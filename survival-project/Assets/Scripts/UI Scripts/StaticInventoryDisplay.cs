@@ -7,7 +7,7 @@ public class StaticInventoryDisplay : InventoryDisplay
     [SerializeField] private InventoryHolder inventoryHolder;
     [SerializeField] private InventorySlot_UI[] slots;
 
-    protected override void Start()
+    public override void Start()
     {
         base.Start();
 

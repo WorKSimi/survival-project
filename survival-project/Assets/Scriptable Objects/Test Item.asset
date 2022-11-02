@@ -18,4 +18,4 @@ MonoBehaviour:
 
 '
   Icon: {fileID: 0}
-  MaxStackSize: 1
+  MaxStackSize: 5
