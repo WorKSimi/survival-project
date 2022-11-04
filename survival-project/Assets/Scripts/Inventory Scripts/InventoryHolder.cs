@@ -14,7 +14,7 @@ public class InventoryHolder : MonoBehaviour
 
     public static UnityAction<InventorySystem> OnDynamicInventoryDisplayRequested;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         inventorySystem = new InventorySystem(inventorySize);
     }
