@@ -16,4 +16,4 @@ MonoBehaviour:
   DisplayName: Tomato
   Description: This is a tomato!!
   Icon: {fileID: 1526037774, guid: e6145644c236f5e42b53bcbc243d37ba, type: 3}
-  MaxStackSize: 8
+  MaxStackSize: 5
