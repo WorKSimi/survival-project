@@ -10,6 +10,8 @@ public class PlayerInventoryHolder : InventoryHolder
     
     public static UnityAction OnPlayerInventoryChanged;
 
+    public static UnityAction<InventorySystem, int> OnPlayerInventoryDisplayRequested;
+
     private void Start()
     {
         SaveGameManager.data.playerInventory = new InventorySaveData(inventorySystem);
@@ -28,7 +30,7 @@ public class PlayerInventoryHolder : InventoryHolder
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.bKey.wasPressedThisFrame) OnDynamicInventoryDisplayRequested?.Invoke(inventorySystem, offset);
+        if (Keyboard.current.bKey.wasPressedThisFrame) OnPlayerInventoryDisplayRequested?.Invoke(inventorySystem, offset);
     }
 
     public bool AddToInventory(InventoryItemData data, int amount)
