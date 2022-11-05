@@ -1035,12 +1035,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b0cafa6f2672541a584913893b2f0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventorySize: 10
+  inventorySize: 50
   inventorySystem:
     inventorySlots: []
-  secondaryInventorySize: 30
-  secondaryInventorySystem:
-    inventorySlots: []
+  offset: 10
 --- !u!1001 &467216681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1297,6 +1295,7 @@ MonoBehaviour:
   inventorySize: 10
   inventorySystem:
     inventorySlots: []
+  offset: 10
 --- !u!114 &470671959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2464,7 +2463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c160f0ec5dccdda4bbada48fd98a68d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestPanel: {fileID: 1429025720}
+  inventoryPanel: {fileID: 1429025720}
   playerBackpackPanel: {fileID: 1231448120}
 --- !u!1 &867773035
 GameObject:
@@ -5470,6 +5469,7 @@ MonoBehaviour:
   inventorySize: 20
   inventorySystem:
     inventorySlots: []
+  offset: 10
 --- !u!61 &1746670521
 BoxCollider2D:
   m_ObjectHideFlags: 0

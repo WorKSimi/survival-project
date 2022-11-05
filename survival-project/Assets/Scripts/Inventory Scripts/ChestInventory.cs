@@ -17,25 +17,25 @@ public class ChestInventory : InventoryHolder, IInteractable
 
     private void Start()
     {
-        var chestSaveData = new ChestSaveData(inventorySystem, transform.position, transform.rotation);
+        var InventorySaveData = new InventorySaveData(inventorySystem, transform.position, transform.rotation);
 
-        SaveGameManager.data.chestDictionary.Add(GetComponent<UniqueID>().ID, chestSaveData);
+        SaveGameManager.data.chestDictionary.Add(GetComponent<UniqueID>().ID, InventorySaveData);
     }
 
-    private void LoadInventory(SaveData data)
+    protected override void LoadInventory(SaveData data)
     {
         //Check the save data for this specific chests inventory, and if it exists, load it in.
-        if (data.chestDictionary.TryGetValue(GetComponent<UniqueID>().ID, out ChestSaveData chestData))
+        if (data.chestDictionary.TryGetValue(GetComponent<UniqueID>().ID, out InventorySaveData chestData))
         {
-            this.inventorySystem = chestData.invSystem;
-            this.transform.position = chestData.position;
-            this.transform.rotation = chestData.rotation;
+            this.inventorySystem = chestData.InvSystem;
+            this.transform.position = chestData.Position;
+            this.transform.rotation = chestData.Rotation;
         }
     }
 
     public void Interact(Interactor interactor, out bool interactSuccessful)
     {
-        OnDynamicInventoryDisplayRequested?.Invoke(inventorySystem);
+        OnDynamicInventoryDisplayRequested?.Invoke(inventorySystem, 0);
         interactSuccessful = true;
     }
 
@@ -44,20 +44,4 @@ public class ChestInventory : InventoryHolder, IInteractable
 
     }
         
-}
-
-[System.Serializable]
-
-public struct ChestSaveData
-{
-    public InventorySystem invSystem;
-    public Vector3 position; //This might need to be vector2, game is 2D
-    public Quaternion rotation; //This might also need to change, game is 2D. It might also not be needed but unsure yet.
-
-    public ChestSaveData(InventorySystem _invSystem, Vector3 _position, Quaternion _rotation)
-    {
-        invSystem = _invSystem;
-        position = _position;
-        rotation = _rotation;
-    }
 }
