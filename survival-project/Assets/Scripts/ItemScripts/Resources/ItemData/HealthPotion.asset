@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: Pear
+  m_Name: HealthPotion
   m_EditorClassIdentifier: 
   ID: -1
-  DisplayName: Pear
+  DisplayName: HealthPotion
   Description: 
-  Icon: {fileID: 0}
-  MaxStackSize: 0
+  Icon: {fileID: 21300000, guid: ddb0dca8fc9b91e4ab37cd3296ffab5e, type: 3}
+  MaxStackSize: 1
+  GoldValue: 0
+  ItemPrefab: {fileID: 7820691248969044443, guid: a08e6636311f6504294c606ebe155bb3,
+    type: 3}

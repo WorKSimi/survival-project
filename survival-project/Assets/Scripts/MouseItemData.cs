@@ -12,23 +12,36 @@ public class MouseItemData : MonoBehaviour
     public TextMeshProUGUI ItemCount;
     public InventorySlot AssignedInventorySlot;
 
+    private Transform playerTransform;    
+   
     private void Awake()
     {
         ItemSprite.color = Color.clear;
+        ItemSprite.preserveAspect = true;
         ItemCount.text = "";
+
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        if (playerTransform == null) Debug.Log("Player not found!");
     }
 
     public void UpdateMouseSlot(InventorySlot invSlot)
     {
         AssignedInventorySlot.AssignItem(invSlot);
-        ItemSprite.sprite = invSlot.ItemData.Icon;
-        ItemCount.text = invSlot.StackSize.ToString();
+        UpdateMouseSlot();
+    }
+
+    public void UpdateMouseSlot()
+    {
+        ItemSprite.sprite = AssignedInventorySlot.ItemData.Icon;
+        ItemCount.text = AssignedInventorySlot.StackSize.ToString();
         ItemSprite.color = Color.white;
     }
 
     private void Update()
     {
         // TODO: Add controller support.
+        Vector3 dropOffset = new Vector3(0, 3, 0f);
+        Vector3 dropLocation = playerTransform.position - dropOffset;
 
         if (AssignedInventorySlot.ItemData != null) // If has an item, follow the mouse position.
         {
@@ -36,9 +49,21 @@ public class MouseItemData : MonoBehaviour
 
             if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject())
             {
-                ClearSlot();
-                // TODO: Drop the item on the ground.
-            }
+                if (AssignedInventorySlot.ItemData.ItemPrefab != null)
+                Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, dropLocation, 
+                Quaternion.identity);
+
+                if (AssignedInventorySlot.StackSize > 1)
+                {
+                    AssignedInventorySlot.AddToStack(-1);
+                    UpdateMouseSlot();
+                }
+
+                else
+                {
+                     ClearSlot();
+                }
+            } 
         }
     }
 

@@ -17,5 +17,8 @@ MonoBehaviour:
   Description: 'The apple. The apple.
 
 '
-  Icon: {fileID: 0}
-  MaxStackSize: 0
+  Icon: {fileID: 21300000, guid: d02b6b07ea9efd741b0ff3691b7dbb0e, type: 3}
+  MaxStackSize: 5
+  GoldValue: 0
+  ItemPrefab: {fileID: 7052819178168246034, guid: b4840cd78d56f3847bb706a6126406d9,
+    type: 3}
