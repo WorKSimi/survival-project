@@ -4,9 +4,14 @@ using UnityEngine;
 
 [System.Serializable]
 
-public class InventorySlot : ItemSlot
+public class InventorySlot : ISerializationCallbackReceiver
 {
-    
+    [System.NonSerialized] private InventoryItemData itemData; // Reference to the data
+    [SerializeField] private int _itemID = -1;
+    [SerializeField] private int stackSize; // Current stack size - how many of the data do we have?
+
+    public InventoryItemData ItemData => itemData;
+    public int StackSize => stackSize;
 
     public InventorySlot(InventoryItemData source, int amount) // Constructor to make a occupied inventory slot.
     {
@@ -18,6 +23,25 @@ public class InventorySlot : ItemSlot
     public InventorySlot() // Consturctor to make an empty inventory slot.
     {
         ClearSlot();
+    }
+
+    public void ClearSlot() // Clears the slot
+    {
+        itemData = null;
+        _itemID = -1;
+        stackSize = -1;
+    }
+
+    public void AssignItem(InventorySlot invSlot) // Assigns an item to the slot
+    {
+        if (itemData == invSlot.ItemData) AddToStack(invSlot.stackSize); // Does the slot contain the same item? Add to stack if so.
+        else // Overwrite slot with the inventory slot that we're passing in.
+        {
+            itemData = invSlot.itemData;
+            _itemID = itemData.ID;
+            stackSize = 0;
+            AddToStack(invSlot.stackSize);
+        }
     }
 
     public void UpdateInventorySlot(InventoryItemData data, int amount) // Updates slot directly.
@@ -40,7 +64,15 @@ public class InventorySlot : ItemSlot
         else return false;
     }
 
-    
+    public void AddToStack(int amount)
+    {
+        stackSize += amount;
+    }
+
+    public void RemoveFromStack (int amount)
+    {
+        stackSize -= amount;
+    }
 
     public bool SplitStack(out InventorySlot splitStack)
     {
@@ -57,5 +89,16 @@ public class InventorySlot : ItemSlot
         return true;
     }
 
-    
+    public void OnBeforeSerialize()
+    {
+
+    }
+
+    public void OnAfterDeserialize()
+    {
+        if (_itemID == -1) return;
+
+        var db = Resources.Load<Database>("Database");
+        itemData = db.GetItem(_itemID);
+    }
 }

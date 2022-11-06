@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
-  ID: 2
+  ID: -1
   DisplayName: HealthPotion
   Description: 
   Icon: {fileID: 21300000, guid: ddb0dca8fc9b91e4ab37cd3296ffab5e, type: 3}
