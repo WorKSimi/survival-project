@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInventoryHolder : InventoryHolder
 {
-
-    
     public static UnityAction OnPlayerInventoryChanged;
 
     public static UnityAction<InventorySystem, int> OnPlayerInventoryDisplayRequested;
