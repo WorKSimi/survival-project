@@ -5,11 +5,10 @@ using UnityEngine.Events;
 using System.Linq;
 
 [System.Serializable]
-
+//Note, making this a network behaivor causes the U.I. to stop functioning for inventory and chests.
 public class InventorySystem
 {
     [SerializeField] private List<InventorySlot> inventorySlots; 
-
 
     public List<InventorySlot> InventorySlots => inventorySlots;
 

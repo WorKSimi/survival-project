@@ -1,8 +1,9 @@
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventorySlot_UI : MonoBehaviour
+public class InventorySlot_UI : NetworkBehaviour
 {
     [SerializeField] private Image itemSprite;
     [SerializeField] private GameObject _slotHighlight;

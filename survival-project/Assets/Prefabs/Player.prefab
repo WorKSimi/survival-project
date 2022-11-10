@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 311317416142517194}
   - component: {fileID: 6982808670112934317}
   - component: {fileID: 6982808670112934318}
-  - component: {fileID: 6982808670112934319}
   - component: {fileID: 6982808670112934315}
   - component: {fileID: 6982808670112934313}
   - component: {fileID: 6982808670112934312}
@@ -19,6 +18,7 @@ GameObject:
   - component: {fileID: 898379684}
   - component: {fileID: 412420745655480834}
   - component: {fileID: 1495257015508960938}
+  - component: {fileID: -7152675466506680753}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -115,21 +115,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6982808670112934319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3430272870254572311}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b076fbf8e555e4db26231bdc719596, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
-  rb: {fileID: 6982808670112934318}
-  animator: {fileID: 6982808670112934315}
 --- !u!95 &6982808670112934315
 Animator:
   serializedVersion: 4
@@ -237,6 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47fea512af00274b8400888170ce638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnedObjectPrefab: {fileID: 0}
   moveSpeed: 5
   rb: {fileID: 6982808670112934318}
   animator: {fileID: 6982808670112934315}
@@ -266,6 +252,20 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &-7152675466506680753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3430272870254572311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b187825d884193c4985f9fde8bd80346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 6982808670112934315}
 --- !u!1 &6982808669949990761
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,13 +52,14 @@ public class ItemPickup : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var inventory = other.transform.GetComponent<PlayerInventoryHolder>();
-
+        Debug.Log("Collision Happened");
         if (!inventory) return;
 
         if (inventory.AddToInventory(ItemData, 1))
         {
             SaveGameManager.data.collectedItems.Add(id);
             Destroy(this.gameObject);
+            Debug.Log("Object Destroyed");
         }
     }
 }

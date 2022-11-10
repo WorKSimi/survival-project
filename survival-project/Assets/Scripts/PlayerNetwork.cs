@@ -12,6 +12,7 @@ public class PlayerNetwork : NetworkBehaviour
     [SerializeField]private float moveSpeed = 5f;
     [SerializeField]private Rigidbody2D rb;
     [SerializeField]private Animator animator;
+    [SerializeField]private  playerHotbar;
     Vector2 movement;
 
     private NetworkVariable<MyCustomData> randomNumber = new NetworkVariable<MyCustomData>(
@@ -37,6 +38,7 @@ public class PlayerNetwork : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        playerHotbar.
         randomNumber.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) => {
             Debug.Log(OwnerClientId + "; " + newValue._int + "; " + newValue._bool + "; " + newValue.message);
         };
@@ -45,21 +47,7 @@ public class PlayerNetwork : NetworkBehaviour
 
     private void Update()
     {
-        
         if (!IsOwner) return;
-
-        if (Input.GetKeyDown(KeyCode.T)) {
-            Transform spawnedObjectTransform = Instantiate(spawnedObjectPrefab);
-            spawnedObjectTransform.GetComponent<NetworkObject>().Spawn(true);
-        //TestClientRpc(new ClientRpcParams { Send = new ClientRpcSendParams {TargetClientIds = new List<ulong> {1} } });
-        /*
-            randomNumber.Value = new MyCustomData {
-                _int = 10,
-                _bool = false,
-                message = "All your base are belong to us!"
-            };
-        */
-        }
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");

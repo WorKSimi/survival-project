@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
 [System.Serializable]
 
-public abstract class InventoryHolder : MonoBehaviour
+public abstract class InventoryHolder : NetworkBehaviour
 {
     [SerializeField] private int inventorySize;
     [SerializeField] protected InventorySystem inventorySystem;

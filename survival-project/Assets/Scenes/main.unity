@@ -515,6 +515,60 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b4840cd78d56f3847bb706a6126406d9, type: 3}
+--- !u!1 &617839196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 617839198}
+  - component: {fileID: 617839197}
+  m_Layer: 0
+  m_Name: RuntimeStatsMonitor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &617839197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617839196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17737e0516da2445b9b0077ae2bd9b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Visible: 1
+  m_MaxRefreshRate: 30
+  <CustomStyleSheet>k__BackingField: {fileID: 0}
+  <PanelSettingsOverride>k__BackingField: {fileID: 0}
+  <Position>k__BackingField:
+    <OverridePosition>k__BackingField: 1
+    m_PositionLeftToRight: 0
+    m_PositionTopToBottom: 0
+  <Configuration>k__BackingField: {fileID: 11400000, guid: 8f1b4e3792d8446399527749cfb591a2,
+    type: 2}
+--- !u!4 &617839198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617839196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.1639286, y: -0.5879539, z: -9.860507}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802663357
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +642,12 @@ MonoBehaviour:
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
       Prefab: {fileID: 1450464307976007669, guid: 03a0a2e7f804e1f42888b3737720cf9a,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 7389436694480070536, guid: a078dbfb92dd9ad48a5b4a23a7c85ca7,
         type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
@@ -697,6 +757,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 19287068}
     m_Modifications:
+    - target: {fileID: -2083750711423560777, guid: a078dbfb92dd9ad48a5b4a23a7c85ca7,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2385670351
+      objectReference: {fileID: 0}
     - target: {fileID: 7389436694480070531, guid: a078dbfb92dd9ad48a5b4a23a7c85ca7,
         type: 3}
       propertyPath: _id
@@ -1144,6 +1209,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1902881322, guid: f38c113cc12d2dd46a09c451f94c1760, type: 3}
+      propertyPath: inventoryHolder
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 557792041325667898, guid: f38c113cc12d2dd46a09c451f94c1760,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1459,10 +1528,60 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3695435342227231903, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 296941184
+      objectReference: {fileID: 0}
     - target: {fileID: 6299238010718736707, guid: f38c113cc12d2dd46a09c451f94c1760,
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639507621157661, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3403430481
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639507861842803, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2076434859
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639508412856594, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1265722106
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639508507239341, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3767950936
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639508574757116, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2790340246
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639508797252953, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2482996319
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639508806951224, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2470643295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639509117824689, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 253912171
+      objectReference: {fileID: 0}
+    - target: {fileID: 6784639509610917591, guid: f38c113cc12d2dd46a09c451f94c1760,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3895233731
       objectReference: {fileID: 0}
     - target: {fileID: 7697390199322254356, guid: f38c113cc12d2dd46a09c451f94c1760,
         type: 3}
@@ -1692,6 +1811,11 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 19287068}
     m_Modifications:
+    - target: {fileID: -2083750711423560777, guid: a078dbfb92dd9ad48a5b4a23a7c85ca7,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2792783361
+      objectReference: {fileID: 0}
     - target: {fileID: 7389436694480070531, guid: a078dbfb92dd9ad48a5b4a23a7c85ca7,
         type: 3}
       propertyPath: _id

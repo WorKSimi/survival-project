@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 
-public abstract class InventoryDisplay : MonoBehaviour
+public abstract class InventoryDisplay : NetworkBehaviour
 {
     [SerializeField] MouseItemData mouseInventoryItem;
 
