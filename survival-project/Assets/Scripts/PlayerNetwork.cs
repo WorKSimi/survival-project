@@ -12,7 +12,8 @@ public class PlayerNetwork : NetworkBehaviour
     [SerializeField]private float moveSpeed = 5f;
     [SerializeField]private Rigidbody2D rb;
     [SerializeField]private Animator animator;
-    [SerializeField]private  playerHotbar;
+    [SerializeField]private Canvas canvas;
+
     Vector2 movement;
 
     private NetworkVariable<MyCustomData> randomNumber = new NetworkVariable<MyCustomData>(
@@ -38,7 +39,7 @@ public class PlayerNetwork : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        playerHotbar.
+        Instantiate(canvas);
         randomNumber.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) => {
             Debug.Log(OwnerClientId + "; " + newValue._int + "; " + newValue._bool + "; " + newValue.message);
         };

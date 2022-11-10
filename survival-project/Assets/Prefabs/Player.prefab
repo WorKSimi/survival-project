@@ -192,7 +192,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySize: 50
   inventorySystem:
-    inventorySlots: []
+    inventorySlots:
+    - _itemID: 0
+      stackSize: 0
   offset: 10
 --- !u!114 &898379684
 MonoBehaviour:
@@ -226,6 +228,7 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 6982808670112934318}
   animator: {fileID: 6982808670112934315}
+  canvas: {fileID: 2701585235553617501, guid: d16d39a155da6694a81ede6a7e93992e, type: 3}
 --- !u!114 &1495257015508960938
 MonoBehaviour:
   m_ObjectHideFlags: 0
