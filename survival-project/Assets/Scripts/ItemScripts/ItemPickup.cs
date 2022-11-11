@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(UniqueID))]
 
-public class ItemPickup : MonoBehaviour
+public class ItemPickup : NetworkBehaviour
 {
     public float PickUpRadius = 1f;
     public InventoryItemData ItemData;
@@ -40,14 +41,14 @@ public class ItemPickup : MonoBehaviour
 
     private void LoadGame(SaveData data)
     {
-        if (data.collectedItems.Contains(id)) Destroy(this.gameObject);
+    //    if (data.collectedItems.Contains(id)) Destroy(this.gameObject);
     }
 
-    private void OnDestroy()
-    {
-        if (SaveGameManager.data.activeItems.ContainsKey(id)) SaveGameManager.data.activeItems.Remove(id);
-        SaveLoad.OnLoadGame -= LoadGame;
-    }
+    //private void OnDestroy()
+    //{
+    //    if (SaveGameManager.data.activeItems.ContainsKey(id)) SaveGameManager.data.activeItems.Remove(id);
+    //    SaveLoad.OnLoadGame -= LoadGame;
+    //}
 
     private void OnTriggerEnter2D(Collider2D other)
     {

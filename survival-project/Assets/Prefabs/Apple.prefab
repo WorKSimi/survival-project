@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7052819178168246039}
   - component: {fileID: 7052819178168246032}
   - component: {fileID: 7052819178168246033}
+  - component: {fileID: 7281228086232947468}
   m_Layer: 0
   m_Name: Apple
   m_TagString: Untagged
@@ -131,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickUpRadius: 1
   ItemData: {fileID: 11400000, guid: f967fcac24c1a134cbecef6739e8f5d1, type: 2}
+  _rotationSpeed: 20
   itemSaveData:
     ItemData: {fileID: 0}
     Position: {x: 0, y: 0, z: 0}
@@ -148,3 +150,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 7e49158c-f0bd-4450-b0b4-c9074861c4cb
+--- !u!114 &7281228086232947468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7052819178168246034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
