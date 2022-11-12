@@ -19,11 +19,22 @@ public class InventoryItemData : ScriptableObject
     public Sprite Icon;
     public int MaxStackSize;
     public int GoldValue;
+    public string ItemType;
+    public int Damage;
     public GameObject ItemPrefab;
 
     public void UseItem()
     {
-        Debug.Log($"Using {DisplayName}"); 
+        switch (ItemType)
+        {
+            case "Axe": 
+            Debug.Log("CHOP CHOP CHOP");
+            break;
+
+            default:
+            Debug.Log($"Using {DisplayName}");
+            break;
+        }
     }
     //Use item function in the game will use different things based on the logic. Add a
     //Weapon type class somewhere and it inherits from this. Then put that logic into the useItem
