@@ -20,15 +20,15 @@ public class InventoryItemData : ScriptableObject
     public int MaxStackSize;
     public int GoldValue;
     public string ItemType;
-    public int Damage;
+    public double Damage;
     public GameObject ItemPrefab;
 
     public void UseItem()
     {
         switch (ItemType)
         {
-            case "Axe": 
-            Debug.Log("CHOP CHOP CHOP");
+            case "Axe":
+            Debug.Log("CHOPPER");
             break;
 
             default:
