@@ -6,6 +6,7 @@ using Unity.Netcode;
 public class RotateToMouse : NetworkBehaviour
 {
     private Transform m_transform;
+    [SerializeField] private Camera playerCamera;
 
     void Start()
     {
@@ -15,7 +16,7 @@ public class RotateToMouse : NetworkBehaviour
 
     private void RTMouse()
     {
-        Vector2 direction = Camera.main.ScreenToWorldPoint
+        Vector2 direction = playerCamera.ScreenToWorldPoint
         (Input.mousePosition) - m_transform.position;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
