@@ -36,7 +36,8 @@ public class InventoryItemData : ScriptableObject
             break;
         }
     }
+}
     //Use item function in the game will use different things based on the logic. Add a
     //Weapon type class somewhere and it inherits from this. Then put that logic into the useItem
     // Function. For example, if the item type is a sword, then use sword logic, and vice versa.
-}
+

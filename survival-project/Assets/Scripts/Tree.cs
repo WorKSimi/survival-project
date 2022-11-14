@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class Tree : NetworkBehaviour
+public class Tree : MonoBehaviour
 {
     [SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
+
     double currentHealth;
 
     void Start()
@@ -30,14 +31,14 @@ public class Tree : NetworkBehaviour
     {
         Debug.Log("Tree down!");
         //Tree die animation
-
+        Debug.Log("Tree death animation moment");
         // Destroy the tree and drop wood
         for (int i = 0; i < 5; i++)
         {
-            Instantiate(wood);
+            transform.rotation = Random.rotation;
+            Instantiate(wood, transform.position, Quaternion.identity);
+            wood.GetComponent<Rigidbody2D>().AddForce(transform.up * 2, ForceMode2D.Impulse);
         }
         Destroy(this.gameObject);
     }
-
-
 }

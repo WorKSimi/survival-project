@@ -12,7 +12,8 @@ public class MouseItemData : MonoBehaviour
     public TextMeshProUGUI ItemCount;
     public InventorySlot AssignedInventorySlot;
 
-    private Transform playerTransform;    
+    private Transform playerTransform;
+    private Transform interactionPoint;    
    
     private void Awake()
     {
@@ -22,6 +23,8 @@ public class MouseItemData : MonoBehaviour
 
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
         if (playerTransform == null) Debug.Log("Player not found!");
+
+        interactionPoint = GameObject.FindWithTag("InteractionPoint").GetComponent<Transform>();
     }
 
     public void UpdateMouseSlot(InventorySlot invSlot)

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.Netcode;
 
 public class MeleeAttack : MonoBehaviour
 {
@@ -10,12 +9,10 @@ public class MeleeAttack : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask treeLayers;
 
-    [SerializeField] private float attackRange = 0.5f; 
-    [SerializeField] private double attackDamage = 0.5; 
+    private float attackRange = 0.5f; 
+    private double attackDamage = 0.5; 
     
-   // private double itemDamage = InventoryItemData.Damage;
-    //private InventoryItemData itemData;
-    [SerializeField] private float attackRate = 2f; //How many times you can attack per second
+    private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
     void Update()
@@ -30,7 +27,7 @@ public class MeleeAttack : MonoBehaviour
         }
     }
 
-    public void Attack()
+    void Attack()
     {
         // Play an attack animation
         animator.SetTrigger("Attack");
