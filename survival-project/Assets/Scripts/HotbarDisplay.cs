@@ -124,10 +124,11 @@ public class HotbarDisplay : StaticInventoryDisplay
         if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
         {
             //slots[_currentIndex].AssignedInventorySlot.ItemData.UseItem();
-            switch (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType)
+            InventoryItemData itemData = slots[_currentIndex].AssignedInventorySlot.ItemData;
+            switch (itemData.ItemType)
             {
                 case "Axe":
-                player.GetComponent<UseItemManager>().UseAxe();
+                player.GetComponent<UseItemManager>().UseAxe(itemData.itemDamage);
                 break;
 
                 default:

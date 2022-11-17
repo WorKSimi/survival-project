@@ -21,4 +21,4 @@ MonoBehaviour:
   ItemType: Axe
   ItemPrefab: {fileID: 7389436694480070536, guid: c84329bea2b7dfa4fab46a536e00aa39,
     type: 3}
-  itemDamage: 0
+  itemDamage: 100

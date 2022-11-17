@@ -15,7 +15,7 @@ public class UseItemManager : MonoBehaviour
     private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
-    public void UseAxe()
+    public void UseAxe(double itemDamage)
     {
         Debug.Log("AXE USED!");
         if (Time.time >= nextAttackTime)
@@ -26,7 +26,7 @@ public class UseItemManager : MonoBehaviour
 
             foreach (Collider2D tree in hitTrees) // Damage trees
             {
-                tree.GetComponent<Tree>().TakeDamage(attackDamage);
+                tree.GetComponent<Tree>().TakeDamage(itemDamage);
             }
 
             nextAttackTime = Time.time + 1f / attackRate;
