@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class MeleeAttack : MonoBehaviour
+public class UseItemManager : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
@@ -11,21 +10,16 @@ public class MeleeAttack : MonoBehaviour
 
     private InventoryItemData inventoryItemData;
     private float attackRange = 0.5f; 
-    private double attackDamage = 0.5; 
-    
+    private double attackDamage = 0.5;
+
     private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
-    public void Update()
+    public void UseAxe()
     {
+        Debug.Log("AXE USED!");
         if (Time.time >= nextAttackTime)
-            {
-            Attack();
-            }
-    }
-
-    void Attack()
-    {
+        {
             animator.SetTrigger("Attack"); // Play an attack animation
 
             Collider2D[] hitTrees = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, treeLayers); // Detect trees in range of attack
@@ -36,15 +30,7 @@ public class MeleeAttack : MonoBehaviour
             }
 
             nextAttackTime = Time.time + 1f / attackRate;
+        }
     }
 
-    void OnDrawGizmosSelected()
-    {   
-        if(attackPoint == null)
-        return;
-
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
 }
-
-

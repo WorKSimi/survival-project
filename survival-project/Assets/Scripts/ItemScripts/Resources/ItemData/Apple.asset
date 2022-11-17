@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
-  ID: 1
+  ID: 0
   DisplayName: Apple
   Description: 'The apple. The apple.
 
@@ -20,5 +20,7 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: d02b6b07ea9efd741b0ff3691b7dbb0e, type: 3}
   MaxStackSize: 5
   GoldValue: 0
+  ItemType: 
   ItemPrefab: {fileID: 7052819178168246034, guid: b4840cd78d56f3847bb706a6126406d9,
     type: 3}
+  itemDamage: 0

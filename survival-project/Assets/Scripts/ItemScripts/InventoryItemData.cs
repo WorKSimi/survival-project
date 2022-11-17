@@ -20,21 +20,12 @@ public class InventoryItemData : ScriptableObject
     public int MaxStackSize;
     public int GoldValue;
     public string ItemType;
-    public double Damage;
     public GameObject ItemPrefab;
+    public double itemDamage;
 
     public void UseItem()
     {
-        switch (ItemType)
-        {
-            case "Axe":
-            Debug.Log("CHOPPER");
-            break;
-
-            default:
-            Debug.Log($"Using {DisplayName}");
-            break;
-        }
+        
     }
 }
     //Use item function in the game will use different things based on the logic. Add a

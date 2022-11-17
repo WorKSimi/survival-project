@@ -31,13 +31,15 @@ public class Tree : MonoBehaviour
     {
         Debug.Log("Tree down!");
         //Tree die animation
+
         Debug.Log("Tree death animation moment");
         // Destroy the tree and drop wood
+        
         for (int i = 0; i < 5; i++)
         {
             transform.rotation = Random.rotation;
             Instantiate(wood, transform.position, Quaternion.identity);
-            wood.GetComponent<Rigidbody2D>().AddForce(transform.up * 2, ForceMode2D.Impulse);
+            //wood.GetComponent<Rigidbody2D>().AddForce(transform.up * 2, ForceMode2D.Impulse);
         }
         Destroy(this.gameObject);
     }

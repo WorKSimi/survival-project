@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 7389436694480070535}
   - component: {fileID: 7389436694480070531}
   - component: {fileID: -2083750711423560777}
+  - component: {fileID: -893153624378043234}
   m_Layer: 0
-  m_Name: TestAxe
+  m_Name: Flint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,12 +30,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7389436694480070536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.35, y: -0.08, z: 0}
-  m_LocalScale: {x: 6.52, y: 6.52, z: 6.52}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3951, y: 0.3951, z: 0.3951}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7389436694480070533
 SpriteRenderer:
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 27854cd117b738e44a6c3662bab997cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ba1211edd8a64b94aa913e0ad0d91a49, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,7 +104,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.08
+  m_Radius: 0.53
 --- !u!114 &7389436694480070535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,11 +117,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfd99be32210d2498c94d8fc7230b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickUpRadius: 0.08
-  ItemData: {fileID: 11400000, guid: 53cde3b22759f0b488a0d227bdf14358, type: 2}
+  PickUpRadius: 0.53
+  ItemData: {fileID: 11400000, guid: 5d12c946634ae614d99ac5e0ccc6493b, type: 2}
   _rotationSpeed: 20
   itemSaveData:
-    ItemData: {fileID: 0}
+    ItemData: {fileID: 11400000, guid: 5d12c946634ae614d99ac5e0ccc6493b, type: 2}
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7389436694480070531
@@ -135,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b24fc1c82534d4b8b445711eb45776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 39754937-92b4-47ff-b09f-8e87136e330b
+  _id: 781bfa16-b8d1-43a1-82a6-d42d6032e4ae
 --- !u!114 &-2083750711423560777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +153,24 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!50 &-893153624378043234
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389436694480070536}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.56
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

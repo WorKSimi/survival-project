@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  ID: 5
+  ID: 6
   DisplayName: Wood
   Description: Wood Please! No. Yes. Yes. Yes.
   Icon: {fileID: 21300000, guid: 346452b24c9c90441a6fa1ee32310e67, type: 3}
   MaxStackSize: 99
   GoldValue: 0
   ItemType: Resource
-  Damage: 0
-  ItemPrefab: {fileID: 0}
+  ItemPrefab: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f,
+    type: 3}
+  itemDamage: 0

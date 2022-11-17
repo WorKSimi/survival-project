@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class HotbarDisplay : StaticInventoryDisplay
 {
+    public GameObject player;
     private int _maxIndexSize = 9;
     private int _currentIndex = 0;
 
@@ -120,7 +121,20 @@ public class HotbarDisplay : StaticInventoryDisplay
 
     private void UseItem(InputAction.CallbackContext obj)
     {
-        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) slots[_currentIndex].AssignedInventorySlot.ItemData.UseItem();
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
+        {
+            //slots[_currentIndex].AssignedInventorySlot.ItemData.UseItem();
+            switch (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType)
+            {
+                case "Axe":
+                player.GetComponent<UseItemManager>().UseAxe();
+                break;
+
+                default:
+                Debug.Log($"Default Case");
+                break;
+            }
+        }   
     }
 
     private void ChangeIndex(int direction)
