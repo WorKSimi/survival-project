@@ -4229,6 +4229,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &662283016 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1784105365037295708, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1784105363962092364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 296f4f8f72bf3c84dbc04d317986be65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &802663357
 GameObject:
   m_ObjectHideFlags: 0
@@ -5455,6 +5467,41 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 363815429697668278, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 363815429697668278, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 363815429697668278, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 662283016}
+    - target: {fileID: 363815429697668278, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 363815429697668278, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CraftFlintAxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 363815429697668278, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CraftingTable, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 363815429697668278, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1784105365037295680, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
         type: 3}
       propertyPath: m_Name
@@ -5515,6 +5562,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2502420084332055171, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 839022771, guid: 9d92c5ee93abcfc4598a85b2eb1da699,
+        type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ec4fe492b4012744a47f4838b1b5e0f, type: 3}

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class CraftingTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject craftingTableMenu;
+    private CurrentInteractor = interactor;
 
     private void Awake()
     {
@@ -32,5 +33,11 @@ public class CraftingTable : MonoBehaviour, IInteractable
     public void EndInteraction()
     {
         throw new System.NotImplementedException();
+    }
+
+    public void CraftFlintAxe()
+    {
+        Debug.Log("Trying to Craft Flint Axe");
+        interactor.GetComponent<PlayerInventoryHolder>() = playerInventoryHolder;
     }
 }
