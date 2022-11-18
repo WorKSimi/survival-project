@@ -70,7 +70,7 @@ Transform:
   m_Children:
   - {fileID: 2330979487585588629}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1784105365037295681
 SpriteRenderer:
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296f4f8f72bf3c84dbc04d317986be65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  craftingTableMenu: {fileID: 1215311508964224929}
+  craftingTableMenu: {fileID: 6996422526858874397}
 --- !u!1 &2210720719711880025
 GameObject:
   m_ObjectHideFlags: 0
