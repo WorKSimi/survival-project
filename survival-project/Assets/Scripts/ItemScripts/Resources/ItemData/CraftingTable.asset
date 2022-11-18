@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: Flint
+  m_Name: CraftingTable
   m_EditorClassIdentifier: 
-  ID: 1
-  DisplayName: Flint
-  Description: Flint Balls
-  Icon: {fileID: -1307697927, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
-  MaxStackSize: 99
+  ID: -1
+  DisplayName: Crafting Table
+  Description: 'A table for crafting
+
+'
+  Icon: {fileID: 1381102850, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  MaxStackSize: 1
   GoldValue: 0
-  ItemType: Resource
-  ItemPrefab: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08,
+  ItemType: 
+  ItemPrefab: {fileID: 1784105365037295680, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
     type: 3}
   itemDamage: 0

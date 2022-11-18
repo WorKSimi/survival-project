@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: Flint
+  m_Name: TinAxe
   m_EditorClassIdentifier: 
-  ID: 1
-  DisplayName: Flint
-  Description: Flint Balls
-  Icon: {fileID: -1307697927, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
-  MaxStackSize: 99
+  ID: -1
+  DisplayName: TinAxe
+  Description: A better axe made out of tin
+  Icon: {fileID: -1078150396, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  MaxStackSize: 1
   GoldValue: 0
-  ItemType: Resource
-  ItemPrefab: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08,
+  ItemType: Axe
+  ItemPrefab: {fileID: 7389436694480070536, guid: d1fd14203969a2c45bf6cf54ae042bca,
     type: 3}
-  itemDamage: 0
+  itemDamage: 2

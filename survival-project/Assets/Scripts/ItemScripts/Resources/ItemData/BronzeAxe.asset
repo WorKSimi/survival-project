@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: Flint
+  m_Name: BronzeAxe
   m_EditorClassIdentifier: 
-  ID: 1
-  DisplayName: Flint
-  Description: Flint Balls
-  Icon: {fileID: -1307697927, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
-  MaxStackSize: 99
+  ID: 4
+  DisplayName: BronzeAxe
+  Description: 'Dope ass bronze axe
+
+'
+  Icon: {fileID: -1425158167, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  MaxStackSize: 1
   GoldValue: 0
-  ItemType: Resource
-  ItemPrefab: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08,
+  ItemType: Axe
+  ItemPrefab: {fileID: 7600503522853652280, guid: 1bb74649c66476144a2316fd4a1fbe28,
     type: 3}
-  itemDamage: 0
+  itemDamage: 3

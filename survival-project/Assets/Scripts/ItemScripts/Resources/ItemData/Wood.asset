@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: 6
   DisplayName: Wood
   Description: Wood Please! No. Yes. Yes. Yes.
-  Icon: {fileID: 21300000, guid: 346452b24c9c90441a6fa1ee32310e67, type: 3}
+  Icon: {fileID: -1823399334, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
   MaxStackSize: 99
   GoldValue: 0
   ItemType: Resource
