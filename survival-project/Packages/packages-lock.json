@@ -228,7 +228,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.authentication": {
-      "version": "2.3.1",
+      "version": "2.2.0",
       "depth": 2,
       "source": "registry",
       "dependencies": {
@@ -240,7 +240,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.services.core": {
-      "version": "1.6.0",
+      "version": "1.4.3",
       "depth": 1,
       "source": "registry",
       "dependencies": {
