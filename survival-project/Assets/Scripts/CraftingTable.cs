@@ -20,6 +20,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
     {
         craftingTableMenu.SetActive(true);
         interactSuccessful = true;
+        CurrentInteractor = interactor;
     }
 
     public void Update()
@@ -41,15 +42,13 @@ public class CraftingTable : MonoBehaviour, IInteractable
         Debug.Log("Trying to Craft Flint Axe");
         CurrentInteractor.GetComponent<PlayerInventoryHolder>();
 
-        if(PlayerInventoryHolder ContainsItem(wood, out List<InventorySlot> invSlot)
-        && PlayerInventoryHolder ContainsItem(flint, out List<InventorySlot> invSlot))
+        /*for (int i = 0; i < 50; i++)
         {
-            foreach(var slot in invSlot)
+            if (PlayerInventoryHolder.InventorySystem.InventorySlot.ContainsItem(InventoryItemData wood))
             {
-                ClearSlot();
+                Debug.Log("Contains Wood");
             }
-        }
-
+        }*/
 
     }
 }

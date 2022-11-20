@@ -20,6 +20,7 @@ public class InventoryItemData : ScriptableObject
     public int MaxStackSize;
     public int GoldValue;
     public string ItemType;
+    // public enum Type {axe, sword};
     public GameObject ItemPrefab;
     public double itemDamage;
 
