@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
+using Assets.Scripts;
 
 [System.Serializable]
 //Note, making this a network behaivor causes the U.I. to stop functioning for inventory and chests.
@@ -81,7 +82,8 @@ public class InventorySystem
                     InventorySlot.RemoveFromStack(quantity); //Removes material amount from your inventory
                     OnInventorySlotChanged.Invoke(InventorySlot);
 
-                    var FlintAxe = new InventoryItemData()
+                    var FlintAxe = GameObject.Instantiate(GameManager.Instance.FlintAxe);
+                    AddToInventory(FlintAxe, 1);
 
                     return true;
                 }
