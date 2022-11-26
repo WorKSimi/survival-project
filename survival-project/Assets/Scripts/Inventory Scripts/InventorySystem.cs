@@ -68,7 +68,7 @@ public class InventorySystem
         return freeSlot == null ? false : true;
     }
 
-    public bool ContainsItem(string displayName, int quantity)
+    public bool CraftItem(string displayName, int quantity)
     {
         foreach (var InventorySlot in InventorySlots)
         {
@@ -76,7 +76,15 @@ public class InventorySystem
 
             if (InventorySlot.itemData.DisplayName.Equals(displayName, System.StringComparison.OrdinalIgnoreCase))
             {
-                return true;
+                if (InventorySlot.stackSize >= quantity)
+                {
+                    InventorySlot.RemoveFromStack(quantity); //Removes material amount from your inventory
+                    OnInventorySlotChanged.Invoke(InventorySlot);
+
+                    var FlintAxe = new InventoryItemData()
+
+                    return true;
+                }
             }
         }
         return false;

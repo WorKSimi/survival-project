@@ -7,7 +7,7 @@ public abstract class ItemSlot : ISerializationCallbackReceiver
 {
     [System.NonSerialized] public InventoryItemData itemData; // Reference to the data
     [SerializeField] protected int _itemID = -1;
-    [SerializeField] protected int stackSize; // Current stack size - how many of the data do we have?
+    [SerializeField] public int stackSize; // Current stack size - how many of the data do we have?
 
     public InventoryItemData ItemData => itemData;
 
