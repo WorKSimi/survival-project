@@ -74,7 +74,7 @@ public class InventorySystem
         {
             if (InventorySlot.itemData == null) continue;
 
-            if (InventorySlot.itemData.DisplayName == displayName)
+            if (InventorySlot.itemData.DisplayName.Equals(displayName, System.StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
