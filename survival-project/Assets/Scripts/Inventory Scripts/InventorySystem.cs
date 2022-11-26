@@ -81,7 +81,7 @@ public class InventorySystem
         return freeSlot == null ? false : true;
     }
 
-    public void CraftItem(List<CraftRecipeItem> itemComponents)
+    public void CraftItem(List<CraftRecipeItem> itemComponents, InventoryItemData createdItem, int itemAmount)
     {
         var FoundItems = new List<FoundItem>();
 
@@ -112,8 +112,8 @@ public class InventorySystem
                 OnInventorySlotChanged.Invoke(foundItem.itemSlot);
             }
 
-            var FlintAxe = GameObject.Instantiate(GameManager.Instance.FlintAxe);
-            AddToInventory(FlintAxe, 1);
+            var CreatedItem = GameObject.Instantiate(createdItem);
+            AddToInventory(CreatedItem, itemAmount);
 
           
         }

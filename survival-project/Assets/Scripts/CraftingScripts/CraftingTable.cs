@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,8 +58,8 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
         var components = new List<CraftRecipeItem>() { woodComponent, flintComponent};
         {
-            playerInventoryHolder.inventorySystem.CraftItem(components);
-            Debug.Log("Contains Wood");
+            playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.FlintAxe, 1);
+            Debug.Log("Crafted Flint Axe");
         }
     }
 }
