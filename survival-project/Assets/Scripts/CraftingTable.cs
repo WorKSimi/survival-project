@@ -8,6 +8,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject craftingTableMenu;
     private Interactor CurrentInteractor;
+ 
 
     private void Awake()
     {
@@ -40,15 +41,12 @@ public class CraftingTable : MonoBehaviour, IInteractable
     {
         //CurrentInteractor = interactor;
         Debug.Log("Trying to Craft Flint Axe");
-        CurrentInteractor.GetComponent<PlayerInventoryHolder>();
+        var playerInventoryHolder = CurrentInteractor.GetComponent<PlayerInventoryHolder>();
 
-        /*for (int i = 0; i < 50; i++)
+        if (playerInventoryHolder.inventorySystem.ContainsItem("wood", 5))
         {
-            if (PlayerInventoryHolder.InventorySystem.InventorySlot.ContainsItem(InventoryItemData wood))
-            {
-                Debug.Log("Contains Wood");
-            }
-        }*/
-
+            Debug.Log("Contains Wood");
+        }
+        else Debug.Log("Failed");
     }
 }

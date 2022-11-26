@@ -8,7 +8,7 @@ using System.Linq;
 //Note, making this a network behaivor causes the U.I. to stop functioning for inventory and chests.
 public class InventorySystem
 {
-    [SerializeField] private List<InventorySlot> inventorySlots; 
+    [SerializeField] public List<InventorySlot> inventorySlots; 
 
     public List<InventorySlot> InventorySlots => inventorySlots;
 
@@ -66,5 +66,19 @@ public class InventorySystem
     {
         freeSlot = InventorySlots.FirstOrDefault(i => i.ItemData == null); // Get the first free slot
         return freeSlot == null ? false : true;
+    }
+
+    public bool ContainsItem(string displayName, int quantity)
+    {
+        foreach (var InventorySlot in InventorySlots)
+        {
+            if (InventorySlot.itemData == null) continue;
+
+            if (InventorySlot.itemData.DisplayName == displayName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

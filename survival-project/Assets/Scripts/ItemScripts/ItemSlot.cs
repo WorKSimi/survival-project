@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class ItemSlot : ISerializationCallbackReceiver
 {
-    [System.NonSerialized] protected InventoryItemData itemData; // Reference to the data
+    [System.NonSerialized] public InventoryItemData itemData; // Reference to the data
     [SerializeField] protected int _itemID = -1;
     [SerializeField] protected int stackSize; // Current stack size - how many of the data do we have?
 

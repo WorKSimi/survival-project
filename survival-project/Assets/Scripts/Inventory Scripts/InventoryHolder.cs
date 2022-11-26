@@ -9,7 +9,7 @@ using UnityEngine.Events;
 public abstract class InventoryHolder : NetworkBehaviour
 {
     [SerializeField] private int inventorySize;
-    [SerializeField] protected InventorySystem inventorySystem;
+    [SerializeField] public InventorySystem inventorySystem;
     [SerializeField] protected int offset = 10;
 
     public int Offset => offset;
