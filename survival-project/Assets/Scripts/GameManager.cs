@@ -13,7 +13,7 @@ namespace Assets.Scripts
 
         public InventoryItemData FlintAxe;
 
-        public void OnStart()
+        protected void Start()
         {
             Instance = this;
         }
