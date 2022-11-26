@@ -12,6 +12,7 @@ namespace Assets.Scripts
         public static GameManager Instance;
 
         public InventoryItemData FlintAxe;
+        public InventoryItemData CraftingTable;
 
         protected void Start()
         {

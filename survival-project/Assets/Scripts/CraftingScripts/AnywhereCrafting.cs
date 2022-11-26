@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,21 +27,22 @@ public class AnywhereCrafting : MonoBehaviour
         }
     }
 
-    //public void CraftCraftingTable()
-    //{
-    //    Debug.Log("Trying to Craft Crafting Table");
-    //    var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+    public void CraftCraftingTable()
+    {
+        //CurrentInteractor = interactor;
+        Debug.Log("Trying to Craft Crafting Table");
+        var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
 
-    //    var woodComponent = new CraftRecipeItem
-    //    {
-    //        displayName = "wood",
-    //        quantity = 5
-    //    };
+        var woodComponent = new CraftRecipeItem
+        {
+            displayName = "wood",
+            quantity = 5
+        };
 
-    //    var components = new List<CraftRecipeItem>() { woodComponent };
-    //    {
-    //        playerInventoryHolder.inventorySystem.CraftItem(components);
-    //        Debug.Log("Contains Wood");
-    //    }
-    //}
+        var components = new List<CraftRecipeItem>() { woodComponent};
+        {
+            playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.CraftingTable, 1);
+            Debug.Log("Crafted Flint Axe");
+        }
+    }
 }
