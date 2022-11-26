@@ -11,11 +11,17 @@ public struct CraftRecipeItem
     public int quantity;
 }
 
+public struct FoundItem
+{
+    public InventorySlot itemSlot;
+    public int quantity;
+}
+
 [System.Serializable]
 //Note, making this a network behaivor causes the U.I. to stop functioning for inventory and chests.
 public class InventorySystem
 {
-    [SerializeField] public List<InventorySlot> inventorySlots; 
+    [SerializeField] public List<InventorySlot> inventorySlots;
 
     public List<InventorySlot> InventorySlots => inventorySlots;
 
@@ -23,7 +29,7 @@ public class InventorySystem
 
     public UnityAction<InventorySlot> OnInventorySlotChanged;
 
-    public InventorySystem (int size) // Constructor that sets the amount of slots.
+    public InventorySystem(int size) // Constructor that sets the amount of slots.
     {
         inventorySlots = new List<InventorySlot>(size);
 
@@ -37,9 +43,9 @@ public class InventorySystem
     {
         if (ContainsItem(itemToAdd, out List<InventorySlot> invSlot)) //Check whether item exists in inventory.
         {
-            foreach(var slot in invSlot)
+            foreach (var slot in invSlot)
             {
-                if(slot.EnoughRoomLeftInStack(amountToAdd))
+                if (slot.EnoughRoomLeftInStack(amountToAdd))
                 {
                     slot.AddToStack(amountToAdd);
                     OnInventorySlotChanged?.Invoke(slot);
@@ -51,7 +57,7 @@ public class InventorySystem
 
         if (HasFreeSlot(out InventorySlot freeSlot)) //Gets the first avaliable slot
         {
-            if(freeSlot.EnoughRoomLeftInStack(amountToAdd))
+            if (freeSlot.EnoughRoomLeftInStack(amountToAdd))
             {
                 freeSlot.UpdateInventorySlot(itemToAdd, amountToAdd);
                 OnInventorySlotChanged?.Invoke(freeSlot);
@@ -75,26 +81,43 @@ public class InventorySystem
         return freeSlot == null ? false : true;
     }
 
-    public bool CraftItem(List<CraftRecipeItem> craftRecipeItems)
+    public void CraftItem(List<CraftRecipeItem> itemComponents)
     {
+        var FoundItems = new List<FoundItem>();
+
         foreach (var InventorySlot in InventorySlots)
         {
             if (InventorySlot.itemData == null) continue;
 
-            if (InventorySlot.itemData.DisplayName.Equals(craftRecipeItems[0].displayName, System.StringComparison.OrdinalIgnoreCase))
+            foreach (var itemComponent in itemComponents)
             {
-                if (InventorySlot.stackSize >= craftRecipeItems[0].quantity)
+                if (InventorySlot.itemData.DisplayName.Equals(itemComponent.displayName, System.StringComparison.OrdinalIgnoreCase))
                 {
-                    InventorySlot.RemoveFromStack(craftRecipeItems[0].quantity); //Removes material amount from your inventory
-                    OnInventorySlotChanged.Invoke(InventorySlot);
+                    if (InventorySlot.stackSize >= itemComponent.quantity)
+                    {
 
-                    var FlintAxe = GameObject.Instantiate(GameManager.Instance.FlintAxe);
-                    AddToInventory(FlintAxe, 1);
 
-                    return true;
+                        FoundItems.Add(new FoundItem { itemSlot = InventorySlot, quantity = itemComponent.quantity});
+                    }
                 }
             }
+
         }
-        return false;
+
+        if (FoundItems.Count == itemComponents.Count)
+        {
+            foreach (var foundItem in FoundItems)
+            {
+                foundItem.itemSlot.RemoveFromStack(foundItem.quantity); //Removes material amount from your inventory
+                OnInventorySlotChanged.Invoke(foundItem.itemSlot);
+            }
+
+            var FlintAxe = GameObject.Instantiate(GameManager.Instance.FlintAxe);
+            AddToInventory(FlintAxe, 1);
+
+          
+        }
+
+
     }
 }

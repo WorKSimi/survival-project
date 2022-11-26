@@ -56,12 +56,9 @@ public class CraftingTable : MonoBehaviour, IInteractable
         };
 
         var components = new List<CraftRecipeItem>() { woodComponent, flintComponent};
-
-        if (playerInventoryHolder.inventorySystem.CraftItem(components)){
+        {
+            playerInventoryHolder.inventorySystem.CraftItem(components);
             Debug.Log("Contains Wood");
-        }
-        else {
-            Debug.Log("Failed");
         }
     }
 }
