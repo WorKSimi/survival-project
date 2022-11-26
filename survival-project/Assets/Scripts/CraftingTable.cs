@@ -43,10 +43,17 @@ public class CraftingTable : MonoBehaviour, IInteractable
         Debug.Log("Trying to Craft Flint Axe");
         var playerInventoryHolder = CurrentInteractor.GetComponent<PlayerInventoryHolder>();
 
-        if (playerInventoryHolder.inventorySystem.CraftItem("wood", 5))
+        var woodComponent = new CraftRecipeItem
         {
+            displayName = "wood",
+            quantity = 5
+        };
+
+        if (playerInventoryHolder.inventorySystem.CraftItem(woodComponent)){
             Debug.Log("Contains Wood");
         }
-        else Debug.Log("Failed");
+        else {
+            Debug.Log("Failed");
+        }
     }
 }

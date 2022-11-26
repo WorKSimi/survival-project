@@ -5,6 +5,12 @@ using UnityEngine.Events;
 using System.Linq;
 using Assets.Scripts;
 
+public struct CraftRecipeItem
+{
+    public string displayName;
+    public int quantity;
+}
+
 [System.Serializable]
 //Note, making this a network behaivor causes the U.I. to stop functioning for inventory and chests.
 public class InventorySystem
@@ -69,17 +75,17 @@ public class InventorySystem
         return freeSlot == null ? false : true;
     }
 
-    public bool CraftItem(string displayName, int quantity)
+    public bool CraftItem(CraftRecipeItem craftRecipeItem)
     {
         foreach (var InventorySlot in InventorySlots)
         {
             if (InventorySlot.itemData == null) continue;
 
-            if (InventorySlot.itemData.DisplayName.Equals(displayName, System.StringComparison.OrdinalIgnoreCase))
+            if (InventorySlot.itemData.DisplayName.Equals(craftRecipeItem.displayName, System.StringComparison.OrdinalIgnoreCase))
             {
-                if (InventorySlot.stackSize >= quantity)
+                if (InventorySlot.stackSize >= craftRecipeItem.quantity)
                 {
-                    InventorySlot.RemoveFromStack(quantity); //Removes material amount from your inventory
+                    InventorySlot.RemoveFromStack(craftRecipeItem.quantity); //Removes material amount from your inventory
                     OnInventorySlotChanged.Invoke(InventorySlot);
 
                     var FlintAxe = GameObject.Instantiate(GameManager.Instance.FlintAxe);
