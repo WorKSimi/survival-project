@@ -75,17 +75,17 @@ public class InventorySystem
         return freeSlot == null ? false : true;
     }
 
-    public bool CraftItem(CraftRecipeItem craftRecipeItem)
+    public bool CraftItem(List<CraftRecipeItem> craftRecipeItems)
     {
         foreach (var InventorySlot in InventorySlots)
         {
             if (InventorySlot.itemData == null) continue;
 
-            if (InventorySlot.itemData.DisplayName.Equals(craftRecipeItem.displayName, System.StringComparison.OrdinalIgnoreCase))
+            if (InventorySlot.itemData.DisplayName.Equals(craftRecipeItems[0].displayName, System.StringComparison.OrdinalIgnoreCase))
             {
-                if (InventorySlot.stackSize >= craftRecipeItem.quantity)
+                if (InventorySlot.stackSize >= craftRecipeItems[0].quantity)
                 {
-                    InventorySlot.RemoveFromStack(craftRecipeItem.quantity); //Removes material amount from your inventory
+                    InventorySlot.RemoveFromStack(craftRecipeItems[0].quantity); //Removes material amount from your inventory
                     OnInventorySlotChanged.Invoke(InventorySlot);
 
                     var FlintAxe = GameObject.Instantiate(GameManager.Instance.FlintAxe);
