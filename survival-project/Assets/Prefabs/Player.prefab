@@ -40,7 +40,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -186.96611, y: 72.00519}
+  m_AnchoredPosition: {x: -421, y: 24}
   m_SizeDelta: {x: 276.0836, y: 283.324}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &849411672
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f0d53dca59a0614d993571a637dc316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anywhereCraftingMenu: {fileID: 3733963201338179345}
+  anywhereCraftingMenu: {fileID: 849411669}
   thisPlayer: {fileID: 3430272870254572311}
 --- !u!1 &908924334
 GameObject:
@@ -1043,6 +1043,7 @@ MonoBehaviour:
   inventorySystem:
     inventorySlots: []
   offset: 10
+  personalCraftingMenu: {fileID: 849411669}
 --- !u!114 &898379684
 MonoBehaviour:
   m_ObjectHideFlags: 0

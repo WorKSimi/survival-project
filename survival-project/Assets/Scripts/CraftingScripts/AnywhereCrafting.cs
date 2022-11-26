@@ -9,22 +9,30 @@ public class AnywhereCrafting : MonoBehaviour
 {
     [SerializeField] private GameObject anywhereCraftingMenu;
     [SerializeField] private GameObject thisPlayer;
+    //private bool menuActive;
 
     private void Awake()
     {
         anywhereCraftingMenu.SetActive(false);
+        //menuActive = false;
     }
 
-    public void Update()
+    private void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             anywhereCraftingMenu.SetActive(false);
+            //menuActive = false;
+            Debug.Log("Personal Crafting Menu Off");
         }
+
         else if (Keyboard.current.bKey.wasPressedThisFrame)
         {
             anywhereCraftingMenu.SetActive(true);
+            //menuActive = true;
+            Debug.Log("Personal Crafting Menu On");
         }
+        return;
     }
 
     public void CraftCraftingTable()
