@@ -13,6 +13,8 @@ namespace Assets.Scripts
 
         public InventoryItemData FlintAxe;
         public InventoryItemData CraftingTable;
+        public InventoryItemData Campfire;
+        public InventoryItemData WoodClub;
 
         protected void Start()
         {

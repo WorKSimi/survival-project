@@ -215,7 +215,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 908924337}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 169439273}
+        m_TargetAssemblyTypeName: AnywhereCrafting, Assembly-CSharp
+        m_MethodName: CraftWoodenClub
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &986717555
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +686,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1808286579}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 169439273}
+        m_TargetAssemblyTypeName: AnywhereCrafting, Assembly-CSharp
+        m_MethodName: CraftCampfire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &271712660807823109
 GameObject:
   m_ObjectHideFlags: 0

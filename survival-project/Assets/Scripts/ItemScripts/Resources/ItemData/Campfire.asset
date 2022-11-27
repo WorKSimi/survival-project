@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
+  m_Name: Campfire
+  m_EditorClassIdentifier: 
+  ID: -1
+  DisplayName: Campfire
+  Description: Campfire for cooking simple foods
+  Icon: {fileID: -845833006, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  MaxStackSize: 1
+  GoldValue: 0
+  ItemType: 
+  ItemPrefab: {fileID: 1784105365037295680, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+    type: 3}
+  itemDamage: 0
