@@ -1158,6 +1158,7 @@ MonoBehaviour:
   treeLayers:
     serializedVersion: 2
     m_Bits: 128
+  grid: {fileID: 1657539433045584491, guid: cf6d7e9e11e34104c8c01d9b27534769, type: 3}
 --- !u!1 &3733963201338179345
 GameObject:
   m_ObjectHideFlags: 0

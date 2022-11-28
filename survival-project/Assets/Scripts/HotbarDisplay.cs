@@ -131,6 +131,11 @@ public class HotbarDisplay : StaticInventoryDisplay
                 player.GetComponent<UseItemManager>().UseAxe(itemData.itemDamage);
                 break;
 
+                case "Block":
+                player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
+                Debug.Log("Trying to Place Block");
+                break;
+
                 default:
                 Debug.Log($"Default Case");
                 break;

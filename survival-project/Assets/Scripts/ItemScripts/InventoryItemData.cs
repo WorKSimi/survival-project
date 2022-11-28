@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 // <summary>
 // This is a scriptable object, that defines what an item is in our game.
@@ -23,6 +24,7 @@ public class InventoryItemData : ScriptableObject
     // public enum Type {axe, sword};
     public GameObject ItemPrefab;
     public double itemDamage;
+    public Tile ItemTile;
 
     public void UseItem()
     {

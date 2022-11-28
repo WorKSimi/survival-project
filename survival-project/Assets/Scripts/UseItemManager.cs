@@ -1,9 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class UseItemManager : MonoBehaviour
 {
+    private Grid grid;
+    private GameObject gridObject;
+
+    private Tilemap wallTilemap;
+    private GameObject wallObject;
+    
+    void Start()
+    {
+        gridObject = GameObject.FindWithTag("Grid");
+        grid = gridObject.GetComponent<Grid>();
+
+        wallObject = GameObject.FindWithTag("WallTilemap");
+        wallTilemap = wallObject.GetComponent<Tilemap>();
+    }
+
+    void Update()
+    {
+        //Vector3Int mousePos = GetMousePosition();
+    }
+
+    private Vector3Int GetMousePosition()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return grid.WorldToCell(mouseWorldPos);
+    }
+
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask treeLayers;
@@ -31,6 +58,15 @@ public class UseItemManager : MonoBehaviour
 
             nextAttackTime = Time.time + 1f / attackRate;
         }
+    }
+
+    public void PlaceBlock(Tile ItemTile)
+    {
+        Vector3Int mousePos = GetMousePosition(); //Gets mouse position
+
+        wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
+
+        // Finally, remove 1 from the item stack.
     }
 
 }
