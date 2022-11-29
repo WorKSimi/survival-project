@@ -22,4 +22,4 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: a2c3b1011c7bfcc4e9d291fecc2893ba,
     type: 3}
   itemDamage: 0
-  ItemTile: {fileID: 0}
+  ItemTile: {fileID: 11400000, guid: 8c5cebb6a71e7bd46a5917ccb301cfa5, type: 2}

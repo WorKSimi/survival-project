@@ -5,30 +5,18 @@ using UnityEngine.Tilemaps;
 
 public class UseItemManager : MonoBehaviour
 {
-    private Grid grid;
-    private GameObject gridObject;
-
-    private Tilemap wallTilemap;
-    private GameObject wallObject;
-    
-    void Start()
+    void Awake()
     {
-        gridObject = GameObject.FindWithTag("Grid");
-        grid = gridObject.GetComponent<Grid>();
+        //gridObject = GameObject.FindWithTag("Grid");
+        //grid = gridObject.GetComponent<Grid>();
 
-        wallObject = GameObject.FindWithTag("WallTilemap");
-        wallTilemap = wallObject.GetComponent<Tilemap>();
+        //wallObject = GameObject.FindWithTag("WallTilemap");
+        //wallTilemap = wallObject.GetComponent<Tilemap>();
     }
 
     void Update()
     {
         //Vector3Int mousePos = GetMousePosition();
-    }
-
-    private Vector3Int GetMousePosition()
-    {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return grid.WorldToCell(mouseWorldPos);
     }
 
     [SerializeField] private Animator animator;
@@ -60,13 +48,24 @@ public class UseItemManager : MonoBehaviour
         }
     }
 
-    public void PlaceBlock(Tile ItemTile)
+    [SerializeField] private Grid grid;
+    [SerializeField] private Tilemap wallTilemap;
+
+    private Vector3Int GetMousePosition()
     {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return grid.WorldToCell(mouseWorldPos);
+    }
+
+
+    public void PlaceBlock(Tile ItemTile) //Takes in a ItemTile based on what your holding and places it
+    {
+        Debug.Log("Trying to place Block");
         Vector3Int mousePos = GetMousePosition(); //Gets mouse position
 
         wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
 
-        // Finally, remove 1 from the item stack.
+        //Finally, remove 1 from the item stack.
     }
 
 }
