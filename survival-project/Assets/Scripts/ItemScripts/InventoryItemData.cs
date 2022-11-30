@@ -24,7 +24,7 @@ public class InventoryItemData : ScriptableObject
     // public enum Type {axe, sword};
     public GameObject ItemPrefab;
     public double itemDamage;
-    public Tile ItemTile;
+    public RuleTile ItemTile;
 
     public void UseItem()
     {

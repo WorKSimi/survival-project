@@ -49,7 +49,8 @@ public class GridController : MonoBehaviour
         // Right mouse click > remove path tile
         if (Input.GetMouseButton(1))
         {
-            pathMap.SetTile(mousePos, null);
+            //pathMap.SetTile(mousePos, pathTile);
+            
         }
     }
 
