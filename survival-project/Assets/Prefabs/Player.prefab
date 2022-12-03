@@ -1153,12 +1153,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2b2a4d9e53a57429f2549fad214e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject: {fileID: 0}
+  wallmapObject: {fileID: 0}
+  grid: {fileID: 1657539433045584491, guid: cf6d7e9e11e34104c8c01d9b27534769, type: 3}
+  wallTilemap: {fileID: 0}
+  thisPlayer: {fileID: 3430272870254572311}
   animator: {fileID: 6982808670112934315}
   attackPoint: {fileID: 2660268309940200196}
   treeLayers:
     serializedVersion: 2
     m_Bits: 128
-  grid: {fileID: 1657539433045584491, guid: cf6d7e9e11e34104c8c01d9b27534769, type: 3}
+  wallLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &3733963201338179345
 GameObject:
   m_ObjectHideFlags: 0

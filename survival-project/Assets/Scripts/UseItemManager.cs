@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,13 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private GameObject wallmapObject;
     [SerializeField] private Grid grid;
     [SerializeField] private Tilemap wallTilemap;
+    [SerializeField] private GameObject thisPlayer;
+
+    private Vector3Int playerPos;
+    private Vector3 playerPos2;
+    private Vector3Int mousePos;
+    private Vector3 mouseWorldPos;
+    private Vector3Int cellPosition;
 
     void Awake()
     {
@@ -21,12 +29,39 @@ public class UseItemManager : MonoBehaviour
 
     void Update()
     {
-        
+        playerPos2 = thisPlayer.transform.position;
+        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        playerPos = grid.WorldToCell(transform.position);
+        Vector3Int mousePos = GetMousePosition();
+
+        if (Input.GetMouseButton(1))
+        {
+            wallTilemap.SetTile(mousePos, null); 
+        }
+    }
+    
+    public bool IsInRange()
+    {
+        float maxRange = 10.5f;
+        float dist = Vector3.Distance(mouseWorldPos, playerPos2);
+        if (dist <= maxRange)
+        {
+            return true;
+        }
+        else return false; 
+    }
+
+    private Vector3Int GetMousePosition()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return grid.WorldToCell(mouseWorldPos);
     }
 
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask treeLayers;
+    [SerializeField] private LayerMask wallLayers;
 
     private InventoryItemData inventoryItemData;
     private float attackRange = 0.5f; 
@@ -53,28 +88,33 @@ public class UseItemManager : MonoBehaviour
         }
     }
 
-    private Vector3Int GetMousePosition()
+     public void UsePick(double itemDamage)
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return grid.WorldToCell(mouseWorldPos);
-    }
+        Debug.Log("PICK USED!");
+        if (Time.time >= nextAttackTime)
+        {
+            animator.SetTrigger("Attack"); // Play an attack animation
 
+            Collider2D[] hitWalls = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, wallLayers); // Detect walls in range of attack
+
+            foreach (Collider2D wall in hitWalls) // Damage walls
+            {
+                wall.GetComponent<Wall>().TakeDamage(itemDamage);
+            }
+
+            nextAttackTime = Time.time + 1f / attackRate;
+        }
+    }
 
     public void PlaceBlock(RuleTile ItemTile) //Takes in a ItemTile based on what your holding and places it
     {
-        Debug.Log("Trying to place Block");
-        Vector3Int mousePos = GetMousePosition(); //Gets mouse position
-
-        wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
-
-        //RemoveFromStack(1);
-        //Finally, remove 1 from the item stack.
-        
-    }
-
-    public void MineBlock(double itemDamage)
-    {
+        if (IsInRange()) 
+        {
+            Debug.Log("mouse in da range"); 
+            Vector3Int mousePos = GetMousePosition(); //Gets mouse position
+            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is  
+        }
+        else Debug.Log("Not in range");
 
     }
-
 }

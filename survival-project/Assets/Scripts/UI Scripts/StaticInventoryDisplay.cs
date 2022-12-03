@@ -17,7 +17,7 @@ public class StaticInventoryDisplay : InventoryDisplay
         PlayerInventoryHolder.OnPlayerInventoryChanged -= RefreshStaticDisplay;
     }
 
-    private void RefreshStaticDisplay()
+    public void RefreshStaticDisplay()
     {
         if (inventoryHolder != null)
         {

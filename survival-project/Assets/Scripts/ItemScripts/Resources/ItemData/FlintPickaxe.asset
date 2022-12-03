@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: WoodWall
+  m_Name: FlintPickaxe
   m_EditorClassIdentifier: 
   ID: -1
-  DisplayName: Wood Wall
-  Description: A wood wall. The most basic of building blocks.
-  Icon: {fileID: 21300000, guid: 2f55a5ed42e5ca0499ad8a78c9dcce37, type: 3}
-  MaxStackSize: 99
+  DisplayName: FlintPickaxe
+  Description: A shoddy pickaxe for basic destruction
+  Icon: {fileID: 706460424, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  MaxStackSize: 1
   GoldValue: 0
-  ItemType: Block
-  ItemPrefab: {fileID: 7389436694480070536, guid: a2c3b1011c7bfcc4e9d291fecc2893ba,
+  ItemType: Pick
+  ItemPrefab: {fileID: 7389436694480070536, guid: d1fd14203969a2c45bf6cf54ae042bca,
     type: 3}
-  itemDamage: 0
-  ItemTile: {fileID: 11400000, guid: 804de162d757ebe47b4b91a44de2a626, type: 2}
+  itemDamage: 5
+  ItemTile: {fileID: 0}

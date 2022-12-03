@@ -17,6 +17,8 @@ public class GridController : MonoBehaviour
 
     private Vector3Int playerPos;
 
+    private Vector3Int cellPosition;
+
     private Vector3Int previousMousePos = new Vector3Int();
 
     void Start()
@@ -27,7 +29,8 @@ public class GridController : MonoBehaviour
     void Update()
     {
         // Mouse over, highlight the tile
-        playerPos = pathMap.WorldToCell(transform.position);
+        //playerPos = pathMap.WorldToCell(transform.position);
+        Vector3Int cellPosition = grid.WorldToCell(playerPos);
 
         Vector3Int mousePos = GetMousePosition();
         if (!mousePos.Equals(previousMousePos))
@@ -47,11 +50,11 @@ public class GridController : MonoBehaviour
         //}
 
         // Right mouse click > remove path tile
-        if (Input.GetMouseButton(1))
-        {
+        //if (Input.GetMouseButton(1))
+        //{
             //pathMap.SetTile(mousePos, pathTile);
             
-        }
+        //}
     }
 
     private Vector3Int GetMousePosition()

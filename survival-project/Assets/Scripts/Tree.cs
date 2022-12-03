@@ -8,7 +8,7 @@ public class Tree : MonoBehaviour
     [SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
 
-    double currentHealth;
+    private double currentHealth;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class Tree : MonoBehaviour
     public void TakeDamage(double damage)
     {
         currentHealth -= damage;
-
+        Debug.Log("Tree Hit!");
         //Play hurt animation
 
         if (currentHealth <= 0)
@@ -27,7 +27,7 @@ public class Tree : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         Debug.Log("Tree down!");
         //Tree die animation

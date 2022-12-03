@@ -132,8 +132,16 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Block":
-                player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
-                Debug.Log("Placing Block");
+                if (player.GetComponent<UseItemManager>().IsInRange()) 
+                {
+                    player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
+                    slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
+                    RefreshStaticDisplay();
+                }
+                break;
+
+                case "Pick":
+                player.GetComponent<UseItemManager>().UsePick(itemData.itemDamage);
                 break;
 
                 default:

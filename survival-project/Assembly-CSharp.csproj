@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\Inventory Scripts\InventoryHolder.cs" />
      <Compile Include="Assets\Scripts\Inventory Scripts\InventorySlot.cs" />
+     <Compile Include="Assets\Scripts\Wall.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\SaveData.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\InventorySlot_UI.cs" />
      <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
