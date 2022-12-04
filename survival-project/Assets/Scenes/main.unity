@@ -2119,6 +2119,11 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 642653959
       objectReference: {fileID: 0}
+    - target: {fileID: 7389436694480070531, guid: c84329bea2b7dfa4fab46a536e00aa39,
+        type: 3}
+      propertyPath: _id
+      value: e5bbbec2-08ae-43a0-aa55-529bc2961a51
+      objectReference: {fileID: 0}
     - target: {fileID: 7389436694480070532, guid: c84329bea2b7dfa4fab46a536e00aa39,
         type: 3}
       propertyPath: m_RootOrder
@@ -2571,7 +2576,7 @@ GameObject:
   - component: {fileID: 1532068201}
   m_Layer: 0
   m_Name: Interactive
-  m_TagString: Untagged
+  m_TagString: InteractiveTilemap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2777,15 +2782,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1557202662}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 537e47c89b92da740bff8b59f7ae46eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactiveMap: {fileID: 1532068200}
-  pathMap: {fileID: 1958575256}
   hoverTile: {fileID: 11400000, guid: 272c720135621284f8bc2ce851d9925c, type: 2}
-  pathTile: {fileID: 11400000, guid: 5c0f1656054745045984cc5e9772bbbf, type: 2}
 --- !u!156049354 &1557202664
 Grid:
   m_ObjectHideFlags: 0

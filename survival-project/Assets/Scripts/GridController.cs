@@ -9,9 +9,11 @@ public class GridController : MonoBehaviour
 {
     private Grid grid;
     [SerializeField] private Tilemap interactiveMap = null;
-    [SerializeField] private Tilemap pathMap = null;
     [SerializeField] private Tile hoverTile = null;
-    [SerializeField] private Tile pathTile = null;
+
+    private Vector3 playerPos2;
+
+    private Vector3 mouseWorldPos;
 
     private Vector2Int range = new Vector2Int(5, 4);
 
@@ -28,33 +30,19 @@ public class GridController : MonoBehaviour
 
     void Update()
     {
-        // Mouse over, highlight the tile
-        //playerPos = pathMap.WorldToCell(transform.position);
+        
         Vector3Int cellPosition = grid.WorldToCell(playerPos);
 
         Vector3Int mousePos = GetMousePosition();
         if (!mousePos.Equals(previousMousePos))
         {
-            //if (InRange(playerPos, mousePos, (Vector3Int)range))
-            //{
+            if (IsInRange()) 
+            {
                 interactiveMap.SetTile(previousMousePos, null);
                 interactiveMap.SetTile(mousePos, hoverTile);
                 previousMousePos = mousePos;
-            //}
+            }
         }
-
-        // Left mouse click > add path tile
-        //if (Input.GetMouseButton(0))
-        //{
-        //    pathMap.SetTile(mousePos, pathTile);
-        //}
-
-        // Right mouse click > remove path tile
-        //if (Input.GetMouseButton(1))
-        //{
-            //pathMap.SetTile(mousePos, pathTile);
-            
-        //}
     }
 
     private Vector3Int GetMousePosition()
@@ -63,14 +51,14 @@ public class GridController : MonoBehaviour
         return grid.WorldToCell(mouseWorldPos);
     }
 
-    private bool InRange(Vector3Int positionA, Vector3Int positionB, Vector3Int range)
+    public bool IsInRange()
     {
-        Vector3Int distance = positionA - positionB;
-
-        if (Math.Abs(distance.x) >= range.x || Math.Abs(distance.y) >= range.y)
+        float maxRange = 10.5f;
+        float dist = Vector3.Distance(mouseWorldPos, playerPos2);
+        if (dist <= maxRange)
         {
-            return false;
+            return true;
         }
-        return true;
+        else return false; 
     }
 }

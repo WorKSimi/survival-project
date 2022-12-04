@@ -41,7 +41,7 @@
      <Compile Include="Assets\Scripts\OwnerNetworkAnimator.cs" />
      <Compile Include="Assets\Scripts\GridController.cs" />
      <Compile Include="Assets\Scripts\CraftingScripts\AnywhereCrafting.cs" />
-     <Compile Include="Assets\Scripts\Tree.cs" />
+     <Compile Include="Assets\Scripts\TreeLogic.cs" />
      <Compile Include="Assets\Scripts\HotbarDisplay.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
      <Compile Include="Assets\Scripts\UI Scripts\InventoryUIController.cs" />

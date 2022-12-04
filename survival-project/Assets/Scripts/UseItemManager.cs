@@ -6,17 +6,26 @@ using UnityEngine.Tilemaps;
 
 public class UseItemManager : MonoBehaviour
 {
-    [SerializeField] private GameObject gridObject;
-    [SerializeField] private GameObject wallmapObject;
-    [SerializeField] private Grid grid;
-    [SerializeField] private Tilemap wallTilemap;
+    private Grid grid;
+    private GameObject gridObject;
+
+    private GameObject wallmapObject;
+    private Tilemap wallTilemap;
+
+    private GameObject interactivemapObject;
+    private Tilemap interactiveTilemap;
+
+    [SerializeField] private Tile hoverTile = null;
     [SerializeField] private GameObject thisPlayer;
 
     private Vector3Int playerPos;
     private Vector3 playerPos2;
+
     private Vector3Int mousePos;
+    private Vector3Int previousMousePos;
+
     private Vector3 mouseWorldPos;
-    private Vector3Int cellPosition;
+    private Transform hoveredWall;
 
     void Awake()
     {
@@ -25,20 +34,32 @@ public class UseItemManager : MonoBehaviour
 
         wallmapObject = GameObject.FindWithTag("WallTilemap");
         wallTilemap = wallmapObject.GetComponent<Tilemap>();
+
+        interactivemapObject = GameObject.FindWithTag("InteractiveTilemap");
+        interactiveTilemap = interactivemapObject.GetComponent<Tilemap>();
     }
 
     void Update()
     {
         playerPos2 = thisPlayer.transform.position;
         mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         playerPos = grid.WorldToCell(transform.position);
         Vector3Int mousePos = GetMousePosition();
 
-        if (Input.GetMouseButton(1))
+        if (IsInRange()) 
         {
-            wallTilemap.SetTile(mousePos, null); 
+            interactiveTilemap.SetTile(previousMousePos, null);
+            interactiveTilemap.SetTile(mousePos, hoverTile);
+            previousMousePos = mousePos;
         }
+        else interactiveTilemap.SetTile(mousePos, null);
+    }
+
+    void DetectObject()
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.GetRayIntersection(ray, 10f, wallLayers);
+        hoveredWall = hit.transform;
     }
     
     public bool IsInRange()
@@ -81,25 +102,7 @@ public class UseItemManager : MonoBehaviour
 
             foreach (Collider2D tree in hitTrees) // Damage trees
             {
-                tree.GetComponent<Tree>().TakeDamage(itemDamage);
-            }
-
-            nextAttackTime = Time.time + 1f / attackRate;
-        }
-    }
-
-     public void UsePick(double itemDamage)
-    {
-        Debug.Log("PICK USED!");
-        if (Time.time >= nextAttackTime)
-        {
-            animator.SetTrigger("Attack"); // Play an attack animation
-
-            Collider2D[] hitWalls = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, wallLayers); // Detect walls in range of attack
-
-            foreach (Collider2D wall in hitWalls) // Damage walls
-            {
-                wall.GetComponent<Wall>().TakeDamage(itemDamage);
+                tree.GetComponent<TreeLogic>().TakeDamage(itemDamage);
             }
 
             nextAttackTime = Time.time + 1f / attackRate;
@@ -110,11 +113,27 @@ public class UseItemManager : MonoBehaviour
     {
         if (IsInRange()) 
         {
-            Debug.Log("mouse in da range"); 
             Vector3Int mousePos = GetMousePosition(); //Gets mouse position
-            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is  
+            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is    
         }
-        else Debug.Log("Not in range");
+    }
 
+    public void UsePick(double itemDamage)
+    {
+        Debug.Log("PICK USED!");
+
+        if (IsInRange())
+        {
+            if (Time.time >= nextAttackTime)
+            {
+                animator.SetTrigger("Attack"); // Play an attack animation
+
+                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                var hit = Physics2D.GetRayIntersection(ray, 10f, wallLayers);
+                hoveredWall = hit.transform;
+                hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
     }
 }

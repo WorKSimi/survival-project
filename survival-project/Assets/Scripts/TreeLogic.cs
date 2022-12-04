@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 
-public class Tree : MonoBehaviour
+public class TreeLogic : MonoBehaviour
 {
     [SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
 
     private double currentHealth;
+    
 
     void Start()
     {
@@ -39,7 +40,6 @@ public class Tree : MonoBehaviour
         {
             transform.rotation = Random.rotation;
             Instantiate(wood, transform.position, Quaternion.identity);
-            //wood.GetComponent<Rigidbody2D>().AddForce(transform.up * 2, ForceMode2D.Impulse);
         }
         Destroy(this.gameObject);
     }
