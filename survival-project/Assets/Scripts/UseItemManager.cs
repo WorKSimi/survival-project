@@ -46,13 +46,16 @@ public class UseItemManager : MonoBehaviour
         playerPos = grid.WorldToCell(transform.position);
         Vector3Int mousePos = GetMousePosition();
 
-        if (IsInRange()) 
+        if (IsInRange())
         {
             interactiveTilemap.SetTile(previousMousePos, null);
             interactiveTilemap.SetTile(mousePos, hoverTile);
             previousMousePos = mousePos;
         }
-        else interactiveTilemap.SetTile(mousePos, null);
+        else
+        {
+            interactiveTilemap.SetTile(mousePos, null);
+        }
     }
 
     void DetectObject()
