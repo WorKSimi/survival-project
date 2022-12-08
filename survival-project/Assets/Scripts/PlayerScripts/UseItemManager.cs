@@ -76,6 +76,21 @@ public class UseItemManager : MonoBehaviour
         else return false; 
     }
 
+    public bool TileFound()
+    {
+        Vector3Int mousePos = GetMousePosition(); //Gets mouse position
+        if (wallTilemap.GetTile(mousePos))
+        {
+            Debug.Log("Tile occupied, can not place block!");
+            return true;
+        }
+        else
+        {              
+            Debug.Log("No Tile found, placing block");
+            return false;
+        }
+    }
+
     private Vector3Int GetMousePosition()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -107,7 +122,6 @@ public class UseItemManager : MonoBehaviour
             {
                 tree.GetComponent<TreeLogic>().TakeDamage(itemDamage);
             }
-
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
@@ -115,12 +129,11 @@ public class UseItemManager : MonoBehaviour
     public void PlaceBlock(RuleTile ItemTile) //Takes in a ItemTile based on what your holding and places it
     {
         if (IsInRange()) 
-        {
-            Vector3Int mousePos = GetMousePosition(); //Gets mouse position
-            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is    
+        {  
+             Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
+             wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
         }
     }
-
     public void UsePick(double itemDamage)
     {
         Debug.Log("PICK USED!");
@@ -130,7 +143,6 @@ public class UseItemManager : MonoBehaviour
             if (Time.time >= nextAttackTime)
             {
                 animator.SetTrigger("Attack"); // Play an attack animation
-
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 var hit = Physics2D.GetRayIntersection(ray, 10f, wallLayers);
                 hoveredWall = hit.transform;
