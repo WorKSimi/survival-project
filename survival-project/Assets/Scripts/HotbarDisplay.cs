@@ -7,6 +7,10 @@ using UnityEngine.InputSystem;
 public class HotbarDisplay : StaticInventoryDisplay
 {
     public GameObject player;
+    private Transform weaponAnchor; //Weapon anchor on player
+    private Transform weapon; //Weapon object on player
+    private SpriteRenderer weaponSprite; //Held weapon sprite on boejct
+
     private int _maxIndexSize = 9;
     private int _currentIndex = 0;
 
@@ -15,6 +19,10 @@ public class HotbarDisplay : StaticInventoryDisplay
     private void Awake()
     {
         _playerControls = new PlayerControls();
+   
+        weaponAnchor = player.transform.GetChild(1); //Sets weapon anchor variable
+        weapon = weaponAnchor.GetChild(0); //Sets weapon variable
+        weaponSprite = weapon.GetComponent<SpriteRenderer>(); //Sets sprite renderer on weapon to this.
     }
 
     protected override void Start()

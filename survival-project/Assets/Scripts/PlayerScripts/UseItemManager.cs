@@ -151,4 +151,9 @@ public class UseItemManager : MonoBehaviour
             }
         }
     }
+
+    public void UseSword(double itemDamage)
+    {
+        Debug.Log("SWORD USED!");
+    }
 }

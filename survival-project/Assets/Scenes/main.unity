@@ -366,6 +366,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7389436694480070533, guid: d1fd14203969a2c45bf6cf54ae042bca,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7389436694480070536, guid: d1fd14203969a2c45bf6cf54ae042bca,
         type: 3}
       propertyPath: m_Name
@@ -2711,8 +2716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537e47c89b92da740bff8b59f7ae46eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveMap: {fileID: 1532068200}
-  hoverTile: {fileID: 11400000, guid: 272c720135621284f8bc2ce851d9925c, type: 2}
 --- !u!156049354 &1557202664
 Grid:
   m_ObjectHideFlags: 0

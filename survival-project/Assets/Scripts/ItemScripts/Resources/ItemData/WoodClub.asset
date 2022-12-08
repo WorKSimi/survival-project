@@ -18,9 +18,10 @@ MonoBehaviour:
 
 '
   Icon: {fileID: -1078251973, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
-  MaxStackSize: 0
+  MaxStackSize: 1
   GoldValue: 0
-  ItemType: 
+  ItemType: Sword
   ItemPrefab: {fileID: 7389436694480070536, guid: c35379fde93c5154b84688083e7a3c92,
     type: 3}
-  itemDamage: 0
+  itemDamage: 1
+  ItemTile: {fileID: 0}
