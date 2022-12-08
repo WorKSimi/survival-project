@@ -1067,7 +1067,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootOrder: 10
+=======
+  m_RootOrder: 12
+>>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802663357
 GameObject:
@@ -1215,7 +1219,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootOrder: 8
+=======
+  m_RootOrder: 10
+>>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &842814112
 PrefabInstance:
@@ -1388,7 +1396,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootOrder: 6
+=======
+  m_RootOrder: 8
+>>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &893543214
 GameObject:
@@ -1436,7 +1448,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootOrder: 12
+=======
+  m_RootOrder: 14
+>>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &908346579 stripped
 Transform:
@@ -1472,11 +1488,14 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 13
+<<<<<<< Updated upstream
       objectReference: {fileID: 0}
     - target: {fileID: 7389436694480070532, guid: a2c3b1011c7bfcc4e9d291fecc2893ba,
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.86766344
+=======
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 7389436694480070532, guid: a2c3b1011c7bfcc4e9d291fecc2893ba,
         type: 3}
@@ -2679,7 +2698,11 @@ Transform:
   - {fileID: 76979362}
   - {fileID: 1493233264}
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootOrder: 14
+=======
+  m_RootOrder: 16
+>>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1557202662
 GameObject:
@@ -2711,8 +2734,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537e47c89b92da740bff8b59f7ae46eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactiveMap: {fileID: 1532068200}
-  hoverTile: {fileID: 11400000, guid: 272c720135621284f8bc2ce851d9925c, type: 2}
 --- !u!156049354 &1557202664
 Grid:
   m_ObjectHideFlags: 0
@@ -2742,7 +2763,11 @@ Transform:
   - {fileID: 1143258759}
   - {fileID: 1532068202}
   m_Father: {fileID: 0}
+<<<<<<< Updated upstream
   m_RootOrder: 16
+=======
+  m_RootOrder: 18
+>>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1588193341
 PrefabInstance:

@@ -59,7 +59,10 @@
     <Compile Include="Assets\Scripts\CraftingScripts\CraftingTable.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\OwnerNetworkAnimator.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\GridController.cs" />
+=======
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\CraftingScripts\AnywhereCrafting.cs" />
     <Compile Include="Assets\Scripts\TreeLogic.cs" />
     <Compile Include="Assets\Scripts\HotbarDisplay.cs" />
@@ -73,6 +76,7 @@
     <Compile Include="Assets\Input\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\InventorySystem.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StaticInventoryDisplay.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\PlayerCanvasController.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\InventoryItemData.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
@@ -80,6 +84,15 @@
     <Compile Include="Assets\Scripts\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\WeaponData.cs" />
     <Compile Include="Assets\Scripts\UseItemManager.cs" />
+=======
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerCanvasController.cs" />
+    <Compile Include="Assets\Scripts\ItemScripts\InventoryItemData.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\ItemScripts\ItemPickup.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\IInteractable.cs" />
+    <Compile Include="Assets\Scripts\ItemScripts\WeaponData.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\UseItemManager.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\NetworkManagerUI.cs" />
     <Compile Include="Assets\Scripts\MouseItemData.cs" />
     <Compile Include="Assets\Scripts\RotateToMouse.cs" />
@@ -94,7 +107,11 @@
     <Compile Include="Assets\Scripts\SaveLoad\UniqueID.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\ItemSlot.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\PlayerNetwork.cs" />
+=======
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
