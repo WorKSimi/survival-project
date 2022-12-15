@@ -15,6 +15,11 @@ public class UseItemManager : MonoBehaviour
     private GameObject interactivemapObject;
     private Tilemap interactiveTilemap;
 
+    private bool facingRight;
+    private bool facingLeft;
+
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     [SerializeField] private Tile hoverTile = null;
     [SerializeField] private GameObject thisPlayer;
 
@@ -56,7 +61,38 @@ public class UseItemManager : MonoBehaviour
         {
             interactiveTilemap.SetTile(mousePos, null);
         }
+
+        PlayerDirection();
+
     }
+    private void PlayerDirection()
+    {
+        if (mouseWorldPos.x > playerPos2.x)
+        {
+            //Debug.Log("mouse greater den player");
+            FaceRight();
+        }
+
+        else if (mouseWorldPos.x < playerPos2.x)
+        {
+            //Debug.Log("mouse less than player");
+            FaceLeft();
+        }
+    }
+
+    private void FaceRight()
+    {
+        facingRight = true;
+        facingLeft = false;
+        spriteRenderer.flipX = false;
+    }
+
+    private void FaceLeft()
+    {
+        facingRight = false;
+        facingLeft = true;
+        spriteRenderer.flipX = true;
+    }    
 
     void DetectObject()
     {
@@ -67,8 +103,9 @@ public class UseItemManager : MonoBehaviour
     
     public bool IsInRange()
     {
-        float maxRange = 10.5f;
+        float maxRange = 13.2f;
         float dist = Vector3.Distance(mouseWorldPos, playerPos2);
+        //Debug.Log(dist);
         if (dist <= maxRange)
         {
             return true;
@@ -144,7 +181,7 @@ public class UseItemManager : MonoBehaviour
             {
                 animator.SetTrigger("Attack"); // Play an attack animation
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                var hit = Physics2D.GetRayIntersection(ray, 10f, wallLayers);
+                var hit = Physics2D.GetRayIntersection(ray, 50f, wallLayers);
                 hoveredWall = hit.transform;
                 hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);
                 nextAttackTime = Time.time + 1f / attackRate;
