@@ -6,31 +6,29 @@ using UnityEngine.Tilemaps;
 
 public class UseItemManager : MonoBehaviour
 {
-    private Grid grid;
-    private GameObject gridObject;
+    private Grid grid; //Game World Grid
+    private GameObject gridObject; //Object holding game world grid
 
-    private GameObject wallmapObject;
-    private Tilemap wallTilemap;
+    private GameObject wallmapObject; //Object holding wall tilemap
+    private Tilemap wallTilemap; //The wall tilemap of the world
 
-    private GameObject interactivemapObject;
-    private Tilemap interactiveTilemap;
+    private GameObject interactivemapObject; //Object holding interactive tilemap
+    private Tilemap interactiveTilemap; //The interactive tilemap of the world
 
-    private bool facingRight;
-    private bool facingLeft;
+    private bool facingRight; //Bool for if the player is facing right
+    private bool facingLeft; //Bool if the player is facing left
 
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Tile hoverTile = null; //Tile that is used when you hover on a spot on grid
+    [SerializeField] private GameObject thisPlayer; //This players game object
 
-    [SerializeField] private Tile hoverTile = null;
-    [SerializeField] private GameObject thisPlayer;
+    private Vector3Int playerPos; //Player position on grid
+    private Vector3 playerPos2; //Player normal position
 
-    private Vector3Int playerPos;
-    private Vector3 playerPos2;
+    private Vector3Int mousePos; //Mouse position on grid
+    private Vector3Int previousMousePos; //Previous mouse position on grid
 
-    private Vector3Int mousePos;
-    private Vector3Int previousMousePos;
-
-    private Vector3 mouseWorldPos;
-    private Transform hoveredWall;
+    private Vector3 mouseWorldPos; //Mouse position in world
+    private Transform hoveredWall; //Wall object your mouse is currently hovering over
 
     void Awake()
     {
@@ -61,38 +59,7 @@ public class UseItemManager : MonoBehaviour
         {
             interactiveTilemap.SetTile(mousePos, null);
         }
-
-        PlayerDirection();
-
     }
-    private void PlayerDirection()
-    {
-        if (mouseWorldPos.x > playerPos2.x)
-        {
-            //Debug.Log("mouse greater den player");
-            FaceRight();
-        }
-
-        else if (mouseWorldPos.x < playerPos2.x)
-        {
-            //Debug.Log("mouse less than player");
-            FaceLeft();
-        }
-    }
-
-    private void FaceRight()
-    {
-        facingRight = true;
-        facingLeft = false;
-        spriteRenderer.flipX = false;
-    }
-
-    private void FaceLeft()
-    {
-        facingRight = false;
-        facingLeft = true;
-        spriteRenderer.flipX = true;
-    }    
 
     void DetectObject()
     {

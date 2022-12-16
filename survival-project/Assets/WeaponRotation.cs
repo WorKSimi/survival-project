@@ -9,18 +9,21 @@ public class WeaponRotation : MonoBehaviour
     [SerializeField] private Transform weaponSprite;
 
     private Transform m_transform;
+    private SpriteRenderer swordSprite;
 
     private Vector3 mouseWorldPos;
     private Vector3 playerPos2;
 
     private bool facingRight;
     private bool facingLeft;
+    private bool swungWeapon = false;
 
 
 
     void Start()
     {
         m_transform = this.transform;
+        swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
     }
 
     private void RTMouse()
@@ -43,7 +46,12 @@ public class WeaponRotation : MonoBehaviour
 
     void Update()
     {
-        playerPos2 = thisPlayer.transform.position;
+        if (Input.GetMouseButtonDown(0))
+        {
+            swungWeapon = !swungWeapon;
+        }
+
+            playerPos2 = thisPlayer.transform.position;
         mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         FacingDirection();
@@ -56,17 +64,31 @@ public class WeaponRotation : MonoBehaviour
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
             m_transform.rotation = rotation;
+            swordSprite.flipX = false;
+            swordSprite.flipY = false;
 
-            if (Input.GetMouseButton(0))
+            if (swungWeapon == true)
             {
-                Debug.Log("Swing Test");
-                rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
+                m_transform.rotation = rotation;
+                swordSprite.flipX = true;
+                swordSprite.flipY = true;
             }
         }
         else if (facingLeft == true)
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
             m_transform.rotation = rotation;
+            swordSprite.flipX = true;
+            swordSprite.flipY = true;
+
+            if (swungWeapon == true)
+            {
+                rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
+                m_transform.rotation = rotation;
+                swordSprite.flipX = false;
+                swordSprite.flipY = false;
+            }
         }
 
 
@@ -75,15 +97,13 @@ public class WeaponRotation : MonoBehaviour
     private void FacingDirection()
     {
         if (mouseWorldPos.x > playerPos2.x)
-        {
-            //weaponSprite.rotation = Quaternion.Euler(0, 0, 38);
+        {          
             facingRight = true;
             facingLeft = false;
         }
 
         if (mouseWorldPos.x < playerPos2.x)
-        {
-            //weaponSprite.rotation = Quaternion.Euler(0, 0, -38);
+        {          
             facingRight = false;
             facingLeft = true;
         }

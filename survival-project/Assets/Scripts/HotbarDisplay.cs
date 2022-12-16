@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 public class HotbarDisplay : StaticInventoryDisplay
 {
     public GameObject player;
-    private Transform weaponAnchor; //Weapon anchor on player
-    private Transform weapon; //Weapon object on player
-    private SpriteRenderer weaponSprite; //Held weapon sprite on boejct
+    [SerializeField] private GameObject weaponAnchor; //Weapon anchor on player
+    [SerializeField] private GameObject weapon; //Weapon object on player
+    private SpriteRenderer weaponSpriteRenderer; //Held weapon sprite renderer on object
 
     private int _maxIndexSize = 9;
     private int _currentIndex = 0;
@@ -19,10 +19,8 @@ public class HotbarDisplay : StaticInventoryDisplay
     private void Awake()
     {
         _playerControls = new PlayerControls();
-   
-        weaponAnchor = player.transform.GetChild(1); //Sets weapon anchor variable
-        weapon = weaponAnchor.GetChild(0); //Sets weapon variable
-        weaponSprite = weapon.GetComponent<SpriteRenderer>(); //Sets sprite renderer on weapon to this.
+
+        weaponSpriteRenderer = weapon.GetComponent<SpriteRenderer>();
     }
 
     protected override void Start()
@@ -123,17 +121,34 @@ public class HotbarDisplay : StaticInventoryDisplay
 
     private void Update()
     {
-        if (_playerControls.Player.MouseWheel.ReadValue<float>() > 0.1f) ChangeIndex(-1);
-        if (_playerControls.Player.MouseWheel.ReadValue<float>() < -0.1f) ChangeIndex(1);
+        if (_playerControls.Player.MouseWheel.ReadValue<float>() > 0.1f) ChangeIndex(-1); //Changes selected hotbar slot
+        if (_playerControls.Player.MouseWheel.ReadValue<float>() < -0.1f) ChangeIndex(1); //Changes selected hotbar slot the other way
+
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
+        {
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Sword") //Checks if the currently held item is a sword type
+            {
+                weaponSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Sets the visual for the sword weapon to the held item.
+            }
+
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Sword")
+            {
+                weaponSpriteRenderer.sprite = null;
+            }
+        }
+
+        else if (slots[_currentIndex].AssignedInventorySlot.ItemData == null)
+        {
+            weaponSpriteRenderer.sprite = null;
+        }
     }
 
     private void UseItem(InputAction.CallbackContext obj)
     {
-        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) //Checks if current slot data is not null
         {
-            //slots[_currentIndex].AssignedInventorySlot.ItemData.UseItem();
             InventoryItemData itemData = slots[_currentIndex].AssignedInventorySlot.ItemData;
-            switch (itemData.ItemType)
+            switch (itemData.ItemType) //Switch statement that runs different code from use item manager depending on item type.
             {
                 case "Axe":
                 player.GetComponent<UseItemManager>().UseAxe(itemData.itemDamage);

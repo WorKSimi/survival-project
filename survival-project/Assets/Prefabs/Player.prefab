@@ -857,7 +857,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -89504842, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -865,7 +865,7 @@ SpriteRenderer:
   m_Size: {x: 0.5, y: 0.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1072291285837398972
@@ -1186,6 +1186,8 @@ MonoBehaviour:
   rb: {fileID: 6982808670112934318}
   animator: {fileID: 6982808670112934315}
   cam: {fileID: 1635909743}
+  spritePlayerRenderer: {fileID: 6982808670112934317}
+  thisPlayer: {fileID: 3430272870254572311}
 --- !u!114 &1495257015508960938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2b2a4d9e53a57429f2549fad214e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 6982808670112934317}
   hoverTile: {fileID: 11400000, guid: 272c720135621284f8bc2ce851d9925c, type: 2}
   thisPlayer: {fileID: 3430272870254572311}
   animator: {fileID: 6982808670112934315}
@@ -1536,8 +1537,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisPlayer: {fileID: 3430272870254572311}
   weaponSprite: {fileID: 6162341976679928071}
-  rightRotation: {x: 0, y: 0, z: -38}
-  leftRotation: {x: 0, y: 0, z: 38}
 --- !u!1 &6982808669949990761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,6 +1721,16 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 3430272870254572311}
+    - target: {fileID: 6402773926901007303, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 290361835400507354}
+    - target: {fileID: 6402773926901007303, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: weaponAnchor
+      value: 
+      objectReference: {fileID: 6017402676266651342}
     - target: {fileID: 6402773926901007303, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: inventoryHolder
