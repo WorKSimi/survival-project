@@ -25,6 +25,7 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask treeLayers;
     [SerializeField] private LayerMask wallLayers;
+    [SerializeField] private LayerMask enemyLayers;
 
     [SerializeField] private Transform weaponSprite;
     [SerializeField] private GameObject weaponAnchor;
@@ -39,6 +40,9 @@ public class UseItemManager : MonoBehaviour
     private Transform hoveredWall; //Wall object your mouse is currently hovering over
     private Transform m_transform;
     private SpriteRenderer swordSprite;
+
+    private Vector2 boxSize = new Vector2(1.2f, 1.2f);
+    //private Vector2 boxPoint;
 
     private bool swungWeapon = false;
 
@@ -55,6 +59,8 @@ public class UseItemManager : MonoBehaviour
 
         m_transform = weaponAnchor.transform;
         swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
+
+        //boxPoint = new Vector2(attackPoint.position.x, attackPoint.position.y);
     }
 
     void Update()
@@ -81,7 +87,7 @@ public class UseItemManager : MonoBehaviour
         (Input.mousePosition) - m_transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if (facingRight == true)
+        if (facingRight == true) // If your facing right, run this code for rotating weapon
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
             m_transform.rotation = rotation;
@@ -96,7 +102,7 @@ public class UseItemManager : MonoBehaviour
                 swordSprite.flipY = true;
             }
         }
-        else if (facingLeft == true)
+        else if (facingLeft == true) // If your facing left runthis code for rotating weapon
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
             m_transform.rotation = rotation;
@@ -237,8 +243,29 @@ public class UseItemManager : MonoBehaviour
         }
     }
 
-    public void UseSword()
+    public void UseSword(double itemDamage)
     {
-        swungWeapon = !swungWeapon;
+        if (Time.time >= nextAttackTime)
+        {
+            swungWeapon = !swungWeapon;
+
+            animator.SetTrigger("Attack"); // Play an attack animation
+
+            Collider2D[] hitTrees = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, treeLayers); // Detect enemies in range of attack
+
+            foreach (Collider2D tree in hitTrees) // Damage enemies
+            {
+                tree.GetComponent<TreeLogic>().TakeDamage(itemDamage);
+            }
+
+            nextAttackTime = Time.time + 1f / attackRate;
+        }
+    }
+
+    //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(attackPoint.position, new Vector3 (1.2f, 1.2f, 0));
     }
 }
