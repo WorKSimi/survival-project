@@ -170,6 +170,10 @@ public class HotbarDisplay : StaticInventoryDisplay
                 player.GetComponent<UseItemManager>().UsePick(itemData.itemDamage);
                 break;
 
+                case "Sword":
+                player.GetComponent<UseItemManager>().UseSword();
+                break;
+
                 default:
                 Debug.Log($"Default Case");
                 break;

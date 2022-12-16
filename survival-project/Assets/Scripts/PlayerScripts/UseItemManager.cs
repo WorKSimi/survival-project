@@ -21,6 +21,14 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private Tile hoverTile = null; //Tile that is used when you hover on a spot on grid
     [SerializeField] private GameObject thisPlayer; //This players game object
 
+    [SerializeField] private Animator animator;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private LayerMask treeLayers;
+    [SerializeField] private LayerMask wallLayers;
+
+    [SerializeField] private Transform weaponSprite;
+    [SerializeField] private GameObject weaponAnchor;
+
     private Vector3Int playerPos; //Player position on grid
     private Vector3 playerPos2; //Player normal position
 
@@ -29,6 +37,10 @@ public class UseItemManager : MonoBehaviour
 
     private Vector3 mouseWorldPos; //Mouse position in world
     private Transform hoveredWall; //Wall object your mouse is currently hovering over
+    private Transform m_transform;
+    private SpriteRenderer swordSprite;
+
+    private bool swungWeapon = false;
 
     void Awake()
     {
@@ -40,6 +52,9 @@ public class UseItemManager : MonoBehaviour
 
         interactivemapObject = GameObject.FindWithTag("InteractiveTilemap");
         interactiveTilemap = interactivemapObject.GetComponent<Tilemap>();
+
+        m_transform = weaponAnchor.transform;
+        swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -58,6 +73,77 @@ public class UseItemManager : MonoBehaviour
         else
         {
             interactiveTilemap.SetTile(mousePos, null);
+        }
+
+        FacingDirection();
+
+        Vector2 direction = Camera.main.ScreenToWorldPoint
+        (Input.mousePosition) - m_transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        if (facingRight == true)
+        {
+            Quaternion rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
+            m_transform.rotation = rotation;
+            swordSprite.flipX = false;
+            swordSprite.flipY = false;
+
+            if (swungWeapon == true)
+            {
+                rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
+                m_transform.rotation = rotation;
+                swordSprite.flipX = true;
+                swordSprite.flipY = true;
+            }
+        }
+        else if (facingLeft == true)
+        {
+            Quaternion rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
+            m_transform.rotation = rotation;
+            swordSprite.flipX = true;
+            swordSprite.flipY = true;
+
+            if (swungWeapon == true)
+            {
+                rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
+                m_transform.rotation = rotation;
+                swordSprite.flipX = false;
+                swordSprite.flipY = false;
+            }
+        }
+
+    }
+
+    private void RTMouse()
+    {
+        Vector2 direction = Camera.main.ScreenToWorldPoint
+        (Input.mousePosition) - m_transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        if (facingRight == true)
+        {
+            Quaternion rotation = Quaternion.AngleAxis(angle + 160, Vector3.forward);
+            m_transform.rotation = rotation;
+        }
+        else if (facingLeft == true)
+        {
+            Quaternion rotation = Quaternion.AngleAxis(angle + 190, Vector3.forward);
+            m_transform.rotation = rotation;
+        }
+    }
+
+    private void FacingDirection()
+    {
+        if (mouseWorldPos.x > playerPos2.x)
+        {
+            facingRight = true;
+            facingLeft = false;
+        }
+
+        if (mouseWorldPos.x < playerPos2.x)
+        {
+            facingRight = false;
+            facingLeft = true;
         }
     }
 
@@ -101,15 +187,9 @@ public class UseItemManager : MonoBehaviour
         return grid.WorldToCell(mouseWorldPos);
     }
 
-    [SerializeField] private Animator animator;
-    [SerializeField] private Transform attackPoint;
-    [SerializeField] private LayerMask treeLayers;
-    [SerializeField] private LayerMask wallLayers;
-
     private InventoryItemData inventoryItemData;
     private float attackRange = 0.5f; 
     private double attackDamage = 0.5;
-
     private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
@@ -138,6 +218,7 @@ public class UseItemManager : MonoBehaviour
              wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
         }
     }
+
     public void UsePick(double itemDamage)
     {
         Debug.Log("PICK USED!");
@@ -156,8 +237,8 @@ public class UseItemManager : MonoBehaviour
         }
     }
 
-    public void UseSword(double itemDamage)
+    public void UseSword()
     {
-        Debug.Log("SWORD USED!");
+        swungWeapon = !swungWeapon;
     }
 }
