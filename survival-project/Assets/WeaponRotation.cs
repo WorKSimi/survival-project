@@ -6,6 +6,8 @@ using Unity.Netcode;
 public class WeaponRotation : MonoBehaviour
 {
     [SerializeField] private GameObject thisPlayer;
+    [SerializeField] private Transform weaponSprite;
+
     private Transform m_transform;
 
     private Vector3 mouseWorldPos;
@@ -13,6 +15,9 @@ public class WeaponRotation : MonoBehaviour
 
     private bool facingRight;
     private bool facingLeft;
+
+
+
     void Start()
     {
         m_transform = this.transform;
@@ -51,28 +56,34 @@ public class WeaponRotation : MonoBehaviour
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
             m_transform.rotation = rotation;
-            
+
+            if (Input.GetMouseButton(0))
+            {
+                Debug.Log("Swing Test");
+                rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            }
         }
         else if (facingLeft == true)
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
             m_transform.rotation = rotation;
-           
         }
+
+
     }
    
     private void FacingDirection()
     {
         if (mouseWorldPos.x > playerPos2.x)
         {
-            Debug.Log("mouse greater den player");
+            //weaponSprite.rotation = Quaternion.Euler(0, 0, 38);
             facingRight = true;
             facingLeft = false;
         }
 
         if (mouseWorldPos.x < playerPos2.x)
         {
-            Debug.Log("mouse less than player");
+            //weaponSprite.rotation = Quaternion.Euler(0, 0, -38);
             facingRight = false;
             facingLeft = true;
         }
