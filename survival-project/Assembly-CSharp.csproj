@@ -58,53 +58,53 @@
   <ItemGroup>
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\CameraStacking\3D Skybox\Scripts\SkyboxCamera.cs" />
     <Compile Include="Assets\Scripts\CraftingScripts\CraftingTable.cs" />
-    <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\CraftingScripts\AnywhereCrafting.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\AutoLoadPipelineAsset.cs" />
-    <Compile Include="Assets\Scripts\TreeLogic.cs" />
     <Compile Include="Assets\Scripts\HotbarDisplay.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
-    <Compile Include="Assets\Scripts\UI Scripts\InventoryUIController.cs" />
-    <Compile Include="Assets\Scripts\UI Scripts\DynamicInventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\ReadOnlyAttribute.cs" />
-    <Compile Include="Assets\Scripts\Inventory Scripts\PlayerInventoryHolder.cs" />
-    <Compile Include="Assets\Scripts\Shop System\ShopItemList.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSlot.cs" />
     <Compile Include="Assets\Input\PlayerControls.cs" />
-    <Compile Include="Assets\Scripts\Inventory Scripts\InventorySystem.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StaticInventoryDisplay.cs" />
-    <Compile Include="Assets\Scripts\PlayerScripts\PlayerCanvasController.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\InventoryItemData.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
-    <Compile Include="Assets\Scripts\ItemScripts\ItemPickup.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\WeaponData.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\UseItemManager.cs" />
-    <Compile Include="Assets\Scripts\NetworkManagerUI.cs" />
-    <Compile Include="Assets\Scripts\MouseItemData.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\RendererFeatures\KeepFrame\KeepFrameFeature.cs" />
     <Compile Include="Assets\Scripts\RotateToMouse.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\InventoryHolder.cs" />
-    <Compile Include="Assets\Scripts\Inventory Scripts\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
+    <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
+    <Compile Include="Assets\Scripts\Shop System\ShopSystem.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\SerializableDictionary.cs" />
+    <Compile Include="Assets\Scripts\SaveLoad\SaveGameManager.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
+    <Compile Include="Assets\SnailEnemy.cs" />
+    <Compile Include="Assets\Scripts\TreeLogic.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\InventoryUIController.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\DynamicInventoryDisplay.cs" />
+    <Compile Include="Assets\Scripts\Inventory Scripts\PlayerInventoryHolder.cs" />
+    <Compile Include="Assets\Scripts\Shop System\ShopItemList.cs" />
+    <Compile Include="Assets\Scripts\Inventory Scripts\InventorySystem.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\PlayerCanvasController.cs" />
+    <Compile Include="Assets\Scripts\ItemScripts\ItemPickup.cs" />
+    <Compile Include="Assets\Scripts\NetworkManagerUI.cs" />
+    <Compile Include="Assets\Scripts\MouseItemData.cs" />
+    <Compile Include="Assets\Scripts\EnemyHealth.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Inventory Scripts\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveData.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventorySlot_UI.cs" />
-    <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\Database.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\UniqueID.cs" />
-    <Compile Include="Assets\Scripts\Shop System\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\ItemSlot.cs" />
-    <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\Scripts\SaveLoad\SaveGameManager.cs" />
-    <Compile Include="Assets\Scripts\EnemyHealth.cs" />
-    <Compile Include="Assets\SnailEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -386,6 +386,9 @@
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
     </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.7.4\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
@@ -400,9 +403,6 @@
     </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil@1.10.2\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.1.20f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -859,6 +859,10 @@
       <Project>{19758409-BC7F-F2C5-D887-027380372877}</Project>
       <Name>Unity.Multiplayer.Tools.NetworkProfiler.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="PackageToolsEditor.csproj">
+      <Project>{45E2798A-0A49-992C-86DB-195B13CAC619}</Project>
+      <Name>PackageToolsEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Searcher.Editor.csproj">
       <Project>{424BBB9D-4110-4BF8-47E6-E793FEFD8A80}</Project>
       <Name>Unity.Searcher.Editor</Name>
@@ -922,6 +926,10 @@
     <ProjectReference Include="Unity.Mathematics.Editor.csproj">
       <Project>{CD362BE7-BE2E-7E9A-4A0E-7BA503750A63}</Project>
       <Name>Unity.Mathematics.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
+      <Project>{8ACE40DF-A102-F5A9-0588-22458D211803}</Project>
+      <Name>AstarPathfindingProjectEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Collections.csproj">
       <Project>{0845EC70-BEF0-B7CC-60E1-72E9B988EA60}</Project>
@@ -1031,6 +1039,10 @@
       <Project>{9ED1EB2A-A45F-E536-CE59-BBF039B2C2E4}</Project>
       <Name>Unity.Burst</Name>
     </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{7058D929-CE05-FDAC-05B9-0ADF4E05F149}</Project>
+      <Name>AstarPathfindingProject</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Environments.csproj">
       <Project>{9DFE5454-143A-C50F-0EE6-F4C52EF4324D}</Project>
       <Name>Unity.Services.Core.Environments</Name>
@@ -1070,18 +1082,6 @@
     <ProjectReference Include="Unity.2D.SpriteShape.Runtime.csproj">
       <Project>{0757194F-FB93-F6C1-36D2-07DB5302F9A8}</Project>
       <Name>Unity.2D.SpriteShape.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
-      <Project>{8ACE40DF-A102-F5A9-0588-22458D211803}</Project>
-      <Name>AstarPathfindingProjectEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProject.csproj">
-      <Project>{7058D929-CE05-FDAC-05B9-0ADF4E05F149}</Project>
-      <Name>AstarPathfindingProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="PackageToolsEditor.csproj">
-      <Project>{45E2798A-0A49-992C-86DB-195B13CAC619}</Project>
-      <Name>PackageToolsEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
