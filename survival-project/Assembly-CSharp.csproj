@@ -92,7 +92,6 @@
     <Compile Include="Assets\Scripts\Inventory Scripts\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveData.cs" />
-    <Compile Include="Assets\WeaponRotation.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventorySlot_UI.cs" />
     <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\Database.cs" />
@@ -102,9 +101,10 @@
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SerializableDictionary.cs" />
-    <Compile Include="Assets\ArchvaleMelee.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveGameManager.cs" />
+    <Compile Include="Assets\Scripts\EnemyHealth.cs" />
+    <Compile Include="Assets\SnailEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -251,11 +251,11 @@ public class UseItemManager : MonoBehaviour
 
             animator.SetTrigger("Attack"); // Play an attack animation
 
-            Collider2D[] hitTrees = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, treeLayers); // Detect enemies in range of attack
+            Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
 
-            foreach (Collider2D tree in hitTrees) // Damage enemies
+            foreach (Collider2D enemy in hitEnemies) // Damage enemies
             {
-                tree.GetComponent<TreeLogic>().TakeDamage(itemDamage);
+                enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
             }
 
             nextAttackTime = Time.time + 1f / attackRate;

@@ -1250,6 +1250,9 @@ MonoBehaviour:
   wallLayers:
     serializedVersion: 2
     m_Bits: 256
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 512
   weaponSprite: {fileID: 6162341976679928071}
   weaponAnchor: {fileID: 6017402676266651342}
 --- !u!1 &3733963201338179345
