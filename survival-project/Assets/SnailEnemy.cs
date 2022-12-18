@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SnailEnemy : MonoBehaviour
 {
+    
+    private Transform target;
     private Vector3 startingPosition;
     private Vector3 roamPosition;
 

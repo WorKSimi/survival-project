@@ -89,6 +89,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Services.Core.Configu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Tutorials.Core", "Unity.Tutorials.Core.csproj", "{59F68ABA-C4C1-5113-939E-27714791B172}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPathfindingProject", "AstarPathfindingProject.csproj", "{7058D929-CE05-FDAC-05B9-0ADF4E05F149}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Multiplayer.Tools.Editor", "Unity.Multiplayer.Tools.Editor.csproj", "{3E0F1047-7126-C021-BB2A-45F4C95BBDB9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.PlasticSCM.Editor", "Unity.PlasticSCM.Editor.csproj", "{E7EF294A-02C6-4871-1A0D-7DCDF07B66AA}"
@@ -186,6 +188,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Collections.BurstCompatibilityGen", "Unity.Collections.BurstCompatibilityGen.csproj", "{90F122A3-F27A-6124-F469-AAEA74BA2D08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{CF0537B1-293C-9167-C9EF-3F760D168663}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPathfindingProjectEditor", "AstarPathfindingProjectEditor.csproj", "{8ACE40DF-A102-F5A9-0588-22458D211803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageToolsEditor", "PackageToolsEditor.csproj", "{45E2798A-0A49-992C-86DB-195B13CAC619}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -369,6 +375,10 @@ Global
 		{59F68ABA-C4C1-5113-939E-27714791B172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59F68ABA-C4C1-5113-939E-27714791B172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59F68ABA-C4C1-5113-939E-27714791B172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7058D929-CE05-FDAC-05B9-0ADF4E05F149}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7058D929-CE05-FDAC-05B9-0ADF4E05F149}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7058D929-CE05-FDAC-05B9-0ADF4E05F149}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7058D929-CE05-FDAC-05B9-0ADF4E05F149}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E0F1047-7126-C021-BB2A-45F4C95BBDB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E0F1047-7126-C021-BB2A-45F4C95BBDB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E0F1047-7126-C021-BB2A-45F4C95BBDB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -565,6 +575,14 @@ Global
 		{CF0537B1-293C-9167-C9EF-3F760D168663}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF0537B1-293C-9167-C9EF-3F760D168663}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF0537B1-293C-9167-C9EF-3F760D168663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ACE40DF-A102-F5A9-0588-22458D211803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ACE40DF-A102-F5A9-0588-22458D211803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ACE40DF-A102-F5A9-0588-22458D211803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ACE40DF-A102-F5A9-0588-22458D211803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E2798A-0A49-992C-86DB-195B13CAC619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E2798A-0A49-992C-86DB-195B13CAC619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E2798A-0A49-992C-86DB-195B13CAC619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E2798A-0A49-992C-86DB-195B13CAC619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
