@@ -5,27 +5,33 @@ using Pathfinding;
 
 public class SnailEnemy : MonoBehaviour
 {
+    private enum State
+    {
+        Roaming,
+        ChaseTarget,
+    }
+    private State state;
     [SerializeField] private Transform target;
-
     [SerializeField] private float speed = 200f;
     [SerializeField] private float nextWaypointDistance = 3f;
-
     [SerializeField] private Transform enemyGFX;
 
     private GameObject player;
+    private GameObject roamWaypoint;
     private Vector3 startingPosition;
     private Vector3 roamPosition;
 
     Path path;
     int currentWaypoint = 0;
     private bool reachedEndOfPath = false;
-
+    private bool playerFound = false;
     Seeker seeker;
     Rigidbody2D rb;
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
+        roamWaypoint = transform.GetChild(1).gameObject; //Sets roam waypoint variable to the second child of the snail object       
+        state = State.Roaming;
     }
 
     private void Start()
@@ -39,14 +45,37 @@ public class SnailEnemy : MonoBehaviour
         roamPosition = GetRoamingPosition();
     }
 
-    private void Update()
+    private void SetPlayerVariable()
     {
-        target.position = roamPosition;
+        if (playerFound == true) return;
+
+        else if (playerFound == false)
+        {
+            player = GameObject.FindWithTag("Player");
+            playerFound = true;
+        }
     }
 
-    void FixedUpdate()
+    private void Update()
     {
-        MoveToWaypoint();
+        player = GameObject.FindWithTag("Player");
+
+
+        switch (state)
+        {
+            default:
+            case State.Roaming:
+            target = roamWaypoint.transform;  //This sets the target to be the roaming waypoint.
+            target.position = roamPosition; //Sets the targets position to equal the roaming position.
+            MoveToWaypoint(); //Moves snail to the waypoint.
+            FindTarget(); //Tries to find a player near it
+            break;
+
+            case State.ChaseTarget:
+                target = player.transform; //Sets the target to be the player
+                MoveToWaypoint(); //Moves the snail to the target (player)
+            break;
+        }
     }
 
     void UpdatePath()
@@ -56,6 +85,8 @@ public class SnailEnemy : MonoBehaviour
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
     }
+
+
     void OnPathComplete(Path p)
     {
         if (!p.error)
@@ -67,12 +98,12 @@ public class SnailEnemy : MonoBehaviour
 
     private Vector3 GetRoamingPosition()
     {
-        return startingPosition + GetRandomDir() * Random.Range(10f, 70f);
+        return startingPosition + GetRandomDir() * Random.Range(3f, 3f);
     }
 
     public static Vector3 GetRandomDir() //This function generates a random normalized direction
     {
-      return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
+        return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
 
     private void MoveToWaypoint()
@@ -102,13 +133,22 @@ public class SnailEnemy : MonoBehaviour
             currentWaypoint++;
         }
 
-        if (rb.velocity.x >= 0.01f)
+        if (rb.velocity.x >= -0.01f)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
-        else if (rb.velocity.x <= -0.01f)
+        else if (rb.velocity.x <= 0.01f)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
+
+    private void FindTarget()
+    {
+        float targetRange = 10f;
+        if (Vector3.Distance(transform.position, player.transform.position) < targetRange) //Search for the player within target range
+        {
+            state = State.ChaseTarget;
         }
     }
 }
