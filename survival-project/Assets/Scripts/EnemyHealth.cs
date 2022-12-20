@@ -6,6 +6,8 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private GameObject droppedItem;
     [SerializeField] private double maxHealth;
+    [SerializeField] private SimpleFlash flashEffect;
+    [SerializeField] private AudioSource hitSound;
 
     private double currentHealth;
 
@@ -18,7 +20,8 @@ public class EnemyHealth : MonoBehaviour
     {
         Debug.Log("ENEMY HIT!");
         currentHealth -= damage;
-        //Make enemy flash when hit
+        flashEffect.Flash(); //Make enemy flash when hit
+        hitSound.Play();
         //Play hit sound
 
         if (currentHealth <= 0)
@@ -29,8 +32,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Die!");
-        //Enemy die animation
         if (droppedItem != null) //If the enemy has an item to drop
         {
             for (int i = 0; i < 5; i++) //Drop 5 of this enemies item drop

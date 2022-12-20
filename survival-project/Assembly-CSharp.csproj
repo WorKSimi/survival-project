@@ -84,7 +84,7 @@
     <Compile Include="Assets\Scripts\SaveLoad\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveGameManager.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
-    <Compile Include="Assets\SnailEnemy.cs" />
+    <Compile Include="Assets\Scripts\SnailEnemy.cs" />
     <Compile Include="Assets\Scripts\TreeLogic.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventoryUIController.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\DynamicInventoryDisplay.cs" />
@@ -105,6 +105,10 @@
     <Compile Include="Assets\Scripts\ItemScripts\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
+    <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\EnemyDamage.cs" />
+    <Compile Include="Assets\Scripts\HitFlashEffect.cs" />
+    <Compile Include="Assets\Scripts\SimpleFlash.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
