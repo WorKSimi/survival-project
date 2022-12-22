@@ -20,7 +20,10 @@ public class SnailEnemy : MonoBehaviour
 
     private Vector3 targetChargePosition;
 
-    private bool isAttacking;
+    private bool foundPlayer = false;
+    private bool isCharging = false;
+    private bool isRoaming = false;
+
     private GameObject player;
     private GameObject roamWaypoint;
     private Vector3 startingPosition;
@@ -39,7 +42,6 @@ public class SnailEnemy : MonoBehaviour
     private void Awake()
     {
         roamWaypoint = transform.GetChild(1).gameObject; //Sets roam waypoint variable to the second child of the snail object
-        isAttacking = false;
         state = State.Roaming;
     }
 
@@ -56,16 +58,7 @@ public class SnailEnemy : MonoBehaviour
         currentTime = startingTime;
     }
 
-    //private void SetPlayerVariable()
-    //{
-    //    if (playerFound == true) return;
-
-    //    else if (playerFound == false)
-    //    {
-    //        player = GameObject.FindWithTag("Player");
-    //        playerFound = true;
-    //    }
-    //}
+    
     private void Update()
     {
         player = GameObject.FindWithTag("Player");
@@ -76,7 +69,7 @@ public class SnailEnemy : MonoBehaviour
             case State.Roaming:
 
             target = roamWaypoint.transform;  //This sets the target to be the roaming waypoint.
-            target.position = roamPosition; //Sets the targets position to equal the roaming position.
+            target.position = roamPosition; //Sets the targets position to equal the roaming position.                      
             MoveToWaypoint(); //Moves snail to the waypoint.
             FindTarget(); //Tries to find a player near it
 
@@ -84,22 +77,26 @@ public class SnailEnemy : MonoBehaviour
 
             case State.ChaseTarget:
 
+                isCharging = false;
                 target = player.transform; //Sets the target to be the player
                 MoveToWaypoint(); //Moves the snail to the target (player)
-
+                
                 float attackRange = 5f;
                 if (Vector3.Distance(transform.position, player.transform.position) < attackRange) //See if player is close enough for attack
                 {
                     Debug.Log("Enemy in attack range (disabled for testing");
-                    //state = State.AttackingTarget;                  
+                    state = State.AttackingTarget;                  
                 }
-
+                TargetToFar(); //Sees if player is too far or not
                 break;
 
             case State.AttackingTarget:
 
-                StartCoroutine(ChargeAttack());
-                state = State.ChaseTarget;
+                if (isCharging == false)
+                {
+                    isCharging = true;
+                    StartCoroutine(ChargeAttack());               
+                }
                 break;
         }
     }
@@ -168,23 +165,21 @@ public class SnailEnemy : MonoBehaviour
     }
 
     private IEnumerator ChargeAttack()
-    {
-        //Stop his movement
-        rb.velocity = Vector3.zero;
-        Debug.Log("Waiting");
-        yield return new WaitForSeconds(5); //Wait 2 seconds       
+    {     
+        rb.velocity = Vector3.zero; //Stop his movement       
+        yield return new WaitForSeconds(1f); //Wait 1 seconds       
 
         targetChargePosition = target.position;
-        Vector2 direction = (targetChargePosition - transform.position); 
+        Vector2 direction = (targetChargePosition - transform.position); //Get direction of player
+        rb.AddForce(direction * 200); //Charge at the player
 
-        rb.AddForce(direction * 40); //Charge at the player
-        Debug.Log("Charging");
-        yield return new WaitForSeconds(5); //Charge for 3 second
+        yield return new WaitForSeconds(1); //Charge for 1 second
 
-        Debug.Log("Disabling Movement");
         rb.velocity = Vector3.zero; //Disable movement 
-        Debug.Log("Brief Pause");
-        yield return new WaitForSeconds(5); //Charge for 3 second        
+
+        yield return new WaitForSeconds(.5f); //Pause for half a second
+
+        state = State.ChaseTarget;
     }
 
     private void FindTarget()
@@ -193,6 +188,15 @@ public class SnailEnemy : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) < targetRange) //Search for the player within target range
         {
             state = State.ChaseTarget;
+        }
+    }
+
+    private void TargetToFar()
+    {
+        float aggroRange = 20f;
+        if (Vector3.Distance(transform.position, player.transform.position) > aggroRange) //If player gets too far
+        {
+            state = State.Roaming; //Set state back to roaming
         }
     }
 }

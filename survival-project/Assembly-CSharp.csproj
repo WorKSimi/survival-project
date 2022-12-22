@@ -87,6 +87,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\SnailEnemy.cs" />
     <Compile Include="Assets\Scripts\TreeLogic.cs" />
+    <Compile Include="Assets\Scripts\Shooting.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventoryUIController.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\DynamicInventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\PlayerInventoryHolder.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Assets\Scripts\EnemyDamage.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
+    <Compile Include="Assets\Arrow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
