@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private SimpleFlash flashEffect;
     [SerializeField] private AudioSource hitSound;
 
+    public MobSpawning mobSpawning;
     private double currentHealth;
 
     void Start()
@@ -34,10 +35,14 @@ public class EnemyHealth : MonoBehaviour
         {
             for (int i = 0; i < 5; i++) //Drop 5 of this enemies item drop
             {
-                Instantiate(droppedItem, transform.position, Quaternion.identity); //Instantiate that item where snail is
+                Instantiate(droppedItem, transform.position, Quaternion.identity); //Instantiate that item where snail is              
                 Destroy(this.gameObject); //Remove this enemy from the game world
             }
         }
-        else Destroy(this.gameObject); 
+        else
+        {
+            this.mobSpawning.currentSpawns--;
+            Destroy(this.gameObject);
+        }
     }
 }
