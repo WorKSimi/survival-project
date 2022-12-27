@@ -21,6 +21,10 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private Tile hoverTile = null; //Tile that is used when you hover on a spot on grid
     [SerializeField] private GameObject thisPlayer; //This players game object
 
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject arrowPrefab;
+    private float bulletForce = 15f;
+
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
     [SerializeField] private LayerMask treeLayers;
@@ -258,6 +262,19 @@ public class UseItemManager : MonoBehaviour
                 enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
             }
 
+            nextAttackTime = Time.time + 1f / attackRate;
+        }
+    }
+
+    public void UseBow(double itemDamage)
+    {
+        if (Time.time >= nextAttackTime)
+        {
+            GameObject bullet = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            Arrow arrow = bullet.GetComponent<Arrow>();
+            arrow.Arrowdamage = itemDamage;
+            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }

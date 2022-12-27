@@ -4,8 +4,28 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    public double Arrowdamage;
+    private float lifeTime = 0.5f;
+
+    private void Start()
     {
-        Destroy(gameObject); //When the arrow collides with something it will be removed.
+        Invoke("DestroyProjectile", lifeTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
+        if (enemyHealth != null)
+        {
+            enemyHealth.TakeDamage(Arrowdamage);
+        }
+        DestroyProjectile();
+    }
+
+    void DestroyProjectile()
+    {
+        //Insert stuff like effects and sounds here.
+        Destroy(gameObject);
     }
 }
+

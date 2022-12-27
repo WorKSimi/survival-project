@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: TinSword
+  m_Name: WoodBow
   m_EditorClassIdentifier: 
   ID: -1
-  DisplayName: Tin Sword
-  Description: A sword crafted out of tin.
-  Icon: {fileID: -89504842, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  DisplayName: Wood Bow
+  Description: A crude wooden bow. Can fire arrows for ranged combat
+  Icon: {fileID: 2103501266, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   MaxStackSize: 1
   GoldValue: 1
-  ItemType: Sword
-  ItemPrefab: {fileID: 7389436694480070536, guid: 8b925416b14cafc4597419cba5cb99bf,
+  ItemType: Bow
+  ItemPrefab: {fileID: 7389436694480070536, guid: abe4de11b81d9c24798a3d84c0ca4bbc,
     type: 3}
-  itemDamage: 5
+  itemDamage: 1
   ItemTile: {fileID: 0}

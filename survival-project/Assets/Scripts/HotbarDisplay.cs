@@ -9,7 +9,9 @@ public class HotbarDisplay : StaticInventoryDisplay
     public GameObject player;
     [SerializeField] private GameObject weaponAnchor; //Weapon anchor on player
     [SerializeField] private GameObject weapon; //Weapon object on player
-    private SpriteRenderer weaponSpriteRenderer; //Held weapon sprite renderer on object
+    [SerializeField] private GameObject heldItem; //Held item object on player
+    private SpriteRenderer heldItemSpriteRenderer; //Held item sprite renderer on object
+    private SpriteRenderer swordSpriteRenderer; //Held Sword sprite renderer on object
 
     private int _maxIndexSize = 9;
     private int _currentIndex = 0;
@@ -20,7 +22,8 @@ public class HotbarDisplay : StaticInventoryDisplay
     {
         _playerControls = new PlayerControls();
 
-        weaponSpriteRenderer = weapon.GetComponent<SpriteRenderer>();
+        swordSpriteRenderer = weapon.GetComponent<SpriteRenderer>();
+        heldItemSpriteRenderer = heldItem.GetComponent<SpriteRenderer>();
     }
 
     protected override void Start()
@@ -126,20 +129,31 @@ public class HotbarDisplay : StaticInventoryDisplay
 
         if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
         {
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow") //Checks if held item is bow
+            {
+                heldItemSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon;
+            }
+
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Bow")
+            {
+                heldItemSpriteRenderer.sprite = null;
+            }
+
             if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Sword") //Checks if the currently held item is a sword type
             {
-                weaponSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Sets the visual for the sword weapon to the held item.
+                swordSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Sets the visual for the sword weapon to the held item.
             }
 
             if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Sword")
             {
-                weaponSpriteRenderer.sprite = null;
+                swordSpriteRenderer.sprite = null;
             }
         }
 
         else if (slots[_currentIndex].AssignedInventorySlot.ItemData == null)
         {
-            weaponSpriteRenderer.sprite = null;
+            swordSpriteRenderer.sprite = null;
+            heldItemSpriteRenderer.sprite = null;
         }
     }
 
@@ -172,6 +186,10 @@ public class HotbarDisplay : StaticInventoryDisplay
 
                 case "Sword":
                 player.GetComponent<UseItemManager>().UseSword(itemData.itemDamage);
+                break;
+
+                case "Bow":
+                player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage);
                 break;
 
                 default:

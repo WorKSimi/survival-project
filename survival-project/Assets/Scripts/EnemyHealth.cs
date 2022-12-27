@@ -18,11 +18,9 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(double damage)
     {
-        Debug.Log("ENEMY HIT!");
         currentHealth -= damage;
         flashEffect.Flash(); //Make enemy flash when hit
-        hitSound.Play();
-        //Play hit sound
+        hitSound.Play(); //Play hit sound
 
         if (currentHealth <= 0)
         {
