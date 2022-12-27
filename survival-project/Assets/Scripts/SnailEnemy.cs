@@ -24,7 +24,7 @@ public class SnailEnemy : MonoBehaviour
     private bool isCharging = false;
     private bool isRoaming = false;
 
-    private GameObject player;
+    public GameObject player;
     private GameObject roamWaypoint;
     private Vector3 startingPosition;
     private Vector3 roamPosition;

@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour
     {
         currentHealth -= damage;
         flashEffect.Flash(); //Make enemy flash when hit
-        hitSound.Play(); //Play hit sound
+        //hitSound.Play(); //Play hit sound
 
         if (currentHealth <= 0)
         {

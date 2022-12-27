@@ -8,7 +8,7 @@ public class MobSpawning : MonoBehaviour
 
     private Vector3 playerPos;
     public int currentSpawns;
-    private int maxSpawns = 1;
+    private int maxSpawns = 5;
     public GameObject[] mobPool;
 
     // Start is called before the first frame update
