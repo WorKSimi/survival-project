@@ -5,6 +5,8 @@ using Pathfinding;
 
 public class SnailEnemy : MonoBehaviour
 {
+    Animator animator;
+
     [SerializeField] private Transform target;
     [SerializeField] private float speed = 200f;
     [SerializeField] private float nextWaypointDistance = 3f;
@@ -42,6 +44,7 @@ public class SnailEnemy : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -56,6 +59,10 @@ public class SnailEnemy : MonoBehaviour
     private void Update()
     {
         player = GameObject.FindWithTag("Player");
+
+        animator.SetFloat("Horizontal", rb.velocity.x);
+        animator.SetFloat("Vertical", rb.velocity.y);
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
 
         float maxDespawnDistance = 50f;
         if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
@@ -159,29 +166,35 @@ public class SnailEnemy : MonoBehaviour
 
         if (rb.velocity.x >= -0.01f)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else if (rb.velocity.x <= 0.01f)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
     }
 
     private IEnumerator ChargeAttack()
     {     
-        rb.velocity = Vector3.zero; //Stop his movement       
+        rb.velocity = Vector3.zero; //Stop his movement
+        animator.SetBool("enterShell", true);
         yield return new WaitForSeconds(1f); //Wait 1 seconds       
 
         targetChargePosition = target.position;
         Vector2 direction = (targetChargePosition - transform.position); //Get direction of player
+
         rb.AddForce(direction * 4, ForceMode2D.Impulse); //Charge at the player
+        animator.SetBool("enterShell", false);
+        animator.SetBool("isRolling", true); //Activate rolling animation
 
         yield return new WaitForSeconds(1); //Charge for 1 second
 
         rb.velocity = Vector3.zero; //Disable movement 
+        animator.SetBool("isRolling", false); //Deactivate Rolling Animation
+        animator.SetBool("exitShell", true); //Activate exit animation
 
         yield return new WaitForSeconds(.5f); //Pause for half a second
-
+        animator.SetBool("exitShell", false);
         state = SnailState.ChaseTarget;
     }
     
