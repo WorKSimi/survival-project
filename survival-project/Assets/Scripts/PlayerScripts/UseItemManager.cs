@@ -266,11 +266,11 @@ public class UseItemManager : MonoBehaviour
         }
     }
 
-    public void UseBow(double itemDamage)
+    public void UseBow(double itemDamage, GameObject projectilePrefab)
     {
         if (Time.time >= nextAttackTime)
         {
-            GameObject bullet = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
+            GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             Arrow arrow = bullet.GetComponent<Arrow>();
             arrow.Arrowdamage = itemDamage;

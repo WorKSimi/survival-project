@@ -26,6 +26,8 @@ public class InventoryItemData : ScriptableObject
     public double itemDamage;
     public RuleTile ItemTile;
 
+    public GameObject projectilePrefab;
+
     public void UseItem()
     {
         

@@ -189,7 +189,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Bow":
-                player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage);
+                player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab);
                 break;
 
                 default:

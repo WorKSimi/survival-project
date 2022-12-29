@@ -23,3 +23,5 @@ MonoBehaviour:
     type: 3}
   itemDamage: 1
   ItemTile: {fileID: 0}
+  projectilePrefab: {fileID: 3006912499862247658, guid: dc22ce4f72da2f74387a2dc713632259,
+    type: 3}
