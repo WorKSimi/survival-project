@@ -194,8 +194,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1474065673
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -362,8 +362,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 508864013
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -564,17 +564,13 @@ MonoBehaviour:
   sandTile: {fileID: 11400000, guid: 90cde903930b2114cae4bf428610ff80, type: 2}
   grassTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
   wallTile: {fileID: 11400000, guid: 804de162d757ebe47b4b91a44de2a626, type: 2}
-  testTile0: {fileID: 433815703059786400, guid: bea96547864d4a9419593e8014ea60c2,
-    type: 3}
-  testTile1: {fileID: 433815703059786400, guid: 8a41fd8aac607324c915f7fd509822d7,
-    type: 3}
-  testTile2: {fileID: 433815703059786400, guid: 13fa60418b7e11d4784f0c0bba2e40ce,
-    type: 3}
-  testTile3: {fileID: 433815703059786400, guid: e9f834934b247b04da2eb4e952873467,
-    type: 3}
+  dirtTile: {fileID: 11400000, guid: eb7f67eb814ae9849939a4957f22d2a9, type: 2}
+  stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
   tree: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523, type: 3}
-  width: 50
-  height: 50
+  caveEntrance: {fileID: 7320463855911632571, guid: aa96e900d26ee1f4ab5f24ddf667e0f5,
+    type: 3}
+  width: 125
+  height: 125
   scale: 1
   offset: {x: 0, y: 0}
   worldGrid: {fileID: 487608508}
@@ -789,8 +785,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1452972441
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

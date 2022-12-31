@@ -46,9 +46,15 @@ TagManager:
   - name: Ground
     uniqueID: 1452972441
     locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Enviroment
+    uniqueID: 459101279
+    locked: 0
   - name: Wall
     uniqueID: 508864013
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Interactive
+    uniqueID: 1474065673
     locked: 0
