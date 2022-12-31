@@ -32,13 +32,18 @@ public class MapGeneration : MonoBehaviour
     private Tilemap wallTilemap;
     private Tilemap groundTilemap;
     private Tilemap carpetTilemap;
-    //private GameObject[] caveEntrances; //Creates an array to store cave entrances
-    //private int currentCaveEntrances = 0;
+
+    private GameObject[] caveEntrances; //Creates an array to store cave entrances
+    private int currentCaveEntrances;
+    private int maxCaveEntrances = 5;
+    bool firstcaveSpawned;
 
     // ground, carpet, wall, interactive
     // Start is called before the first frame update
     void Start()
     {
+        firstcaveSpawned = false;
+        currentCaveEntrances = 0;
         GetTilemaps();
         GenerateMap();
     }
@@ -75,7 +80,7 @@ public class MapGeneration : MonoBehaviour
                 {
                     groundTilemap.SetTile(new Vector3Int(x, y, 0), sandTile);
                 }
-                else if (height < 0.6f) //Grass 
+                else if (height < 0.6f) //Grass
                 {
                     groundTilemap.SetTile(new Vector3Int(x, y, 0), grassTile);
 
@@ -87,9 +92,10 @@ public class MapGeneration : MonoBehaviour
                 else if (height < 0.7f) //Dirt Ground
                 {
                     groundTilemap.SetTile(new Vector3Int(x, y, 0), dirtTile);
-                    if (Random.value >= 0.95) //5 percent chance
+
+                    while (currentCaveEntrances < maxCaveEntrances)
                     {
-                        Instantiate(caveEntrance, new Vector3(x, y, 0), Quaternion.identity);
+                        SpawnCaveEntrance(x, y);
                     }
                 }
                 else if (height < 1.0f) //Dirt Wall
@@ -98,19 +104,53 @@ public class MapGeneration : MonoBehaviour
                 }
             }
         }
-    }
-}
-    //void SpawnCaveEntrance(int x, int y)
-    //{
-    //    int maxEntrnaces = 5;
 
-    //    if (currentCaveEntrances < maxEntrnaces)
-    //    {
-    //       Instantiate(caveEntrance, new Vector3(x, y, 0), Quaternion.identity);
-    //       currentCaveEntrances++;
-    //    }
-    //    else if (currentCaveEntrances >= maxEntrnaces)
-    //    {
-    //       Debug.Log("Cave Limit Reached");
-    //    }
-    //}
+        //while (currentCaveEntrances < maxCaveEntrances) //While there are less current caves than max caves
+        //{
+        //    for (int x = 0; x < width; ++x) //Cycle through noise map
+        //    {
+        //        for (int y = 0; y < height; ++y) //Cycle through the noise map
+        //        {
+        //            if (height < 0.7f && height > 6.0f) //If the height of the map is less then 7 but greater than 6 (place caves can spawn)
+        //            {
+        //                SpawnCaveEntrance(x, y);
+        //            }
+        //        }
+        //    }
+        //}
+
+    }
+
+    void SpawnCaveEntrance(int x, int y)
+    {
+            if (firstcaveSpawned == false) //First cave has not been spawned
+            {
+                Instantiate(caveEntrance, new Vector3(x, y, 0), Quaternion.identity); //Spawn first cave entrance            
+                currentCaveEntrances++; //Add 1 to current cave count
+                firstcaveSpawned = true; //Set the first cave spawned variable to true
+            }
+
+            else if (firstcaveSpawned == true) //The first cave HAS been spawned
+            {
+                //Find all cave entrances and add to array
+                caveEntrances = GameObject.FindGameObjectsWithTag("CaveEntrances");
+
+                foreach (GameObject caveEntrance in caveEntrances) //Do this for every cave entrance in the array
+                {
+                    float minDistance = 30f; //Min distance is 30f;
+                    float dist = Vector3.Distance(caveEntrance.transform.position, new Vector3(x, y, 0)); //Get distance between each cave entrance and where to place
+
+                    if (dist < minDistance) //If the distance between the cave entrance and the spot is less then the minimum
+                    {
+                        Debug.Log("Cannot Place Cave, too close"); //DONT place entrance
+                    }
+                    else if (dist >= minDistance) //If distance is greater then...
+                    {
+
+                        Instantiate(caveEntrance, new Vector3(x, y, 0), Quaternion.identity); //Spawn a cave entrance
+                        currentCaveEntrances++;  //Add 1 to current cave count
+                    }
+                }
+            }
+    }  
+}
