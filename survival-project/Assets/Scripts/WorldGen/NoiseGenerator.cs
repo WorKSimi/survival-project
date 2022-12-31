@@ -28,7 +28,7 @@ public class NoiseGenerator : MonoBehaviour
                 //loop through each wave
                 foreach (Wave wave in waves)
                 {
-                    //Sample the perlin noise taking into consideration amplitude and frequency                   
+                    //Sample the perlin noise taking into consideration amplitude and frequency
                     noiseMap[x, y] += wave.amplitude * Mathf.PerlinNoise(samplePosX * wave.frequency + wave.seed, samplePosY * wave.frequency + wave.seed);
                     normalization += wave.amplitude;
                 }

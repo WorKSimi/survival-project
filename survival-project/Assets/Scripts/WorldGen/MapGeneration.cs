@@ -15,10 +15,11 @@ public class MapGeneration : MonoBehaviour
     public GameObject testTile1;
     public GameObject testTile2;
     public GameObject testTile3;
+    public GameObject tree;
 
     [Header("Dimensions")]
-    public int width;
-    public int height;
+    public int width = 50;
+    public int height = 50;
     public float scale = 1.0f;
     public Vector2 offset;
 
@@ -39,7 +40,7 @@ public class MapGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(worldGrid, new Vector3(0, 0, 0), Quaternion.identity);
+        //Instantiate(worldGrid, new Vector3(0, 0, 0), Quaternion.identity);
         GetTilemaps();
         GenerateMap();
     }
@@ -61,7 +62,6 @@ public class MapGeneration : MonoBehaviour
         heightWaves[1].seed = Random.Range(1.0f, 100.0f);
 
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
-
         for (int x=0; x<width; ++x)
         {
             for (int y=0; y<height; ++y)
@@ -71,7 +71,7 @@ public class MapGeneration : MonoBehaviour
 
                 if (height < 0.2f) //Water
                 {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), waterTile);
+                    groundTilemap.SetTile(new Vector3Int(x, y, 0), waterTile);                   
                 }
                 else if (height < 0.3f) //Sand
                 {
@@ -79,7 +79,12 @@ public class MapGeneration : MonoBehaviour
                 }
                 else if (height < 0.7f) //Grass 
                 {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), grassTile);                   
+                    groundTilemap.SetTile(new Vector3Int(x, y, 0), grassTile);
+
+                    if (Random.value >= 0.9) //10 percent chance
+                    {
+                        Instantiate(tree, new Vector3(x, y, -0.1f), Quaternion.identity);
+                    }
                 }
                 else if (height <= 1.0f) //Dirt Wall
                 {
