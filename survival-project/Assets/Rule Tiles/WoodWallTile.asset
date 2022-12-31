@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodWallTile
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 3179713049715907885, guid: 6944b6ed77fcd3a4181690a3865d0e20,
+  m_DefaultGameObject: {fileID: 2976247172256185871, guid: 74b48bb5fe333f141ab604f5fdc04176,
     type: 3}
   m_DefaultColliderType: 1
   m_TilingRules: []

@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\ReadOnlyAttribute.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSlot.cs" />
+    <Compile Include="Assets\Scripts\WorldGen\NoiseGenerator.cs" />
     <Compile Include="Assets\Input\PlayerControls.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StaticInventoryDisplay.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
+    <Compile Include="Assets\Scripts\WorldGen\MapGeneration.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveGameManager.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
