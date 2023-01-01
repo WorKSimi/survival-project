@@ -563,7 +563,7 @@ MonoBehaviour:
   waterTile: {fileID: 11400000, guid: 725aad9d7fb3f7f439d80efcfc794ac0, type: 2}
   sandTile: {fileID: 11400000, guid: 90cde903930b2114cae4bf428610ff80, type: 2}
   grassTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
-  wallTile: {fileID: 11400000, guid: 804de162d757ebe47b4b91a44de2a626, type: 2}
+  grassWallTile: {fileID: 11400000, guid: 958afdba8e41f2f439542e7e3aa37811, type: 2}
   dirtTile: {fileID: 11400000, guid: eb7f67eb814ae9849939a4957f22d2a9, type: 2}
   stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
   tree: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523, type: 3}
