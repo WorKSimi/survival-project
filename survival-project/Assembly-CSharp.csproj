@@ -116,6 +116,7 @@
     <Compile Include="Assets\Scripts\SnailEnum.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
+    <Compile Include="Assets\Scripts\WorldGen\FalloffGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -19,15 +19,18 @@ public class MapGeneration : MonoBehaviour
     [Header("Dimensions")]
     public int width = 50;
     public int height = 50;
+    public int falloffSize = (100);
     public float scale = 1.0f;
     public Vector2 offset;
 
     [Header("Other Stuff")]
     public Grid worldGrid;
+    public bool useFalloff;
 
     [Header("Height Map")]
     public Wave[] heightWaves;
     public float[,] heightMap;
+    float[,] falloffMap;
 
     private Tilemap wallTilemap;
     private Tilemap groundTilemap;
@@ -42,6 +45,7 @@ public class MapGeneration : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        falloffMap = FalloffGenerator.GenerateFalloffMap(falloffSize);
         firstcaveSpawned = false;
         currentCaveEntrances = 0;
         GetTilemaps();
@@ -69,6 +73,11 @@ public class MapGeneration : MonoBehaviour
         {
             for (int y = 0; y < height; ++y) //Cycle through the noise map
             {
+                if (useFalloff)
+                {
+                    heightMap[x, y] = Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y]);
+                }
+
                 //Instantiate tile on tilemap based on height value               
                 var height = heightMap[x, y];
 
