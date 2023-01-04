@@ -71,6 +71,7 @@
     <Compile Include="Assets\Input\PlayerControls.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StaticInventoryDisplay.cs" />
+    <Compile Include="Assets\Scripts\WorldGen\FalloffGenerator.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\InventoryItemData.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInteractable.cs" />
@@ -116,7 +117,6 @@
     <Compile Include="Assets\Scripts\SnailEnum.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\Scripts\WorldGen\FalloffGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

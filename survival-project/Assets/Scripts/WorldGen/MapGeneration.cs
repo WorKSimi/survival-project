@@ -12,6 +12,7 @@ public class MapGeneration : MonoBehaviour
     public RuleTile grassWallTile;
     public RuleTile dirtTile;
     public RuleTile stoneTile;
+    public RuleTile treeTile;
 
     public GameObject tree;
     public GameObject caveEntrance;
@@ -85,7 +86,7 @@ public class MapGeneration : MonoBehaviour
                 {
                     groundTilemap.SetTile(new Vector3Int(x, y, 0), waterTile);
                 }
-                else if (height < 0.25f) //Sand
+                else if (height < 0.3f) //Sand
                 {
                     groundTilemap.SetTile(new Vector3Int(x, y, 0), sandTile);
                 }
@@ -94,7 +95,8 @@ public class MapGeneration : MonoBehaviour
                     groundTilemap.SetTile(new Vector3Int(x, y, 0), grassTile);
                     if (Random.value >= 0.96) //4 percent chance
                     {
-                        Instantiate(tree, new Vector3Int(x, y+2, 0), Quaternion.identity);
+                        wallTilemap.SetTile(new Vector3Int(x, y, 0), treeTile);
+                        //Instantiate(tree, new Vector3Int(x, y+2, 0), Quaternion.identity);
                     }
                 }
                 else if (height < 0.7f) //Dirt Ground
