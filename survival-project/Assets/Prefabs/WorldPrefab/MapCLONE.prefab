@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3807063424290750275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6887629313388010279}
+  - component: {fileID: 6198562177693846417}
+  m_Layer: 0
+  m_Name: MapCLONE
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6887629313388010279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807063424290750275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7056242, y: -0.948235, z: 0.042218253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6198562177693846417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807063424290750275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2b6ff246447b114ca6be63341890caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterTile: {fileID: 11400000, guid: 725aad9d7fb3f7f439d80efcfc794ac0, type: 2}
+  sandTile: {fileID: 11400000, guid: 90cde903930b2114cae4bf428610ff80, type: 2}
+  grassTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
+  grassWallTile: {fileID: 11400000, guid: 958afdba8e41f2f439542e7e3aa37811, type: 2}
+  dirtTile: {fileID: 11400000, guid: eb7f67eb814ae9849939a4957f22d2a9, type: 2}
+  stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
+  treeTile: {fileID: 11400000, guid: 6869f94d1d9329146b296a81745f5818, type: 2}
+  tinOre: {fileID: 11400000, guid: b8954c1434060b740ad009a95b94cb94, type: 2}
+  caveEntrance: {fileID: 7320463855911632571, guid: aa96e900d26ee1f4ab5f24ddf667e0f5,
+    type: 3}
+  width: 200
+  height: 200
+  falloffSize: 200
+  scale: 1
+  offset: {x: 0, y: 0}
+  worldGrid: {fileID: 0}
+  useFalloff: 1
+  heightWaves:
+  - seed: 100
+    frequency: 0.05
+    amplitude: 1
+  - seed: 100
+    frequency: 0.1
+    amplitude: 0.5

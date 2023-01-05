@@ -13,8 +13,8 @@ public class MapGeneration : MonoBehaviour
     public RuleTile dirtTile;
     public RuleTile stoneTile;
     public RuleTile treeTile;
+    public RuleTile tinOre;
 
-    public GameObject tree;
     public GameObject caveEntrance;
 
     [Header("Dimensions")]
@@ -96,7 +96,6 @@ public class MapGeneration : MonoBehaviour
                     if (Random.value >= 0.96) //4 percent chance
                     {
                         wallTilemap.SetTile(new Vector3Int(x, y, 0), treeTile);
-                        //Instantiate(tree, new Vector3Int(x, y+2, 0), Quaternion.identity);
                     }
                 }
                 else if (height < 0.7f) //Dirt Ground
@@ -107,11 +106,21 @@ public class MapGeneration : MonoBehaviour
                 else if (height < 1.0f) //Dirt Wall
                 {
                     wallTilemap.SetTile(new Vector3Int(x, y, 0), grassWallTile);
+                    if (Random.value >= 0.96) //4 percent chance each wall tile
+                    {
+                        SpawnOreVein(x, y);
+                    }
                 }
             }
         }
     }
 
+    void SpawnOreVein(int x, int y)
+    {
+        wallTilemap.SetTile(new Vector3Int(x, y, 0), tinOre); //Spawn ore tile
+        wallTilemap.SetTile(new Vector3Int(x-1, y, 0), tinOre); //Spawn ore tile to the right
+        wallTilemap.SetTile(new Vector3Int(x, y-1, 0), tinOre); //Spawn ore tile down
+    }
     void TrySpawnCaveEntrance(int x, int y)
     {
         if (firstcaveSpawned == false) //First cave has not been spawned
