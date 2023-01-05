@@ -543,7 +543,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1033,6 +1033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisPlayer: {fileID: 3430272870254572311}
   currentSpawns: 0
+  maxSpawns: 0
   mobPool:
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
 --- !u!1 &2509366372892732496

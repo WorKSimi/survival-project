@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class PlayerNetwork : NetworkBehaviour
 {
-
-
     [SerializeField]private Transform spawnedObjectPrefab; 
     [SerializeField]private float moveSpeed = 5f; //Float for the move speed of this player
     [SerializeField]private Rigidbody2D rb; //Rigidbody2D of this player
