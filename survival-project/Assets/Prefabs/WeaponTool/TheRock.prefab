@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7389436694480070531}
   - component: {fileID: -2083750711423560777}
   m_Layer: 0
-  m_Name: FlintAxe
+  m_Name: TheRock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7389436694480070533
 SpriteRenderer:
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1737849897, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  m_Sprite: {fileID: -143193231, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.25, y: 1.25}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -103,7 +103,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.29
+  m_Radius: 0.47
 --- !u!114 &7389436694480070535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,11 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abfd99be32210d2498c94d8fc7230b88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickUpRadius: 0.29
-  ItemData: {fileID: 11400000, guid: 53cde3b22759f0b488a0d227bdf14358, type: 2}
-  _rotationSpeed: 20
+  PickUpRadius: 0.47
+  ItemData: {fileID: 11400000, guid: 1aa4432049f37354cb7cff0be6862af3, type: 2}
+  _rotationSpeed: 0
   itemSaveData:
-    ItemData: {fileID: 0}
+    ItemData: {fileID: 11400000, guid: 1aa4432049f37354cb7cff0be6862af3, type: 2}
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7389436694480070531

@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 6
   DisplayName: Wood
-  Description: Wood Please! No. Yes. Yes. Yes.
-  Icon: {fileID: -1823399334, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
-  MaxStackSize: 99
-  GoldValue: 0
+  Description: 'Wood Please!
+
+'
+  Icon: {fileID: -279398244, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  MaxStackSize: 999
+  GoldValue: 1
   ItemType: Resource
   ItemPrefab: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f,
     type: 3}
   itemDamage: 0
+  ItemTile: {fileID: 0}
+  projectilePrefab: {fileID: 0}

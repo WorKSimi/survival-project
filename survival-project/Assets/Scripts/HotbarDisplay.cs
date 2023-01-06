@@ -192,6 +192,10 @@ public class HotbarDisplay : StaticInventoryDisplay
                 player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab);
                 break;
 
+                case "Rock":
+                player.GetComponent<UseItemManager>().UseRock(itemData.itemDamage);
+                break;
+
                 default:
                 Debug.Log($"Default Case");
                 break;

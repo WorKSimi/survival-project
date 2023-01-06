@@ -5,7 +5,7 @@ using Pathfinding;
 
 public class SnailEnemy : MonoBehaviour
 {
-    Animator animator;
+    [SerializeField] private Animator animator;
 
     [SerializeField] private Transform target;
     [SerializeField] private float speed = 200f;
@@ -44,7 +44,7 @@ public class SnailEnemy : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -75,7 +75,7 @@ public class SnailEnemy : MonoBehaviour
         {
             default:
             case SnailState.Roaming:
-            
+
             target = roamWaypoint.transform;  //This sets the target to be the roaming waypoint.
             target.position = roamPosition; //Sets the targets position to equal the roaming position.                      
             MoveToWaypoint(); //Moves snail to the waypoint.
@@ -84,8 +84,8 @@ public class SnailEnemy : MonoBehaviour
             break;
 
             case SnailState.ChaseTarget:
-                
 
+                animator.SetBool("isAttacking", false); //Attack animation is false
                 isCharging = false;
                 target = player.transform; //Sets the target to be the player
                 MoveToWaypoint(); //Moves the snail to the target (player)
@@ -100,10 +100,10 @@ public class SnailEnemy : MonoBehaviour
 
             case SnailState.AttackingTarget:
          
-
                 if (isCharging == false)
                 {
                     isCharging = true;
+                    animator.SetBool("isAttacking", true); //Activate attack animation
                     StartCoroutine(ChargeAttack());               
                 }
                 break;
@@ -175,26 +175,20 @@ public class SnailEnemy : MonoBehaviour
     }
 
     private IEnumerator ChargeAttack()
-    {     
+    {
         rb.velocity = Vector3.zero; //Stop his movement
-        animator.SetBool("enterShell", true);
         yield return new WaitForSeconds(1f); //Wait 1 seconds       
 
         targetChargePosition = target.position;
         Vector2 direction = (targetChargePosition - transform.position); //Get direction of player
 
         rb.AddForce(direction * 4, ForceMode2D.Impulse); //Charge at the player
-        animator.SetBool("enterShell", false);
-        animator.SetBool("isRolling", true); //Activate rolling animation
 
         yield return new WaitForSeconds(1); //Charge for 1 second
 
         rb.velocity = Vector3.zero; //Disable movement 
-        animator.SetBool("isRolling", false); //Deactivate Rolling Animation
-        animator.SetBool("exitShell", true); //Activate exit animation
 
-        yield return new WaitForSeconds(.5f); //Pause for half a second
-        animator.SetBool("exitShell", false);
+        yield return new WaitForSeconds(.5f); //Pause for half a second       
         state = SnailState.ChaseTarget;
     }
     

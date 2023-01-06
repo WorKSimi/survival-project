@@ -106,7 +106,7 @@ public class UseItemManager : MonoBehaviour
                 swordSprite.flipY = true;
             }
         }
-        else if (facingLeft == true) // If your facing left runthis code for rotating weapon
+        else if (facingLeft == true) // If your facing left run this code for rotating weapon
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
             m_transform.rotation = rotation;
@@ -244,6 +244,29 @@ public class UseItemManager : MonoBehaviour
                 hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);
                 nextAttackTime = Time.time + 1f / attackRate;
             }
+        }
+    }
+
+    public void UseRock(double itemDamage)
+    {
+        Debug.Log("The rock has been used");
+        if (Time.time >= nextAttackTime)
+        {
+
+            //Hit Enemies
+            Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
+            foreach (Collider2D enemy in hitEnemies) // Damage enemies
+            {
+                enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
+            }
+
+            //Hit Trees
+            Collider2D[] hitTrees = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, treeLayers); // Detect trees in range of attack
+            foreach (Collider2D tree in hitTrees) // Damage trees
+            {
+                tree.GetComponent<TreeLogic>().TakeDamage(itemDamage);
+            }
+            nextAttackTime = Time.time + 1f / attackRate;
         }
     }
 

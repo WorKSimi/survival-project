@@ -17,11 +17,12 @@ MonoBehaviour:
   Description: 'The most basic weapon ever created
 
 '
-  Icon: {fileID: -1078251973, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  Icon: {fileID: 1468101880, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
   GoldValue: 0
   ItemType: Sword
   ItemPrefab: {fileID: 7389436694480070536, guid: c35379fde93c5154b84688083e7a3c92,
     type: 3}
-  itemDamage: 1
+  itemDamage: 2
   ItemTile: {fileID: 0}
+  projectilePrefab: {fileID: 0}

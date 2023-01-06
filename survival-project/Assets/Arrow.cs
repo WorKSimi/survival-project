@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public double Arrowdamage;
-    private float lifeTime = 0.5f;
+    private float lifeTime = 0.9f;
 
     private void Start()
     {
@@ -14,12 +14,20 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
-        if (enemyHealth != null)
+        if (hitInfo.tag == "Enemy")
         {
-            enemyHealth.TakeDamage(Arrowdamage);
+            EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(Arrowdamage);
+            }
+            DestroyProjectile();
         }
-        DestroyProjectile();
+
+        else if (hitInfo.tag != "Enemy")
+        {
+            Debug.Log("Something other than enemy was hit!");
+        }
     }
 
     void DestroyProjectile()

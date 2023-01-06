@@ -24,7 +24,7 @@ public class WorldTime : MonoBehaviour
     private void Awake()
     {
         _light = GetComponent<Light2D>();
-        hours = 8; //Have the game start at hour 8 (day)
+        hours = 12; //Have the game start at hour 12 (day)
     }
 
     void FixedUpdate() 

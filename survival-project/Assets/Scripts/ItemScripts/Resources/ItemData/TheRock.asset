@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: FlintPickaxe
+  m_Name: TheRock
   m_EditorClassIdentifier: 
   ID: -1
-  DisplayName: FlintPickaxe
-  Description: A shoddy pickaxe for basic destruction
-  Icon: {fileID: 862417796, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  DisplayName: Rock
+  Description: Where it all started...
+  Icon: {fileID: -143193231, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
   MaxStackSize: 1
   GoldValue: 0
-  ItemType: Pick
-  ItemPrefab: {fileID: 7389436694480070536, guid: 72201346e3a830e4e9b3cd20e3652d09,
+  ItemType: Rock
+  ItemPrefab: {fileID: 7389436694480070536, guid: 175f85b708952ef4cba11263095a5aa9,
     type: 3}
-  itemDamage: 5
+  itemDamage: 1
   ItemTile: {fileID: 0}
   projectilePrefab: {fileID: 0}

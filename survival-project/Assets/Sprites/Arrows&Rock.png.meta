@@ -1,0 +1,289 @@
+fileFormatVersion: 2
+guid: 34913c8139c99a343a3e5d2a28354dc8
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Flint_Arrow
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 304
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf717ae9a7f36104cabe4cf3db4cc83d
+      internalID: 910543348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tin_Arrow
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f0b906ffc86e7248a91eb77e56cf5b3
+      internalID: -146881550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bronze_Arrow
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 272
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8deec55be820e364b9d7430401a67274
+      internalID: 1044941745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RustRock
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a562568daa33a274b98da5de69c2e28f
+      internalID: -143193231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Arrows&Rock_60: 1841588790
+      Arrows&Rock_2: 596227338
+      Arrows&Rock_17: 222361678
+      Arrows&Rock_26: 1844781438
+      Arrows&Rock_16: -478133760
+      Arrows&Rock_49: 362862633
+      Arrows&Rock_1: 2053297689
+      Arrows&Rock_39: 216373475
+      Arrows&Rock_70: 1820937704
+      Arrows&Rock_4: -581500338
+      Arrows&Rock_11: 1742505068
+      Arrows&Rock_8: 1621105475
+      Arrows&Rock_42: 260340358
+      Arrows&Rock_6: 1134263322
+      Arrows&Rock_48: 1146759118
+      Arrows&Rock_50: 917437459
+      Arrows&Rock_5: 1568950611
+      Arrows&Rock_64: -1941591646
+      Arrows&Rock_80: -1824954824
+      Arrows&Rock_43: -1459504602
+      Arrows&Rock_3: 2130455617
+      Arrows&Rock_13: 911373598
+      Arrows&Rock_34: 518899304
+      Arrows&Rock_23: -65227677
+      Arrows&Rock_68: 1729163333
+      Arrows&Rock_76: -761870839
+      Arrows&Rock_35: -1901012142
+      Arrows&Rock_75: -1084014558
+      Arrows&Rock_14: 1716057011
+      Arrows&Rock_40: 1308312343
+      Arrows&Rock_56: 2098309090
+      Arrows&Rock_77: 1086785652
+      Arrows&Rock_22: -1644401934
+      Arrows&Rock_51: 237352121
+      Arrows&Rock_54: 936975199
+      Arrows&Rock_25: 793172515
+      Arrows&Rock_7: 1449399682
+      Arrows&Rock_29: 499989338
+      Arrows&Rock_12: -427966233
+      Arrows&Rock_0: 36899827
+      Tin_Arrow: -146881550
+      Arrows&Rock_30: -421780639
+      Arrows&Rock_15: 1507193869
+      Arrows&Rock_36: 144531228
+      Arrows&Rock_19: 1674447751
+      Arrows&Rock_63: 868168692
+      Arrows&Rock_73: 1764592399
+      Arrows&Rock_46: -1931168924
+      Arrows&Rock_33: 366207518
+      Arrows&Rock_27: -41817801
+      Arrows&Rock_32: -193057604
+      Arrows&Rock_57: -557072032
+      Arrows&Rock_59: -598678511
+      Arrows&Rock_20: 1543252807
+      Arrows&Rock_9: -1289595224
+      Arrows&Rock_66: -1901241515
+      Flint_Arrow: 910543348
+      Arrows&Rock_28: 1004629664
+      Arrows&Rock_18: -554168053
+      Arrows&Rock_45: -2137885745
+      Arrows&Rock_69: 147827138
+      Arrows&Rock_37: 1422317619
+      Arrows&Rock_55: 1964464252
+      Arrows&Rock_79: 153261043
+      Arrows&Rock_71: -1820036936
+      Bronze_Arrow: 1044941745
+      Arrows&Rock_53: -1253006072
+      Arrows&Rock_65: -1444729610
+      Arrows&Rock_10: -1920814638
+      Arrows&Rock_31: -480079961
+      Arrows&Rock_58: -477203311
+      Arrows&Rock_62: -281841281
+      Arrows&Rock_21: -79171996
+      Arrows&Rock_72: -1537421533
+      Arrows&Rock_24: 1727920241
+      Arrows&Rock_52: 1285231383
+      Arrows&Rock_67: 1933890986
+      Arrows&Rock_78: -1439365643
+      Arrows&Rock_61: -1838237698
+      Arrows&Rock_74: -1590510948
+      RustRock: -143193231
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
