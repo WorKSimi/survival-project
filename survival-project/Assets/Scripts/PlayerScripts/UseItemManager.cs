@@ -22,8 +22,8 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private GameObject thisPlayer; //This players game object
 
     [SerializeField] private Transform firePoint;
+    [SerializeField] private Transform projectileRotationObject;
     [SerializeField] private GameObject arrowPrefab;
-    private float bulletForce = 15f;
 
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
@@ -46,7 +46,6 @@ public class UseItemManager : MonoBehaviour
     private SpriteRenderer swordSprite;
 
     private Vector2 boxSize = new Vector2(1.2f, 1.2f);
-    //private Vector2 boxPoint;
 
     private bool swungWeapon = false;
 
@@ -288,12 +287,12 @@ public class UseItemManager : MonoBehaviour
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
-
+    private float bulletForce = 15f;
     public void UseBow(double itemDamage, GameObject projectilePrefab)
     {
         if (Time.time >= nextAttackTime)
         {
-            GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            GameObject bullet = Instantiate(projectilePrefab, firePoint.position, projectileRotationObject.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             Arrow arrow = bullet.GetComponent<Arrow>();
             arrow.Arrowdamage = itemDamage;
