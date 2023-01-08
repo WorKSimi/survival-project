@@ -31,7 +31,7 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private LayerMask wallLayers;
     [SerializeField] private LayerMask enemyLayers;
 
-    [SerializeField] private Transform weaponSprite;
+    [SerializeField] private GameObject weaponSprite;
     [SerializeField] private GameObject weaponAnchor;
 
     private Vector3Int playerPos; //Player position on grid
@@ -94,30 +94,30 @@ public class UseItemManager : MonoBehaviour
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
             m_transform.rotation = rotation;
-            swordSprite.flipX = false;
-            swordSprite.flipY = false;
+            //swordSprite.flipX = false;
+            //swordSprite.flipY = false;
 
             if (swungWeapon == true)
             {
                 rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
                 m_transform.rotation = rotation;              
-                swordSprite.flipX = true;
-                swordSprite.flipY = true;               
+                //swordSprite.flipX = true;
+                //swordSprite.flipY = true;               
             }
         }
         else if (facingLeft == true) // If your facing left run this code for rotating weapon
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
             m_transform.rotation = rotation;
-            swordSprite.flipX = true;
-            swordSprite.flipY = true;
+            //swordSprite.flipX = true;
+            //swordSprite.flipY = true;
 
             if (swungWeapon == true)
             {
                 rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
                 m_transform.rotation = rotation;
-                swordSprite.flipX = false;
-                swordSprite.flipY = false;
+                //swordSprite.flipX = false;
+                //swordSprite.flipY = false;
             }
         }
 
@@ -272,8 +272,17 @@ public class UseItemManager : MonoBehaviour
     public void UseSword(double itemDamage)
     {
         if (Time.time >= nextAttackTime)
-        {           
-            swungWeapon = !swungWeapon;           
+        {
+            var degreeChange = 180f;
+            var weaponDegreeChange = 360f;
+            if (swungWeapon)
+            {
+                degreeChange *= -1f;
+                weaponDegreeChange *= -1f;
+            }
+            var tween = LeanTween.rotateAround(weaponAnchor, Vector3.back, degreeChange, 0.1f);
+            LeanTween.rotateAround(weaponSprite, Vector3.back, weaponDegreeChange, 0.1f);
+            tween.setOnComplete(() => { swungWeapon = !swungWeapon; });
 
             animator.SetTrigger("Attack"); // Play an attack animation
 
@@ -287,6 +296,7 @@ public class UseItemManager : MonoBehaviour
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
+
     private float bulletForce = 15f;
     public void UseBow(double itemDamage, GameObject projectilePrefab)
     {
