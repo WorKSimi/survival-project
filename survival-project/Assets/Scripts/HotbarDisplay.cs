@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class HotbarDisplay : StaticInventoryDisplay
 {
     public GameObject player;
+    [SerializeField] private TMP_Text heldItemText; 
     [SerializeField] private GameObject weaponAnchor; //Weapon anchor on player
     [SerializeField] private GameObject weapon; //Weapon object on player
     [SerializeField] private GameObject heldItem; //Held item object on player
@@ -127,35 +129,20 @@ public class HotbarDisplay : StaticInventoryDisplay
         if (_playerControls.Player.MouseWheel.ReadValue<float>() > 0.1f) ChangeIndex(-1); //Changes selected hotbar slot
         if (_playerControls.Player.MouseWheel.ReadValue<float>() < -0.1f) ChangeIndex(1); //Changes selected hotbar slot the other way
 
+        ChangeHeldItemText();
+        DisplayHeldWeaponSprite();
+    }
+
+    private void ChangeHeldItemText()
+    {
         if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
         {
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow") //Checks if held item is bow
-            {
-                heldItemSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon;
-            }
-
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Bow")
-            {
-                heldItemSpriteRenderer.sprite = null;
-            }
-
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Sword") //Checks if the currently held item is a sword type
-            {
-                swordSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Sets the visual for the sword weapon to the held item.
-            }
-
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Sword")
-            {
-                swordSpriteRenderer.sprite = null;
-            }
+            heldItemText.SetText(slots[_currentIndex].AssignedInventorySlot.ItemData.DisplayName);
         }
+        else heldItemText.SetText("");
+    }    
 
-        else if (slots[_currentIndex].AssignedInventorySlot.ItemData == null)
-        {
-            swordSpriteRenderer.sprite = null;
-            heldItemSpriteRenderer.sprite = null;
-        }
-    }
+
 
     private void UseItem(InputAction.CallbackContext obj)
     {
@@ -201,6 +188,37 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
             }
         }   
+    }
+    private void DisplayHeldWeaponSprite()
+    {
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
+        {
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow") //Checks if held item is bow
+            {
+                heldItemSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon;
+            }
+
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Bow")
+            {
+                heldItemSpriteRenderer.sprite = null;
+            }
+
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Sword") //Checks if the currently held item is a sword type
+            {
+                swordSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Sets the visual for the sword weapon to the held item.
+            }
+
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Sword")
+            {
+                swordSpriteRenderer.sprite = null;
+            }
+        }
+
+        else if (slots[_currentIndex].AssignedInventorySlot.ItemData == null)
+        {
+            swordSpriteRenderer.sprite = null;
+            heldItemSpriteRenderer.sprite = null;
+        }
     }
 
     private void ChangeIndex(int direction)

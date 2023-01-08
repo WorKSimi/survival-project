@@ -100,9 +100,9 @@ public class UseItemManager : MonoBehaviour
             if (swungWeapon == true)
             {
                 rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
-                m_transform.rotation = rotation;
+                m_transform.rotation = rotation;              
                 swordSprite.flipX = true;
-                swordSprite.flipY = true;
+                swordSprite.flipY = true;               
             }
         }
         else if (facingLeft == true) // If your facing left run this code for rotating weapon
@@ -259,11 +259,11 @@ public class UseItemManager : MonoBehaviour
                 enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
             }
 
-            //Hit Trees
-            Collider2D[] hitTrees = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, treeLayers); // Detect trees in range of attack
-            foreach (Collider2D tree in hitTrees) // Damage trees
+            //Hit Trees and Walls
+            Collider2D[] hitWalls = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, wallLayers); // Detect trees in range of attack
+            foreach (Collider2D wall in hitWalls) // Damage trees
             {
-                tree.GetComponent<TreeLogic>().TakeDamage(itemDamage);
+                wall.GetComponent<Wall>().TakeDamage(itemDamage);
             }
             nextAttackTime = Time.time + 1f / attackRate;
         }
@@ -272,8 +272,8 @@ public class UseItemManager : MonoBehaviour
     public void UseSword(double itemDamage)
     {
         if (Time.time >= nextAttackTime)
-        {
-            swungWeapon = !swungWeapon;
+        {           
+            swungWeapon = !swungWeapon;           
 
             animator.SetTrigger("Attack"); // Play an attack animation
 
