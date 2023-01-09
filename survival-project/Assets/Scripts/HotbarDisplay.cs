@@ -12,7 +12,7 @@ public class HotbarDisplay : StaticInventoryDisplay
     [SerializeField] private GameObject weaponAnchor; //Weapon anchor on player
     [SerializeField] private GameObject weapon; //Weapon object on player
     [SerializeField] private GameObject heldItem; //Held item object on player
-    private SpriteRenderer heldItemSpriteRenderer; //Held item sprite renderer on object
+    [SerializeField] private SpriteRenderer heldItemSpriteRenderer; //Held item sprite renderer on object
     private SpriteRenderer swordSpriteRenderer; //Held Sword sprite renderer on object
 
     private int _maxIndexSize = 9;
@@ -131,6 +131,7 @@ public class HotbarDisplay : StaticInventoryDisplay
 
         ChangeHeldItemText();
         DisplayHeldWeaponSprite();
+        DisplayHeldBowSprite();
     }
 
     private void ChangeHeldItemText()
@@ -189,36 +190,39 @@ public class HotbarDisplay : StaticInventoryDisplay
             }
         }   
     }
+
     private void DisplayHeldWeaponSprite()
+    {    
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) //Held item isnt null
+        {
+            var heldItemType = slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType; //Store so easier to reference
+
+            if (heldItemType == "Sword" || heldItemType == "Pick" || heldItemType == "Rock") //If held item is a valid type
+            {
+                swordSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Character hold that item
+            }
+            else
+            {
+                swordSpriteRenderer.sprite = null; //If you arent holding one of those types, display no sprite
+            }
+        }
+        else if (slots[_currentIndex].AssignedInventorySlot.ItemData == null) //Held item IS null
+        {
+            swordSpriteRenderer.sprite = null; //Display no sprite
+        }
+    }
+
+    private void DisplayHeldBowSprite()
     {
         if (slots[_currentIndex].AssignedInventorySlot.ItemData != null)
         {
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow") //Checks if held item is bow
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow")
             {
                 heldItemSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon;
             }
-
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Bow")
-            {
-                heldItemSpriteRenderer.sprite = null;
-            }
-
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Sword") //Checks if the currently held item is a sword type
-            {
-                swordSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Sets the visual for the sword weapon to the held item.
-            }
-
-            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType != "Sword")
-            {
-                swordSpriteRenderer.sprite = null;
-            }
+            else heldItemSpriteRenderer.sprite = null;
         }
-
-        else if (slots[_currentIndex].AssignedInventorySlot.ItemData == null)
-        {
-            swordSpriteRenderer.sprite = null;
-            heldItemSpriteRenderer.sprite = null;
-        }
+        else heldItemSpriteRenderer.sprite = null;
     }
 
     private void ChangeIndex(int direction)

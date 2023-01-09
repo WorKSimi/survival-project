@@ -17,7 +17,7 @@ MonoBehaviour:
   Description: 'A table for crafting
 
 '
-  Icon: {fileID: 1381102850, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  Icon: {fileID: 1554181044, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
   GoldValue: 0
   ItemType: Block
@@ -25,3 +25,4 @@ MonoBehaviour:
     type: 3}
   itemDamage: 0
   ItemTile: {fileID: 11400000, guid: 2858add7abd26604f92d0d22d08a6866, type: 2}
+  projectilePrefab: {fileID: 0}

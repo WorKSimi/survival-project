@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: -1
   DisplayName: Tin Sword
   Description: A sword crafted out of tin.
-  Icon: {fileID: -89504842, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  Icon: {fileID: 1526551678, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
   GoldValue: 1
   ItemType: Sword
@@ -23,3 +23,4 @@ MonoBehaviour:
     type: 3}
   itemDamage: 5
   ItemTile: {fileID: 0}
+  projectilePrefab: {fileID: 0}

@@ -15,10 +15,12 @@ MonoBehaviour:
   ID: -1
   DisplayName: Campfire
   Description: Campfire for cooking simple foods
-  Icon: {fileID: -845833006, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  Icon: {fileID: -907254436, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
   GoldValue: 0
   ItemType: 
   ItemPrefab: {fileID: 1784105365037295680, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
     type: 3}
   itemDamage: 0
+  ItemTile: {fileID: 0}
+  projectilePrefab: {fileID: 0}

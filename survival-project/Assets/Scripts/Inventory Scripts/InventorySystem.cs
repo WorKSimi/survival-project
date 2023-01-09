@@ -95,8 +95,6 @@ public class InventorySystem
                 {
                     if (InventorySlot.stackSize >= itemComponent.quantity)
                     {
-
-
                         FoundItems.Add(new FoundItem { itemSlot = InventorySlot, quantity = itemComponent.quantity});
                     }
                 }
@@ -111,13 +109,8 @@ public class InventorySystem
                 foundItem.itemSlot.RemoveFromStack(foundItem.quantity); //Removes material amount from your inventory
                 OnInventorySlotChanged.Invoke(foundItem.itemSlot);
             }
-
             var CreatedItem = GameObject.Instantiate(createdItem);
             AddToInventory(CreatedItem, itemAmount);
-
-          
         }
-
-
     }
 }

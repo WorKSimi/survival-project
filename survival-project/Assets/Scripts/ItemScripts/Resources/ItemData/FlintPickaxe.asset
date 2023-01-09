@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: -1
   DisplayName: FlintPickaxe
   Description: A shoddy pickaxe for basic destruction
-  Icon: {fileID: 862417796, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  Icon: {fileID: 1782844944, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
   GoldValue: 0
   ItemType: Pick

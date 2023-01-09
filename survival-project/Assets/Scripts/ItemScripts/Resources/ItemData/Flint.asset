@@ -15,10 +15,12 @@ MonoBehaviour:
   ID: 1
   DisplayName: Flint
   Description: Flint Balls
-  Icon: {fileID: -1307697927, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  Icon: {fileID: -1829741519, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 99
   GoldValue: 0
   ItemType: Resource
   ItemPrefab: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08,
     type: 3}
   itemDamage: 0
+  ItemTile: {fileID: 0}
+  projectilePrefab: {fileID: 0}

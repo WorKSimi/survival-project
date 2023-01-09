@@ -45,7 +45,7 @@ public class UseItemManager : MonoBehaviour
     private Transform m_transform;
     private SpriteRenderer swordSprite;
 
-    private Vector2 boxSize = new Vector2(1.2f, 1.2f);
+    private Vector2 boxSize = new Vector2(1.5f, 1.5f);
 
     private bool swungWeapon = false;
 
@@ -230,18 +230,18 @@ public class UseItemManager : MonoBehaviour
 
     public void UsePick(double itemDamage)
     {
-        Debug.Log("PICK USED!");
-
-        if (IsInRange())
+        if (Time.time >= nextAttackTime) //If not on cooldown
         {
-            if (Time.time >= nextAttackTime)
+            SwingTweenAnimation(); //Swing animation
+            nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
+
+            if (IsInRange()) //If your in range
             {
                 animator.SetTrigger("Attack"); // Play an attack animation
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 var hit = Physics2D.GetRayIntersection(ray, 50f, wallLayers);
                 hoveredWall = hit.transform;
                 hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);
-                nextAttackTime = Time.time + 1f / attackRate;
             }
         }
     }
@@ -251,6 +251,7 @@ public class UseItemManager : MonoBehaviour
         Debug.Log("The rock has been used");
         if (Time.time >= nextAttackTime)
         {
+            SwingTweenAnimation(); //Swing animation
 
             //Hit Enemies
             Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
@@ -273,16 +274,7 @@ public class UseItemManager : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            var degreeChange = 180f;
-            var weaponDegreeChange = 360f;
-            if (swungWeapon)
-            {
-                degreeChange *= -1f;
-                weaponDegreeChange *= -1f;
-            }
-            var tween = LeanTween.rotateAround(weaponAnchor, Vector3.back, degreeChange, 0.1f);
-            LeanTween.rotateAround(weaponSprite, Vector3.back, weaponDegreeChange, 0.1f);
-            tween.setOnComplete(() => { swungWeapon = !swungWeapon; });
+            SwingTweenAnimation(); //Swing animation
 
             animator.SetTrigger("Attack"); // Play an attack animation
 
@@ -295,6 +287,20 @@ public class UseItemManager : MonoBehaviour
 
             nextAttackTime = Time.time + 1f / attackRate;
         }
+    }
+
+    private void SwingTweenAnimation()
+    {
+        var degreeChange = 180f;
+        var weaponDegreeChange = 360f;
+        if (swungWeapon)
+        {
+            degreeChange *= -1f;
+            weaponDegreeChange *= -1f;
+        }
+        var tween = LeanTween.rotateAround(weaponAnchor, Vector3.back, degreeChange, 0.2f).setEaseInOutQuart();
+        LeanTween.rotateAround(weaponSprite, Vector3.back, weaponDegreeChange, 0.2f).setEaseInOutQuart();
+        tween.setOnComplete(() => { swungWeapon = !swungWeapon; });
     }
 
     private float bulletForce = 15f;

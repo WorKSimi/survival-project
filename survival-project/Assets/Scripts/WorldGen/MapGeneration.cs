@@ -139,7 +139,6 @@ public class MapGeneration : MonoBehaviour
             {
                 float minDistance = 50f; //Min distance caves can be from eachother;
                 float dist = Vector3.Distance(ce.transform.position, new Vector3(x, y, 0)); //Get distance between each cave entrance and where to place
-                Debug.Log(dist);
 
                 if (dist < minDistance) //If the distance between the cave entrance and the spot is less then the minimum
                 {
