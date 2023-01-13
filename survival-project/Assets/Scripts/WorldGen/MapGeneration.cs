@@ -20,13 +20,14 @@ public class MapGeneration : MonoBehaviour
     [Header("Dimensions")]
     public int width = 50;
     public int height = 50;
-    public int falloffSize = (100);
+    public int falloffSize = 100;
     public float scale = 1.0f;
     public Vector2 offset;
 
     [Header("Other Stuff")]
     public Grid worldGrid;
     public bool useFalloff;
+    public int worldOffset = 0; //Use this to determine where in the world this island will spawn
 
     [Header("Height Map")]
     public Wave[] heightWaves;
@@ -40,7 +41,7 @@ public class MapGeneration : MonoBehaviour
     private GameObject[] caveEntrances; //Creates an array to store cave entrances
     private int currentCaveEntrances;
     private int maxCaveEntrances = 5;
-    bool firstcaveSpawned;
+    bool firstcaveSpawned;   
 
     // ground, carpet, wall, interactive
     // Start is called before the first frame update
@@ -84,31 +85,31 @@ public class MapGeneration : MonoBehaviour
 
                 if (height < 0.2f) //Water
                 {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), waterTile);
+                    groundTilemap.SetTile(new Vector3Int(x+worldOffset, y+worldOffset, 0), waterTile);
                 }
                 else if (height < 0.3f) //Sand
                 {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), sandTile);
+                    groundTilemap.SetTile(new Vector3Int(x + worldOffset, y + worldOffset, 0), sandTile);
                 }
                 else if (height < 0.6f) //Grass
                 {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), grassTile);
+                    groundTilemap.SetTile(new Vector3Int(x + worldOffset, y + worldOffset, 0), grassTile);
                     if (Random.value >= 0.96) //4 percent chance
                     {
-                        wallTilemap.SetTile(new Vector3Int(x, y, 0), treeTile);
+                        wallTilemap.SetTile(new Vector3Int(x + worldOffset, y + worldOffset, 0), treeTile);
                     }
                 }
                 else if (height < 0.7f) //Dirt Ground
                 {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), dirtTile);
+                    groundTilemap.SetTile(new Vector3Int(x + worldOffset, y + worldOffset, 0), dirtTile);
                     TrySpawnCaveEntrance(x, y);
                 }
                 else if (height < 1.0f) //Dirt Wall
                 {
-                    wallTilemap.SetTile(new Vector3Int(x, y, 0), grassWallTile);
+                    wallTilemap.SetTile(new Vector3Int(x + worldOffset, y + worldOffset, 0), grassWallTile);
                     if (Random.value >= 0.96) //4 percent chance each wall tile
                     {
-                        SpawnOreVein(x, y);
+                        SpawnOreVein(x + worldOffset, y + worldOffset);
                     }
                 }
             }

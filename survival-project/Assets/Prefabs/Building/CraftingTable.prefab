@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 1784105365037295681}
   - component: {fileID: 1784105365037295683}
   - component: {fileID: 1784105365037295708}
+  - component: {fileID: 8366289397458614362}
   m_Layer: 6
   m_Name: CraftingTable
   m_TagString: Untagged
@@ -70,7 +71,7 @@ Transform:
   m_Children:
   - {fileID: 2330979487585588629}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1784105365037295681
 SpriteRenderer:
@@ -113,12 +114,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1381102850, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
+  m_Sprite: {fileID: 1554181044, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 2, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -137,18 +138,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.06}
+  m_Offset: {x: 0, y: -0.39}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.25}
-    newSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.52, y: 0.16}
+  m_Size: {x: 1, y: 0.22}
   m_EdgeRadius: 0
 --- !u!114 &1784105365037295708
 MonoBehaviour:
@@ -163,6 +164,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftingTableMenu: {fileID: 6996422526858874397}
+--- !u!114 &8366289397458614362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784105365037295680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6401c9d6be1a2ef41a486660255ba6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wood: {fileID: 7389436694480070536, guid: 9900632c2b12b914c972bd43660349aa, type: 3}
+  maxHealth: 5
 --- !u!1 &2210720719711880025
 GameObject:
   m_ObjectHideFlags: 0

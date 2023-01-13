@@ -21,7 +21,7 @@ MonoBehaviour:
   MaxStackSize: 1
   GoldValue: 0
   ItemType: Block
-  ItemPrefab: {fileID: 1784105365037295680, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
+  ItemPrefab: {fileID: 7389436694480070536, guid: 9900632c2b12b914c972bd43660349aa,
     type: 3}
   itemDamage: 0
   ItemTile: {fileID: 11400000, guid: 2858add7abd26604f92d0d22d08a6866, type: 2}

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: GrassTile
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 0}
+  m_DefaultGameObject: {fileID: 2976247172256185871, guid: 64e25086feb1f9d49aaeac7342fced68,
+    type: 3}
   m_DefaultColliderType: 0
   m_TilingRules:
   - m_Id: 0
@@ -22,7 +23,8 @@ MonoBehaviour:
     - {fileID: -1203659061, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
     - {fileID: 47642799, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
     - {fileID: 31579180, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
-    m_GameObject: {fileID: 0}
+    m_GameObject: {fileID: 2976247172256185871, guid: 64e25086feb1f9d49aaeac7342fced68,
+      type: 3}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
     m_PerlinScale: 0.5

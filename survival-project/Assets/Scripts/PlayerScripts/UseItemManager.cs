@@ -30,9 +30,11 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private LayerMask treeLayers;
     [SerializeField] private LayerMask wallLayers;
     [SerializeField] private LayerMask enemyLayers;
+    [SerializeField] private LayerMask interactableLayers;
 
     [SerializeField] private GameObject weaponSprite;
     [SerializeField] private GameObject weaponAnchor;
+    [SerializeField] private Animator slashAnimator;
 
     private Vector3Int playerPos; //Player position on grid
     private Vector3 playerPos2; //Player normal position
@@ -46,6 +48,7 @@ public class UseItemManager : MonoBehaviour
     private SpriteRenderer swordSprite;
 
     private Vector2 boxSize = new Vector2(1.5f, 1.5f);
+    private Vector3 dir;
 
     private bool swungWeapon = false;
 
@@ -94,30 +97,26 @@ public class UseItemManager : MonoBehaviour
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
             m_transform.rotation = rotation;
-            //swordSprite.flipX = false;
-            //swordSprite.flipY = false;
+            swordSprite.flipX = false;
+            swordSprite.flipY = false;
 
             if (swungWeapon == true)
             {
                 rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
-                m_transform.rotation = rotation;              
-                //swordSprite.flipX = true;
-                //swordSprite.flipY = true;               
+                m_transform.rotation = rotation;                           
             }
         }
         else if (facingLeft == true) // If your facing left run this code for rotating weapon
         {
             Quaternion rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
             m_transform.rotation = rotation;
-            //swordSprite.flipX = true;
-            //swordSprite.flipY = true;
+            swordSprite.flipX = true;
+            swordSprite.flipY = true;
 
             if (swungWeapon == true)
             {
                 rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
                 m_transform.rotation = rotation;
-                //swordSprite.flipX = false;
-                //swordSprite.flipY = false;
             }
         }
 
@@ -146,13 +145,15 @@ public class UseItemManager : MonoBehaviour
         if (mouseWorldPos.x > playerPos2.x)
         {
             facingRight = true;
+            dir = Vector3.back;
             facingLeft = false;
         }
 
         if (mouseWorldPos.x < playerPos2.x)
         {
-            facingRight = false;
             facingLeft = true;
+            dir = Vector3.forward;
+            facingRight = false;
         }
     }
 
@@ -239,8 +240,8 @@ public class UseItemManager : MonoBehaviour
             {
                 animator.SetTrigger("Attack"); // Play an attack animation
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                var hit = Physics2D.GetRayIntersection(ray, 50f, wallLayers);
-                hoveredWall = hit.transform;
+                var hit = Physics2D.GetRayIntersection(ray, 50f);
+                hoveredWall = hit.transform;              
                 hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);
             }
         }
@@ -290,7 +291,7 @@ public class UseItemManager : MonoBehaviour
     }
 
     private void SwingTweenAnimation()
-    {
+    {      
         var degreeChange = 180f;
         var weaponDegreeChange = 360f;
         if (swungWeapon)
@@ -298,9 +299,10 @@ public class UseItemManager : MonoBehaviour
             degreeChange *= -1f;
             weaponDegreeChange *= -1f;
         }
-        var tween = LeanTween.rotateAround(weaponAnchor, Vector3.back, degreeChange, 0.2f).setEaseInOutQuart();
-        LeanTween.rotateAround(weaponSprite, Vector3.back, weaponDegreeChange, 0.2f).setEaseInOutQuart();
-        tween.setOnComplete(() => { swungWeapon = !swungWeapon; });
+        slashAnimator.SetBool("isSlashing", true);
+        var tween = LeanTween.rotateAround(weaponAnchor, dir, degreeChange, 0.2f).setEaseInOutQuart();
+        LeanTween.rotateAround(weaponSprite, dir, weaponDegreeChange, 0.2f).setEaseInOutQuart();
+        tween.setOnComplete(() => { swungWeapon = !swungWeapon; slashAnimator.SetBool("isSlashing", false); });
     }
 
     private float bulletForce = 15f;

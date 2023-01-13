@@ -105,6 +105,15 @@ public class AnywhereCrafting : MonoBehaviour
 
     public void SelectWoodClub()
     {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.WoodClub.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.WoodClub.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.WoodClub.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x5"); //Set component amount 
+
         selected = SelectedRecipe.WoodClub;
     }
 
@@ -149,62 +158,70 @@ public class AnywhereCrafting : MonoBehaviour
     }
 
     private void CraftCraftingTable()
-    {        
-        Debug.Log("Trying to Craft Crafting Table");
-        var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
-
-        var woodComponent = new CraftRecipeItem
+    {
+        for (int i = 0; i < amountToCraft; i++)
         {
-            displayName = "wood",
-            quantity = 10
-        };
+            Debug.Log("Trying to Craft Crafting Table");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 10
+            };
 
-        var components = new List<CraftRecipeItem>() { woodComponent};
-        {
-            playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.CraftingTable, 1);
-            Debug.Log("Crafted Crafting Table");
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.CraftingTable, 1);
+                Debug.Log("Crafted Crafting Table");
+            }
         }
     }
 
     private void CraftCampfire()
     {
-        Debug.Log("Trying to Craft Campfire");
-        var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
-
-        var woodComponent = new CraftRecipeItem
+        for (int i = 0; i < amountToCraft; i++)
         {
-            displayName = "wood",
-            quantity = 5
-        };
+            Debug.Log("Trying to Craft Campfire");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
 
-        var flintComponent = new CraftRecipeItem
-        {
-            displayName = "flint",
-            quantity = 2
-        };
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 5
+            };
 
-        var components = new List<CraftRecipeItem>() { woodComponent, flintComponent};
-        {
-            playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Campfire, 1);
-            Debug.Log("Crafted Campfire");
+            var flintComponent = new CraftRecipeItem
+            {
+                displayName = "flint",
+                quantity = 2
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent, flintComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Campfire, 1);
+                Debug.Log("Crafted Campfire");
+            }
         }
     }
 
     private void CraftWoodenClub()
-    {        
-        Debug.Log("Trying to Craft Wood Club");
-        var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
-
-        var woodComponent = new CraftRecipeItem
+    {
+        for (int i = 0; i < amountToCraft; i++)
         {
-            displayName = "wood",
-            quantity = 5
-        };
+            Debug.Log("Trying to Craft Wood Club");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
 
-        var components = new List<CraftRecipeItem>() { woodComponent};
-        {
-            playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodClub, 1);
-            Debug.Log("Crafted Wood Club");
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 5
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodClub, 1);
+                Debug.Log("Crafted Wood Club");
+            }
         }
     }
 

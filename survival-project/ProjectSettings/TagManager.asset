@@ -10,6 +10,10 @@ TagManager:
   - WallTile
   - InteractiveTilemap
   - CaveEntrance
+  - GroundTilemap
+  - BasicArrow
+  - Enemy
+  - SpawnableGround
   layers:
   - Default
   - TransparentFX
@@ -50,11 +54,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 3822340725
+    locked: 0
   - name: Wall
     uniqueID: 508864013
     locked: 0
   - name: Enviroment
     uniqueID: 459101279
+    locked: 0
+  - name: SlashAnimation
+    uniqueID: 3117087371
     locked: 0
   - name: Interactive
     uniqueID: 1474065673
