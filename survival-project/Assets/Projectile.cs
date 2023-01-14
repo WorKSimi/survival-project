@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
-    public double Arrowdamage;
-    private float lifeTime = 0.9f;
+    public double Projectiledamage;
+    public float Projectilelifetime;
 
     private void Start()
     {
-        Invoke("DestroyProjectile", lifeTime);
+        Invoke("DestroyProjectile", Projectilelifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour
             EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(Arrowdamage);
+                enemyHealth.TakeDamage(Projectiledamage);
             }
             DestroyProjectile();
         }

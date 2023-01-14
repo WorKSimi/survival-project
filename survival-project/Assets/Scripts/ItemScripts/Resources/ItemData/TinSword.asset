@@ -23,4 +23,7 @@ MonoBehaviour:
     type: 3}
   itemDamage: 5
   ItemTile: {fileID: 0}
-  projectilePrefab: {fileID: 0}
+  projectilePrefab: {fileID: 3006912499862247658, guid: 1bb90855afd17564f948e0e798fa7208,
+    type: 3}
+  projectileSpeed: 20
+  projectileLifetime: 0.1

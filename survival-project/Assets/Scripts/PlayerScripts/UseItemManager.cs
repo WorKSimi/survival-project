@@ -13,16 +13,17 @@ public class UseItemManager : MonoBehaviour
     private Tilemap wallTilemap; //The wall tilemap of the world
 
     private GameObject interactivemapObject; //Object holding interactive tilemap
-    private Tilemap interactiveTilemap; //The interactive tilemap of the world
+    private Tilemap interactiveTilemap; //The interactive tilemap of the world 
 
-    private bool facingRight; //Bool for if the player is facing right
-    private bool facingLeft; //Bool if the player is facing left
+    public bool facingRight; //Bool for if the player is facing right
+    public bool facingLeft; //Bool if the player is facing left
 
     [SerializeField] private Tile hoverTile = null; //Tile that is used when you hover on a spot on grid
     [SerializeField] private GameObject thisPlayer; //This players game object
 
     [SerializeField] private Transform firePoint;
-    [SerializeField] private Transform projectileRotationObject;
+    [SerializeField] private Transform projectileRotationObject; //Rotation for the arrow projectile for bows
+    [SerializeField] private Transform defaultProjectileRotation; //Default rotation for a projectile
     [SerializeField] private GameObject arrowPrefab;
 
     [SerializeField] private Animator animator;
@@ -65,8 +66,6 @@ public class UseItemManager : MonoBehaviour
 
         m_transform = weaponAnchor.transform;
         swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
-
-        //boxPoint = new Vector2(attackPoint.position.x, attackPoint.position.y);
     }
 
     void Update()
@@ -146,7 +145,7 @@ public class UseItemManager : MonoBehaviour
         {
             facingRight = true;
             dir = Vector3.back;
-            facingLeft = false;
+            facingLeft = false;           
         }
 
         if (mouseWorldPos.x < playerPos2.x)
@@ -166,7 +165,7 @@ public class UseItemManager : MonoBehaviour
     
     public bool IsInRange()
     {
-        float maxRange = 13.2f;
+        float maxRange = 20f;
         float dist = Vector3.Distance(mouseWorldPos, playerPos2);
         //Debug.Log(dist);
         if (dist <= maxRange)
@@ -271,13 +270,17 @@ public class UseItemManager : MonoBehaviour
         }
     }
 
-    public void UseSword(double itemDamage)
+    public void UseSword(double itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime)
     {
         if (Time.time >= nextAttackTime)
         {
-            SwingTweenAnimation(); //Swing animation
+            if (projectilePrefab != null)
+            {
+                LaunchProjectile(itemDamage, projectilePrefab, defaultProjectileRotation, projectileSpeed, projectileLifetime);
+            }
+            else Debug.Log("This weapon has no projectile, not firing");
 
-            animator.SetTrigger("Attack"); // Play an attack animation
+            SwingTweenAnimation(); //Swing animation
 
             Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
 
@@ -304,25 +307,29 @@ public class UseItemManager : MonoBehaviour
         LeanTween.rotateAround(weaponSprite, dir, weaponDegreeChange, 0.2f).setEaseInOutQuart();
         tween.setOnComplete(() => { swungWeapon = !swungWeapon; slashAnimator.SetBool("isSlashing", false); });
     }
-
-    private float bulletForce = 15f;
-    public void UseBow(double itemDamage, GameObject projectilePrefab)
+    public void UseBow(double itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime)
     {
         if (Time.time >= nextAttackTime)
         {
-            GameObject bullet = Instantiate(projectilePrefab, firePoint.position, projectileRotationObject.rotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            Arrow arrow = bullet.GetComponent<Arrow>();
-            arrow.Arrowdamage = itemDamage;
-            rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
-            nextAttackTime = Time.time + 1f / attackRate;
+            LaunchProjectile(itemDamage, projectilePrefab, projectileRotationObject, projectileSpeed, projectileLifetime); //Shoot the projectile
+            nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
         }
     }
+
+    private void LaunchProjectile(double itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
+    {
+        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        Projectile projectile = bullet.GetComponent<Projectile>();
+        projectile.Projectiledamage = itemDamage;
+        projectile.Projectilelifetime = projectileLifetime;
+        rb.AddForce(firePoint.up * projectileSpeed, ForceMode2D.Impulse);
+    }    
 
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(attackPoint.position, new Vector3 (1.2f, 1.2f, 0));
+        Gizmos.DrawWireCube(attackPoint.position, new Vector3 (1.5f, 1.5f, 0));
     }
 }

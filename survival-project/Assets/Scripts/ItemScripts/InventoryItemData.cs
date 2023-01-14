@@ -27,6 +27,8 @@ public class InventoryItemData : ScriptableObject
     public RuleTile ItemTile;
 
     public GameObject projectilePrefab;
+    public float projectileSpeed;
+    public float projectileLifetime;
 
     public void UseItem()
     {

@@ -17,26 +17,47 @@ public class PlayerNetwork : NetworkBehaviour
 
     private Vector3 mousePos; 
     private Vector3 playerPos;
-
-    private bool facingRight;
-    private bool facingLeft;
+    private Vector3 screenPos;
+    private Vector3 distance;
 
     Vector2 movement;
 
     private void PlayerDirection()
-    {
-        if (mousePos.x > playerPos.x)
+    { //40 -40
+        if (distance.x > 0 && distance.y < 10 && distance.y > -10) //face right
         {
-            facingRight = true;
-            facingLeft = false;
+            animator.SetBool("FacingRight", true);
+            animator.SetBool("FacingLeft", false);
+            animator.SetBool("FacingUp", false);
+            animator.SetBool("FacingDown", false);
+
             spritePlayerRenderer.flipX = false;
         }
 
-        else if (mousePos.x < playerPos.x)
+        if (distance.x < 0 && distance.y < 10 && distance.y > -10) //face left
         {
-            facingRight = false;
-            facingLeft = true;
+            animator.SetBool("FacingRight", false);
+            animator.SetBool("FacingLeft", true);
+            animator.SetBool("FacingUp", false);
+            animator.SetBool("FacingDown", false);
+
             spritePlayerRenderer.flipX = true;
+        }
+
+        if(distance.y > 0 && distance.x > -10 && distance.x < 10) //Face up
+        {
+            animator.SetBool("FacingRight", false);
+            animator.SetBool("FacingLeft", false);
+            animator.SetBool("FacingUp", true);
+            animator.SetBool("FacingDown", false);
+        }
+
+        if(distance.y < 0 && distance.x > -10 && distance.x < 10) //Face down
+        {
+            animator.SetBool("FacingRight", false);
+            animator.SetBool("FacingLeft", false);
+            animator.SetBool("FacingUp", false);
+            animator.SetBool("FacingDown", true);
         }
     }
 
@@ -45,22 +66,16 @@ public class PlayerNetwork : NetworkBehaviour
     private void Update()
     {
         if (!IsOwner) return;
-
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        
         playerPos = thisPlayer.transform.position;
-
+        mousePos = Input.mousePosition;
+        screenPos = Camera.main.WorldToScreenPoint(playerPos);
+        distance = (mousePos - screenPos);
         PlayerDirection();
 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        if (IsOwner) return;
-        cam.SetActive(false);
     }
-
-
 }

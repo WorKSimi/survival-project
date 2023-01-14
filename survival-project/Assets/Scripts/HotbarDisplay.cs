@@ -8,11 +8,16 @@ using TMPro;
 public class HotbarDisplay : StaticInventoryDisplay
 {
     public GameObject player;
+    public UseItemManager useItemManager;
     [SerializeField] private TMP_Text heldItemText; 
     [SerializeField] private GameObject weaponAnchor; //Weapon anchor on player
     [SerializeField] private GameObject weapon; //Weapon object on player
     [SerializeField] private GameObject heldItem; //Held item object on player
     [SerializeField] private SpriteRenderer heldItemSpriteRenderer; //Held item sprite renderer on object
+
+    [SerializeField] private GameObject swordHandR; //Sprite for the hand holding sword facing right
+    [SerializeField] private GameObject swordHandL; //Sprite for the hand holding sword facing left
+
     private SpriteRenderer swordSpriteRenderer; //Held Sword sprite renderer on object
 
     private int _maxIndexSize = 9;
@@ -23,6 +28,9 @@ public class HotbarDisplay : StaticInventoryDisplay
     private void Awake()
     {
         _playerControls = new PlayerControls();
+
+        swordHandR.SetActive(false); //Set sword hands to false
+        swordHandL.SetActive(false); //Set sword hands to false
 
         swordSpriteRenderer = weapon.GetComponent<SpriteRenderer>();
         heldItemSpriteRenderer = heldItem.GetComponent<SpriteRenderer>();
@@ -173,11 +181,11 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Sword":
-                player.GetComponent<UseItemManager>().UseSword(itemData.itemDamage);
+                player.GetComponent<UseItemManager>().UseSword(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime);
                 break;
 
                 case "Bow":
-                player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab);
+                player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime);
                 break;
 
                 case "Rock":
@@ -200,15 +208,26 @@ public class HotbarDisplay : StaticInventoryDisplay
             if (heldItemType == "Sword" || heldItemType == "Pick" || heldItemType == "Rock") //If held item is a valid type
             {
                 swordSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon; //Character hold that item
+                swordHandR.SetActive(true);
+                swordHandL.SetActive(false);
+                if (useItemManager.facingLeft == true)
+                {
+                    swordHandR.SetActive(false);
+                    swordHandL.SetActive(true);
+                }
             }
             else
             {
                 swordSpriteRenderer.sprite = null; //If you arent holding one of those types, display no sprite
+                swordHandR.SetActive(false); //Set sword hands to false
+                swordHandL.SetActive(false); //Set sword hands to false
             }
         }
         else if (slots[_currentIndex].AssignedInventorySlot.ItemData == null) //Held item IS null
         {
             swordSpriteRenderer.sprite = null; //Display no sprite
+            swordHandR.SetActive(false); //Set sword hands to false
+            swordHandL.SetActive(false); //Set sword hands to false
         }
     }
 
