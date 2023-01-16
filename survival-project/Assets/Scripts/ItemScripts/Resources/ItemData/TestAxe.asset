@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: TestAxe
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 12
   DisplayName: Flint Axe
   Description: Flint Axe that cut shit
   Icon: {fileID: 21300000, guid: 27854cd117b738e44a6c3662bab997cf, type: 3}
@@ -22,3 +22,8 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: c84329bea2b7dfa4fab46a536e00aa39,
     type: 3}
   itemDamage: 100
+  ItemTile: {fileID: 0}
+  HealthHealed: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0

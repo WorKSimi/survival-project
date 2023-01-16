@@ -7,18 +7,18 @@ using UnityEngine.Tilemaps;
 public class UseItemManager : MonoBehaviour
 {
     private Grid grid; //Game World Grid
-    private GameObject gridObject; //Object holding game world grid
-
-    private GameObject wallmapObject; //Object holding wall tilemap
     private Tilemap wallTilemap; //The wall tilemap of the world
-
-    private GameObject interactivemapObject; //Object holding interactive tilemap
     private Tilemap interactiveTilemap; //The interactive tilemap of the world 
+    private Tilemap groundTilemap;
+    private Tilemap waterTilemap;
 
     public bool facingRight; //Bool for if the player is facing right
     public bool facingLeft; //Bool if the player is facing left
 
     [SerializeField] private Tile hoverTile = null; //Tile that is used when you hover on a spot on grid
+    [SerializeField] private RuleTile dryFarmTile; //Stores dry farm tile
+    [SerializeField] private RuleTile wetFarmTile; //Stores wet farm tile
+
     [SerializeField] private GameObject thisPlayer; //This players game object
 
     [SerializeField] private Transform firePoint;
@@ -40,6 +40,8 @@ public class UseItemManager : MonoBehaviour
     private Vector3Int playerPos; //Player position on grid
     private Vector3 playerPos2; //Player normal position
 
+    private PlayerHealth playerHealth;
+
     private Vector3Int mousePos; //Mouse position on grid
     private Vector3Int previousMousePos; //Previous mouse position on grid
 
@@ -48,40 +50,48 @@ public class UseItemManager : MonoBehaviour
     private Transform m_transform;
     private SpriteRenderer swordSprite;
 
-    private Vector2 boxSize = new Vector2(1.5f, 1.5f);
+    private Vector2 boxSize = new Vector2(1.5f, 1.5f); //Melee weapon hitbox size
     private Vector3 dir;
 
-    private bool swungWeapon = false;
+    private bool swungWeapon = false; //Flag for swinging the weapon
 
     void Awake()
     {
-        gridObject = GameObject.FindWithTag("Grid");
+        var gridObject = GameObject.FindWithTag("Grid");
         grid = gridObject.GetComponent<Grid>();
 
-        wallmapObject = GameObject.FindWithTag("WallTilemap");
+        var wallmapObject = GameObject.FindWithTag("WallTilemap");
         wallTilemap = wallmapObject.GetComponent<Tilemap>();
 
-        interactivemapObject = GameObject.FindWithTag("InteractiveTilemap");
+        var groundMapObject = GameObject.FindWithTag("GroundTilemap");
+        groundTilemap = groundMapObject.GetComponent<Tilemap>();
+
+        var interactivemapObject = GameObject.FindWithTag("InteractiveTilemap");
         interactiveTilemap = interactivemapObject.GetComponent<Tilemap>();
+
+        var watermapObject = GameObject.FindWithTag("WaterTilemap");
+        waterTilemap = watermapObject.GetComponent<Tilemap>();
 
         m_transform = weaponAnchor.transform;
         swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
+
+        playerHealth = thisPlayer.GetComponent<PlayerHealth>();
     }
 
     void Update()
     {
         playerPos2 = thisPlayer.transform.position;
-        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
         playerPos = grid.WorldToCell(transform.position);
-        Vector3Int mousePos = GetMousePosition();
+        mousePos = grid.WorldToCell(mouseWorldPos);
 
-        if (IsInRange())
+        if (IsInRange() == true)
         {
             interactiveTilemap.SetTile(previousMousePos, null);
             interactiveTilemap.SetTile(mousePos, hoverTile);
             previousMousePos = mousePos;
         }
-        else
+        else if (IsInRange() == false)
         {
             interactiveTilemap.SetTile(mousePos, null);
         }
@@ -102,7 +112,7 @@ public class UseItemManager : MonoBehaviour
             if (swungWeapon == true)
             {
                 rotation = Quaternion.AngleAxis(angle + 0, Vector3.forward);
-                m_transform.rotation = rotation;                           
+                m_transform.rotation = rotation;
             }
         }
         else if (facingLeft == true) // If your facing left run this code for rotating weapon
@@ -117,25 +127,6 @@ public class UseItemManager : MonoBehaviour
                 rotation = Quaternion.AngleAxis(angle + 180, Vector3.forward);
                 m_transform.rotation = rotation;
             }
-        }
-
-    }
-
-    private void RTMouse()
-    {
-        Vector2 direction = Camera.main.ScreenToWorldPoint
-        (Input.mousePosition) - m_transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        if (facingRight == true)
-        {
-            Quaternion rotation = Quaternion.AngleAxis(angle + 160, Vector3.forward);
-            m_transform.rotation = rotation;
-        }
-        else if (facingLeft == true)
-        {
-            Quaternion rotation = Quaternion.AngleAxis(angle + 190, Vector3.forward);
-            m_transform.rotation = rotation;
         }
     }
 
@@ -155,19 +146,11 @@ public class UseItemManager : MonoBehaviour
             facingRight = false;
         }
     }
-
-    void DetectObject()
-    {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var hit = Physics2D.GetRayIntersection(ray, 10f, wallLayers);
-        hoveredWall = hit.transform;
-    }
     
     public bool IsInRange()
     {
-        float maxRange = 20f;
-        float dist = Vector3.Distance(mouseWorldPos, playerPos2);
-        //Debug.Log(dist);
+        float maxRange = 3;
+        float dist = Vector3Int.Distance(mousePos, playerPos);
         if (dist <= maxRange)
         {
             return true;
@@ -196,9 +179,24 @@ public class UseItemManager : MonoBehaviour
         return grid.WorldToCell(mouseWorldPos);
     }
 
-    private InventoryItemData inventoryItemData;
+    //public bool PlayerDetector()
+    //{
+    //    var ray = Camera.main.ScreenPointToRay(Input.mousePosition); //Create a Ray
+    //    var hit = Physics2D.GetRayIntersection(ray, 50f); //Shoot a ray, see what it hits
+
+    //    if (hit.transform.CompareTag("Player")) //If the ray hit a player
+    //    {
+    //        Debug.Log("Player found, cannot place block!");
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No Player Found, can place block!");
+    //        return false; 
+    //    }
+    //}
+
     private float attackRange = 0.5f; 
-    private double attackDamage = 0.5;
     private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
@@ -207,25 +205,20 @@ public class UseItemManager : MonoBehaviour
         Debug.Log("AXE USED!");
         if (Time.time >= nextAttackTime)
         {
-            animator.SetTrigger("Attack"); // Play an attack animation
-
             Collider2D[] hitTrees = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, treeLayers); // Detect trees in range of attack
 
             foreach (Collider2D tree in hitTrees) // Damage trees
             {
                 tree.GetComponent<TreeLogic>().TakeDamage(itemDamage);
             }
-            nextAttackTime = Time.time + 1f / attackRate;
+            nextAttackTime = Time.time + 1f / attackRate; //Cooldown Stuff
         }
     }
 
     public void PlaceBlock(RuleTile ItemTile) //Takes in a ItemTile based on what your holding and places it
-    {
-        if (IsInRange()) 
-        {  
-             Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
-             wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
-        }
+    {      
+        Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
+        wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
     }
 
     public void UsePick(double itemDamage)
@@ -237,11 +230,11 @@ public class UseItemManager : MonoBehaviour
 
             if (IsInRange()) //If your in range
             {
-                animator.SetTrigger("Attack"); // Play an attack animation
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                var hit = Physics2D.GetRayIntersection(ray, 50f);
+                var hit = Physics2D.GetRayIntersection(ray);
                 hoveredWall = hit.transform;              
                 hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);
+                wallTilemap.SetTile(mousePos, null);
             }
         }
     }
@@ -292,6 +285,58 @@ public class UseItemManager : MonoBehaviour
             nextAttackTime = Time.time + 1f / attackRate;
         }
     }
+
+    public void UseFood(int healthHealed)
+    {
+        playerHealth.HealHealth(healthHealed);       
+    }
+
+    public void UseWaterCan()
+    {
+        var tile = groundTilemap.GetTile(mousePos);
+
+        if (tile.name == "DryFarmTile") //If mouse is over dry farm land
+        {
+            groundTilemap.SetTile(mousePos, wetFarmTile); //Set dry tile to wet tile
+        }
+    }
+
+    public void UseHoe()
+    {
+        var tile = groundTilemap.GetTile(mousePos);
+
+        if (IsInRange())
+        {
+            if (tile.name == "GrassTile" || tile.name == "DirtTile") //If your over a grass OR dirt tile
+            {
+                groundTilemap.SetTile(mousePos, dryFarmTile); //Set tile at mouse to dry farm land
+            }
+        }
+    }
+
+    public void UseSeed(RuleTile cropToPlant)
+    {
+        wallTilemap.SetTile(mousePos, cropToPlant); //This sets wall tile to the crop
+    }
+
+    public bool MouseOverCropland()
+    {
+        var tile = groundTilemap.GetTile(mousePos);
+        if (tile.name == "WetFarmTile" || tile.name == "DryFarmTile") //If tile mouse is on is either wet OR dry farmland
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    public bool IsHealthFull()
+    {
+        if (playerHealth.currentHealth == playerHealth.maxHealth)
+        {
+            return true;
+        }
+        else return false;
+    }    
 
     private void SwingTweenAnimation()
     {      

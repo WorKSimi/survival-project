@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  ID: 6
+  ID: 16
   DisplayName: Wood
   Description: 'Wood Please!
 
@@ -25,4 +25,7 @@ MonoBehaviour:
     type: 3}
   itemDamage: 0
   ItemTile: {fileID: 0}
+  HealthHealed: 0
   projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0

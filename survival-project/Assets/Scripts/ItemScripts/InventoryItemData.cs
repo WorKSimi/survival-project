@@ -13,6 +13,7 @@ using UnityEngine.Tilemaps;
 
 public class InventoryItemData : ScriptableObject
 {
+    [Header("Universal")]
     public int ID = -1;
     public string DisplayName;
     [TextArea(4,4)]
@@ -21,14 +22,16 @@ public class InventoryItemData : ScriptableObject
     public int MaxStackSize;
     public int GoldValue;
     public string ItemType;
-    // public enum Type {axe, sword};
     public GameObject ItemPrefab;
+    [Header("Weapons and Tools")]
     public double itemDamage;
-    public RuleTile ItemTile;
-
     public GameObject projectilePrefab;
     public float projectileSpeed;
     public float projectileLifetime;
+    [Header("Other")]
+    public RuleTile ItemTile;
+    public int HealthHealed;
+
 
     public void UseItem()
     {

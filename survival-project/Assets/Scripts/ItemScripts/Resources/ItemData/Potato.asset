@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Potato
   m_EditorClassIdentifier: 
-  ID: 3
+  ID: 10
   DisplayName: Potato
   Description: This is a potato!!
   Icon: {fileID: 324932363, guid: e6145644c236f5e42b53bcbc243d37ba, type: 3}
@@ -22,3 +22,8 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: a078dbfb92dd9ad48a5b4a23a7c85ca7,
     type: 3}
   itemDamage: 0
+  ItemTile: {fileID: 0}
+  HealthHealed: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0

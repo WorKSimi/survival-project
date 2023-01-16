@@ -94,7 +94,7 @@
     <Compile Include="Assets\Scripts\RotateToMouse.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\InventoryHolder.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingMaxTweens.cs" />
-    <Compile Include="Assets\WorldTime.cs" />
+    <Compile Include="Assets\Scripts\WorldTime.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
@@ -163,6 +163,11 @@
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
+    <Compile Include="Assets\BlueberryBushLogic.cs" />
+    <Compile Include="Assets\InteractToBreak.cs" />
+    <Compile Include="Assets\WaterTile.cs" />
+    <Compile Include="Assets\Scripts\OptimizationCulling.cs" />
+    <Compile Include="Assets\CropLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

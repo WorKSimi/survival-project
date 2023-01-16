@@ -6,17 +6,20 @@ using UnityEngine.Tilemaps;
 
 public class Wall : MonoBehaviour
 {
-    [SerializeField] private GameObject wood;
+    [SerializeField] private bool isCrop;
+    [SerializeField] private GameObject wood;    
     [SerializeField] private double maxHealth = 5;
+    [SerializeField] private bool isResourceNode;
+    [SerializeField] private int amountToDrop;  
+
     private GameObject gridObject;
     private GameObject wallmapObject;
     private Grid grid;
     private Tilemap wallTilemap;
 
     private Vector3Int mousePos;
-    private Vector3 mouseWorldPos;
 
-    private double currentHealth;
+    public double currentHealth;
 
     void Start()
     {
@@ -39,22 +42,39 @@ public class Wall : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            Die();           
         }
     }
 
     private void Die()
     {
-        Debug.Log("Death");
-        Instantiate(wood, transform.position, Quaternion.identity); //Spawns dropped item from breaking wall
-        mousePos = GetMousePosition();
-        wallTilemap.SetTile(mousePos, null);
-        Destroy(this.gameObject); //Destroys the game object 
+        if (isResourceNode == true) //If this is a tree or other resource node
+        {
+            Debug.Log("Resource ballin");
+            for (int i = 0; i < amountToDrop; i++) //Loop based on how many resources to drop
+            {
+                Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
+            }
+            GetMousePosition(); //Get mouse position
+            wallTilemap.SetTile(mousePos, null); //Set wall tile at mouse to null
+            Destroy(this.gameObject); //Destroy the tree
+        }
+        else if (isResourceNode == false)
+        {
+            Instantiate(wood, transform.position, Quaternion.identity); //Spawns dropped item from breaking wall
+            GetMousePosition();
+            wallTilemap.SetTile(mousePos, null);
+            Destroy(this.gameObject); //Destroys the game object 
+        }
+        else if (isCrop == true)
+        {
+            Debug.Log("Crop death handled by crop script"); 
+        }
     }
 
-    private Vector3Int GetMousePosition()
+    private void GetMousePosition()
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        return grid.WorldToCell(mouseWorldPos);
+        mousePos = grid.WorldToCell(mouseWorldPos);
     }
 }

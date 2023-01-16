@@ -165,15 +165,18 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Block":
-                if (player.GetComponent<UseItemManager>().IsInRange()) 
-                {
-                     if (player.GetComponent<UseItemManager>().TileFound() == false)
-                     {
-                         player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
-                         slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
-                         RefreshStaticDisplay();
-                     }
-                }
+                    if (player.GetComponent<UseItemManager>().IsInRange()) //Mouse is in valid range
+                    {
+                        if (player.GetComponent<UseItemManager>().TileFound() == false) //No tile found at this spot
+                        {
+                            //if (player.GetComponent<UseItemManager>().PlayerDetector() == false) //No player found at this spot
+                            //{
+                                player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
+                                slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
+                                RefreshStaticDisplay();
+                            //}
+                        }
+                    }
                 break;
 
                 case "Pick":
@@ -191,6 +194,36 @@ public class HotbarDisplay : StaticInventoryDisplay
                 case "Rock":
                 player.GetComponent<UseItemManager>().UseRock(itemData.itemDamage);
                 break;
+
+                case "Food":
+                    if (player.GetComponent<UseItemManager>().IsHealthFull() == false)
+                    {
+                        player.GetComponent<UseItemManager>().UseFood(itemData.HealthHealed);
+                        slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
+                        RefreshStaticDisplay();
+                    }
+                break;
+
+                case "Watercan":
+                    player.GetComponent<UseItemManager>().UseWaterCan();                    
+                    break;
+
+                case "Hoe":
+                    player.GetComponent<UseItemManager>().UseHoe();
+                    break;
+
+                case "Seed":
+                    var seedTile = slots[_currentIndex].AssignedInventorySlot.ItemData.ItemTile;
+                    if (player.GetComponent<UseItemManager>().MouseOverCropland() == true) //if mouse over farmland
+                    {
+                        if (player.GetComponent<UseItemManager>().TileFound() == false)
+                        {
+                            player.GetComponent<UseItemManager>().UseSeed(seedTile); //Use Seed
+                            slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1); //Remove 1 seed from stack
+                            RefreshStaticDisplay();
+                        }
+                    }
+                    break;
 
                 default:
                 Debug.Log($"Default Case");

@@ -7,7 +7,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject droppedItem;
     [SerializeField] private double maxHealth;
     [SerializeField] private SimpleFlash flashEffect;
-    [SerializeField] private AudioSource hitSound;
+    //[SerializeField] private AudioSource hitSound;
 
     public MobSpawning mobSpawning;
     private double currentHealth;

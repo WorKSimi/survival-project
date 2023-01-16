@@ -15,6 +15,7 @@ public class RotateToMouse : NetworkBehaviour
 
     private void RTMouse()
     {
+        if (!IsOwner) return; //If not owner return
         Vector2 direction = Camera.main.ScreenToWorldPoint
         (Input.mousePosition) - m_transform.position;
 

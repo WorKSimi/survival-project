@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
+  m_Name: Blueberry
+  m_EditorClassIdentifier: 
+  ID: 1
+  DisplayName: Blueberry
+  Description: 'A delicious blue berry. '
+  Icon: {fileID: -1328332689, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  MaxStackSize: 9999
+  GoldValue: 1
+  ItemType: Food
+  ItemPrefab: {fileID: 7389436694480070536, guid: 7878e7a56dbda724d84ff408091ba416,
+    type: 3}
+  itemDamage: 0
+  ItemTile: {fileID: 0}
+  HealthHealed: 5
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0

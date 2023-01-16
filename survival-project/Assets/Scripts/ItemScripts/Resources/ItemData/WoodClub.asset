@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: WoodClub
   m_EditorClassIdentifier: 
-  ID: -1
+  ID: 18
   DisplayName: Wood Club
   Description: 'The most basic weapon ever created
 
@@ -25,4 +25,7 @@ MonoBehaviour:
     type: 3}
   itemDamage: 2
   ItemTile: {fileID: 0}
+  HealthHealed: 0
   projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0
