@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Unity.Netcode;
 
-public class MapGeneration : MonoBehaviour
+public class MapGeneration : NetworkBehaviour
 {
     [Header("Tiles")]
     public RuleTile waterTile;
@@ -52,7 +53,7 @@ public class MapGeneration : MonoBehaviour
     private GameObject[] caveEntrances; //Creates an array to store cave entrances
     private int currentCaveEntrances;
     private int maxCaveEntrances = 5;
-    bool firstcaveSpawned;   
+    bool firstcaveSpawned;
 
     // ground, carpet, wall, interactive
     // Start is called before the first frame update
@@ -62,7 +63,7 @@ public class MapGeneration : MonoBehaviour
         firstcaveSpawned = false;
         currentCaveEntrances = 0;
         GetTilemaps();
-        GenerateForestSurface();
+        //GenerateForestSurface();
         //GenerateForestUnderground();
     }
 
@@ -87,7 +88,7 @@ public class MapGeneration : MonoBehaviour
         //undergroundWallTilemap = undergroundWallObject.GetComponent<Tilemap>();
     }
 
-    void GenerateForestSurface()
+    public void GenerateForestSurface()
     {
         heightWaves[0].seed = Random.Range(1.0f, 999.0f);
         heightWaves[1].seed = Random.Range(1.0f, 999.0f);

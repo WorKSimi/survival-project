@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: WheatCropTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
+  m_DefaultSprite: {fileID: -590620230, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   m_DefaultGameObject: {fileID: 5846614102956734016, guid: 8ff155ba75f7a6441a050bf63c9e7080,
     type: 3}
   m_DefaultColliderType: 1

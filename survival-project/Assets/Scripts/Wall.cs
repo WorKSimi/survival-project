@@ -17,7 +17,8 @@ public class Wall : MonoBehaviour
     private Grid grid;
     private Tilemap wallTilemap;
 
-    private Vector3Int mousePos;
+    //private Vector3Int mousePos;
+    private Vector3Int thisPosition;
 
     public double currentHealth;
 
@@ -33,6 +34,7 @@ public class Wall : MonoBehaviour
 
         wallmapObject = GameObject.FindWithTag("WallTilemap");
         wallTilemap = wallmapObject.GetComponent<Tilemap>();
+        thisPosition = grid.WorldToCell(gameObject.transform.position);
     }
 
     public void TakeDamage(double damage)
@@ -55,26 +57,18 @@ public class Wall : MonoBehaviour
             {
                 Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
             }
-            GetMousePosition(); //Get mouse position
-            wallTilemap.SetTile(mousePos, null); //Set wall tile at mouse to null
+            wallTilemap.SetTile(thisPosition, null); //Set wall tile at mouse to null
             Destroy(this.gameObject); //Destroy the tree
         }
         else if (isResourceNode == false)
         {
-            Instantiate(wood, transform.position, Quaternion.identity); //Spawns dropped item from breaking wall
-            GetMousePosition();
-            wallTilemap.SetTile(mousePos, null);
+            Instantiate(wood, transform.position, Quaternion.identity); //Spawns dropped item from breaking wall         
+            wallTilemap.SetTile(thisPosition, null);
             Destroy(this.gameObject); //Destroys the game object 
         }
         else if (isCrop == true)
         {
             Debug.Log("Crop death handled by crop script"); 
         }
-    }
-
-    private void GetMousePosition()
-    {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePos = grid.WorldToCell(mouseWorldPos);
     }
 }

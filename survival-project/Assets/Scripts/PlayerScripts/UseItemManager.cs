@@ -15,6 +15,8 @@ public class UseItemManager : MonoBehaviour
     public bool facingRight; //Bool for if the player is facing right
     public bool facingLeft; //Bool if the player is facing left
 
+    public Camera playerCam;
+
     [SerializeField] private Tile hoverTile = null; //Tile that is used when you hover on a spot on grid
     [SerializeField] private RuleTile dryFarmTile; //Stores dry farm tile
     [SerializeField] private RuleTile wetFarmTile; //Stores wet farm tile
@@ -81,7 +83,7 @@ public class UseItemManager : MonoBehaviour
     void Update()
     {
         playerPos2 = thisPlayer.transform.position;
-        mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
+        mouseWorldPos = playerCam.ScreenToWorldPoint(Input.mousePosition); 
         playerPos = grid.WorldToCell(transform.position);
         mousePos = grid.WorldToCell(mouseWorldPos);
 
@@ -98,7 +100,7 @@ public class UseItemManager : MonoBehaviour
 
         FacingDirection();
 
-        Vector2 direction = Camera.main.ScreenToWorldPoint
+        Vector2 direction = playerCam.ScreenToWorldPoint
         (Input.mousePosition) - m_transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -175,7 +177,7 @@ public class UseItemManager : MonoBehaviour
 
     private Vector3Int GetMousePosition()
     {
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorldPos = playerCam.ScreenToWorldPoint(Input.mousePosition);
         return grid.WorldToCell(mouseWorldPos);
     }
 
@@ -230,7 +232,7 @@ public class UseItemManager : MonoBehaviour
 
             if (IsInRange()) //If your in range
             {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                 var hit = Physics2D.GetRayIntersection(ray);
                 hoveredWall = hit.transform;              
                 hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);

@@ -14,7 +14,7 @@ public class PlayerNetwork : NetworkBehaviour
     private Rigidbody2D rb; //Rigidbody2D of this player
 
     [SerializeField]private Animator animator; //Animator of this player
-    [SerializeField]private GameObject cam; //This players Camera
+    [SerializeField]private Camera playerCam; //This players Camera
 
     private SpriteRenderer spritePlayerRenderer; //Sprite render for the player sprite.
     [SerializeField] private GameObject thisPlayer;
@@ -60,11 +60,12 @@ public class PlayerNetwork : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsOwner) return;
         playerPos = thisPlayer.transform.position;
         playerGridPos = waterTilemap.WorldToCell(playerPos);       
 
         mousePos = Input.mousePosition;
-        screenPos = Camera.main.WorldToScreenPoint(playerPos);
+        screenPos = playerCam.WorldToScreenPoint(playerPos);
         distance = (mousePos - screenPos);
 
         PlayerDirection();

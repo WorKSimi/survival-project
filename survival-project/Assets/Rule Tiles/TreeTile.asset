@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
-  m_Name: CaveEntrance
+  m_Name: TreeTile
   m_EditorClassIdentifier: 
   m_DefaultSprite: {fileID: 0}
-  m_DefaultGameObject: {fileID: 7320463855911632571, guid: aa96e900d26ee1f4ab5f24ddf667e0f5,
+  m_DefaultGameObject: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523,
     type: 3}
   m_DefaultColliderType: 0
   m_TilingRules: []
