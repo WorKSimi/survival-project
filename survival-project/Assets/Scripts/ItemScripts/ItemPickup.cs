@@ -41,7 +41,7 @@ public class ItemPickup : NetworkBehaviour
 
     private void LoadGame(SaveData data)
     {
-    //    if (data.collectedItems.Contains(id)) Destroy(this.gameObject);
+        //    if (data.collectedItems.Contains(id)) Destroy(this.gameObject);
     }
 
     //private void OnDestroy()
@@ -53,16 +53,33 @@ public class ItemPickup : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var inventory = other.transform.GetComponent<PlayerInventoryHolder>();
-        Debug.Log("Collision Happened");
+        //Debug.Log("Collision Happened");
         if (!inventory) return;
 
         if (inventory.AddToInventory(ItemData, 1))
         {
-            SaveGameManager.data.collectedItems.Add(id);
-            Destroy(this.gameObject);
-            Debug.Log("Object Destroyed");
+            //If host or server, destroy normally
+            if (IsHost)
+            {
+                SaveGameManager.data.collectedItems.Add(id);
+                NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
+                networkObject.Despawn();
+                //Debug.Log("Object Destroyed");
+            }
+            if (IsClient) //If your a client, send message to server to destroy it instead
+            {
+                DestroyObjectServerRpc();
+            }
         }
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
+        networkObject.Despawn();
+    }
+    
 }
 
 [System.Serializable]
@@ -79,3 +96,5 @@ public struct ItemPickUpSaveData
         Rotation = _rotation;
     }
 }
+
+

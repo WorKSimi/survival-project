@@ -4,7 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Tilemaps;
 
-public class Wall : MonoBehaviour
+public class Wall : NetworkBehaviour
 {
     [SerializeField] private bool isCrop;
     [SerializeField] private GameObject wood;    
@@ -35,6 +35,27 @@ public class Wall : MonoBehaviour
         wallmapObject = GameObject.FindWithTag("WallTilemap");
         wallTilemap = wallmapObject.GetComponent<Tilemap>();
         thisPosition = grid.WorldToCell(gameObject.transform.position);
+
+        //GameObject go = this.gameObject;
+        //go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
+        
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
+        networkObject.Despawn();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnItemsServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        for (int i = 0; i < amountToDrop; i++)
+        {
+            NetworkObject networkObject = Instantiate(wood, transform.position, Quaternion.identity).GetComponent<NetworkObject>();
+            networkObject.Spawn();
+        }
     }
 
     public void TakeDamage(double damage)
@@ -50,25 +71,32 @@ public class Wall : MonoBehaviour
 
     private void Die()
     {
-        if (isResourceNode == true) //If this is a tree or other resource node
+        for (int i = 0; i < amountToDrop; i++) //Loop based on how many resources to drop
         {
-            Debug.Log("Resource ballin");
-            for (int i = 0; i < amountToDrop; i++) //Loop based on how many resources to drop
+            if (IsHost) //if host, spawn objects
             {
-                Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
+                GameObject go = Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
+                go.GetComponent<NetworkObject>().Spawn();
             }
+            if (IsClient) //if client, send rpc to spawn items
+            {
+                SpawnItemsServerRpc(); //If client, send the spawn function to server instead
+            }
+        }
+        if (IsClient) //if your the client, send despawn method to server
+        {
+            DestroyObjectServerRpc(); //Send code to server to destroy it instead
+        }
+        else //If your the host, despawn normally
+        {
             wallTilemap.SetTile(thisPosition, null); //Set wall tile at mouse to null
-            Destroy(this.gameObject); //Destroy the tree
+            NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
+            networkObject.Despawn();
         }
-        else if (isResourceNode == false)
+       
+        if (isCrop == true)
         {
-            Instantiate(wood, transform.position, Quaternion.identity); //Spawns dropped item from breaking wall         
-            wallTilemap.SetTile(thisPosition, null);
-            Destroy(this.gameObject); //Destroys the game object 
-        }
-        else if (isCrop == true)
-        {
-            Debug.Log("Crop death handled by crop script"); 
+            Debug.Log("Do nothing, Crop death handled by crop script"); 
         }
     }
 }

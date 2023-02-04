@@ -1334,7 +1334,7 @@ MonoBehaviour:
   thisPlayer: {fileID: 3430272870254572311}
   validTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
   currentSpawns: 0
-  maxSpawns: 5
+  maxSpawns: 0
   mobPool:
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
 --- !u!1 &2437418500877779374
@@ -2305,6 +2305,7 @@ Transform:
   - {fileID: 4678029446697948125}
   - {fileID: 6432331662874710063}
   - {fileID: 8880230033068982422}
+  - {fileID: 2611913516339819651}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5763,6 +5764,52 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7139353137468798827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2611913516339819651}
+  - component: {fileID: 1936683853800126367}
+  m_Layer: 0
+  m_Name: ProximityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2611913516339819651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7139353137468798827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 311317416142517194}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1936683853800126367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7139353137468798827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709d076dccc4a6942b81770e1c886d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProximityTarget: {fileID: 0}
+  m_TickFrequency: 0.5
 --- !u!1 &7733363134233162887
 GameObject:
   m_ObjectHideFlags: 0
@@ -6770,6 +6817,11 @@ PrefabInstance:
       propertyPath: heldItemSpriteRenderer
       value: 
       objectReference: {fileID: 7106203437264922338}
+    - target: {fileID: 6413475157781507117, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: craftingCanvas
+      value: 
+      objectReference: {fileID: 3733963201338179345}
     - target: {fileID: 6811544651807831881, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: GlobalObjectIdHash

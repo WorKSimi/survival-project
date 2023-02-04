@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.Netcode;
 
-public class MouseItemData : MonoBehaviour
+public class MouseItemData : NetworkBehaviour
 {
     public Image ItemSprite;
     public TextMeshProUGUI ItemCount;
@@ -50,21 +51,41 @@ public class MouseItemData : MonoBehaviour
         {
             transform.position = Mouse.current.position.ReadValue();
 
-            if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject())
+            if (Mouse.current.leftButton.wasPressedThisFrame && !IsPointerOverUIObject()) 
             {
                 if (AssignedInventorySlot.ItemData.ItemPrefab != null)
-                Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, dropLocation, 
-                Quaternion.identity);
-
-                if (AssignedInventorySlot.StackSize > 1)
                 {
-                    AssignedInventorySlot.AddToStack(-1);
-                    UpdateMouseSlot();
-                }
+                    if (IsHost)
+                    {
+                        GameObject go = Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, dropLocation, Quaternion.identity); //Drop item
+                        go.GetComponent<NetworkObject>().Spawn();
 
-                else
-                {
-                     ClearSlot();
+                        if (AssignedInventorySlot.StackSize > 1)
+                        {
+                            AssignedInventorySlot.AddToStack(-1);
+                            UpdateMouseSlot();
+                        }
+
+                        else
+                        {
+                            ClearSlot();
+                        }
+                    }
+                    else if (IsClient)
+                    {
+                        DropItemServerRpc(dropLocation); //Spawn item on network
+
+                        if (AssignedInventorySlot.StackSize > 1)
+                        {
+                            AssignedInventorySlot.AddToStack(-1);
+                            UpdateMouseSlot();
+                        }
+
+                        else
+                        {
+                            ClearSlot();
+                        }
+                    }
                 }
             } 
         }
@@ -86,4 +107,12 @@ public class MouseItemData : MonoBehaviour
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DropItemServerRpc( Vector3 dropLocation, ServerRpcParams serverRpcParams = default)
+    {
+        GameObject go = Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, dropLocation, Quaternion.identity); //Drop item
+        go.GetComponent<NetworkObject>().Spawn();
+    }
 }
+

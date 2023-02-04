@@ -7,8 +7,18 @@ using Newtonsoft.Json;
 using System.IO;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
-public class WorldDataCollector : MonoBehaviour
+public class Startup
+{
+    static Startup()
+    {
+        typeof(System.ComponentModel.INotifyPropertyChanging).GetHashCode();
+        typeof(System.ComponentModel.INotifyPropertyChanged).GetHashCode();
+    }
+}
+
+public class WorldDataCollector : NetworkBehaviour
 {
     public Tilemap[] tilemaps;
     public RuleTile[] ruleTiles;
@@ -18,9 +28,9 @@ public class WorldDataCollector : MonoBehaviour
     public GameObject SingleplayerMenu;
     public TMP_InputField world1InputField;
     public TMP_Text slot1Text;
+    public TMP_Text slot1HostText;
 
     public Grid mapGrid;
-
     private string world1name;
 
     [SerializeField] private Tilemap wallTilemap;
@@ -31,6 +41,17 @@ public class WorldDataCollector : MonoBehaviour
 
     public string file1 = "/WorldData1.json";
 
+    public void Start()
+    {
+        if (File.Exists(Application.persistentDataPath + file1)) //If there is a save file in slot 1
+        {
+            string json = File.ReadAllText(Application.persistentDataPath + file1);
+            WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
+            string worldName1 = worldData.WorldName;
+            slot1Text.text = worldName1.ToString();
+        }
+        else Debug.Log("No Data Found");
+    }
     public void SelectSlot1()
     {
         if (File.Exists(Application.persistentDataPath + file1)) //If there is a save file in slot 1
@@ -46,7 +67,7 @@ public class WorldDataCollector : MonoBehaviour
 
     public void CreateWorld1() //This function runs when you click Generate on make world screen.
     {
-        world1name = world1InputField.ToString(); //Set world 1 name to be what player entered
+        world1name = world1InputField.text; //Set world 1 name to be what player entered
         mapGenerator.GenerateForestSurface(); //Generate World
         SaveWorldData(file1); //When world generates, save it to slot 1
         slot1Text.text = world1name; 
@@ -77,27 +98,52 @@ public class WorldDataCollector : MonoBehaviour
                             tilemapType = TilemapDecider(tilemap.name.ToString())
                         };
                         tilesOnMap.Add(tile);
-                    }
+                    }                   
                 }
             }
         }
-        string json = JsonConvert.SerializeObject(tilesOnMap, Formatting.Indented, new JsonSerializerSettings
+
+        var CurrentWorldData = new WorldData
+        {
+            WorldName = world1name,
+            tilesOnMapList = tilesOnMap
+        };
+
+        string json = JsonConvert.SerializeObject(CurrentWorldData, Formatting.Indented, new JsonSerializerSettings
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
         });
-        //System.IO.File.WriteAllText(@"C:\JsonTest\Example" + saveFile, json);
         System.IO.File.WriteAllText(Application.persistentDataPath + saveFile, json);
     }
 
     public void LoadWorldData(string saveFile)
     {
         string json = File.ReadAllText(Application.persistentDataPath + saveFile);
-        List<TileData> loadedTiles = JsonConvert.DeserializeObject<List<TileData>>(json);
-        foreach (TileData tile in loadedTiles)
+        WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
+        List<TileData> loadedTiles = new List<TileData>();
+
+        foreach (TileData tile in worldData.tilesOnMapList) //For each tile in saved list, add to loaded tiles list
+        {
+            loadedTiles.Add(tile);
+        }
+
+        foreach (TileData tile in loadedTiles) //For each tile in loaded tiles list, do this stuff
         {
             Tilemap tilemap = TilemapChecker(tile.tilemapType);
             RuleTile tile1 = TileReturner(tile.tileType);
             tilemap.SetTile(tile.tileLocation, tile1);
+        }
+    }
+
+    private void SpawnAllObjectsOnNetwork()
+    {
+        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+        foreach (GameObject gameObject in allObjects)
+        {
+            if (gameObject.GetComponent<NetworkObject>()) //If the object has a network object component
+            {
+                gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn that object
+            }
         }
     }
 
