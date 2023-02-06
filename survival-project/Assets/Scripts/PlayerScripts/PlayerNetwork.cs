@@ -54,9 +54,8 @@ public class PlayerNetwork : NetworkBehaviour
         rb = this.GetComponent<Rigidbody2D>();
 
         var tilemapObject = GameObject.FindWithTag("WaterTilemap");
-        waterTilemap = tilemapObject.GetComponent<Tilemap>();
+        waterTilemap = tilemapObject.GetComponent<Tilemap>();    
     }
-
 
     private void Update()
     {

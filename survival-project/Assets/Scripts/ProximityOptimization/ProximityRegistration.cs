@@ -52,7 +52,6 @@ namespace WizardsCode.Optimization
                 gameObject.SetActive(false); //Turn object off
                 TurnOffObjectClientRpc(); //Turn off object for all clients
             }
-            else Debug.Log("Your not the host dawg");
         }
 
         /// <summary>

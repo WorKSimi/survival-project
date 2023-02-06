@@ -66,7 +66,7 @@ public class ItemPickup : NetworkBehaviour
                 networkObject.Despawn();
                 //Debug.Log("Object Destroyed");
             }
-            if (IsClient) //If your a client, send message to server to destroy it instead
+            else if (IsClient) //If your a client, send message to server to destroy it instead
             {
                 DestroyObjectServerRpc();
             }

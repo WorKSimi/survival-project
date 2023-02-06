@@ -135,6 +135,30 @@ public class WorldDataCollector : NetworkBehaviour
         }
     }
 
+    public void LoadClientWorldData(string saveFile) //This is an alternate load function, that only loads tiles without a game object. This is for clients, as the server only needs to load and spawn object tiles
+    {
+        if (IsHost || IsServer) return;
+        string json = File.ReadAllText(Application.persistentDataPath + saveFile);
+        WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
+        List<TileData> loadedTiles = new List<TileData>();
+
+        foreach (TileData tile in worldData.tilesOnMapList) //For each tile in saved list, add to loaded tiles list
+        {
+            loadedTiles.Add(tile);
+        }
+
+        foreach (TileData tile in loadedTiles) //For each tile in loaded tiles list, do this stuff
+        {
+            Tilemap tilemap = TilemapChecker(tile.tilemapType);
+            RuleTile tile1 = TileReturner(tile.tileType);
+            if (tile1.m_DefaultGameObject == null) //If the tile DOES NOT have a game object
+            {
+                tilemap.SetTile(tile.tileLocation, tile1); //Set the tile 
+            }
+            else Debug.Log("Tile has a game object, not placing");
+        }
+    }
+
     private void SpawnAllObjectsOnNetwork()
     {
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();

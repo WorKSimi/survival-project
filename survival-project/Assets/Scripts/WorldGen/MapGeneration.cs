@@ -90,8 +90,11 @@ public class MapGeneration : NetworkBehaviour
 
     public void GenerateForestSurface()
     {
-        heightWaves[0].seed = Random.Range(1.0f, 999.0f);
-        heightWaves[1].seed = Random.Range(1.0f, 999.0f);
+        float seed = Random.Range(-9999f, 9999f); //seed for world gen
+        int seedInt = (int)seed;
+        Random.InitState(seedInt);
+        heightWaves[0].seed = seed;
+        heightWaves[1].seed = seed + 500;
 
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
         for (int x = 0; x < width; ++x)
