@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Unity.Netcode;
 
-public class UseItemManager : MonoBehaviour
+public class UseItemManager : NetworkBehaviour
 {
     private Grid grid; //Game World Grid
     private Tilemap wallTilemap; //The wall tilemap of the world
@@ -26,7 +27,9 @@ public class UseItemManager : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private Transform projectileRotationObject; //Rotation for the arrow projectile for bows
     [SerializeField] private Transform defaultProjectileRotation; //Default rotation for a projectile
+
     [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private GameObject slashPrefab;
 
     [SerializeField] private Animator animator;
     [SerializeField] private Transform attackPoint;
@@ -82,6 +85,8 @@ public class UseItemManager : MonoBehaviour
 
     void Update()
     {
+        if (!IsLocalPlayer) return; //If your not local player return
+        if (!IsOwner) return; //If not owner return
         playerPos2 = thisPlayer.transform.position;
         mouseWorldPos = playerCam.ScreenToWorldPoint(Input.mousePosition); 
         playerPos = grid.WorldToCell(transform.position);
@@ -269,22 +274,41 @@ public class UseItemManager : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            if (projectilePrefab != null)
+            if (IsHost)
             {
-                LaunchProjectile(itemDamage, projectilePrefab, defaultProjectileRotation, projectileSpeed, projectileLifetime);
+                if (projectilePrefab != null)
+                {
+                    LaunchProjectile(itemDamage, projectilePrefab, defaultProjectileRotation, projectileSpeed, projectileLifetime);
+                }
+                else Debug.Log("This weapon has no projectile, not firing");
+
+                SwingTweenAnimation(); //Swing animation
+                Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
+                foreach (Collider2D enemy in hitEnemies) // Damage enemies
+                {
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
+                }
+                nextAttackTime = Time.time + 1f / attackRate;
             }
-            else Debug.Log("This weapon has no projectile, not firing");
-
-            SwingTweenAnimation(); //Swing animation
-
-            Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
-
-            foreach (Collider2D enemy in hitEnemies) // Damage enemies
+            else if (IsClient)
             {
-                enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
-            }
+                if (projectilePrefab != null)
+                {
+                    Vector3 fireLocation = firePoint.position;
+                    Vector3 projectileDirection = firePoint.up;
+                    Quaternion tempRotation = projectileRotationObject.rotation;
+                    SwordSlashProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);                 
+                }
+                else Debug.Log("This weapon has no projectile, not firing");
 
-            nextAttackTime = Time.time + 1f / attackRate;
+                SwingTweenAnimation(); //Swing animation
+                Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
+                foreach (Collider2D enemy in hitEnemies) // Damage enemies
+                {
+                    enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
+                }
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
     }
 
@@ -358,20 +382,61 @@ public class UseItemManager : MonoBehaviour
     {
         if (Time.time >= nextAttackTime)
         {
-            LaunchProjectile(itemDamage, projectilePrefab, projectileRotationObject, projectileSpeed, projectileLifetime); //Shoot the projectile
-            nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
+            if (IsHost)
+            {
+                LaunchProjectile(itemDamage, projectilePrefab, projectileRotationObject, projectileSpeed, projectileLifetime); //Shoot the projectile
+                nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
+            }
+
+            else if (IsClient)
+            {
+                Vector3 fireLocation = firePoint.position;
+                Vector3 projectileDirection = firePoint.up;
+                Quaternion tempRotation = projectileRotationObject.rotation;
+                LaunchArrowProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);
+                nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
+            }
         }
     }
 
     private void LaunchProjectile(double itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     {
+        Debug.Log("Start of launch function: " + projectileLifetime);
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
+
+        Debug.Log("Right before pass in: " + projectileLifetime);
+        Projectile projectileScript = bullet.GetComponent<Projectile>();
+        projectileScript.Projectiledamage = itemDamage;
+        projectileScript.Projectilelifetime = projectileLifetime;
+
+        bullet.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(firePoint.up * projectileSpeed, ForceMode2D.Impulse);               
+    }
+
+    [ServerRpc]
+    public void LaunchArrowProjectileServerRpc(double itemDamage,  float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
+    {
+        GameObject bullet = Instantiate(arrowPrefab, spawnLocation, quaternion);
+        bullet.GetComponent<NetworkObject>().Spawn();
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(fireDirection * projectileSpeed, ForceMode2D.Impulse);
         Projectile projectile = bullet.GetComponent<Projectile>();
         projectile.Projectiledamage = itemDamage;
         projectile.Projectilelifetime = projectileLifetime;
-        rb.AddForce(firePoint.up * projectileSpeed, ForceMode2D.Impulse);
-    }    
+    }
+
+    [ServerRpc]
+    public void SwordSlashProjectileServerRpc(double itemDamage, float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
+    {
+        GameObject bullet = Instantiate(slashPrefab, spawnLocation, quaternion);
+        bullet.GetComponent<NetworkObject>().Spawn();
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(fireDirection * projectileSpeed, ForceMode2D.Impulse);
+        Projectile projectile = bullet.GetComponent<Projectile>();
+        projectile.Projectiledamage = itemDamage;
+        projectile.Projectilelifetime = projectileLifetime;
+    }
 
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this
     void OnDrawGizmos()

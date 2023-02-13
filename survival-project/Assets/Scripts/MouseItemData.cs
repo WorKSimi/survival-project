@@ -109,7 +109,7 @@ public class MouseItemData : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void DropItemServerRpc( Vector3 dropLocation, ServerRpcParams serverRpcParams = default)
+    public void DropItemServerRpc(Vector3 dropLocation, ServerRpcParams serverRpcParams = default)
     {
         GameObject go = Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, dropLocation, Quaternion.identity); //Drop item
         go.GetComponent<NetworkObject>().Spawn();

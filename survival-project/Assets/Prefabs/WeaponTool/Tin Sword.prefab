@@ -120,7 +120,7 @@ MonoBehaviour:
   ItemData: {fileID: 11400000, guid: ead69d1d0715b6b4ea21d5d9301fce0d, type: 2}
   _rotationSpeed: 20
   itemSaveData:
-    ItemData: {fileID: 11400000, guid: ff316b8e951617a4b87cc476daa274fa, type: 2}
+    ItemData: {fileID: 11400000, guid: ead69d1d0715b6b4ea21d5d9301fce0d, type: 2}
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7389436694480070531

@@ -355,7 +355,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6162341976679928071}
   - component: {fileID: 6978085179806670528}
-  - component: {fileID: 7173105301341122778}
   m_Layer: 0
   m_Name: WeaponSprite
   m_TagString: InteractionPoint
@@ -432,32 +431,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7173105301341122778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 290361835400507354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 0
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
 --- !u!1 &358522686924785301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,7 +1347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4805980865374843022}
   - component: {fileID: 4861907013777914186}
-  - component: {fileID: 4449284866878111824}
   m_Layer: 0
   m_Name: SwordHandR
   m_TagString: Untagged
@@ -1449,32 +1421,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4449284866878111824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2437418500877779374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 0
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
 --- !u!1 &2770732529890737803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1528,7 +1474,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8911936120154203816}
   - component: {fileID: 5253010484986322179}
-  - component: {fileID: 8829273299532150350}
   m_Layer: 0
   m_Name: SwordHandL
   m_TagString: Untagged
@@ -1603,32 +1548,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8829273299532150350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2849720770153103284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 0
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
 --- !u!1 &2879148532766083770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,6 +2557,8 @@ MonoBehaviour:
   projectileRotationObject: {fileID: 5878514350590556735}
   defaultProjectileRotation: {fileID: 1819059229248070036}
   arrowPrefab: {fileID: 3006912499862247658, guid: dc22ce4f72da2f74387a2dc713632259,
+    type: 3}
+  slashPrefab: {fileID: 3006912499862247658, guid: 1bb90855afd17564f948e0e798fa7208,
     type: 3}
   animator: {fileID: 6982808670112934315}
   attackPoint: {fileID: 2660268309940200196}
@@ -5861,7 +5782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2611913516339819651
 Transform:
   m_ObjectHideFlags: 0
@@ -5884,7 +5805,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7139353137468798827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 709d076dccc4a6942b81770e1c886d5a, type: 3}
   m_Name: 

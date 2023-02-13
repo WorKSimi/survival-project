@@ -22,9 +22,9 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: abe4de11b81d9c24798a3d84c0ca4bbc,
     type: 3}
   itemDamage: 2
-  ItemTile: {fileID: 0}
-  HealthHealed: 0
   projectilePrefab: {fileID: 3006912499862247658, guid: dc22ce4f72da2f74387a2dc713632259,
     type: 3}
   projectileSpeed: 20
-  projectileLifetime: 1
+  projectileLifetime: 5
+  ItemTile: {fileID: 0}
+  HealthHealed: 0

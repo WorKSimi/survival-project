@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class Projectile : MonoBehaviour
+public class Projectile : NetworkBehaviour
 {
     public double Projectiledamage;
     public float Projectilelifetime;
 
-    private void Start()
+    private void Awake()
     {
-        Invoke("DestroyProjectile", Projectilelifetime);
+        Debug.Log("Projectile on creation: " + Projectilelifetime);
+        StartCoroutine(DestroyProjectileAfterTime(Projectilelifetime));
     }
+
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.tag == "Enemy")
+        if (hitInfo.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
@@ -30,10 +33,30 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    public IEnumerator DestroyProjectileAfterTime(float lifetime)
+    {
+        yield return new WaitForSeconds(lifetime); //Wait for lifetime
+        DestroyProjectile(); //Destroy the object
+    }
+
     void DestroyProjectile()
     {
-        //Insert stuff like effects and sounds here.
-        Destroy(gameObject);
+        if (IsHost)
+        {
+            gameObject.GetComponent<NetworkObject>().Despawn();
+        }
+        else if (IsClient)
+        {
+            DestroyObjectServerRpc(); //Destroy on server
+            Destroy(this.gameObject); //Destroy on client
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
+        networkObject.Despawn();
     }
 }
 

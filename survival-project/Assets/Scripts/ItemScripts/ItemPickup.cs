@@ -64,17 +64,18 @@ public class ItemPickup : NetworkBehaviour
                 SaveGameManager.data.collectedItems.Add(id);
                 NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
                 networkObject.Despawn();
-                //Debug.Log("Object Destroyed");
+
             }
             else if (IsClient) //If your a client, send message to server to destroy it instead
             {
+                SaveGameManager.data.collectedItems.Add(id);
                 DestroyObjectServerRpc();
             }
         }
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
+    [ServerRpc]
+    public void DestroyObjectServerRpc()
     {
         NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
         networkObject.Despawn();
