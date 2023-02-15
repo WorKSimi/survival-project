@@ -408,6 +408,7 @@ public class UseItemManager : NetworkBehaviour
         Projectile projectileScript = bullet.GetComponent<Projectile>();
         projectileScript.Projectiledamage = itemDamage;
         projectileScript.Projectilelifetime = projectileLifetime;
+        projectileScript.StartDestructionCoroutine();
 
         bullet.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -424,6 +425,7 @@ public class UseItemManager : NetworkBehaviour
         Projectile projectile = bullet.GetComponent<Projectile>();
         projectile.Projectiledamage = itemDamage;
         projectile.Projectilelifetime = projectileLifetime;
+        projectile.StartDestructionCoroutine();
     }
 
     [ServerRpc]
@@ -436,6 +438,7 @@ public class UseItemManager : NetworkBehaviour
         Projectile projectile = bullet.GetComponent<Projectile>();
         projectile.Projectiledamage = itemDamage;
         projectile.Projectilelifetime = projectileLifetime;
+        projectile.StartDestructionCoroutine();
     }
 
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this

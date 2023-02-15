@@ -11,9 +11,13 @@ public class Projectile : NetworkBehaviour
     private void Awake()
     {
         Debug.Log("Projectile on creation: " + Projectilelifetime);
-        StartCoroutine(DestroyProjectileAfterTime(Projectilelifetime));
     }
 
+    public void StartDestructionCoroutine()
+    {
+        Debug.Log("Projectile on function call: " + Projectilelifetime);
+        StartCoroutine(DestroyProjectileAfterTime(Projectilelifetime));
+    }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
