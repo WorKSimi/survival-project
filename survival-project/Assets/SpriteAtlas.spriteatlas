@@ -230,6 +230,7 @@ SpriteAtlas:
   - {fileID: 2085108035, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   - {fileID: -854765610, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   - {fileID: 1671616272, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  - {fileID: 21300000, guid: aac12c4b590888b4fb5fdb508f0ea589, type: 3}
   - {fileID: 21300000, guid: 8a8e7abb4f089dc4f9b3194dad704894, type: 3}
   - {fileID: -129298098, guid: dc55773ccb4f73e4e91a4700c65cc538, type: 3}
   - {fileID: 1383207144, guid: dc55773ccb4f73e4e91a4700c65cc538, type: 3}
@@ -410,7 +411,7 @@ SpriteAtlas:
   - TestWood
   - SnailPlaceholder
   - BobFaceRight
-  - New Piskel (13)
+  - PlaceholderSquare
   - FaceRight
   - FaceForward
   - TestWaterTile
@@ -563,6 +564,7 @@ SpriteAtlas:
   - WoodFloor2
   - WoodFloor3
   - WoodFloor1
+  - New Piskel (51)
   - DryTilledDirt
   - StoneTile4
   - StoneTile2

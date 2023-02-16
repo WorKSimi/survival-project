@@ -228,6 +228,9 @@ public class WorldDataCollector : NetworkBehaviour
 
             case ("woodwalltile"):
                 return TileType.WoodWall;
+
+            case ("flinttile"):
+                return TileType.Flint;
         }
     }
 
@@ -321,6 +324,9 @@ public class WorldDataCollector : NetworkBehaviour
 
             case (TileType.WoodWall):
                 return ruleTiles[15];
+
+            case (TileType.Flint):
+                return ruleTiles[16];
         }
     }
 }

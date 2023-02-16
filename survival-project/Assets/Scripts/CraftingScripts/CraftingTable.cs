@@ -12,23 +12,24 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        craftingTableMenu.SetActive(false);
+        //craftingTableMenu.SetActive(false);
     }
 
     public UnityAction<IInteractable> OnInteractionComplete {get; set;}
 
     public void Interact(Interactor interactor, out bool interactSuccessful)
     {
-        craftingTableMenu.SetActive(true);
+        //craftingTableMenu.SetActive(true);
         interactSuccessful = true;
         CurrentInteractor = interactor;
+        interactor.GetComponent<PlayerCraftingMenuManager>().CraftingTableMenuSelect();
     }
 
     public void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            craftingTableMenu.SetActive(false);
+            CurrentInteractor.GetComponent<PlayerCraftingMenuManager>().DisableAllMenus();
         }
     }
 
@@ -37,28 +38,28 @@ public class CraftingTable : MonoBehaviour, IInteractable
         throw new System.NotImplementedException();
     }
 
-    public void CraftFlintAxe()
-    {
-        //CurrentInteractor = interactor;
-        Debug.Log("Trying to Craft Flint Axe");
-        var playerInventoryHolder = CurrentInteractor.GetComponent<PlayerInventoryHolder>();
+    //public void CraftFlintAxe()
+    //{
+    //    //CurrentInteractor = interactor;
+    //    Debug.Log("Trying to Craft Flint Axe");
+    //    var playerInventoryHolder = CurrentInteractor.GetComponent<PlayerInventoryHolder>();
 
-        var woodComponent = new CraftRecipeItem
-        {
-            displayName = "wood",
-            quantity = 5
-        };
+    //    var woodComponent = new CraftRecipeItem
+    //    {
+    //        displayName = "wood",
+    //        quantity = 5
+    //    };
 
-        var flintComponent = new CraftRecipeItem
-        {
-            displayName = "flint",
-            quantity = 5
-        };
+    //    var flintComponent = new CraftRecipeItem
+    //    {
+    //        displayName = "flint",
+    //        quantity = 5
+    //    };
 
-        var components = new List<CraftRecipeItem>() { woodComponent, flintComponent};
-        {
-            playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.FlintAxe, 1);
-            Debug.Log("Crafted Flint Axe");
-        }
-    }
+    //    var components = new List<CraftRecipeItem>() { woodComponent, flintComponent};
+    //    {
+    //        playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.FlintAxe, 1);
+    //        Debug.Log("Crafted Flint Axe");
+    //    }
+    //}
 }

@@ -73,15 +73,17 @@ public class Wall : NetworkBehaviour
     {
         for (int i = 0; i < amountToDrop; i++) //Loop based on how many resources to drop
         {
-            if (IsHost) //if host, spawn objects
-            {
-                GameObject go = Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
-                go.GetComponent<NetworkObject>().Spawn();
-            }
-            if (IsClient) //if client, send rpc to spawn items
-            {
-                SpawnItemsServerRpc(); //If client, send the spawn function to server instead
-            }
+            //if (IsHost) //if host, spawn objects
+            //{
+            //    GameObject go = Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
+            //    go.GetComponent<NetworkObject>().Spawn();
+            //}
+            //if (IsClient) //if client, send rpc to spawn items
+            //{
+            //    SpawnItemsServerRpc(); //If client, send the spawn function to server instead
+            //}
+            GameObject go = Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
+            go.GetComponent<NetworkObject>().Spawn();
         }
         if (IsClient) //if your the client, send despawn method to server
         {

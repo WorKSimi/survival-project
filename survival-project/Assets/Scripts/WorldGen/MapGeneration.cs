@@ -22,6 +22,7 @@ public class MapGeneration : NetworkBehaviour
     public RuleTile blueberryTile;
     public RuleTile caveEntranceTile;
     public RuleTile treeTile;
+    public RuleTile flintTile;
 
     [Header("Dimensions")]
     public int width = 50;
@@ -126,15 +127,19 @@ public class MapGeneration : NetworkBehaviour
                     {
                         wallTilemap.SetTile(new Vector3Int(newX, newY, 0), treeTile); //Spawn tree on tile
                     }
-                    else if (Random.value >= 0.995) //If tree check fails, and another .5 percent chance pass
+                    else if (Random.value >= 0.98) 
+                    {
+                        wallTilemap.SetTile(new Vector3Int(newX, newY, 0), flintTile); //Spawn Flint node on tile
+                    }
+                    else if (Random.value >= 0.995) 
                     {
                         wallTilemap.SetTile(new Vector3Int(newX, newY, 0), blueberryTile); //Spawn blueberry bush on tile
                     }
-                    else if (Random.value >= 0.995) //If tree check fails, and another .5 percent chance pass
+                    else if (Random.value >= 0.995) 
                     {
                         wallTilemap.SetTile(new Vector3Int(newX, newY, 0), redShroomTile); //Spawn Red Mushroom on tile
                     }
-                    else if (Random.value >= 0.995) //If tree check fails, and another .5 percent chance pass
+                    else if (Random.value >= 0.995) 
                     {
                         wallTilemap.SetTile(new Vector3Int(newX, newY, 0), brownShroomTile); //Spawn brown mushroom on tile
                     }

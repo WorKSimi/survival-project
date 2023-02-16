@@ -20,6 +20,7 @@ public enum TileType
     Water,
     WheatCrop,
     WoodWall,
+    Flint,
 }
 
 public enum TilemapType

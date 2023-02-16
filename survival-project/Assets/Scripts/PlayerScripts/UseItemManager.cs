@@ -411,7 +411,7 @@ public class UseItemManager : NetworkBehaviour
         projectileScript.StartDestructionCoroutine();
 
         bullet.GetComponent<NetworkObject>().Spawn();
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();       
         rb.AddForce(firePoint.up * projectileSpeed, ForceMode2D.Impulse);               
     }
 

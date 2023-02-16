@@ -72,6 +72,7 @@ public class AnywhereCrafting : MonoBehaviour
         CraftingTable,
         Campfire,
         WoodClub,
+        FlintPickaxe,
     }
     public void SelectCraftingTable()
     {
@@ -117,6 +118,23 @@ public class AnywhereCrafting : MonoBehaviour
         selected = SelectedRecipe.WoodClub;
     }
 
+    public void SelectFlintPick()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.FlintPick.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.FlintPick.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.FlintPick.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x5"); //Set component amount 
+
+        ComponentText2.SetText("Flint"); //Set second component
+        ComponentAmount2.SetText("x5"); //Set second component amount
+
+        selected = SelectedRecipe.FlintPickaxe;
+    }
+
     public void CraftItem()
     {
         if (selected == SelectedRecipe.CraftingTable)
@@ -130,6 +148,10 @@ public class AnywhereCrafting : MonoBehaviour
         if (selected == SelectedRecipe.WoodClub)
         {
             CraftWoodenClub();
+        }
+        if (selected == SelectedRecipe.FlintPickaxe)
+        {
+            CraftFlintPickaxe();
         }
         else Debug.Log("Nothing is selected to craft!");
     }
@@ -221,6 +243,33 @@ public class AnywhereCrafting : MonoBehaviour
             {
                 playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodClub, 1);
                 Debug.Log("Crafted Wood Club");
+            }
+        }
+    }
+
+    private void CraftFlintPickaxe()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Flint Pickaxe");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 5
+            };
+
+            var flintComponent = new CraftRecipeItem
+            {
+                displayName = "flint",
+                quantity = 5
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent, flintComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.FlintPick, 1);
+                Debug.Log("Crafted Flint Pickaxe");
             }
         }
     }

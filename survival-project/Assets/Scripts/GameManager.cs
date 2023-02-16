@@ -15,6 +15,7 @@ namespace Assets.Scripts
         public InventoryItemData CraftingTable;
         public InventoryItemData Campfire;
         public InventoryItemData WoodClub;
+        public InventoryItemData FlintPick;
 
         protected void Start()
         {

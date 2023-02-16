@@ -1771,6 +1771,7 @@ MonoBehaviour:
   blueberryTile: {fileID: 11400000, guid: ae6b57dc89cd2bd4e83fc06a5e9a8a0f, type: 2}
   caveEntranceTile: {fileID: 11400000, guid: f973e57f5504b6241b9cc0ae6914db29, type: 2}
   treeTile: {fileID: 11400000, guid: 6869f94d1d9329146b296a81745f5818, type: 2}
+  flintTile: {fileID: 11400000, guid: 2c3316cb667a93046a6400947309ee74, type: 2}
   width: 200
   height: 200
   falloffSize: 200
@@ -3294,6 +3295,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e2eedf0acb1cb5248b10ade8fde91faa, type: 2}
   - {fileID: 11400000, guid: 542825b8b0df0364582291f84fce022a, type: 2}
   - {fileID: 11400000, guid: 804de162d757ebe47b4b91a44de2a626, type: 2}
+  - {fileID: 11400000, guid: 2c3316cb667a93046a6400947309ee74, type: 2}
   mapGenerator: {fileID: 596956918}
   createWorld1Menu: {fileID: 1398613189}
   SingleplayerMenu: {fileID: 216619917}
