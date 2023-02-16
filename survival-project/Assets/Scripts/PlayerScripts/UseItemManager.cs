@@ -411,8 +411,8 @@ public class UseItemManager : NetworkBehaviour
         projectileScript.StartDestructionCoroutine();
 
         bullet.GetComponent<NetworkObject>().Spawn();
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();       
-        rb.AddForce(firePoint.up * projectileSpeed, ForceMode2D.Impulse);               
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = firePoint.up * projectileSpeed;              
     }
 
     [ServerRpc]
@@ -421,7 +421,7 @@ public class UseItemManager : NetworkBehaviour
         GameObject bullet = Instantiate(arrowPrefab, spawnLocation, quaternion);
         bullet.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(fireDirection * projectileSpeed, ForceMode2D.Impulse);
+        rb.velocity = fireDirection * projectileSpeed;        
         Projectile projectile = bullet.GetComponent<Projectile>();
         projectile.Projectiledamage = itemDamage;
         projectile.Projectilelifetime = projectileLifetime;
@@ -434,7 +434,7 @@ public class UseItemManager : NetworkBehaviour
         GameObject bullet = Instantiate(slashPrefab, spawnLocation, quaternion);
         bullet.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(fireDirection * projectileSpeed, ForceMode2D.Impulse);
+        rb.velocity = fireDirection * projectileSpeed;
         Projectile projectile = bullet.GetComponent<Projectile>();
         projectile.Projectiledamage = itemDamage;
         projectile.Projectilelifetime = projectileLifetime;
