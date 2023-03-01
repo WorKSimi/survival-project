@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Unity.Netcode;
 
-public class SnailEnemy : MonoBehaviour
+public class SnailEnemy : NetworkBehaviour
 {
     [SerializeField] private Animator animator;
 
@@ -21,7 +22,8 @@ public class SnailEnemy : MonoBehaviour
     private bool isRoaming = false;
 
     public MobSpawning mobSpawning;
-    public GameObject player;
+    public GameObject playerToChase;
+    public GameObject[] players; //Array for all players
     private GameObject roamWaypoint;
     public Vector3 startingPosition;
     private Vector3 roamPosition;
@@ -54,21 +56,31 @@ public class SnailEnemy : MonoBehaviour
 
         currentTime = startingTime;
     }
-
+    //instead of 1 player, fill an array for every object with the tag Player
+    //Whenever checking distance, do it for each player in the array
     
     private void Update()
     {
-        player = GameObject.FindWithTag("Player");
+        players = GameObject.FindGameObjectsWithTag("Player");
 
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
 
         float maxDespawnDistance = 50f;
-        if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
+
+        if (playerWhoSpawned != null)
         {
-            this.mobSpawning.currentSpawns--;
-            Destroy(this.gameObject); //Destroy the snail,          
+            if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
+            {
+                this.mobSpawning.currentSpawns--;
+                this.gameObject.GetComponent<NetworkObject>().Despawn();
+                Destroy(this.gameObject); //Destroy the snail,          
+            }
+        }
+        else if (playerWhoSpawned == null)
+        {
+            Debug.Log("ERROR! PLAYER WHO SPAWNED IS NULL!");
         }
 
         switch (state)
@@ -87,11 +99,11 @@ public class SnailEnemy : MonoBehaviour
 
                 animator.SetBool("isAttacking", false); //Attack animation is false
                 isCharging = false;
-                target = player.transform; //Sets the target to be the player
+                target = playerToChase.transform; //Sets the target to be the player               
                 MoveToWaypoint(); //Moves the snail to the target (player)
                 
                 float attackRange = 5f;
-                if (Vector3.Distance(transform.position, player.transform.position) < attackRange) //See if player is close enough for attack
+                if (Vector3.Distance(transform.position, playerToChase.transform.position) < attackRange) //See if player is close enough for attack
                 {                                 
                     state = SnailState.AttackingTarget;                  
                 }
@@ -195,20 +207,28 @@ public class SnailEnemy : MonoBehaviour
     private void FindTarget()
     {
         float targetRange = 10f;
-        float distance = Vector3.Distance(transform.position, player.transform.position);
-
-        if (Vector3.Distance(transform.position, player.transform.position) < targetRange) //Search for the player within target range
+        foreach (GameObject player in players) //For each player in players
         {
-            state = SnailState.ChaseTarget;
+            float distance = Vector3.Distance(transform.position, player.transform.position); //Distance is snail to current player
+
+            if (Vector3.Distance(transform.position, player.transform.position) < targetRange) //Search for the player within target range
+            {
+                playerToChase = player; //Player to chase will be if the player is closer
+                state = SnailState.ChaseTarget;
+            }
         }
     }
 
     private void TargetToFar()
     {
         float aggroRange = 20f;
-        if (Vector3.Distance(transform.position, player.transform.position) > aggroRange) //If player gets too far
+
+        foreach (GameObject player in players)
         {
-            state = SnailState.Roaming; //Set state back to roaming
+            if (Vector3.Distance(transform.position, player.transform.position) > aggroRange) //If player gets too far
+            {
+                state = SnailState.Roaming; //Set state back to roaming
+            }
         }
     }
 }

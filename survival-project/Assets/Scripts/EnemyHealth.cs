@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : NetworkBehaviour
 {
     [SerializeField] private GameObject droppedItem;
     [SerializeField] private double maxHealth;
@@ -31,18 +32,53 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        if (droppedItem != null) //If the enemy has an item to drop
+        if (IsHost)
         {
-            for (int i = 0; i < 5; i++) //Drop 5 of this enemies item drop
+            if (droppedItem != null) //If the enemy has an item to drop
             {
-                Instantiate(droppedItem, transform.position, Quaternion.identity); //Instantiate that item where snail is              
-                Destroy(this.gameObject); //Remove this enemy from the game world
+                for (int i = 0; i < 5; i++) //Drop 5 of this enemies item drop
+                {
+                    Instantiate(droppedItem, transform.position, Quaternion.identity); //Instantiate that item where snail is
+                    this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
+                    Destroy(this.gameObject); //Remove this enemy from the game world
+                }
+            }
+            else if (droppedItem == null) //If enemy has no item
+            {
+                this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
+                Destroy(this.gameObject); //Remove enemy
             }
         }
-        else
+        else if (IsClient)
         {
-            this.mobSpawning.currentSpawns--;
-            Destroy(this.gameObject);
+            if (droppedItem != null) //If the enemy has an item to drop
+            {
+                for (int i = 0; i < 5; i++) //Drop 5 of this enemies item drop
+                {
+                    SpawnItemOnServerRpc();               
+                }
+                this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
+                DespawnEnemyServerRpc();
+            }
+            else if (droppedItem == null) //If enemy has no item
+            {
+                this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
+                DespawnEnemyServerRpc(); 
+            }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)] //Fired by client executed on server
+    public void DespawnEnemyServerRpc() //Remove enemy from server
+    {
+        this.gameObject.GetComponent<NetworkObject>().Despawn(); //Despawn object
+        Destroy(this.gameObject); //Remove this enemy from the game world
+    }
+
+    [ServerRpc(RequireOwnership = false)] //Fired by client executed on server
+    public void SpawnItemOnServerRpc()
+    {
+        var item = Instantiate(droppedItem, transform.position, Quaternion.identity); //Instantiate that item where snail is
+        item.GetComponent<NetworkObject>().Spawn(); //Spawn item on server
     }
 }

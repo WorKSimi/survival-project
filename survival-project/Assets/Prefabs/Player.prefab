@@ -2431,7 +2431,7 @@ MonoBehaviour:
   thisPlayer: {fileID: 3430272870254572311}
   validTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
   currentSpawns: 0
-  maxSpawns: 0
+  maxSpawns: 5
   mobPool:
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
 --- !u!1 &2156278191627496922
@@ -10198,6 +10198,8 @@ GameObject:
   - component: {fileID: 572909712831558781}
   - component: {fileID: 6474472308151965125}
   - component: {fileID: 6844337498401036859}
+  - component: {fileID: 858120468114273982}
+  - component: {fileID: 7898786445973567002}
   m_Layer: 0
   m_Name: SlashAnimation
   m_TagString: Untagged
@@ -10292,6 +10294,46 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &858120468114273982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085936111080725542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
+  SyncRotAngleZ: 1
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  InLocalSpace: 0
+  Interpolate: 0
+--- !u!114 &7898786445973567002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085936111080725542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b187825d884193c4985f9fde8bd80346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 6844337498401036859}
 --- !u!1 &8104248529032543508
 GameObject:
   m_ObjectHideFlags: 0

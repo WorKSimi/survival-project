@@ -100,7 +100,6 @@ public class PlayerNetwork : NetworkBehaviour
                 rb.velocity = rollDir * rollSpeed;
                 break;
         }
-
     }
 
     private void PlayerDirection()

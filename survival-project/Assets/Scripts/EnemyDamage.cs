@@ -13,20 +13,21 @@ public class EnemyDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foundPlayer = false;
+        //foundPlayer = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        LocatePlayer();
+        //LocatePlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            playerHealth.TakeDamage(damage);
+            var playerHealthScript = collision.GetComponent<PlayerHealth>();
+            playerHealthScript.TakeDamage(damage);
         }
     }
 

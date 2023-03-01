@@ -27,6 +27,8 @@ public class RotateToMouse : NetworkBehaviour
 
     void Update()
     {
+        if (!IsLocalPlayer) return;
+        if (!IsOwner) return; //Return if not local player OR owner!
         RTMouse();
     }
 }
