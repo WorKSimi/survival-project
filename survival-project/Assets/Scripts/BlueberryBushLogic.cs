@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 
-public class BlueberryBushLogic : MonoBehaviour, IInteractable
+public class BlueberryBushLogic : NetworkBehaviour, IInteractable
 {
     private State state;
     private int growTime = 300; //in seconds
@@ -47,9 +48,10 @@ public class BlueberryBushLogic : MonoBehaviour, IInteractable
         interactSuccessful = true;
         if (canInteract == true)
         {
-            spriteRenderer.sprite = emptySprite;
             canInteract = false;
-            Instantiate(blueberryItem, this.transform.position, Quaternion.identity); //Instantiate blueberry item
+            spriteRenderer.sprite = emptySprite;
+            var go = Instantiate(blueberryItem, this.transform.position, Quaternion.identity); //Instantiate blueberry item
+            go.GetComponent<NetworkObject>().Spawn();
             state = State.Empty; //Set the state to empty
             StartCoroutine(GrowingPlant());
         }
@@ -65,5 +67,16 @@ public class BlueberryBushLogic : MonoBehaviour, IInteractable
     public void EndInteraction()
     {
         throw new System.NotImplementedException();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void BlueberryLogicServerRpc()
+    {
+        canInteract = false;
+        spriteRenderer.sprite = emptySprite;
+        var go = Instantiate(blueberryItem, this.transform.position, Quaternion.identity); //Instantiate blueberry item
+        go.GetComponent<NetworkObject>().Spawn();
+        state = State.Empty; //Set the state to empty
+        StartCoroutine(GrowingPlant());
     }
 }

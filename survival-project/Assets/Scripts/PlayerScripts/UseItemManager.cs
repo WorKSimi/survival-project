@@ -223,9 +223,24 @@ public class UseItemManager : NetworkBehaviour
     }
 
     public void PlaceBlock(RuleTile ItemTile) //Takes in a ItemTile based on what your holding and places it
-    {      
-        Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
-        wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
+    {
+        if (IsHost) //If host, do this and then spawn it on network
+        {
+            Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
+            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
+        }
+        else if (IsClient)
+        {
+            //Vector3Int mousePos = GetMousePosition();
+            //PlaceBlockServerRpc(mousePos, );
+            Debug.Log("CLIENT PLACEMENT NOT IMPLEMENTED!");
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void PlaceBlockServerRpc(Vector3Int tilePosition)
+    {
+        wallTilemap.SetTile(tilePosition, null); //Set tile to null
     }
 
     public void UsePick(double itemDamage)
@@ -239,11 +254,32 @@ public class UseItemManager : NetworkBehaviour
             {
                 var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                 var hit = Physics2D.GetRayIntersection(ray);
-                hoveredWall = hit.transform;              
-                hoveredWall.GetComponent<Wall>().TakeDamage(itemDamage);
-                wallTilemap.SetTile(mousePos, null);
+                hoveredWall = hit.transform;
+                var wallScript = hoveredWall.GetComponent<Wall>();
+                wallScript.TakeDamage(itemDamage);
+
+                if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
+                {
+                    if (IsHost)
+                    {
+                        wallScript.Die(); //Spawn the items
+                        wallScript.DestroyAndDespawnThisObject();
+                        wallTilemap.SetTile(mousePos, null); //Set tile to null
+                    }
+                    else if (IsClient)
+                    {
+                        wallScript.Die();
+                        BreakBlockServerRpc(mousePos); //Set tile to null on server
+                    }
+                }
             }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void BreakBlockServerRpc(Vector3Int tilePosition)
+    {
+        wallTilemap.SetTile(tilePosition, null); //Set tile to null
     }
 
     public void UseRock(double itemDamage)

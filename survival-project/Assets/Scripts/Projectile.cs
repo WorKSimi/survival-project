@@ -21,6 +21,8 @@ public class Projectile : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        if (hitInfo == null) return; //If collider hit info doesn't exist return
+
         if (hitInfo.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = hitInfo.GetComponent<EnemyHealth>();
@@ -52,7 +54,7 @@ public class Projectile : NetworkBehaviour
         else if (IsClient)
         {
             DestroyObjectServerRpc(); //Destroy on server
-            Destroy(this.gameObject); //Destroy on client
+          //Destroy(this.gameObject); //Destroy on client
         }
     }
 

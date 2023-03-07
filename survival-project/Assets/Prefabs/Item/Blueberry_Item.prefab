@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7389436694480070531}
   - component: {fileID: -2083750711423560777}
   m_Layer: 0
-  m_Name: Blueberry
+  m_Name: Blueberry_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b24fc1c82534d4b8b445711eb45776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: ab441505-b58e-427c-8edf-d7846123b77a
+  _id: 30748129-27d9-455f-96e0-b4a2949d7687
 --- !u!114 &-2083750711423560777
 MonoBehaviour:
   m_ObjectHideFlags: 0

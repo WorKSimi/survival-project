@@ -122,8 +122,8 @@ MonoBehaviour:
   SyncRotAngleX: 0
   SyncRotAngleY: 0
   SyncRotAngleZ: 0
-  SyncScaleX: 0
-  SyncScaleY: 0
+  SyncScaleX: 1
+  SyncScaleY: 1
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fd3e1bfaf7a7e42a20497af78d2ad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueberryItem: {fileID: 7389436694480070536, guid: 7878e7a56dbda724d84ff408091ba416,
+  blueberryItem: {fileID: 7389436694480070536, guid: 4a7b8188bea0302498ae8c8dfc81455f,
     type: 3}
   grownSprite: {fileID: -783015623, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   emptySprite: {fileID: -405399837, guid: a07eed7efbabc9847911472e4f78a966, type: 3}

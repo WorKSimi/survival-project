@@ -19,11 +19,11 @@ MonoBehaviour:
   MaxStackSize: 9999
   GoldValue: 1
   ItemType: Food
-  ItemPrefab: {fileID: 7389436694480070536, guid: 7878e7a56dbda724d84ff408091ba416,
+  ItemPrefab: {fileID: 7389436694480070536, guid: 4a7b8188bea0302498ae8c8dfc81455f,
     type: 3}
   itemDamage: 0
-  ItemTile: {fileID: 0}
-  HealthHealed: 5
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  ItemTile: {fileID: 0}
+  HealthHealed: 5

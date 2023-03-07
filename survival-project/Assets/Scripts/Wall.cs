@@ -10,7 +10,7 @@ public class Wall : NetworkBehaviour
     [SerializeField] private GameObject wood;    
     [SerializeField] private double maxHealth = 5;
     [SerializeField] private bool isResourceNode;
-    [SerializeField] private int amountToDrop;  
+    [SerializeField] private int amountToDrop;
 
     private GameObject gridObject;
     private GameObject wallmapObject;
@@ -36,9 +36,8 @@ public class Wall : NetworkBehaviour
         wallTilemap = wallmapObject.GetComponent<Tilemap>();
         thisPosition = grid.WorldToCell(gameObject.transform.position);
 
-        //GameObject go = this.gameObject;
-        //go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
-        
+        GameObject go = this.gameObject;
+        go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -53,8 +52,8 @@ public class Wall : NetworkBehaviour
     {
         for (int i = 0; i < amountToDrop; i++)
         {
-            NetworkObject networkObject = Instantiate(wood, transform.position, Quaternion.identity).GetComponent<NetworkObject>();
-            networkObject.Spawn();
+            GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
+            gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
         }
     }
 
@@ -63,42 +62,38 @@ public class Wall : NetworkBehaviour
         currentHealth -= damage;
         Debug.Log("Wall Hit");
 
-        if (currentHealth <= 0)
+        //if (currentHealth <= 0)
+        //{
+        //    Die();           
+        //}
+    }
+
+    public void Die()
+    {
+        if (wood != null) //If the item to drop is something
         {
-            Die();           
+            if (IsHost)
+            {
+                for (int i = 0; i < amountToDrop; i++)
+                {
+                    GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
+                    gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
+                }
+            }
+            else if (IsClient)
+            {
+                SpawnItemsServerRpc();
+            }
+        }
+        if (isCrop == true)
+        {
+            Debug.Log("Do nothing, Crop death handled by crop script");
         }
     }
 
-    private void Die()
+    public void DestroyAndDespawnThisObject()
     {
-        for (int i = 0; i < amountToDrop; i++) //Loop based on how many resources to drop
-        {
-            //if (IsHost) //if host, spawn objects
-            //{
-            //    GameObject go = Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
-            //    go.GetComponent<NetworkObject>().Spawn();
-            //}
-            //if (IsClient) //if client, send rpc to spawn items
-            //{
-            //    SpawnItemsServerRpc(); //If client, send the spawn function to server instead
-            //}
-            GameObject go = Instantiate(wood, transform.position, Quaternion.identity); //Drop item, will drop 5
-            go.GetComponent<NetworkObject>().Spawn();
-        }
-        if (IsClient) //if your the client, send despawn method to server
-        {
-            DestroyObjectServerRpc(); //Send code to server to destroy it instead
-        }
-        else //If your the host, despawn normally
-        {
-            wallTilemap.SetTile(thisPosition, null); //Set wall tile at mouse to null
-            NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
-            networkObject.Despawn();
-        }
-       
-        if (isCrop == true)
-        {
-            Debug.Log("Do nothing, Crop death handled by crop script"); 
-        }
+        this.gameObject.GetComponent<NetworkObject>().Despawn();
+        Destroy(this.gameObject);
     }
 }

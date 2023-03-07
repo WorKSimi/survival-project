@@ -102,7 +102,6 @@ public class MobSpawning : NetworkBehaviour
     {
         var snail = Instantiate(mobPool[0], spawnPosition, Quaternion.identity);
         snail.GetComponent<NetworkObject>().Spawn();
-        currentSpawns++;
         var snailScript = snail.GetComponent<SnailEnemy>();
         var snailHealthScript = snail.GetComponent<EnemyHealth>();
         snailScript.playerWhoSpawned = thisPlayer;

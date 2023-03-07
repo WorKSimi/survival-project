@@ -176,7 +176,7 @@ public class WorldDataCollector : NetworkBehaviour
         if (File.Exists(saveFilePath)) File.Delete(saveFilePath); //If the file exists, delete it
     }
 
-    private TileType TileDataComparision(string tileName)
+    public TileType TileDataComparision(string tileName)
     {
         switch (tileName.ToLower())
         {
@@ -272,7 +272,7 @@ public class WorldDataCollector : NetworkBehaviour
         }
     }
 
-    private RuleTile TileReturner(TileType tiletype)
+    public RuleTile TileReturner(TileType tiletype)
     {
         switch (tiletype)
         {
