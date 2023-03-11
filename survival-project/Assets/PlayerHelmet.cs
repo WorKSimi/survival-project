@@ -10,6 +10,7 @@ public class PlayerHelmet : NetworkBehaviour
     public Image HelmetSprite;
     public MouseItemData mouseItemData;
     public bool IsHelmetEquiped;
+    public string equippedHelmet = "";
 
     [Header("Helmet Sprites")]
 
@@ -32,8 +33,9 @@ public class PlayerHelmet : NetworkBehaviour
                 if (mouseItemData.AssignedInventorySlot.ItemData.ItemType == "Helmet") //And the mouse inventory item data is equal to helmet
                 {
                     Debug.Log("Equipping Helmet!");
+                    IsHelmetEquiped = true;
                     HelmetCatalog(); //Function for all helmet types
-                    mouseItemData.AssignedInventorySlot.ClearSlot(); //Remove the item from the mouse inventory slot
+                    mouseItemData.ClearSlot(); //Remove the item from the mouse inventory slot
                 }
             }
         }
@@ -49,24 +51,32 @@ public class PlayerHelmet : NetworkBehaviour
 
     public void HelmetCatalog()
     {
-        if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "WoodHelmet")
+        if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "Wood Helmet")
         {
             HelmetSprite.sprite = WoodHelmetSprite;
+            equippedHelmet = "Wood Helmet";
+            Debug.Log("Wood Helmet Equipped");
         }
 
-        else if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "TinHelmet")
+        else if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "Tin Helmet")
         {
             HelmetSprite.sprite = TinHelmetSprite;
+            equippedHelmet = "Tin Helmet";
+            Debug.Log("Tin Helmet Equipped");
         }
 
-        else if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "IronHelmet")
+        else if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "Iron Helmet")
         {
             HelmetSprite.sprite = IronHelmetSprite;
+            equippedHelmet = "Iron Helmet";
+            Debug.Log("Iron Helmet Equipped");
         }
 
-        else if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "BronzeHelmet")
+        else if (mouseItemData.AssignedInventorySlot.itemData.DisplayName == "Bronze Helmet")
         {
             HelmetSprite.sprite = BronzeHelmetSprite;
+            equippedHelmet = "Bronze Helmet";
+            Debug.Log("Bronze Helmet Equipped");
         }
     }
 }
