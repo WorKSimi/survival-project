@@ -124,7 +124,6 @@
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
     <Compile Include="Assets\Scripts\SnailEnemy.cs" />
-    <Compile Include="Assets\PlayerHelmetSlot.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
     <Compile Include="Assets\Lobbymanager.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
@@ -179,7 +178,6 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\EnemyDamage.cs" />
-    <Compile Include="Assets\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\SnailEnum.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />

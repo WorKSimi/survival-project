@@ -8,10 +8,9 @@ using UnityEngine.Tilemaps;
 
 public class PlayerNetwork : NetworkBehaviour
 {
-    public float moveSpeed = 8f; //Float for the move speed of this player
+    private float moveSpeed = 8f; //Float for the move speed of this player
     private float waterMoveSpeed = 4f; //Speed for when you want players to go slow
-    public float deadSpeed = 0f;
-    public float currentMoveSpeed; //Variable to store what the players CURRENT move speed is
+    private float currentMoveSpeed; //Variable to store what the players CURRENT move speed is
     private Rigidbody2D rb; //Rigidbody2D of this player
 
     [SerializeField]private Animator animator; //Animator of this player
@@ -45,7 +44,6 @@ public class PlayerNetwork : NetworkBehaviour
     {
         Normal, //The normal state of player
         Rolling, //When player is Dodge-Rolling
-        Dead, //When the player has died of Ligma
     }
 
     private void Awake()
@@ -73,7 +71,6 @@ public class PlayerNetwork : NetworkBehaviour
         switch (state)
         {
             case State.Normal:
-                currentMoveSpeed = moveSpeed;
                 MovementInput();
                 animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
                 break;
@@ -88,10 +85,6 @@ public class PlayerNetwork : NetworkBehaviour
                     state = State.Normal;
                 }
                 break;
-
-            case State.Dead:
-                
-                break;
         }
     }
 
@@ -105,10 +98,6 @@ public class PlayerNetwork : NetworkBehaviour
 
             case State.Rolling:
                 rb.velocity = rollDir * rollSpeed;
-                break;
-
-            case State.Dead:
-                rb.velocity = moveDir * deadSpeed;
                 break;
         }
     }
