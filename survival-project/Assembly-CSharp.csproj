@@ -150,6 +150,7 @@
     <Compile Include="Assets\Scripts\MobSpawning.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingRotate.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
+    <Compile Include="Assets\PlayerHelmet.cs" />
     <Compile Include="Assets\Scripts\NetworkManagerUI.cs" />
     <Compile Include="Assets\Scripts\MouseItemData.cs" />
     <Compile Include="Assets\WorldManager.cs" />
