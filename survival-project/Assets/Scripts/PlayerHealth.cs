@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : NetworkBehaviour
 {
     public int currentHealth;
     public int maxHealth = 100;
@@ -14,6 +15,8 @@ public class PlayerHealth : MonoBehaviour
     private PlayerNetwork playerNetwork;
 
     public HealthBar healthBar;
+    //public Transform playerRespawnPoint;
+    private Vector3Int respawnPosition = new Vector3Int(0, 0, 0);
 
     private void Awake()
     {
@@ -41,7 +44,8 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0) //If your health is equal to or less than 0
         {
-            Debug.Log("PLAYER HAS DIED!"); //DIE!
+            Debug.Log("YOU DIED!");
+            StartCoroutine(PlayerRespawn());
         }
     }
 
@@ -63,5 +67,22 @@ public class PlayerHealth : MonoBehaviour
             currentHealth += healthRegen;
             healthBar.SetHealth(currentHealth);
         }
+    }
+    private float RespawnTime = 3f;
+    private IEnumerator PlayerRespawn()
+    {
+        bool respawned = false;
+        //When a player dies, play a death animation
+        playerNetwork.state = PlayerNetwork.State.Dead;
+        yield return new WaitForSeconds(RespawnTime); //Wait for respawn time
+        currentHealth = maxHealth; //Current health will also be set back to max health
+        healthBar.SetHealth(currentHealth); //Update the health bar
+        if (respawned == false)
+        {
+            this.gameObject.transform.position = respawnPosition; //Set player position to respawn position (default is 0, 0, 0)
+            respawned = true;
+        }
+        playerNetwork.state = PlayerNetwork.State.Normal;
+        yield break; //End the couroutine
     }
 }
