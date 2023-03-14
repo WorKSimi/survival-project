@@ -12,6 +12,7 @@ public class WorldTime : MonoBehaviour
     public float tick; // Increasing the tick, increases second rate
     public float seconds;
     public int mins;
+    public int totalMins; //Mins used for gradiant
     public int hours;
     public int days = 1;
 
@@ -24,7 +25,8 @@ public class WorldTime : MonoBehaviour
     private void Awake()
     {
         _light = GetComponent<Light2D>();
-        hours = 12; //Have the game start at hour 12 (day)
+        hours = 10; //Have the game start at hour 12 (day)
+        totalMins = 600; //Set total mins equal to hour 10
     }
 
     void FixedUpdate() 
@@ -46,6 +48,8 @@ public class WorldTime : MonoBehaviour
         {
             seconds = 0;
             mins += 1;
+            totalMins += 1; //Add 1 to total mins counter
+            ChangeColor(); //Change color of the world
         }
 
         if (mins >= 60) //60 min = 1 hr
@@ -57,9 +61,15 @@ public class WorldTime : MonoBehaviour
         if (hours >= 24) //24 hr = 1 day
         {
             hours = 0;
+            totalMins = 0; //Reset total mins back to 0
             days += 1;
         }
         
+    }
+
+    private float PercentOfDay(int totalMins)
+    {
+        return (float)totalMins % 1440 / 1440; //Total minutes past divded by minutes in a day
     }
     //public void DisplayTime() // Shows time and day in ui
     //{
@@ -69,101 +79,104 @@ public class WorldTime : MonoBehaviour
 
     private void ChangeColor() 
     {
-        if (hours == 0) //Hour 0, Night [Color 0]
-        {
-            _light.color = myColors[0];
-        }
-        if (hours == 1) //Hour 1, Night [Color 0]
-        {
-            _light.color = myColors[0];
-        }
-        if (hours == 2) //Hour 2, Night [Color 0]
-        {
-            _light.color = myColors[0];
-        }
-        if (hours == 3) //Hour 3, Night [Color 0]
-        {
-            _light.color = myColors[0];
-        }
-        if (hours == 4) //Hour 4, Night [Color 0]
-        {
-            _light.color = myColors[0];
-        }
-        if (hours == 5) //Hour 5, Night Ending [Color 1]
-        {
-            _light.color = myColors[1];
-        }
-        if (hours == 6) //Hour 6, Day Starts [Color 2]
-        {
-            _light.color = myColors[2];
-        }
-        if (hours == 7) //Hour 7, Day [Color 3]
-        {
-            _light.color = myColors[3];
-        }
-        if (hours == 8) //Hour 8, Day [Color 4]
-        {
-            _light.color = myColors[4];
-        }
-        if (hours == 9) //Hour 9, Day [Color 5]
-        {
-            _light.color = myColors[5];
-        }
-        if (hours == 10) // Day [Color 6]
-        {
-            _light.color = myColors[6];
-        }
-        if (hours == 11) // Day [Color 6]
-        {
-            _light.color = myColors[6];
-        }
-        if (hours == 12) // Day [Color 6]
-        {
-            _light.color = myColors[6];
-        }
-        if (hours == 13) // Day [Color 6]
-        {
-            _light.color = myColors[6];
-        }
-        if (hours == 14) //Color 6
-        {
-            _light.color = myColors[6];
-        }
-        if (hours == 15) //Color 6
-        {
-            _light.color = myColors[6];
-        }
-        if (hours == 16) //Color 5
-        {
-            _light.color = myColors[5];
-        }
-        if (hours == 17) //Color 4
-        {
-            _light.color = myColors[4];
-        }
-        if (hours == 18) //Color 3
-        {
-            _light.color = myColors[3];
-        }
-        if (hours == 19) //[Color 2]
-        {
-            _light.color = myColors[2];
-        }
-        if (hours == 20) //Night Starts [Color 1]
-        {
-            _light.color = myColors[1];
-        }
-        if (hours == 21) //Night
-        {
-            _light.color = myColors[0];
-        }
-        if (hours == 22) //Night
-        {
-            _light.color = myColors[0];
-        }
-        if (hours == 23) //Hour 23, Night
-        {
-            _light.color = myColors[0];
-        }            
+        _light.color = gradient.Evaluate(PercentOfDay(totalMins));
+        Debug.Log("Changing Time!");
+        Debug.Log(PercentOfDay(totalMins));
+        //if (hours == 0) //Hour 0, Night [Color 0]
+        //{
+        //    _light.color = myColors[0];
+        //}
+        //if (hours == 1) //Hour 1, Night [Color 0]
+        //{
+        //    _light.color = myColors[0];
+        //}
+        //if (hours == 2) //Hour 2, Night [Color 0]
+        //{
+        //    _light.color = myColors[0];
+        //}
+        //if (hours == 3) //Hour 3, Night [Color 0]
+        //{
+        //    _light.color = myColors[0];
+        //}
+        //if (hours == 4) //Hour 4, Night [Color 0]
+        //{
+        //    _light.color = myColors[0];
+        //}
+        //if (hours == 5) //Hour 5, Night Ending [Color 1]
+        //{
+        //    _light.color = myColors[1];
+        //}
+        //if (hours == 6) //Hour 6, Day Starts [Color 2]
+        //{
+        //    _light.color = myColors[2];
+        //}
+        //if (hours == 7) //Hour 7, Day [Color 3]
+        //{
+        //    _light.color = myColors[3];
+        //}
+        //if (hours == 8) //Hour 8, Day [Color 4]
+        //{
+        //    _light.color = myColors[4];
+        //}
+        //if (hours == 9) //Hour 9, Day [Color 5]
+        //{
+        //    _light.color = myColors[5];
+        //}
+        //if (hours == 10) // Day [Color 6]
+        //{
+        //    _light.color = myColors[6];
+        //}
+        //if (hours == 11) // Day [Color 6]
+        //{
+        //    _light.color = myColors[6];
+        //}
+        //if (hours == 12) // Day [Color 6]
+        //{
+        //    _light.color = myColors[6];
+        //}
+        //if (hours == 13) // Day [Color 6]
+        //{
+        //    _light.color = myColors[6];
+        //}
+        //if (hours == 14) //Color 6
+        //{
+        //    _light.color = myColors[6];
+        //}
+        //if (hours == 15) //Color 6
+        //{
+        //    _light.color = myColors[6];
+        //}
+        //if (hours == 16) //Color 5
+        //{
+        //    _light.color = myColors[5];
+        //}
+        //if (hours == 17) //Color 4
+        //{
+        //    _light.color = myColors[4];
+        //}
+        //if (hours == 18) //Color 3
+        //{
+        //    _light.color = myColors[3];
+        //}
+        //if (hours == 19) //[Color 2]
+        //{
+        //    _light.color = myColors[2];
+        //}
+        //if (hours == 20) //Night Starts [Color 1]
+        //{
+        //    _light.color = myColors[1];
+        //}
+        //if (hours == 21) //Night
+        //{
+        //    _light.color = myColors[0];
+        //}
+        //if (hours == 22) //Night
+        //{
+        //    _light.color = myColors[0];
+        //}
+        //if (hours == 23) //Hour 23, Night
+        //{
+        //    _light.color = myColors[0];
+        //}            
     }        
 }
