@@ -9,8 +9,10 @@ public class PlayerHelmet : NetworkBehaviour
 {
     public Image HelmetSprite;
     public MouseItemData mouseItemData;
+    public PlayerHealth playerHealth;
     public bool IsHelmetEquiped;
     public string equippedHelmet = "";
+    public int helmetDefense;
 
     [Header("Helmet Sprites")]
 
@@ -43,6 +45,7 @@ public class PlayerHelmet : NetworkBehaviour
                     IsHelmetEquiped = true;
                     HelmetCatalog(); //Function for all helmet types
                     mouseItemData.ClearSlot(); //Remove the item from the mouse inventory slot
+                    playerHealth.UpdateArmor(); //Update the armor value of the player
                 }
             }
         }
@@ -53,6 +56,8 @@ public class PlayerHelmet : NetworkBehaviour
                 Debug.Log("Removing Helmet!");
                 IsHelmetEquiped = false;
                 HelmetRemoval();
+                helmetDefense = 0;
+                playerHealth.UpdateArmor();
                 mouseItemData.UpdateMouseSlot();
             }
         }
@@ -64,6 +69,7 @@ public class PlayerHelmet : NetworkBehaviour
         {
             HelmetSprite.sprite = WoodHelmetSprite;
             equippedHelmet = "Wood Helmet";
+            helmetDefense = WoodHelmet.DefenseValue;
             Debug.Log("Wood Helmet Equipped");
         }
 
@@ -71,6 +77,7 @@ public class PlayerHelmet : NetworkBehaviour
         {
             HelmetSprite.sprite = TinHelmetSprite;
             equippedHelmet = "Tin Helmet";
+            helmetDefense = TinHelmet.DefenseValue;
             Debug.Log("Tin Helmet Equipped");
         }
 
@@ -78,6 +85,7 @@ public class PlayerHelmet : NetworkBehaviour
         {
             HelmetSprite.sprite = IronHelmetSprite;
             equippedHelmet = "Iron Helmet";
+            helmetDefense = IronHelmet.DefenseValue;
             Debug.Log("Iron Helmet Equipped");
         }
 
@@ -85,6 +93,7 @@ public class PlayerHelmet : NetworkBehaviour
         {
             HelmetSprite.sprite = BronzeHelmetSprite;
             equippedHelmet = "Bronze Helmet";
+            helmetDefense = BronzeHelmet.DefenseValue;
             Debug.Log("Bronze Helmet Equipped");
         }
     }
@@ -95,7 +104,7 @@ public class PlayerHelmet : NetworkBehaviour
         {
             HelmetSprite.sprite = null;
             equippedHelmet = "";
-            mouseItemData.AssignedInventorySlot.itemData = WoodHelmet;
+            mouseItemData.AssignedInventorySlot.itemData = WoodHelmet;            
             Debug.Log("Wood Helmet Removed");
         }
 

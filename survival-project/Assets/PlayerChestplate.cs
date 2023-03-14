@@ -9,8 +9,10 @@ public class PlayerChestplate : NetworkBehaviour
 {
     public Image ChestplateSprite;
     public MouseItemData mouseItemData;
+    public PlayerHealth playerHealth;
     public bool IsChestplateEquiped;
     public string equippedChestplate = "";
+    public int ChestplateDefense;
 
     [Header("Helmet Sprites")]
 
@@ -43,6 +45,7 @@ public class PlayerChestplate : NetworkBehaviour
                     IsChestplateEquiped = true;
                     ChestplateCatalog(); //Function for all helmet types
                     mouseItemData.ClearSlot(); //Remove the item from the mouse inventory slot
+                    playerHealth.UpdateArmor(); //Update the armor value of the player                           
                 }
             }
         }
@@ -53,6 +56,8 @@ public class PlayerChestplate : NetworkBehaviour
                 Debug.Log("Removing Chestplate!");
                 IsChestplateEquiped = false;
                 ChestplateRemoval();
+                ChestplateDefense = 0;
+                playerHealth.UpdateArmor();
                 mouseItemData.UpdateMouseSlot();
             }
         }
@@ -64,6 +69,7 @@ public class PlayerChestplate : NetworkBehaviour
         {
             ChestplateSprite.sprite = WoodChestplateSprite;
             equippedChestplate = "Wood Chestplate";
+            ChestplateDefense = WoodChestplate.DefenseValue;
             Debug.Log("Wood Chestplate Equipped");
         }
 
@@ -71,6 +77,7 @@ public class PlayerChestplate : NetworkBehaviour
         {
             ChestplateSprite.sprite = TinChestplateSprite;
             equippedChestplate = "Tin Chestplate";
+            ChestplateDefense = TinChestplate.DefenseValue;
             Debug.Log("Tin Helmet Equipped");
         }
 
@@ -78,6 +85,7 @@ public class PlayerChestplate : NetworkBehaviour
         {
             ChestplateSprite.sprite = IronChestplateSprite;
             equippedChestplate = "Iron Chestplate";
+            ChestplateDefense = IronChestplate.DefenseValue;
             Debug.Log("Iron Helmet Equipped");
         }
 
@@ -85,6 +93,7 @@ public class PlayerChestplate : NetworkBehaviour
         {
             ChestplateSprite.sprite = BronzeChestplateSprite;
             equippedChestplate = "Bronze Chestplate";
+            ChestplateDefense = BronzeChestplate.DefenseValue;
             Debug.Log("Bronze Helmet Equipped");
         }
     }
@@ -95,7 +104,7 @@ public class PlayerChestplate : NetworkBehaviour
         {
             ChestplateSprite.sprite = null;
             equippedChestplate = "";
-            mouseItemData.AssignedInventorySlot.itemData = WoodChestplate;
+            mouseItemData.AssignedInventorySlot.itemData = WoodChestplate;           
             Debug.Log("Wood Helmet Removed");
         }
 

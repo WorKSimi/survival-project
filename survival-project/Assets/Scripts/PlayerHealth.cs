@@ -11,9 +11,16 @@ public class PlayerHealth : MonoBehaviour
     public bool isHealthFull;
     private int healthRegen = 1; //How much health is regenerated
 
-    private PlayerNetwork playerNetwork;
+    public int playerTotalDefense = 0; //Total defense value the player has
+    private int playerHelmetDefense = 0; //Defense value the player helmet has
+    private int playerChestplateDefense = 0; //Defense value the player chestplate has
+    private float respawnTime = 5f; //Value for respawn time
 
+    private PlayerNetwork playerNetwork;
+    public PlayerChestplate playerChestplate;
+    public PlayerHelmet playerHelmet;
     public HealthBar healthBar;
+    public Vector3Int respawnPoint = new Vector3Int(0, 0, 0);
 
     private void Awake()
     {
@@ -35,14 +42,29 @@ public class PlayerHealth : MonoBehaviour
     {
         if (playerNetwork.state != PlayerNetwork.State.Rolling) //If player is not rolling
         {
-            currentHealth -= amount; //Take damage
+            var damageToTake = amount - playerTotalDefense; //Subtract player defense from amount to take
+            if (damageToTake < 1) damageToTake = 1; //If the damage to take is less then 1, set it to 1
+            currentHealth -= damageToTake; //Take damage           
             healthBar.SetHealth(currentHealth); //Update Healthbar
         }
 
         if (currentHealth <= 0) //If your health is equal to or less than 0
         {
-            Debug.Log("PLAYER HAS DIED!"); //DIE!
+            StartCoroutine(Die());
         }
+    }
+
+    public IEnumerator Die() //Function for player death
+    {
+        playerNetwork.state = PlayerNetwork.State.Dead; //Set state to dead
+        yield return new WaitForSeconds(respawnTime); //Wait for respawn time
+        this.gameObject.transform.position = respawnPoint; //Set player position back to respawn point
+        playerNetwork.state = PlayerNetwork.State.Normal; //Set state back to normal
+
+        currentHealth = maxHealth; //Set player health back to full
+        healthBar.SetHealth(currentHealth); //Update the health bar
+
+        //TO DO - DEATH ANIMATION!
     }
 
     public void HealHealth(int amount) //Function for food healing HP
@@ -63,5 +85,13 @@ public class PlayerHealth : MonoBehaviour
             currentHealth += healthRegen;
             healthBar.SetHealth(currentHealth);
         }
+    }
+
+    public void UpdateArmor() //function used by other scripts to update the players armor
+    {
+        playerChestplateDefense = playerChestplate.ChestplateDefense;
+        playerHelmetDefense = playerHelmet.helmetDefense;
+
+        playerTotalDefense = playerChestplateDefense + playerHelmetDefense;
     }
 }

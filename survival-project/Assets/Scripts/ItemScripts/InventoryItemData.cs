@@ -23,15 +23,19 @@ public class InventoryItemData : ScriptableObject
     public int GoldValue;
     public string ItemType;
     public GameObject ItemPrefab;
+
     [Header("Weapons and Tools")]
     public double itemDamage;
     public GameObject projectilePrefab;
     public float projectileSpeed;
     public float projectileLifetime;
+
+    [Header("Equipment and Armor")]
+    public int DefenseValue;
+
     [Header("Other")]
     public RuleTile ItemTile;
-    public int HealthHealed;
-
+    public int HealthHealed;    
 
     public void UseItem()
     {

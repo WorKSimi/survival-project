@@ -2431,7 +2431,7 @@ MonoBehaviour:
   thisPlayer: {fileID: 3430272870254572311}
   validTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
   currentSpawns: 0
-  maxSpawns: 0
+  maxSpawns: 1
   mobPool:
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
 --- !u!1 &2156278191627496922
@@ -4913,7 +4913,11 @@ MonoBehaviour:
   maxHealth: 100
   healthRegenOn: 0
   isHealthFull: 0
+  playerTotalDefense: 0
+  playerChestplate: {fileID: 4054673190450678986}
+  playerHelmet: {fileID: 3888090876268265113}
   healthBar: {fileID: 5639924605906436553}
+  respawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &6396074603074503390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5983,8 +5987,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HelmetSprite: {fileID: 3990065792211944325}
   mouseItemData: {fileID: 5328690029759843884}
+  playerHealth: {fileID: 1561123434143958599}
   IsHelmetEquiped: 0
   equippedHelmet: 
+  helmetDefense: 0
   WoodHelmetSprite: {fileID: 652334077, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   TinHelmetSprite: {fileID: -1931848229, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   IronHelmetSprite: {fileID: -1259415857, guid: a07eed7efbabc9847911472e4f78a966,
@@ -10495,8 +10501,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChestplateSprite: {fileID: 882435293724959413}
   mouseItemData: {fileID: 5328690029759843884}
+  playerHealth: {fileID: 1561123434143958599}
   IsChestplateEquiped: 0
   equippedChestplate: 
+  ChestplateDefense: 0
   WoodChestplateSprite: {fileID: 383090137, guid: a07eed7efbabc9847911472e4f78a966,
     type: 3}
   TinChestplateSprite: {fileID: -2104806153, guid: a07eed7efbabc9847911472e4f78a966,
