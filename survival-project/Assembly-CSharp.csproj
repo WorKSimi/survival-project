@@ -129,6 +129,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
     <Compile Include="Assets\Scripts\TreeLogic.cs" />
     <Compile Include="Assets\LeanTween\Testing\Testing243.cs" />
+    <Compile Include="Assets\PlayerChestplate.cs" />
     <Compile Include="Assets\TestLobby.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventoryUIController.cs" />

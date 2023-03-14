@@ -19,6 +19,13 @@ public class PlayerHelmet : NetworkBehaviour
     public Sprite IronHelmetSprite;
     public Sprite BronzeHelmetSprite;
 
+    [Header("Helmet Item Data")]
+
+    public InventoryItemData WoodHelmet;
+    public InventoryItemData TinHelmet;
+    public InventoryItemData IronHelmet;
+    public InventoryItemData BronzeHelmet;
+
     private void Awake()
     {
         IsHelmetEquiped = false;
@@ -43,8 +50,10 @@ public class PlayerHelmet : NetworkBehaviour
         {
             if (mouseItemData.AssignedInventorySlot.ItemData == null) //Mouse inventory slot is empty
             {
-                //Set the helmet slot data back to empty
-                //Add the item the helmet is equivilant to into the mouse item data
+                Debug.Log("Removing Helmet!");
+                IsHelmetEquiped = false;
+                HelmetRemoval();
+                mouseItemData.UpdateMouseSlot();
             }
         }
     }
@@ -77,6 +86,41 @@ public class PlayerHelmet : NetworkBehaviour
             HelmetSprite.sprite = BronzeHelmetSprite;
             equippedHelmet = "Bronze Helmet";
             Debug.Log("Bronze Helmet Equipped");
+        }
+    }
+
+    public void HelmetRemoval()
+    {
+        if (equippedHelmet == "Wood Helmet")
+        {
+            HelmetSprite.sprite = null;
+            equippedHelmet = "";
+            mouseItemData.AssignedInventorySlot.itemData = WoodHelmet;
+            Debug.Log("Wood Helmet Removed");
+        }
+
+        else if (equippedHelmet == "Tin Helmet")
+        {
+            HelmetSprite.sprite = null;
+            equippedHelmet = "";
+            mouseItemData.AssignedInventorySlot.itemData = TinHelmet;
+            Debug.Log("Tin Helmet Removed");
+        }
+
+        else if (equippedHelmet == "Iron Helmet")
+        {
+            HelmetSprite.sprite = null;
+            equippedHelmet = "";
+            mouseItemData.AssignedInventorySlot.itemData = IronHelmet;
+            Debug.Log("Iron Helmet Removed");
+        }
+
+        else if (equippedHelmet == "Bronze Helmet")
+        {
+            HelmetSprite.sprite = null;
+            equippedHelmet = "";
+            mouseItemData.AssignedInventorySlot.itemData = BronzeHelmet;
+            Debug.Log("Bronze Helmet Removed");
         }
     }
 }

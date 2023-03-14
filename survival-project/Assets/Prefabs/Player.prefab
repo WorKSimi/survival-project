@@ -5984,12 +5984,17 @@ MonoBehaviour:
   HelmetSprite: {fileID: 3990065792211944325}
   mouseItemData: {fileID: 5328690029759843884}
   IsHelmetEquiped: 0
+  equippedHelmet: 
   WoodHelmetSprite: {fileID: 652334077, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   TinHelmetSprite: {fileID: -1931848229, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   IronHelmetSprite: {fileID: -1259415857, guid: a07eed7efbabc9847911472e4f78a966,
     type: 3}
   BronzeHelmetSprite: {fileID: 1972000508, guid: a07eed7efbabc9847911472e4f78a966,
     type: 3}
+  WoodHelmet: {fileID: 11400000, guid: b7dccd0043d61664ab2482d6a7795a13, type: 2}
+  TinHelmet: {fileID: 11400000, guid: 4c849ea98e8ef7d4b8629af1bf446bdd, type: 2}
+  IronHelmet: {fileID: 11400000, guid: 86d623191c8de644694c408ecacab389, type: 2}
+  BronzeHelmet: {fileID: 11400000, guid: c2ee598b1b3667c4c9817d74dfcd5912, type: 2}
 --- !u!114 &1182050742987791200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6030,7 +6035,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 3990065792211944325}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -10342,6 +10347,168 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8032559226102417140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6831500068298811697}
+  - component: {fileID: 4313201251939168132}
+  - component: {fileID: 8360819185433884702}
+  - component: {fileID: 882435293724959413}
+  - component: {fileID: 4054673190450678986}
+  m_Layer: 5
+  m_Name: Player Chestplate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6831500068298811697
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032559226102417140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5328690029055835430}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -660, y: 11.500008}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4313201251939168132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032559226102417140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 882435293724959413}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4054673190450678986}
+        m_TargetAssemblyTypeName: PlayerChestplate, Assembly-CSharp
+        m_MethodName: EquipChestplate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!222 &8360819185433884702
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032559226102417140}
+  m_CullTransparentMesh: 1
+--- !u!114 &882435293724959413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032559226102417140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4054673190450678986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032559226102417140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d097ce7ed496743924e6eaf8355aab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChestplateSprite: {fileID: 882435293724959413}
+  mouseItemData: {fileID: 5328690029759843884}
+  IsChestplateEquiped: 0
+  equippedChestplate: 
+  WoodChestplateSprite: {fileID: 383090137, guid: a07eed7efbabc9847911472e4f78a966,
+    type: 3}
+  TinChestplateSprite: {fileID: -2104806153, guid: a07eed7efbabc9847911472e4f78a966,
+    type: 3}
+  IronChestplateSprite: {fileID: -1572543380, guid: a07eed7efbabc9847911472e4f78a966,
+    type: 3}
+  BronzeChestplateSprite: {fileID: -473378838, guid: a07eed7efbabc9847911472e4f78a966,
+    type: 3}
+  WoodChestplate: {fileID: 11400000, guid: 5209c638931633543b03dd9cf5e65241, type: 2}
+  TinChestplate: {fileID: 11400000, guid: cb0ae26130ee4a94f9daf26f10173436, type: 2}
+  IronChestplate: {fileID: 11400000, guid: 610f5e4a423685f40ab97b8e8fd5355e, type: 2}
+  BronzeChestplate: {fileID: 11400000, guid: 553c499af4250a34caa76b3620cdf769, type: 2}
 --- !u!1 &8085936111080725542
 GameObject:
   m_ObjectHideFlags: 0
@@ -10353,8 +10520,7 @@ GameObject:
   - component: {fileID: 572909712831558781}
   - component: {fileID: 6474472308151965125}
   - component: {fileID: 6844337498401036859}
-  - component: {fileID: 858120468114273982}
-  - component: {fileID: 7898786445973567002}
+  - component: {fileID: 2724724120649229603}
   m_Layer: 0
   m_Name: SlashAnimation
   m_TagString: Untagged
@@ -10449,33 +10615,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &858120468114273982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8085936111080725542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 0
-  SyncRotAngleX: 0
-  SyncRotAngleY: 0
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 0
---- !u!114 &7898786445973567002
+--- !u!114 &2724724120649229603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11700,6 +11840,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7742373932456866378}
+    - targetCorrespondingSourceObject: {fileID: 8320818365991003114, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6831500068298811697}
   m_SourcePrefab: {fileID: 100100000, guid: bb5ec6c3ad252d34ab6ae13b80e947ad, type: 3}
 --- !u!114 &4118994911359268602 stripped
 MonoBehaviour:
