@@ -12,6 +12,7 @@ public class UseItemManager : NetworkBehaviour
     private Tilemap interactiveTilemap; //The interactive tilemap of the world 
     private Tilemap groundTilemap;
     private Tilemap waterTilemap;
+    public bool healCooldownComplete;
 
     public bool facingRight; //Bool for if the player is facing right
     public bool facingLeft; //Bool if the player is facing left
@@ -46,6 +47,7 @@ public class UseItemManager : NetworkBehaviour
     private Vector3 playerPos2; //Player normal position
 
     private PlayerHealth playerHealth;
+    private PlayerBuffsDebuffs playerBuffsDebuffs;
 
     private Vector3Int mousePos; //Mouse position on grid
     private Vector3Int previousMousePos; //Previous mouse position on grid
@@ -62,6 +64,7 @@ public class UseItemManager : NetworkBehaviour
 
     void Awake()
     {
+        healCooldownComplete = true;
         var gridObject = GameObject.FindWithTag("Grid");
         grid = gridObject.GetComponent<Grid>();
 
@@ -81,6 +84,7 @@ public class UseItemManager : NetworkBehaviour
         swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
 
         playerHealth = thisPlayer.GetComponent<PlayerHealth>();
+        playerBuffsDebuffs = thisPlayer.GetComponent<PlayerBuffsDebuffs>();
     }
 
     void Update()
@@ -350,7 +354,8 @@ public class UseItemManager : NetworkBehaviour
 
     public void UseFood(int healthHealed)
     {
-        playerHealth.HealHealth(healthHealed);       
+        playerHealth.HealHealth(healthHealed);
+        StartCoroutine(healingCooldown());
     }
 
     public void UseWaterCan()
@@ -399,6 +404,15 @@ public class UseItemManager : NetworkBehaviour
         }
         else return false;
     }    
+
+    public IEnumerator healingCooldown()
+    {
+        healCooldownComplete = false; //Set cooldown complete to false
+        playerBuffsDebuffs.FullStomachDebuff = true; //Set full stomach debuff to true
+        yield return new WaitForSeconds(60f); //Do 60 second cooldown
+        healCooldownComplete = true; //Set cooldown complete to true
+        playerBuffsDebuffs.FullStomachDebuff = false; //Turn full stomach debuff off
+    }
 
     private void SwingTweenAnimation()
     {      
@@ -475,6 +489,12 @@ public class UseItemManager : NetworkBehaviour
         projectile.Projectiledamage = itemDamage;
         projectile.Projectilelifetime = projectileLifetime;
         projectile.StartDestructionCoroutine();
+    }
+
+    [ServerRpc]
+    public void PlaceBlockServerRpc()
+    {
+
     }
 
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this

@@ -196,11 +196,14 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Food":
-                    if (player.GetComponent<UseItemManager>().IsHealthFull() == false)
+                    if (player.GetComponent<UseItemManager>().IsHealthFull() == false) //If health isnt full
                     {
-                        player.GetComponent<UseItemManager>().UseFood(itemData.HealthHealed);
-                        slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
-                        RefreshStaticDisplay();
+                        if (player.GetComponent<UseItemManager>().healCooldownComplete == true) //If cooldown is done
+                        {
+                            player.GetComponent<UseItemManager>().UseFood(itemData.HealthHealed);
+                            slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
+                            RefreshStaticDisplay();
+                        }
                     }
                 break;
 

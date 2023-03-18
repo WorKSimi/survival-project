@@ -78,6 +78,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b2cbb7b25d67ad4409c394642689f787, type: 3}
   - {fileID: 21300000, guid: 39ad9163c94d11c4a8527b619048c4db, type: 3}
   - {fileID: 21300000, guid: 352e7a63d835ea04082e75c5267a6dab, type: 3}
+  - {fileID: 21300000, guid: 3fedbd7352690cf43bb32794f696a8bc, type: 3}
   - {fileID: 21300000, guid: f2b187d3f5759c940867c3bdb7104d81, type: 3}
   - {fileID: 21300000, guid: 69592e26efe101541b93faa6ad4b1a26, type: 3}
   - {fileID: 21300000, guid: a552c536116b12c4ea8321851876c201, type: 3}
@@ -412,6 +413,7 @@ SpriteAtlas:
   - SnailPlaceholder
   - BobFaceRight
   - PlaceholderSquare
+  - FoodTimerPH
   - FaceRight
   - FaceForward
   - TestWaterTile

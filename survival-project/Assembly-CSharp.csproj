@@ -171,6 +171,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\InventorySlot_UI.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingSceneSwitching.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
+    <Compile Include="Assets\PlayerBuffsDebuffs.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\Database.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\UniqueID.cs" />
