@@ -138,6 +138,7 @@ public class HotbarDisplay : StaticInventoryDisplay
         if (_playerControls.Player.MouseWheel.ReadValue<float>() < -0.1f) ChangeIndex(1); //Changes selected hotbar slot the other way
 
         ChangeHeldItemText();
+        AreYouHoldingPickOrBlock();
         DisplayHeldWeaponSprite();
         DisplayHeldBowSprite();
     }
@@ -150,8 +151,6 @@ public class HotbarDisplay : StaticInventoryDisplay
         }
         else heldItemText.SetText("");
     }    
-
-
 
     private void UseItem(InputAction.CallbackContext obj)
     {
@@ -278,6 +277,23 @@ public class HotbarDisplay : StaticInventoryDisplay
             else heldItemSpriteRenderer.sprite = null;
         }
         else heldItemSpriteRenderer.sprite = null;
+    }
+
+    private void AreYouHoldingPickOrBlock()
+    {
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) //If the current held item is not null
+        {
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Block") //If held item type is block
+            {
+                useItemManager.HoldingPickOrBlock = true; //Set to true
+            }
+            else if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Pick") //If held item type is pick
+            {
+                useItemManager.HoldingPickOrBlock = true; //Set to true
+            }
+            else useItemManager.HoldingPickOrBlock = false; //Else set to false
+        }
+        else useItemManager.HoldingPickOrBlock = false; //If item data is null, set to false
     }
 
     private void ChangeIndex(int direction)

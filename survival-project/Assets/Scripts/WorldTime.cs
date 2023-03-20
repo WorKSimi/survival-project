@@ -79,8 +79,6 @@ public class WorldTime : MonoBehaviour
 
     private void ChangeColor() 
     {
-        _light.color = gradient.Evaluate(PercentOfDay(totalMins));
-        Debug.Log("Changing Time!");
-        Debug.Log(PercentOfDay(totalMins));    
+        _light.color = gradient.Evaluate(PercentOfDay(totalMins));       
     }        
 }

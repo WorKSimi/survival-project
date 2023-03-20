@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FlintPickaxe
   m_EditorClassIdentifier: 
   ID: 7
-  DisplayName: FlintPickaxe
+  DisplayName: Flint Pickaxe
   Description: A shoddy pickaxe for basic destruction
   Icon: {fileID: 1782844944, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
@@ -22,8 +22,9 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: 72201346e3a830e4e9b3cd20e3652d09,
     type: 3}
   itemDamage: 5
-  ItemTile: {fileID: 0}
-  HealthHealed: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  DefenseValue: 0
+  ItemTile: {fileID: 0}
+  HealthHealed: 0

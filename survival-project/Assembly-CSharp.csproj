@@ -87,6 +87,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSequencer.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\InventoryItemData.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerMovement.cs" />
+    <Compile Include="Assets\TooltipManager.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IInteractable.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\WeaponData.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\LogoCinematic.cs" />
@@ -175,6 +176,7 @@
     <Compile Include="Assets\Scripts\ItemScripts\Database.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\UniqueID.cs" />
+    <Compile Include="Assets\Tooltip.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\ItemSlot.cs" />
     <Compile Include="Assets\Scripts\WaterTile.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />

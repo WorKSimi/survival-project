@@ -60,6 +60,8 @@ public class UseItemManager : NetworkBehaviour
     private Vector2 boxSize = new Vector2(1.5f, 1.5f); //Melee weapon hitbox size
     private Vector3 dir;
 
+    public bool HoldingPickOrBlock = false; //Bool if your holding pickaxe or block. Set to false at the start
+
     private bool swungWeapon = false; //Flag for swinging the weapon
 
     void Awake()
@@ -96,17 +98,25 @@ public class UseItemManager : NetworkBehaviour
         playerPos = grid.WorldToCell(transform.position);
         mousePos = grid.WorldToCell(mouseWorldPos);
 
-        if (IsInRange() == true)
+        if (IsInRange() == true) //If is in range is true
         {
-            interactiveTilemap.SetTile(previousMousePos, null);
-            interactiveTilemap.SetTile(mousePos, hoverTile);
-            previousMousePos = mousePos;
+            if (HoldingPickOrBlock == true) //if your holding pick or block
+            {
+                interactiveTilemap.SetTile(previousMousePos, null);
+                interactiveTilemap.SetTile(mousePos, hoverTile);
+                previousMousePos = mousePos;
+            }
         }
-        else if (IsInRange() == false)
+        else if (IsInRange() == false) //If not in range 
         {
-            interactiveTilemap.SetTile(mousePos, null);
+            interactiveTilemap.SetTile(mousePos, null); //Set interactive tilemap to null at mouse
+            interactiveTilemap.SetTile(previousMousePos, null); //Set to null at previous mouse pos
         }
-
+        if (HoldingPickOrBlock == false) //OR not holding block
+        {
+            interactiveTilemap.SetTile(mousePos, null); //Set interactive tilemap to null at mouse
+            interactiveTilemap.SetTile(previousMousePos, null); //Set to null at previous mouse pos
+        }
         FacingDirection();
 
         Vector2 direction = playerCam.ScreenToWorldPoint
