@@ -16,6 +16,7 @@ public class UseItemManager : NetworkBehaviour
 
     public bool facingRight; //Bool for if the player is facing right
     public bool facingLeft; //Bool if the player is facing left
+    public BlockDatabase blockDatabase; //Database of all tiles in game
 
     public Camera playerCam;
 
@@ -236,20 +237,7 @@ public class UseItemManager : NetworkBehaviour
         }
     }
 
-    public void PlaceBlock(RuleTile ItemTile) //Takes in a ItemTile based on what your holding and places it
-    {
-        if (IsHost) //If host, do this and then spawn it on network
-        {
-            Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
-            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
-        }
-        else if (IsClient)
-        {
-            //Vector3Int mousePos = GetMousePosition();
-            //PlaceBlockServerRpc(mousePos, );
-            Debug.Log("CLIENT PLACEMENT NOT IMPLEMENTED!");
-        }
-    }
+   
 
     [ServerRpc(RequireOwnership = false)]
     public void PlaceBlockServerRpc(Vector3Int tilePosition)
@@ -501,16 +489,59 @@ public class UseItemManager : NetworkBehaviour
         projectile.StartDestructionCoroutine();
     }
 
-    [ServerRpc]
-    public void PlaceBlockServerRpc()
-    {
-
-    }
-
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(attackPoint.position, new Vector3 (1.5f, 1.5f, 0));
+    }
+    public void PlaceBlock(RuleTile ItemTile) //Takes in a ItemTile based on what your holding and places it
+    {
+        if (IsHost) //If host, do this and then spawn it on network
+        {
+            Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
+            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
+        }
+        else if (IsClient)
+        {
+            int tileId = CheckTile(ItemTile);
+            Vector3Int posToPlaceTile = mousePos;
+            PlaceBlockServerRpc(tileId, posToPlaceTile);
+        }
+    }
+
+    [ServerRpc] //Fired by Client, Execute by Server
+    public void PlaceBlockServerRpc(int tileId, Vector3Int position) 
+    {
+        var tile = TileReturner(tileId); //Get tile
+        var tilemap = TilemapReturner(tileId); //Get tilemap
+        tilemap.SetTile(position, tile); //Set the tile
+    }
+
+    public int CheckTile(RuleTile ItemTile)
+    {
+        if (ItemTile == blockDatabase.woodWallData.ItemTile)
+        {
+            return 1;
+        }
+        else return 0;
+    }
+
+    public RuleTile TileReturner(int integer)
+    {
+        if (integer == 1)
+        {
+            return blockDatabase.woodWallData.ItemTile;
+        }
+        else return null;
+    }
+
+    public Tilemap TilemapReturner(int integer)
+    {
+        if (integer == 1)
+        {
+            return wallTilemap;
+        }
+        else return null;
     }
 }

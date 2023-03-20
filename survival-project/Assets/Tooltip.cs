@@ -21,7 +21,14 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        tooltipManager.EnableTooltip(inventorySlot.AssignedInventorySlot.itemData.DisplayName, inventorySlot.AssignedInventorySlot.itemData.Description);
+        tooltipManager.EnableTooltip(inventorySlot.AssignedInventorySlot.itemData.ItemType,
+            inventorySlot.AssignedInventorySlot.itemData.DisplayName,
+            inventorySlot.AssignedInventorySlot.itemData.Description,
+            inventorySlot.AssignedInventorySlot.itemData.itemDamage.ToString(),
+            inventorySlot.AssignedInventorySlot.itemData.DefenseValue.ToString(),
+            inventorySlot.AssignedInventorySlot.itemData.HealthHealed.ToString(),
+            inventorySlot.AssignedInventorySlot.itemData.attackRate.ToString(),
+            inventorySlot.AssignedInventorySlot.itemData.BlockHealth.ToString());
     }
 
     public void OnPointerExit(PointerEventData eventData)

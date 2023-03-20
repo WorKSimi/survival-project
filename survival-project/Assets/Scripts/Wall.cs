@@ -16,6 +16,7 @@ public class Wall : NetworkBehaviour
     private GameObject wallmapObject;
     private Grid grid;
     private Tilemap wallTilemap;
+    public InventoryItemData inventoryItemData;
 
     //private Vector3Int mousePos;
     private Vector3Int thisPosition;
