@@ -14,6 +14,9 @@ public class PlayerChestplate : NetworkBehaviour
     public string equippedChestplate = "";
     public int ChestplateDefense;
 
+    public GameObject chestplateSpriteObject;
+    public Animator chestplateAnimator;
+
     [Header("Helmet Sprites")]
 
     public Sprite WoodChestplateSprite;
@@ -31,6 +34,7 @@ public class PlayerChestplate : NetworkBehaviour
     private void Awake()
     {
         IsChestplateEquiped = false;
+        chestplateSpriteObject.SetActive(false);
     }
 
     public void EquipChestplate() //If you click on the helmet button
@@ -45,7 +49,8 @@ public class PlayerChestplate : NetworkBehaviour
                     IsChestplateEquiped = true;
                     ChestplateCatalog(); //Function for all helmet types
                     mouseItemData.ClearSlot(); //Remove the item from the mouse inventory slot
-                    playerHealth.UpdateArmor(); //Update the armor value of the player                           
+                    playerHealth.UpdateArmor(); //Update the armor value of the player
+                    chestplateSpriteObject.SetActive(true);
                 }
             }
         }
@@ -59,6 +64,7 @@ public class PlayerChestplate : NetworkBehaviour
                 ChestplateDefense = 0;
                 playerHealth.UpdateArmor();
                 mouseItemData.UpdateMouseSlot();
+                chestplateSpriteObject.SetActive(false);
             }
         }
     }

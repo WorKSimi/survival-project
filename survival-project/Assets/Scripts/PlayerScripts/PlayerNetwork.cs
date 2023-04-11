@@ -15,9 +15,13 @@ public class PlayerNetwork : NetworkBehaviour
     private Rigidbody2D rb; //Rigidbody2D of this player
 
     [SerializeField]private Animator animator; //Animator of this player
+    [SerializeField] private Animator helmetAnimator;
+    [SerializeField] private Animator chestplateAnimator;
     [SerializeField]private Camera playerCam; //This players Camera
 
     private SpriteRenderer spritePlayerRenderer; //Sprite render for the player sprite.
+    [SerializeField] private SpriteRenderer helmetSpriteRenderer;
+    [SerializeField] private SpriteRenderer chestplateSpriteRenderer;
     [SerializeField] private GameObject thisPlayer;
 
     private Tilemap waterTilemap; //Water Tilemap
@@ -75,6 +79,8 @@ public class PlayerNetwork : NetworkBehaviour
             case State.Normal:
                 MovementInput();
                 animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+                helmetAnimator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+                chestplateAnimator.SetFloat("Speed", rb.velocity.sqrMagnitude);
                 break;
 
             case State.Rolling:
@@ -117,7 +123,17 @@ public class PlayerNetwork : NetworkBehaviour
             animator.SetBool("FacingUp", false);
             animator.SetBool("FacingDown", false);
 
+            helmetAnimator.SetBool("FacingSide", true);
+            helmetAnimator.SetBool("FacingDown", false);
+            helmetAnimator.SetBool("FacingUp", false);
+
+            chestplateAnimator.SetBool("FacingSide", true);
+            chestplateAnimator.SetBool("FacingDown", false);
+            chestplateAnimator.SetBool("FacingUp", false);
+
             spritePlayerRenderer.flipX = false;
+            helmetSpriteRenderer.flipX = false;
+            chestplateSpriteRenderer.flipX = false;
         }
 
         if (distance.x < 0 && distance.y < 10 && distance.y > -10) //face left
@@ -127,7 +143,17 @@ public class PlayerNetwork : NetworkBehaviour
             animator.SetBool("FacingUp", false);
             animator.SetBool("FacingDown", false);
 
+            helmetAnimator.SetBool("FacingSide", true);
+            helmetAnimator.SetBool("FacingDown", false);
+            helmetAnimator.SetBool("FacingUp", false);
+
+            chestplateAnimator.SetBool("FacingSide", true);
+            chestplateAnimator.SetBool("FacingDown", false);
+            chestplateAnimator.SetBool("FacingUp", false);
+
             spritePlayerRenderer.flipX = true;
+            helmetSpriteRenderer.flipX = true;
+            chestplateSpriteRenderer.flipX = true;
         }
 
         if (distance.y > 0 && distance.x > -10 && distance.x < 10) //Face up
@@ -136,6 +162,14 @@ public class PlayerNetwork : NetworkBehaviour
             animator.SetBool("FacingLeft", false);
             animator.SetBool("FacingUp", true);
             animator.SetBool("FacingDown", false);
+
+            helmetAnimator.SetBool("FacingSide", false);
+            helmetAnimator.SetBool("FacingDown", false);
+            helmetAnimator.SetBool("FacingUp", true);
+
+            chestplateAnimator.SetBool("FacingSide", false);
+            chestplateAnimator.SetBool("FacingDown", false);
+            chestplateAnimator.SetBool("FacingUp", true);
         }
 
         if (distance.y < 0 && distance.x > -10 && distance.x < 10) //Face down
@@ -144,6 +178,14 @@ public class PlayerNetwork : NetworkBehaviour
             animator.SetBool("FacingLeft", false);
             animator.SetBool("FacingUp", false);
             animator.SetBool("FacingDown", true);
+
+            helmetAnimator.SetBool("FacingSide", false);
+            helmetAnimator.SetBool("FacingDown", true);
+            helmetAnimator.SetBool("FacingUp", false);
+
+            chestplateAnimator.SetBool("FacingSide", false);
+            chestplateAnimator.SetBool("FacingDown", true);
+            chestplateAnimator.SetBool("FacingUp", false);
         }
     }
 

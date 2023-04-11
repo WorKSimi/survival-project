@@ -73,6 +73,7 @@ public class AnywhereCrafting : MonoBehaviour
         Campfire,
         WoodClub,
         FlintPickaxe,
+        Torch,
     }
     public void SelectCraftingTable()
     {
@@ -135,6 +136,20 @@ public class AnywhereCrafting : MonoBehaviour
         selected = SelectedRecipe.FlintPickaxe;
     }
 
+    public void SelectTorch()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.Torch.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.Torch.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.Torch.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x1"); //Set component amount 
+
+        selected = SelectedRecipe.Torch;
+    }
+
     public void CraftItem()
     {
         if (selected == SelectedRecipe.CraftingTable)
@@ -152,6 +167,10 @@ public class AnywhereCrafting : MonoBehaviour
         if (selected == SelectedRecipe.FlintPickaxe)
         {
             CraftFlintPickaxe();
+        }
+        if (selected == SelectedRecipe.Torch)
+        {
+            CraftTorch();
         }
         else Debug.Log("Nothing is selected to craft!");
     }
@@ -270,6 +289,27 @@ public class AnywhereCrafting : MonoBehaviour
             {
                 playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.FlintPick, 1);
                 Debug.Log("Crafted Flint Pickaxe");
+            }
+        }
+    }
+
+    private void CraftTorch()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Torch");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 1
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Torch, 2);
+                Debug.Log("Crafted Torch");
             }
         }
     }

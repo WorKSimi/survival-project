@@ -20,6 +20,10 @@ public class HotbarDisplay : StaticInventoryDisplay
 
     private SpriteRenderer swordSpriteRenderer; //Held Sword sprite renderer on object
 
+    private float chargeTime;
+    private float maxChargeTime = 2f; //Max charge time is 2 seconds
+    private float chargeModifier;
+
     private int _maxIndexSize = 9;
     private int _currentIndex = 0;
 
@@ -141,6 +145,41 @@ public class HotbarDisplay : StaticInventoryDisplay
         AreYouHoldingPickOrBlock();
         DisplayHeldWeaponSprite();
         DisplayHeldBowSprite();
+
+        ChargeBow();
+        FireBow();
+    }
+
+    public void ChargeBow()
+    {
+        if (Input.GetMouseButton(0)) //If holding mouse down
+        {
+            chargeTime += Time.deltaTime; //ChargeTime goes up
+            if (chargeTime >= maxChargeTime)
+            {
+                chargeModifier = 1 + maxChargeTime; //If at max (2 seconds) charge multiplier - 1 + 2.0                
+            }
+            else
+            {
+                chargeModifier = 1 + chargeTime; //If below max, charge multiplier is equal to 1 + time spent charging              
+            }           
+        }
+        else chargeTime = 0;       
+    }
+
+    public void FireBow()
+    {
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) //If held item isnt nothing
+        {
+            if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow") //if held item type is bow
+            {
+                if (Input.GetMouseButtonUp(0)) //If Let go of left click
+                {
+                    InventoryItemData itemData = slots[_currentIndex].AssignedInventorySlot.ItemData;
+                    player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime, chargeModifier);
+                }
+            }
+        }
     }
 
     private void ChangeHeldItemText()
@@ -187,7 +226,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Bow":
-                player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime);
+                    //player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime);
                 break;
 
                 case "Rock":

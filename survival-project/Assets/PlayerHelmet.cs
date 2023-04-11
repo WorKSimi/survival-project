@@ -13,6 +13,9 @@ public class PlayerHelmet : NetworkBehaviour
     public bool IsHelmetEquiped;
     public string equippedHelmet = "";
     public int helmetDefense;
+    public GameObject helmetSpriteObject;
+
+    public Animator woodHelmetAnimator;
 
     [Header("Helmet Sprites")]
 
@@ -31,6 +34,7 @@ public class PlayerHelmet : NetworkBehaviour
     private void Awake()
     {
         IsHelmetEquiped = false;
+        helmetSpriteObject.SetActive(false);
     }
 
     public void EquipHelmet() //If you click on the helmet button
@@ -46,6 +50,8 @@ public class PlayerHelmet : NetworkBehaviour
                     HelmetCatalog(); //Function for all helmet types
                     mouseItemData.ClearSlot(); //Remove the item from the mouse inventory slot
                     playerHealth.UpdateArmor(); //Update the armor value of the player
+                    helmetSpriteObject.SetActive(true);
+                    
                 }
             }
         }
@@ -59,6 +65,7 @@ public class PlayerHelmet : NetworkBehaviour
                 helmetDefense = 0;
                 playerHealth.UpdateArmor();
                 mouseItemData.UpdateMouseSlot();
+                helmetSpriteObject.SetActive(false);
             }
         }
     }

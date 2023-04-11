@@ -426,13 +426,13 @@ public class UseItemManager : NetworkBehaviour
         LeanTween.rotateAround(weaponSprite, dir, weaponDegreeChange, 0.2f).setEaseInOutQuart();
         tween.setOnComplete(() => { swungWeapon = !swungWeapon; slashAnimator.SetBool("isSlashing", false); });
     }
-    public void UseBow(double itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime)
+    public void UseBow(double itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime, float chargeMultiplier)
     {
         if (Time.time >= nextAttackTime)
         {
             if (IsHost)
             {
-                LaunchProjectile(itemDamage, projectilePrefab, projectileRotationObject, projectileSpeed, projectileLifetime); //Shoot the projectile
+                LaunchProjectile(itemDamage * chargeMultiplier, projectilePrefab, projectileRotationObject, projectileSpeed * chargeMultiplier, projectileLifetime); //Shoot the projectile
                 nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
             }
 

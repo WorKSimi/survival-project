@@ -40,8 +40,6 @@ public class InventorySlot : ItemSlot
         else return false;
     }
 
-    
-
     public bool SplitStack(out InventorySlot splitStack)
     {
         if (stackSize <= 1) // Is there enough to actually split? If not return false.
@@ -56,6 +54,4 @@ public class InventorySlot : ItemSlot
         splitStack = new InventorySlot(itemData, halfStack); // Creates a copy of this slot with half the stack size.
         return true;
     }
-
-    
 }

@@ -80,7 +80,7 @@ public class InventorySystem
         freeSlot = InventorySlots.FirstOrDefault(i => i.ItemData == null); // Get the first free slot
         return freeSlot == null ? false : true;
     }
-
+    
     public void CraftItem(List<CraftRecipeItem> itemComponents, InventoryItemData createdItem, int itemAmount)
     {
         var FoundItems = new List<FoundItem>();
@@ -110,7 +110,7 @@ public class InventorySystem
                 OnInventorySlotChanged.Invoke(foundItem.itemSlot);
             }
             var CreatedItem = GameObject.Instantiate(createdItem);
-            AddToInventory(CreatedItem, itemAmount);
+            AddToInventory(createdItem, itemAmount);
         }
     }
 }
