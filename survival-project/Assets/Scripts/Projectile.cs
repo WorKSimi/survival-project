@@ -10,12 +10,12 @@ public class Projectile : NetworkBehaviour
 
     private void Awake()
     {
-        Debug.Log("Projectile on creation: " + Projectilelifetime);
+        //Debug.Log("Projectile on creation: " + Projectilelifetime);
     }
 
     public void StartDestructionCoroutine()
     {
-        Debug.Log("Projectile on function call: " + Projectilelifetime);
+        //Debug.Log("Projectile on function call: " + Projectilelifetime);
         StartCoroutine(DestroyProjectileAfterTime(Projectilelifetime));
     }
 

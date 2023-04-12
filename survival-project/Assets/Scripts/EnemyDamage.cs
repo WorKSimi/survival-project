@@ -7,7 +7,7 @@ public class EnemyDamage : MonoBehaviour
     private GameObject player;
     private PlayerHealth playerHealth;
     private bool foundPlayer;
-    [SerializeField] private int damage = 2;
+    public int damage = 2;
 
 
     // Start is called before the first frame update

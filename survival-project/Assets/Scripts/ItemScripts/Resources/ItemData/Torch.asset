@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: -1
   DisplayName: Torch
   Description: 'A torch for lighting stuff up '
-  Icon: {fileID: 21300000, guid: 64055fa368e07ce4aa1876fc0e90f62f, type: 3}
+  Icon: {fileID: 1414955053, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
   MaxStackSize: 999
   GoldValue: 0
   ItemType: Block

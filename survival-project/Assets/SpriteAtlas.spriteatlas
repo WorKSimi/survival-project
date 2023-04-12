@@ -96,6 +96,9 @@ SpriteAtlas:
   - {fileID: -206108745, guid: 729ba0863ec4d17409521e5f6c43a73c, type: 3}
   - {fileID: 76333651, guid: 729ba0863ec4d17409521e5f6c43a73c, type: 3}
   - {fileID: 21300000, guid: 0b4e0f96615aa804d8ea6305c8500a99, type: 3}
+  - {fileID: 1414955053, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
+  - {fileID: -107488313, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
+  - {fileID: -32822050, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
   - {fileID: 21300000, guid: a2b041b757f4f674c8164d75ef2c4664, type: 3}
   - {fileID: 21300000, guid: 83cf1a78d88484f48bf7bce59c1861e9, type: 3}
   - {fileID: 1980537615, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
@@ -478,6 +481,9 @@ SpriteAtlas:
   - Slash_3
   - Slash_2
   - TestTree
+  - torch_On
+  - torch_Off
+  - stinger_Projectile
   - BabyBob
   - WetTilledDirt
   - Snail_InShell

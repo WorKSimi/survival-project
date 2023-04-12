@@ -125,7 +125,7 @@
     <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
-    <Compile Include="Assets\Scripts\SnailEnemy.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\SnailEnemy.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
     <Compile Include="Assets\Lobbymanager.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
@@ -189,6 +189,8 @@
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\BeeEnemy.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\EnemyProjectile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
