@@ -74,14 +74,17 @@ public class MobSpawning : NetworkBehaviour
                 CheckIfCanSpawn(spawnPos);
                 if (canSpawnMob == false) return; //If can spawn mob is false (it failed the parameters) then go back
 
-                var snail = Instantiate(mobPool[0], spawnPos, Quaternion.identity);
+                int number = Random.Range(0, 1);
+                int element = Random.Range(0, mobPool.Length);
+
+                var snail = Instantiate(mobPool[element], spawnPos, Quaternion.identity);
                 snail.GetComponent<NetworkObject>().Spawn();
                 currentSpawns++;
                 var snailScript = snail.GetComponent<SnailEnemy>();
                 var snailHealthScript = snail.GetComponent<EnemyHealth>();
-                snailScript.playerWhoSpawned = thisPlayer;
-                snailScript.startingPosition = spawnPos;
-                snailScript.mobSpawning = this;
+                //snailScript.playerWhoSpawned = thisPlayer;
+                //snailScript.startingPosition = spawnPos;
+                //snailScript.mobSpawning = this;
                 snailHealthScript.mobSpawning = this;
             }
             else if (IsClient)
@@ -104,9 +107,9 @@ public class MobSpawning : NetworkBehaviour
         snail.GetComponent<NetworkObject>().Spawn();
         var snailScript = snail.GetComponent<SnailEnemy>();
         var snailHealthScript = snail.GetComponent<EnemyHealth>();
-        snailScript.playerWhoSpawned = thisPlayer;
-        snailScript.startingPosition = spawnPosition;
-        snailScript.mobSpawning = this;
+        //snailScript.playerWhoSpawned = thisPlayer;
+        //snailScript.startingPosition = spawnPosition;
+        //snailScript.mobSpawning = this;
         snailHealthScript.mobSpawning = this;
     }
 }

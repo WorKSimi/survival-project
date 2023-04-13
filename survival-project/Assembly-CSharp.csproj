@@ -65,6 +65,7 @@
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\RPCManager.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingSequencer.cs" />
+    <Compile Include="Assets\RotateToTarget.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
     <Compile Include="Assets\Scripts\CraftingScripts\AnywhereCrafting.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\AutoLoadPipelineAsset.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Scripts\Shop System\ShopSlot.cs" />
     <Compile Include="Assets\Scripts\WorldGen\NoiseGenerator.cs" />
     <Compile Include="Assets\Input\PlayerControls.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\EnemyProjectile.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StaticInventoryDisplay.cs" />
@@ -185,12 +187,11 @@
     <Compile Include="Assets\BlockDatabase.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\EnemyDamage.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\BeeEnemy.cs" />
     <Compile Include="Assets\Scripts\SnailEnum.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\Scripts\EnemyScripts\BeeEnemy.cs" />
-    <Compile Include="Assets\Scripts\EnemyScripts\EnemyProjectile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

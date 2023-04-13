@@ -22,11 +22,11 @@ public class EnemyDamage : MonoBehaviour
         //LocatePlayer();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            var playerHealthScript = collision.GetComponent<PlayerHealth>();
+            var playerHealthScript = collision.gameObject.GetComponent<PlayerHealth>();
             playerHealthScript.TakeDamage(damage);
         }
     }

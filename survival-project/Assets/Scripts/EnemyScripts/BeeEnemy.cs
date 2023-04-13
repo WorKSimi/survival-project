@@ -13,9 +13,13 @@ public class BeeEnemy : NetworkBehaviour
     [SerializeField] private Transform enemyGFX;
 
     [SerializeField] private GameObject stingerProjectile;
-    [SerializeField] private float projectileSpeed = 5f; //Speed of projectile
-    [SerializeField] private float stingCooldown = 2f; //Fire every 2 seconds
+    [SerializeField] private float projectileSpeed = 3f; //Speed of projectile
     [SerializeField] private float projectileDuration = 5f; //projectile lasts 5 seconds
+    public GameObject rotationObject;
+
+    float nextAttackTime = 0f;
+    private float attackRate = 0.5f; //How many times you can attack per second
+
     public EnemyDamage enemyDamage;
 
     public enum BeeState
@@ -61,23 +65,21 @@ public class BeeEnemy : NetworkBehaviour
         //animator = GetComponent<Animator>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-
+        animator = GetComponent<Animator>();
         InvokeRepeating("UpdatePath", 0f, .5f);
 
         roamPosition = GetRoamingPosition();
 
         currentTime = startingTime;
     }
-    //instead of 1 player, fill an array for every object with the tag Player
-    //Whenever checking distance, do it for each player in the array
 
     private void Update()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
 
-        //animator.SetFloat("Horizontal", rb.velocity.x);
-        //animator.SetFloat("Vertical", rb.velocity.y);
-        //animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+        animator.SetFloat("Horizontal", rb.velocity.x);
+        animator.SetFloat("Vertical", rb.velocity.y);
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
 
         float maxDespawnDistance = 50f;
 
@@ -92,7 +94,7 @@ public class BeeEnemy : NetworkBehaviour
         }
         else if (playerWhoSpawned == null)
         {
-            Debug.Log("ERROR! PLAYER WHO SPAWNED IS NULL!");
+            //Debug.Log("ERROR! PLAYER WHO SPAWNED IS NULL!");
         }
 
         switch (state)
@@ -109,18 +111,20 @@ public class BeeEnemy : NetworkBehaviour
 
             case BeeState.Aggro:
 
-                target = playerToChase.transform; //Sets the target to be the player               
-                MoveToWaypoint(); //Moves the bee to the target (player)
-                targetDirection = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-                StartCoroutine(StingAttack()); //Starts coroutine for the stinger attack
-
-                //Bee will move towards player, and fire projectiles
-
-                //float attackRange = 5f;
-                //if (Vector3.Distance(transform.position, playerToChase.transform.position) < attackRange) //See if player is close enough for attack
-                //{
-                //    state = SnailState.AttackingTarget;
-                //}
+                target = playerToChase.transform; //Sets the target to be the player                                            
+                float attackRange = 5f;
+                if (Vector3.Distance(transform.position, playerToChase.transform.position) < attackRange) //See if player is close enough to stop chasing
+                {
+                    targetDirection = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+                    rb.velocity = targetDirection * 0; //Halt enemy movement 
+                    StingAttack(); //Function for sting attack
+                }
+                else //If player is further, move while attacking
+                {
+                    MoveToWaypoint(); //Moves the bee to the target (player)
+                    targetDirection = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+                    StingAttack(); //Function for sting attack 
+                }
 
                 TargetToFar(); //Sees if player is too far or not. If yes, set back to passive
                 break;
@@ -137,18 +141,25 @@ public class BeeEnemy : NetworkBehaviour
         }
     }
 
-    private IEnumerator StingAttack()
+    private void StingAttack()
     {
-        yield return new WaitForSeconds(stingCooldown); //Wait for sting cooldown        
-        GameObject bullet = Instantiate(stingerProjectile, transform.position, Quaternion.identity);
-        EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
-        projectileScript.enemyProjectileDamage = enemyDamage.damage;
-        projectileScript.enemyProjectileLifetime = projectileDuration;
-        projectileScript.StartDestructionCoroutine();
-        bullet.GetComponent<NetworkObject>().Spawn();
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        fireDirection = target.transform.position - this.transform.position;
-        rb.velocity = fireDirection * projectileSpeed;
+        if (Time.time >= nextAttackTime)
+        {
+            fireDirection = (target.transform.position - this.transform.position).normalized;
+            float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            GameObject bullet = Instantiate(stingerProjectile, transform.position, rotation);
+            EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
+            projectileScript.enemyProjectileDamage = enemyDamage.damage;
+            projectileScript.enemyProjectileLifetime = projectileDuration;
+            projectileScript.StartDestructionCoroutine();
+            bullet.GetComponent<NetworkObject>().Spawn();
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>(); 
+            rb.velocity = fireDirection * projectileSpeed;
+
+            nextAttackTime = Time.time + 1f / attackRate;
+        }
     }
 
     void OnPathComplete(Path p)
@@ -186,7 +197,7 @@ public class BeeEnemy : NetworkBehaviour
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        rb.velocity = direction * 1f;
+        rb.velocity = direction * speed;
         //Vector2 force = direction * speed * Time.deltaTime;
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);

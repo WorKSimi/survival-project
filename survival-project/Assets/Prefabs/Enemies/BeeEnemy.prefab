@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 4488536342794087683}
   - component: {fileID: 2396400685973466845}
   - component: {fileID: 55274916191808300}
+  - component: {fileID: 1903748265375248065}
   m_Layer: 9
   m_Name: BeeEnemy
   m_TagString: Enemy
@@ -65,7 +66,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4648358853205179229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.92, y: -7.55, z: -0.0060265455}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -164,7 +165,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.06, y: -0.24}
@@ -187,7 +188,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -288,22 +289,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16430309250691e4a96f421175f59930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1903748265375248065}
   target: {fileID: 0}
-  speed: 200
+  speed: 5
   nextWaypointDistance: 3
   enemyGFX: {fileID: 0}
   stingerProjectile: {fileID: 3006912499862247658, guid: f79edfd85b761044487b5376ddb9df10,
     type: 3}
-  projectileSpeed: 5
-  stingCooldown: 2
+  projectileSpeed: 7
   projectileDuration: 5
+  rotationObject: {fileID: 0}
   enemyDamage: {fileID: 4648358853205179045}
   playerWhoSpawned: {fileID: 0}
   mobSpawning: {fileID: 0}
   playerToChase: {fileID: 0}
   players: []
   startingPosition: {x: 0, y: 0, z: 0}
+--- !u!95 &1903748265375248065
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4648358853205179229}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 28fe771859e198941bc2918af29dc778, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4648358853535510026
 GameObject:
   m_ObjectHideFlags: 0

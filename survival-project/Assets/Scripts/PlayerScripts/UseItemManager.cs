@@ -95,7 +95,7 @@ public class UseItemManager : NetworkBehaviour
         if (!IsLocalPlayer) return; //If your not local player return
         if (!IsOwner) return; //If not owner return
         playerPos2 = thisPlayer.transform.position;
-        mouseWorldPos = playerCam.ScreenToWorldPoint(Input.mousePosition); 
+        mouseWorldPos = playerCam.ScreenToWorldPoint(Input.mousePosition);
         playerPos = grid.WorldToCell(transform.position);
         mousePos = grid.WorldToCell(mouseWorldPos);
 
@@ -158,7 +158,7 @@ public class UseItemManager : NetworkBehaviour
         {
             facingRight = true;
             dir = Vector3.back;
-            facingLeft = false;           
+            facingLeft = false;
         }
 
         if (mouseWorldPos.x < playerPos2.x)
@@ -168,7 +168,7 @@ public class UseItemManager : NetworkBehaviour
             facingRight = false;
         }
     }
-    
+
     public bool IsInRange()
     {
         float maxRange = 3;
@@ -177,7 +177,7 @@ public class UseItemManager : NetworkBehaviour
         {
             return true;
         }
-        else return false; 
+        else return false;
     }
 
     public bool TileFound()
@@ -189,7 +189,7 @@ public class UseItemManager : NetworkBehaviour
             return true;
         }
         else
-        {              
+        {
             Debug.Log("No Tile found, placing block");
             return false;
         }
@@ -218,7 +218,7 @@ public class UseItemManager : NetworkBehaviour
     //    }
     //}
 
-    private float attackRange = 0.5f; 
+    private float attackRange = 0.5f;
     private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
@@ -237,7 +237,7 @@ public class UseItemManager : NetworkBehaviour
         }
     }
 
-   
+
 
     [ServerRpc(RequireOwnership = false)]
     public void PlaceBlockServerRpc(Vector3Int tilePosition)
@@ -335,7 +335,7 @@ public class UseItemManager : NetworkBehaviour
                     Vector3 fireLocation = firePoint.position;
                     Vector3 projectileDirection = firePoint.up;
                     Quaternion tempRotation = projectileRotationObject.rotation;
-                    SwordSlashProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);                 
+                    SwordSlashProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);
                 }
                 else Debug.Log("This weapon has no projectile, not firing");
 
@@ -401,7 +401,7 @@ public class UseItemManager : NetworkBehaviour
             return true;
         }
         else return false;
-    }    
+    }
 
     public IEnumerator healingCooldown()
     {
@@ -413,7 +413,7 @@ public class UseItemManager : NetworkBehaviour
     }
 
     private void SwingTweenAnimation()
-    {      
+    {
         var degreeChange = 180f;
         var weaponDegreeChange = 360f;
         if (swungWeapon)
@@ -446,7 +446,7 @@ public class UseItemManager : NetworkBehaviour
             }
         }
     }
-
+    
     private void LaunchProjectile(double itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     {
         Debug.Log("Start of launch function: " + projectileLifetime);

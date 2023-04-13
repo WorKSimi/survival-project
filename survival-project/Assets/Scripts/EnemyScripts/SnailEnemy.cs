@@ -12,6 +12,7 @@ public class SnailEnemy : NetworkBehaviour
     [SerializeField] private float speed = 200f;
     [SerializeField] private float nextWaypointDistance = 3f;
     [SerializeField] private Transform enemyGFX;
+    [SerializeField] private float snailChargePower;
 
     public SnailState state;
 
@@ -21,7 +22,7 @@ public class SnailEnemy : NetworkBehaviour
     private bool isCharging = false;
     private bool isRoaming = false;
 
-    public MobSpawning mobSpawning;
+    //public MobSpawning mobSpawning;
     public GameObject playerToChase;
     public GameObject[] players; //Array for all players
     private GameObject roamWaypoint;
@@ -39,14 +40,15 @@ public class SnailEnemy : NetworkBehaviour
     Rigidbody2D rb;
 
     private void Awake()
-    { 
+    {
+        startingPosition = this.transform.position;
         roamWaypoint = transform.GetChild(1).gameObject; //Sets roam waypoint variable to the second child of the snail object
         state = SnailState.Roaming;
     }
 
     private void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -55,6 +57,7 @@ public class SnailEnemy : NetworkBehaviour
         roamPosition = GetRoamingPosition();
 
         currentTime = startingTime;
+        
     }
     //instead of 1 player, fill an array for every object with the tag Player
     //Whenever checking distance, do it for each player in the array
@@ -67,21 +70,20 @@ public class SnailEnemy : NetworkBehaviour
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
 
-        float maxDespawnDistance = 50f;
-
-        if (playerWhoSpawned != null)
-        {
-            if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
-            {
-                this.mobSpawning.currentSpawns--;
-                this.gameObject.GetComponent<NetworkObject>().Despawn();
-                Destroy(this.gameObject); //Destroy the snail,          
-            }
-        }
-        else if (playerWhoSpawned == null)
-        {
-            Debug.Log("ERROR! PLAYER WHO SPAWNED IS NULL!");
-        }
+        //float maxDespawnDistance = 50f;
+        //if (playerWhoSpawned != null)
+        //{
+        //    if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
+        //    {
+        //        this.mobSpawning.currentSpawns--;
+        //        this.gameObject.GetComponent<NetworkObject>().Despawn();
+        //        Destroy(this.gameObject); //Destroy the snail,          
+        //    }
+        //}
+        //else if (playerWhoSpawned == null)
+        //{
+        //    Debug.Log("ERROR! PLAYER WHO SPAWNED IS NULL!");
+        //}
 
         switch (state)
         {
@@ -192,9 +194,9 @@ public class SnailEnemy : NetworkBehaviour
         yield return new WaitForSeconds(1f); //Wait 1 seconds       
 
         targetChargePosition = target.position;
-        Vector2 direction = (targetChargePosition - transform.position); //Get direction of player
+        Vector2 direction = (targetChargePosition - transform.position).normalized; //Get direction of player
 
-        rb.AddForce(direction * 4, ForceMode2D.Impulse); //Charge at the player
+        rb.AddForce(direction * snailChargePower, ForceMode2D.Impulse); //Charge at the player
 
         yield return new WaitForSeconds(1); //Charge for 1 second
 

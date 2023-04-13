@@ -121,9 +121,9 @@ MonoBehaviour:
   speed: 400
   nextWaypointDistance: 1
   enemyGFX: {fileID: 0}
+  snailChargePower: 20
   state: 0
   playerWhoSpawned: {fileID: 0}
-  mobSpawning: {fileID: 0}
   playerToChase: {fileID: 0}
   players: []
   startingPosition: {x: 0, y: 0, z: 0}
@@ -189,7 +189,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
