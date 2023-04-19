@@ -247,34 +247,60 @@ public class UseItemManager : NetworkBehaviour
 
     public void UsePick(float itemDamage)
     {
-        if (Time.time >= nextAttackTime) //If not on cooldown
+        if (IsHost)
         {
-            SwingTweenAnimation(); //Swing animation
-            nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
-
-            if (IsInRange()) //If your in range
+            if (Time.time >= nextAttackTime) //If not on cooldown
             {
-                var ray = playerCam.ScreenPointToRay(Input.mousePosition);
-                var hit = Physics2D.GetRayIntersection(ray);
-                hoveredWall = hit.transform;
-                var wallScript = hoveredWall.GetComponent<Wall>();
-                wallScript.TakeDamage(itemDamage);
+                SwingTweenAnimation(); //Swing animation
+                nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
 
-                if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
+                if (IsInRange()) //If your in range
                 {
-                    if (IsHost)
+                    var ray = playerCam.ScreenPointToRay(Input.mousePosition);
+                    var hit = Physics2D.GetRayIntersection(ray);
+                    hoveredWall = hit.transform;
+                    var wallScript = hoveredWall.GetComponent<Wall>();
+                    wallScript.TakeDamage(itemDamage);
+
+                    if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
                     {
                         wallScript.Die(); //Spawn the items
                         wallScript.DestroyAndDespawnThisObject();
-                        wallTilemap.SetTile(mousePos, null); //Set tile to null
-                    }
-                    else if (IsClient)
-                    {
-                        wallScript.Die();
-                        BreakBlockServerRpc(mousePos); //Set tile to null on server
+                        wallTilemap.SetTile(mousePos, null); 
                     }
                 }
             }
+        }
+        if (IsClient)
+        {
+            if (Time.time >= nextAttackTime) //If not on cooldown
+            {
+                SwingTweenAnimation(); //Swing animation
+                nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
+
+                if (IsInRange()) //If your in range
+                {
+                    DamageBlockServerRpc(Input.mousePosition, itemDamage, mousePos);
+                }
+            }
+        }
+        
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DamageBlockServerRpc(Vector3 rayPosition, float itemDamage, Vector3Int tilePosition)
+    {
+        var ray = playerCam.ScreenPointToRay(rayPosition);
+        var hit = Physics2D.GetRayIntersection(ray);
+        hoveredWall = hit.transform;
+        var wallScript = hoveredWall.GetComponent<Wall>();
+        wallScript.TakeDamage(itemDamage);
+        if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
+        {
+            wallScript.Die(); //Spawn the items
+            wallScript.DestroyAndDespawnThisObject();
+            wallTilemap.SetTile(tilePosition, null);
         }
     }
 

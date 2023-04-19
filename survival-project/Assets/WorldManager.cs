@@ -22,6 +22,7 @@ public class WorldManager : NetworkBehaviour
     public NetworkManager networkManager;
     //public String JoinCode { get; private set; }
     private String JoinCode;
+    public String clientJoinCode;
     public void Start()
     {
         GameObject hostClientObject = GameObject.FindWithTag("HostClientManager");
@@ -85,8 +86,33 @@ public class WorldManager : NetworkBehaviour
 
         else if (hostClientManager.IsHost == false) //Client   
         {
-            NetworkManager.Singleton.StartClient();     //Connect on Client        
+            clientJoinCode = hostClientManager.clientJoinCode;
+            joinCodeText.text = clientJoinCode;
+            StartClient(clientJoinCode);        
         }       
+    }
+
+    public async void StartClient(string joinCode)
+    {
+        JoinAllocation allocation;
+
+        try
+        {
+            allocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
+        }
+        catch
+        {
+            Debug.LogError("Relay get join code request failed");
+            throw;
+        }
+
+        Debug.Log($"client: {allocation.ConnectionData[0]} {allocation.ConnectionData[1]}");
+        Debug.Log($"host: {allocation.HostConnectionData[0]} {allocation.HostConnectionData[1]}");
+        Debug.Log($"client: {allocation.AllocationId}");
+
+        var relayServerData = new RelayServerData(allocation, "dtls");
+        NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
+        NetworkManager.Singleton.StartClient();
     }
 
     public void OnConnectedToServer(ulong clientId)

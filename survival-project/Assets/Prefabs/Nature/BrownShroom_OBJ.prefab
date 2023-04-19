@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1889519589}
   - component: {fileID: 8496068699452573177}
   - component: {fileID: 2223123031780455979}
-  - component: {fileID: 1140478698210460141}
+  - component: {fileID: -3788193606983246331}
   m_Layer: 6
-  m_Name: Red Shroom
+  m_Name: BrownShroom_OBJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -206961177, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  m_Sprite: {fileID: 943615887, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -156,7 +156,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.94, y: 0.91}
   m_EdgeRadius: 0
---- !u!114 &1140478698210460141
+--- !u!114 &-3788193606983246331
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: a5513ee3061cc8c4295813a01e2d4f2f, type: 3}
+  wood: {fileID: 7389436694480070536, guid: 2281a7cd3beb92b45bfa4dfdca363f08, type: 3}
   maxHealth: 1
   isResourceNode: 0
   amountToDrop: 1

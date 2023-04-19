@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2268321891706594281}
   - component: {fileID: 2223123031780455979}
   m_Layer: 6
-  m_Name: BlueberryBush
+  m_Name: BlueberryBush_OBJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7389436694480070531}
   - component: {fileID: -2083750711423560777}
   m_Layer: 0
-  m_Name: RedShroom_Item
+  m_Name: RedShroom_ITEM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
