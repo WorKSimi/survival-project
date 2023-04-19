@@ -13,6 +13,7 @@ public class PlayerNetwork : NetworkBehaviour
     private float deadSpeed = 0f;
     private float currentMoveSpeed; //Variable to store what the players CURRENT move speed is
     private Rigidbody2D rb; //Rigidbody2D of this player
+    private PlayerHealth playerHealth;
 
     [SerializeField]private Animator animator; //Animator of this player
     [SerializeField] private Animator helmetAnimator;
@@ -52,12 +53,17 @@ public class PlayerNetwork : NetworkBehaviour
         Dead, //When the player is dead
     }
 
+    private void Start()
+    {
+        spritePlayerRenderer = this.GetComponent<SpriteRenderer>();
+        rb = this.GetComponent<Rigidbody2D>();
+        playerHealth = GetComponent<PlayerHealth>();
+    }
+
     private void Awake()
     {
         state = State.Normal;
         currentMoveSpeed = moveSpeed;
-        spritePlayerRenderer = this.GetComponent<SpriteRenderer>();
-        rb = this.GetComponent<Rigidbody2D>();
 
         var tilemapObject = GameObject.FindWithTag("WaterTilemap");
         waterTilemap = tilemapObject.GetComponent<Tilemap>();    
@@ -77,6 +83,7 @@ public class PlayerNetwork : NetworkBehaviour
         switch (state)
         {
             case State.Normal:
+                playerHealth.invincibile = false;
                 MovementInput();
                 animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
                 helmetAnimator.SetFloat("Speed", rb.velocity.sqrMagnitude);
@@ -84,6 +91,7 @@ public class PlayerNetwork : NetworkBehaviour
                 break;
 
             case State.Rolling:
+                playerHealth.invincibile = true;
                 float rollSpeedDropMultiplier = 2f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
 

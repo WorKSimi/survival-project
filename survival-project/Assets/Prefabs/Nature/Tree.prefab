@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8496068699452573177}
   - component: {fileID: -6244829810187065331}
   - component: {fileID: 3050062930715579047}
+  - component: {fileID: 435465889285507322}
   m_Layer: 8
   m_Name: Tree
   m_TagString: Untagged
@@ -188,4 +189,32 @@ MonoBehaviour:
   maxHealth: 5
   isResourceNode: 1
   amountToDrop: 5
+  inventoryItemData: {fileID: 0}
   currentHealth: 0
+--- !u!114 &435465889285507322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179713049715907885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShadowGroup: 0
+  m_ComponentVersion: 1
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_ApplyToSortingLayers: 99999a5600000000754ad4e30da6541e5f545d1b8bfacab90975dc57
+  m_ShapePath:
+  - {x: -0.14758939, y: -0.5889679, z: 0}
+  - {x: -0.24880096, y: 1.3212509, z: 0}
+  - {x: 0.35592583, y: 1.3212508, z: 0}
+  - {x: 0.25471434, y: -0.57450914, z: 0}
+  m_ShapePathHash: -1959977805
+  m_Mesh: {fileID: 0}
+  m_InstanceId: 58392

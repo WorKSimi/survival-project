@@ -222,7 +222,7 @@ public class UseItemManager : NetworkBehaviour
     private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
-    public void UseAxe(double itemDamage)
+    public void UseAxe(float itemDamage)
     {
         Debug.Log("AXE USED!");
         if (Time.time >= nextAttackTime)
@@ -245,7 +245,7 @@ public class UseItemManager : NetworkBehaviour
         wallTilemap.SetTile(tilePosition, null); //Set tile to null
     }
 
-    public void UsePick(double itemDamage)
+    public void UsePick(float itemDamage)
     {
         if (Time.time >= nextAttackTime) //If not on cooldown
         {
@@ -284,7 +284,7 @@ public class UseItemManager : NetworkBehaviour
         wallTilemap.SetTile(tilePosition, null); //Set tile to null
     }
 
-    public void UseRock(double itemDamage)
+    public void UseRock(float itemDamage)
     {
         Debug.Log("The rock has been used");
         if (Time.time >= nextAttackTime)
@@ -308,7 +308,7 @@ public class UseItemManager : NetworkBehaviour
         }
     }
 
-    public void UseSword(double itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime)
+    public void UseSword(float itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime)
     {
         if (Time.time >= nextAttackTime)
         {
@@ -426,7 +426,7 @@ public class UseItemManager : NetworkBehaviour
         LeanTween.rotateAround(weaponSprite, dir, weaponDegreeChange, 0.2f).setEaseInOutQuart();
         tween.setOnComplete(() => { swungWeapon = !swungWeapon; slashAnimator.SetBool("isSlashing", false); });
     }
-    public void UseBow(double itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime, float chargeMultiplier)
+    public void UseBow(float itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime, float chargeMultiplier)
     {
         if (Time.time >= nextAttackTime)
         {
@@ -447,7 +447,7 @@ public class UseItemManager : NetworkBehaviour
         }
     }
     
-    private void LaunchProjectile(double itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
+    private void LaunchProjectile(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     {
         Debug.Log("Start of launch function: " + projectileLifetime);
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
@@ -464,7 +464,7 @@ public class UseItemManager : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void LaunchArrowProjectileServerRpc(double itemDamage,  float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
+    public void LaunchArrowProjectileServerRpc(float itemDamage,  float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
     {
         GameObject bullet = Instantiate(arrowPrefab, spawnLocation, quaternion);
         bullet.GetComponent<NetworkObject>().Spawn();
@@ -477,7 +477,7 @@ public class UseItemManager : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void SwordSlashProjectileServerRpc(double itemDamage, float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
+    public void SwordSlashProjectileServerRpc(float itemDamage, float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
     {
         GameObject bullet = Instantiate(slashPrefab, spawnLocation, quaternion);
         bullet.GetComponent<NetworkObject>().Spawn();

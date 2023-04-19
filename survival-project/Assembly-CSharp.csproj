@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\CraftingScripts\AnywhereCrafting.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\AutoLoadPipelineAsset.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingOptionalCancel.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\TooltipUI.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\HotbarDisplay.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\SnailEnemy.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
+    <Compile Include="Assets\AuthenticateRelay.cs" />
     <Compile Include="Assets\Lobbymanager.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
     <Compile Include="Assets\Scripts\TreeLogic.cs" />

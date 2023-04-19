@@ -14,11 +14,11 @@ public class EnemyProjectile : NetworkBehaviour
         if (hitInfo.CompareTag("Player"))
         {
             PlayerHealth playerHealth = hitInfo.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (playerHealth != null && playerHealth.invincibile == false)
             {
                 playerHealth.TakeDamage(enemyProjectileDamage);
+                DestroyProjectile();
             }
-            DestroyProjectile();
         }
 
         else if (hitInfo.tag != "Enemy")

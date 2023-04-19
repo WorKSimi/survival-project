@@ -25,7 +25,7 @@ public class InventoryItemData : ScriptableObject
     public GameObject ItemPrefab;
 
     [Header("Weapons and Tools")]
-    public double itemDamage;
+    public float itemDamage;
     public GameObject projectilePrefab;
     public float projectileSpeed;
     public float projectileLifetime;

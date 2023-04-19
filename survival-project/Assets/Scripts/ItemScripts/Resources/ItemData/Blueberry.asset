@@ -25,5 +25,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
   ItemTile: {fileID: 0}
-  HealthHealed: 5
+  ItemTilemap: 
+  HealthHealed: 10
+  BlockHealth: 0

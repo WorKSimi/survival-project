@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
 
     public bool healthRegenOn;
     public bool isHealthFull;
+    public bool invincibile;
     private int healthRegen = 1; //How much health is regenerated
 
     public int playerTotalDefense = 0; //Total defense value the player has
@@ -21,10 +22,12 @@ public class PlayerHealth : MonoBehaviour
     public PlayerHelmet playerHelmet;
     public HealthBar healthBar;
     public Vector3Int respawnPoint = new Vector3Int(0, 0, 0);
+    private SpriteRenderer spriteRend;
 
     private void Awake()
     {
         playerNetwork = this.gameObject.GetComponent<PlayerNetwork>();
+        spriteRend = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     void Start() // Start is called before the first frame update
@@ -46,6 +49,7 @@ public class PlayerHealth : MonoBehaviour
             if (damageToTake < 1) damageToTake = 1; //If the damage to take is less then 1, set it to 1
             currentHealth -= damageToTake; //Take damage           
             healthBar.SetHealth(currentHealth); //Update Healthbar
+            StartCoroutine(Invulnerability());
         }
 
         if (currentHealth <= 0) //If your health is equal to or less than 0
@@ -86,12 +90,28 @@ public class PlayerHealth : MonoBehaviour
             healthBar.SetHealth(currentHealth);
         }
     }
-
     public void UpdateArmor() //function used by other scripts to update the players armor
     {
         playerChestplateDefense = playerChestplate.ChestplateDefense;
         playerHelmetDefense = playerHelmet.helmetDefense;
 
         playerTotalDefense = playerChestplateDefense + playerHelmetDefense;
+    }
+    private float iFramesDuration = 0.5f;
+    private float numberOfFlashes = 3f;
+
+    private IEnumerator Invulnerability()
+    {
+        Physics2D.IgnoreLayerCollision(9 , 10, true);
+        invincibile = true;
+        for (int i = 0; i < numberOfFlashes; i++)
+        {
+            spriteRend.color = new Color(1, 1, 1, 0.5f);
+            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+            spriteRend.color = Color.white;
+            yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
+        }
+        Physics2D.IgnoreLayerCollision(9, 10, false);
+        invincibile = false;
     }
 }

@@ -27,6 +27,7 @@ public class EnemyDamage : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             var playerHealthScript = collision.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealthScript.invincibile == true) return; //If player is invincible, return and do not take damage
             playerHealthScript.TakeDamage(damage);
         }
     }

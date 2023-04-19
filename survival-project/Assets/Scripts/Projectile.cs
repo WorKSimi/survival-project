@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class Projectile : NetworkBehaviour
 {
-    public double Projectiledamage;
+    public float Projectiledamage;
     public float Projectilelifetime;
 
     private void Awake()

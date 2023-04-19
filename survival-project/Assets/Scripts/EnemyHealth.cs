@@ -6,22 +6,28 @@ using Unity.Netcode;
 public class EnemyHealth : NetworkBehaviour
 {
     [SerializeField] private GameObject droppedItem;
-    [SerializeField] private double maxHealth;
+    [SerializeField] private float maxHealth;
     [SerializeField] private SimpleFlash flashEffect;
+    [SerializeField] private GameObject healthbarObject;
+    public HealthBar healthBar;
     //[SerializeField] private AudioSource hitSound;
 
     public MobSpawning mobSpawning;
-    private double currentHealth;
+    private float currentHealth;
 
     void Start()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        healthbarObject.SetActive(false);
     }
 
-    public void TakeDamage(double damage)
+    public void TakeDamage(float damage)
     {
+        healthbarObject.SetActive(true);
         currentHealth -= damage;
         flashEffect.Flash(); //Make enemy flash when hit
+        healthBar.SetHealth(currentHealth);
         //hitSound.Play(); //Play hit sound
 
         if (currentHealth <= 0)

@@ -17,6 +17,10 @@ TagManager:
   - WaterTilemap
   - CarpetTilemap
   - WorldSaveManager
+  - HostClientManager
+  - ToolTipObject
+  - ToolTipName
+  - InventorySlot
   layers:
   - Default
   - TransparentFX
@@ -28,7 +32,7 @@ TagManager:
   - Trees
   - Walls
   - Enemies
-  - 
+  - Player
   - 
   - 
   - 
