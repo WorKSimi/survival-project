@@ -7,7 +7,7 @@ using UnityEngine.Tilemaps;
 public class Wall : NetworkBehaviour
 {
     [SerializeField] private bool isCrop;
-    [SerializeField] private GameObject wood;    
+    [SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
     [SerializeField] private bool isResourceNode;
     [SerializeField] private int amountToDrop;
@@ -48,17 +48,17 @@ public class Wall : NetworkBehaviour
         networkObject.Despawn();
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void SpawnItemsServerRpc(ServerRpcParams serverRpcParams = default)
-    {
-        for (int i = 0; i < amountToDrop; i++)
-        {
-            GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
-            gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
-        }
-    }
+    //[ServerRpc(RequireOwnership = false)]
+    //public void SpawnItemsServerRpc(ServerRpcParams serverRpcParams = default)
+    //{
+    //    for (int i = 0; i < amountToDrop; i++)
+    //    {
+    //        GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
+    //        gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
+    //    }
+    //}
 
-    public void TakeDamage(double damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         Debug.Log("Wall Hit");
@@ -67,6 +67,14 @@ public class Wall : NetworkBehaviour
         //{
         //    Die();           
         //}
+    }
+
+    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
+    public void DamageWallServerRpc(float damage)
+    {
+        Debug.Log("RPC LAUNCHED");
+        TakeDamage(damage);
+        Die();
     }
 
     public void Die()
@@ -81,10 +89,10 @@ public class Wall : NetworkBehaviour
                     gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
                 }
             }
-            else if (IsClient)
-            {
-                SpawnItemsServerRpc();
-            }
+            //else if (IsClient)
+            //{
+            //    SpawnItemsServerRpc();
+            //}
         }
         if (isCrop == true)
         {
@@ -92,7 +100,32 @@ public class Wall : NetworkBehaviour
         }
     }
 
+    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
+    public void DieServerRpc()
+    {
+        if (wood != null)
+        {
+            for (int i = 0; i < amountToDrop; i++)
+            {
+                GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
+                gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
+            }
+        }
+
+        if (isCrop == true)
+        {
+            Debug.Log("Do nothing, Crop death handled by crop script");
+        }
+    }
+
     public void DestroyAndDespawnThisObject()
+    {
+        this.gameObject.GetComponent<NetworkObject>().Despawn();
+        Destroy(this.gameObject);
+    }
+
+    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
+    public void DestroyAndDespawnThisObjectServerRpc()
     {
         this.gameObject.GetComponent<NetworkObject>().Despawn();
         Destroy(this.gameObject);

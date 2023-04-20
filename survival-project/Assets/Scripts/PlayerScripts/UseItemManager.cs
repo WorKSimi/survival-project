@@ -280,32 +280,25 @@ public class UseItemManager : NetworkBehaviour
 
                 if (IsInRange()) //If your in range
                 {
-                    DamageBlockServerRpc(Input.mousePosition, itemDamage, mousePos);
+                    var ray = playerCam.ScreenPointToRay(Input.mousePosition);
+                    var hit = Physics2D.GetRayIntersection(ray);
+                    hoveredWall = hit.transform;
+                    var wallScript = hoveredWall.GetComponent<Wall>();
+                    wallScript.DamageWallServerRpc(itemDamage);
+
+                    if (wallScript.currentHealth <= 0)
+                    {
+                        wallScript.DieServerRpc();
+                        wallScript.DestroyAndDespawnThisObjectServerRpc();
+                        TileNullServerRpc(mousePos);
+                    }
                 }
             }
         }
-        
     }
 
-
-    [ServerRpc(RequireOwnership = false)]
-    public void DamageBlockServerRpc(Vector3 rayPosition, float itemDamage, Vector3Int tilePosition)
-    {
-        var ray = playerCam.ScreenPointToRay(rayPosition);
-        var hit = Physics2D.GetRayIntersection(ray);
-        hoveredWall = hit.transform;
-        var wallScript = hoveredWall.GetComponent<Wall>();
-        wallScript.TakeDamage(itemDamage);
-        if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
-        {
-            wallScript.Die(); //Spawn the items
-            wallScript.DestroyAndDespawnThisObject();
-            wallTilemap.SetTile(tilePosition, null);
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)]
-    public void BreakBlockServerRpc(Vector3Int tilePosition)
+    [ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
+    public void TileNullServerRpc(Vector3Int tilePosition)
     {
         wallTilemap.SetTile(tilePosition, null); //Set tile to null
     }
@@ -328,7 +321,7 @@ public class UseItemManager : NetworkBehaviour
             {
                 if (Time.time >= nextAttackTime) //If not on cooldown
                 {
-                    //wingTweenAnimation(); //Swing animation
+                    SwingTweenAnimation(); //Swing animation
                     nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
 
                     if (IsInRange()) //If your in range
@@ -348,17 +341,26 @@ public class UseItemManager : NetworkBehaviour
                     }
                 }
             }
-
             if (IsClient)
             {
                 if (Time.time >= nextAttackTime) //If not on cooldown
                 {
-                    //SwingTweenAnimation(); //Swing animation
+                    SwingTweenAnimation(); //Swing animation
                     nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
 
                     if (IsInRange()) //If your in range
                     {
-                        DamageBlockServerRpc(Input.mousePosition, itemDamage, mousePos);
+                        var ray = playerCam.ScreenPointToRay(Input.mousePosition);
+                        var hit = Physics2D.GetRayIntersection(ray);
+                        hoveredWall = hit.transform;
+                        var wallScript = hoveredWall.GetComponent<Wall>();
+                        wallScript.DamageWallServerRpc(itemDamage);
+                        if (wallScript.currentHealth <= 0)
+                        {
+                            wallScript.DieServerRpc();
+                            wallScript.DestroyAndDespawnThisObjectServerRpc();
+                            TileNullServerRpc(mousePos);
+                        }
                     }
                 }
             }
@@ -368,7 +370,7 @@ public class UseItemManager : NetworkBehaviour
             //{
             //    var wallScript = wall.GetComponent<Wall>();
             //    wallScript.TakeDamage(itemDamage);
-  
+
             //    if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
             //    {
             //        wallScript.Die(); //Spawn the items
