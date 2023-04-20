@@ -49,6 +49,7 @@ public class WorldDataCollector : NetworkBehaviour
             WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
             string worldName1 = worldData.WorldName;
             slot1Text.text = worldName1.ToString();
+            slot1HostText.text = worldName1.ToString();
         }
         else Debug.Log("No Data Found");
     }
@@ -139,6 +140,7 @@ public class WorldDataCollector : NetworkBehaviour
     {
         if (IsHost || IsServer) return;
         string json = File.ReadAllText(Application.persistentDataPath + saveFile);
+        if (json == null) return;
         WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
         List<TileData> loadedTiles = new List<TileData>();
 
@@ -153,11 +155,18 @@ public class WorldDataCollector : NetworkBehaviour
             RuleTile tile1 = TileReturner(tile.tileType);
             if (tile1.m_DefaultGameObject == null) //If the tile DOES NOT have a game object
             {
-                tilemap.SetTile(tile.tileLocation, tile1); //Set the tile 
+                tilemap.SetTile(tile.tileLocation, tile1); //Set the tile ON THE CLIENT!
+                //SetTileClientRpc(tile.tileLocation, tile1, tilemap); //Set the tile ON THE CLIENT!
             }
             else Debug.Log("Tile has a game object, not placing");
         }
     }
+
+    //[ClientRpc] //Fired by server, executed on client
+    //private void SetTileClientRpc(Vector3Int location, RuleTile tile, Tilemap tilemap)
+    //{
+    //    tilemap.SetTile(location, tile); //Set the tile ON THE CLIENT!
+    //}
 
     private void SpawnAllObjectsOnNetwork()
     {

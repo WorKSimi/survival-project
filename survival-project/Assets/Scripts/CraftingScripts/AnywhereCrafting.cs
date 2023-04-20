@@ -74,6 +74,8 @@ public class AnywhereCrafting : MonoBehaviour
         WoodClub,
         FlintPickaxe,
         Torch,
+        WoodBow,
+        WoodWall,
     }
     public void SelectCraftingTable()
     {
@@ -114,7 +116,7 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.WoodClub.Description); //Set description box text
 
         ComponentText.SetText("Wood"); //Set component name
-        ComponentAmount.SetText("x5"); //Set component amount 
+        ComponentAmount.SetText("x15"); //Set component amount 
 
         selected = SelectedRecipe.WoodClub;
     }
@@ -149,6 +151,32 @@ public class AnywhereCrafting : MonoBehaviour
 
         selected = SelectedRecipe.Torch;
     }
+    public void SelectWoodBow()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.WoodBow.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.WoodBow.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.WoodBow.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x15"); //Set component amount 
+
+        selected = SelectedRecipe.WoodBow;
+    }
+    public void SelectWoodWall()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.WoodWall.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.WoodWall.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.WoodWall.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x5"); //Set component amount 
+
+        selected = SelectedRecipe.WoodWall;
+    }
 
     public void CraftItem()
     {
@@ -171,6 +199,14 @@ public class AnywhereCrafting : MonoBehaviour
         if (selected == SelectedRecipe.Torch)
         {
             CraftTorch();
+        }
+        if (selected == SelectedRecipe.WoodBow)
+        {
+            CraftWoodBow();
+        }
+        if (selected == SelectedRecipe.WoodWall)
+        {
+            CraftWoodWall();
         }
         else Debug.Log("Nothing is selected to craft!");
     }
@@ -255,7 +291,7 @@ public class AnywhereCrafting : MonoBehaviour
             var woodComponent = new CraftRecipeItem
             {
                 displayName = "wood",
-                quantity = 5
+                quantity = 15
             };
 
             var components = new List<CraftRecipeItem>() { woodComponent };
@@ -310,6 +346,47 @@ public class AnywhereCrafting : MonoBehaviour
             {
                 playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Torch, 2);
                 Debug.Log("Crafted Torch");
+            }
+        }
+    }
+    private void CraftWoodWall()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Wood Wall");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 5
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodWall, 2);
+                Debug.Log("Crafted WoodWall");
+            }
+        }
+    }
+
+    private void CraftWoodBow()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Wood Bow");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 15
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodBow, 2);
+                Debug.Log("Crafted Wood Bow");
             }
         }
     }

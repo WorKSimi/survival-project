@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrop: 0
   wood: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f, type: 3}
-  maxHealth: 5
+  maxHealth: 10
   isResourceNode: 1
   amountToDrop: 5
   inventoryItemData: {fileID: 0}

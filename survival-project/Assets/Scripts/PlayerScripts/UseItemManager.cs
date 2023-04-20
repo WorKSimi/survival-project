@@ -324,13 +324,59 @@ public class UseItemManager : NetworkBehaviour
                 enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
             }
 
-            //Hit Trees and Walls
-            Collider2D[] hitWalls = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, wallLayers); // Detect trees in range of attack
-            foreach (Collider2D wall in hitWalls) // Damage trees
+            if (IsHost)
             {
-                wall.GetComponent<Wall>().TakeDamage(itemDamage);
+                if (Time.time >= nextAttackTime) //If not on cooldown
+                {
+                    //wingTweenAnimation(); //Swing animation
+                    nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
+
+                    if (IsInRange()) //If your in range
+                    {
+                        var ray = playerCam.ScreenPointToRay(Input.mousePosition);
+                        var hit = Physics2D.GetRayIntersection(ray);
+                        hoveredWall = hit.transform;
+                        var wallScript = hoveredWall.GetComponent<Wall>();
+                        wallScript.TakeDamage(itemDamage);
+
+                        if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
+                        {
+                            wallScript.Die(); //Spawn the items
+                            wallScript.DestroyAndDespawnThisObject();
+                            wallTilemap.SetTile(mousePos, null);
+                        }
+                    }
+                }
             }
-            nextAttackTime = Time.time + 1f / attackRate;
+
+            if (IsClient)
+            {
+                if (Time.time >= nextAttackTime) //If not on cooldown
+                {
+                    //SwingTweenAnimation(); //Swing animation
+                    nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
+
+                    if (IsInRange()) //If your in range
+                    {
+                        DamageBlockServerRpc(Input.mousePosition, itemDamage, mousePos);
+                    }
+                }
+            }
+            ////Hit Trees and Walls
+            //Collider2D[] hitWalls = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, wallLayers); // Detect trees in range of attack
+            //foreach (Collider2D wall in hitWalls) // Damage trees
+            //{
+            //    var wallScript = wall.GetComponent<Wall>();
+            //    wallScript.TakeDamage(itemDamage);
+  
+            //    if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
+            //    {
+            //        wallScript.Die(); //Spawn the items
+            //        wallScript.DestroyAndDespawnThisObject();
+            //        wallTilemap.SetTile(mousePos, null);
+            //    }
+            //}
+            //nextAttackTime = Time.time + 1f / attackRate;
         }
     }
 

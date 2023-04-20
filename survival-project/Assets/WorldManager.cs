@@ -120,10 +120,11 @@ public class WorldManager : NetworkBehaviour
         AskForDataServerRpc(); //Send server a hello
     }
 
-    [ServerRpc]
+    [ServerRpc] //FIRED BY CLIENT, RAN ON SERVER
     public void AskForDataServerRpc() //Fired by client Ran on Server
     {
         LoadTilesOnClientClientRpc();
+        //worldDataCollector.LoadClientWorldData(worldDataCollector.file1);
     }
 
     [ClientRpc] //Fired by server, executed on client
