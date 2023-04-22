@@ -18,7 +18,6 @@ public class TooltipManager : MonoBehaviour
 
     public void EnableTooltip(string itemType, string itemName, string itemDescription, string damageValue, string defenseValue, string healingValue, string attackRate, string blockHealth)
     {
-
         if (itemType == "Pick")
         {
             toolTipObject.SetActive(true);

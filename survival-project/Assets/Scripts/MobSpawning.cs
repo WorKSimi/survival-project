@@ -63,7 +63,7 @@ public class MobSpawning : NetworkBehaviour
 
     void SpawnMob()
     {
-        if (Random.value >= 0.1) // 1/600 chance, 1 - 0.9983 = 0.0017 [1/600 in decimal]
+        if (Random.value >= 0.0017) // 1/600 chance, 1 - 0.9983 = 0.0017 [1/600 in decimal]
         {
             if (IsHost)
             {
