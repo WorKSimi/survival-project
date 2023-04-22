@@ -35,6 +35,20 @@ public class EnemyHealth : NetworkBehaviour
             Die();
         }
     }
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamageServerRpc(float damage)
+    {
+        healthbarObject.SetActive(true);
+        currentHealth -= damage;
+        flashEffect.Flash(); //Make enemy flash when hit
+        healthBar.SetHealth(currentHealth);
+        //hitSound.Play(); //Play hit sound
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
 
     private void Die()
     {

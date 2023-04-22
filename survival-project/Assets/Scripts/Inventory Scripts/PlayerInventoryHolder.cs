@@ -11,10 +11,13 @@ public class PlayerInventoryHolder : InventoryHolder
     public static UnityAction<InventorySystem, int> OnPlayerInventoryDisplayRequested;
 
     [SerializeField] private GameObject personalCraftingMenu;
+    public RockSpawner rockSpawner;
+    private bool isInventoryOpen;
 
     private void Start()
     {
         SaveGameManager.data.playerInventory = new InventorySaveData(inventorySystem);
+        rockSpawner.AddRockToInventory();
     }
 
     protected override void LoadInventory(SaveData data)
@@ -32,8 +35,8 @@ public class PlayerInventoryHolder : InventoryHolder
     {
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
-            OnPlayerInventoryDisplayRequested?.Invoke(inventorySystem, offset);
-            //personalCraftingMenu.SetActive(true);
+            OnPlayerInventoryDisplayRequested?.Invoke(inventorySystem, offset); //Open it
+            personalCraftingMenu.SetActive(false);
         }
         if (Keyboard.current.cKey.wasPressedThisFrame)
         {
