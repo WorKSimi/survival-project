@@ -35,6 +35,8 @@ public class InventoryItemData : ScriptableObject
     public int DefenseValue;
 
     [Header("Other")]
+    public int BlockID;
+    public int TilemapID; //1 = Wall
     public RuleTile ItemTile;
     public string ItemTilemap;
     public int HealthHealed;

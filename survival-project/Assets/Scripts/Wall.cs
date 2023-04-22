@@ -41,6 +41,19 @@ public class Wall : NetworkBehaviour
         go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
     }
 
+    //public void SpawnWall()
+    //{
+    //    GameObject go = this.gameObject;
+    //    go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
+    //}
+
+    //[ServerRpc(RequireOwnership = false)]
+    //public void SpawnWallServerRpc()
+    //{
+    //    GameObject go = this.gameObject;
+    //    go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
+    //}
+
     [ServerRpc(RequireOwnership = false)]
     public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
     {
@@ -74,7 +87,7 @@ public class Wall : NetworkBehaviour
     {
         Debug.Log("RPC LAUNCHED");
         TakeDamage(damage);
-        Die();
+        //Die();
     }
 
     public void Die()

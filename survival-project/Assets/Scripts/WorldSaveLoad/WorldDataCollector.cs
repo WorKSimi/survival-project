@@ -138,47 +138,52 @@ public class WorldDataCollector : NetworkBehaviour
 
     public void LoadClientWorldData(string saveFile) //This is an alternate load function, that only loads tiles without a game object. This is for clients, as the server only needs to load and spawn object tiles
     {
-        if (IsHost || IsServer) return;
         string json = File.ReadAllText(Application.persistentDataPath + saveFile);
         if (json == null) return;
         WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
         List<TileData> loadedTiles = new List<TileData>();
 
         foreach (TileData tile in worldData.tilesOnMapList) //For each tile in saved list, add to loaded tiles list
-        {
-            loadedTiles.Add(tile);
+        {           
+            loadedTiles.Add(tile); //If the tile doesn't have a game object, add it to the list
         }
 
         foreach (TileData tile in loadedTiles) //For each tile in loaded tiles list, do this stuff
         {
-            Tilemap tilemap = TilemapChecker(tile.tilemapType);
-            RuleTile tile1 = TileReturner(tile.tileType);
-            if (tile1.m_DefaultGameObject == null) //If the tile DOES NOT have a game object
+            var tile1 = TileReturner(tile.tileType);
+            if (tile1.m_DefaultGameObject == null)  //If the tile has NO game object
             {
-                tilemap.SetTile(tile.tileLocation, tile1); //Set the tile ON THE CLIENT!
-                //SetTileClientRpc(tile.tileLocation, tile1, tilemap); //Set the tile ON THE CLIENT!
+                var theTile = tile.tileType; //Get tile enum
+                var theTilemap = tile.tilemapType; //Get tilemap enum
+                var theLocation = tile.tileLocation; //Get tile location
+                SetTileClientRpc(theTile, theTilemap, theLocation); //Send info for client to load it
             }
-            else Debug.Log("Tile has a game object, not placing");
+            else //if tile DOES have a game object
+            {
+                Debug.Log("Do nothing, object found!");
+            }
         }
     }
 
-    //[ClientRpc] //Fired by server, executed on client
-    //private void SetTileClientRpc(Vector3Int location, RuleTile tile, Tilemap tilemap)
-    //{
-    //    tilemap.SetTile(location, tile); //Set the tile ON THE CLIENT!
-    //}
-
-    private void SpawnAllObjectsOnNetwork()
+    [ClientRpc] //Fired by server, executed on client
+    private void SetTileClientRpc(TileType tileType, TilemapType tilemapType, Vector3Int tileLocation)
     {
-        GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-        foreach (GameObject gameObject in allObjects)
-        {
-            if (gameObject.GetComponent<NetworkObject>()) //If the object has a network object component
-            {
-                gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn that object
-            }
-        }
+        Tilemap tilemap = TilemapChecker(tilemapType); 
+        RuleTile tile1 = TileReturner(tileType);
+        tilemap.SetTile(tileLocation, tile1); 
     }
+
+    //private void SpawnAllObjectsOnNetwork()
+    //{
+    //    GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
+    //    foreach (GameObject gameObject in allObjects)
+    //    {
+    //        if (gameObject.GetComponent<NetworkObject>()) //If the object has a network object component
+    //        {
+    //            gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn that object
+    //        }
+    //    }
+    //}
 
     private void DeleteWorldData(string saveFilePath)
     {

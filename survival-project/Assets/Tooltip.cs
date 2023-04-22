@@ -21,7 +21,7 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (eventData == null) return;
+        //if (eventData == null) return;
         if (inventorySlot.AssignedInventorySlot.itemData == null) return;
         tooltipManager.EnableTooltip(inventorySlot.AssignedInventorySlot.itemData.ItemType,
             inventorySlot.AssignedInventorySlot.itemData.DisplayName,

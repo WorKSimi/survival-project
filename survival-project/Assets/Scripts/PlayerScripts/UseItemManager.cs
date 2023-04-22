@@ -579,16 +579,17 @@ public class UseItemManager : NetworkBehaviour
         else if (IsClient)
         {
             int tileId = CheckTile(ItemTile);
+            int tilemapId = CheckTilemap(ItemTile);
             Vector3Int posToPlaceTile = mousePos;
-            PlaceBlockServerRpc(tileId, posToPlaceTile);
+            PlaceBlockServerRpc(tileId, tilemapId, posToPlaceTile);
         }
     }
 
-    [ServerRpc] //Fired by Client, Execute by Server
-    public void PlaceBlockServerRpc(int tileId, Vector3Int position) 
+    [ServerRpc(RequireOwnership = false)] //Fired by Client, Execute by Server
+    public void PlaceBlockServerRpc(int tileId, int tilemapId, Vector3Int position) 
     {
         var tile = TileReturner(tileId); //Get tile
-        var tilemap = TilemapReturner(tileId); //Get tilemap
+        var tilemap = TilemapReturner(tilemapId); //Get tilemap
         tilemap.SetTile(position, tile); //Set the tile
     }
 
@@ -596,16 +597,49 @@ public class UseItemManager : NetworkBehaviour
     {
         if (ItemTile == blockDatabase.woodWallData.ItemTile)
         {
-            return 1;
+            return blockDatabase.woodWallData.BlockID;
+        }
+        else if (ItemTile == blockDatabase.torchWallData.ItemTile)
+        {
+            return blockDatabase.torchWallData.BlockID;
+        }
+        else if (ItemTile == blockDatabase.craftingTable.ItemTile)
+        {
+            return blockDatabase.craftingTable.BlockID;
+        }
+        else return 0;
+    }
+
+    public int CheckTilemap(RuleTile ItemTile)
+    {
+        if (ItemTile == blockDatabase.woodWallData.ItemTile)
+        {
+            return blockDatabase.woodWallData.TilemapID;
+        }
+        else if (ItemTile == blockDatabase.torchWallData.ItemTile)
+        {
+            return blockDatabase.torchWallData.TilemapID;
+        }
+        else if (ItemTile == blockDatabase.craftingTable.ItemTile)
+        {
+            return blockDatabase.craftingTable.TilemapID;
         }
         else return 0;
     }
 
     public RuleTile TileReturner(int integer)
     {
-        if (integer == 1)
+        if (integer == blockDatabase.woodWallData.BlockID)
         {
             return blockDatabase.woodWallData.ItemTile;
+        }
+        else if (integer == blockDatabase.torchWallData.BlockID)
+        {
+            return blockDatabase.torchWallData.ItemTile;
+        }
+        else if (integer == blockDatabase.craftingTable.BlockID)
+        {
+            return blockDatabase.craftingTable.ItemTile;
         }
         else return null;
     }

@@ -385,7 +385,7 @@ public class AnywhereCrafting : MonoBehaviour
 
             var components = new List<CraftRecipeItem>() { woodComponent };
             {
-                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodBow, 2);
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodBow, 1);
                 Debug.Log("Crafted Wood Bow");
             }
         }

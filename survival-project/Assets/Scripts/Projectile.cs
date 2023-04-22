@@ -33,6 +33,11 @@ public class Projectile : NetworkBehaviour
             DestroyProjectile();
         }
 
+        else if (hitInfo.CompareTag("WallTile"))
+        {
+            DestroyProjectile();
+        }
+
         else if (hitInfo.tag != "Enemy")
         {
             Debug.Log("Something other than enemy was hit!");

@@ -12,6 +12,7 @@ public class MouseItemData : NetworkBehaviour
     public Image ItemSprite;
     public TextMeshProUGUI ItemCount;
     public InventorySlot AssignedInventorySlot;
+    public Database database;
 
     private Transform playerTransform;
     private Transform interactionPoint;    
@@ -44,7 +45,7 @@ public class MouseItemData : NetworkBehaviour
     private void Update()
     {
         // TODO: Add controller support.
-        Vector3 dropOffset = new Vector3(0, 3, 0f);
+        Vector3 dropOffset = new Vector3(0, 2, 0f);
         Vector3 dropLocation = playerTransform.position - dropOffset;
 
         if (AssignedInventorySlot.ItemData != null) // If has an item, follow the mouse position.
@@ -114,5 +115,15 @@ public class MouseItemData : NetworkBehaviour
         GameObject go = Instantiate(AssignedInventorySlot.ItemData.ItemPrefab, dropLocation, Quaternion.identity); //Drop item
         go.GetComponent<NetworkObject>().Spawn();
     }
+
+    //This function turns held item into an id, for use with server rpc dropping items
+    private int CheckItem(InventoryItemData inventoryItemData) //Take in the held inventory
+    {
+        return inventoryItemData.ID; //Return item ID
+    }
+    //private InventoryItemData ReturnItem(int id) //Take in the item id
+    //{
+
+    //}
 }
 

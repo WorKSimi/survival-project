@@ -24,8 +24,14 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: 9900632c2b12b914c972bd43660349aa,
     type: 3}
   itemDamage: 0
-  ItemTile: {fileID: 11400000, guid: 2858add7abd26604f92d0d22d08a6866, type: 2}
-  HealthHealed: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  BlockID: 3
+  TilemapID: 1
+  ItemTile: {fileID: 11400000, guid: 2858add7abd26604f92d0d22d08a6866, type: 2}
+  ItemTilemap: 
+  HealthHealed: 0
+  BlockHealth: 0

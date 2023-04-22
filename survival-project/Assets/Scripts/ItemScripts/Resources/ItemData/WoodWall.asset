@@ -27,6 +27,8 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
+  BlockID: 1
+  TilemapID: 1
   ItemTile: {fileID: 11400000, guid: 804de162d757ebe47b4b91a44de2a626, type: 2}
   ItemTilemap: Wall
   HealthHealed: 0

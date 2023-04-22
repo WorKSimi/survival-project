@@ -22,6 +22,8 @@ public class BlueberryBushLogic : NetworkBehaviour, IInteractable
     {
         state = State.Grown;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        GameObject go = this.gameObject;
+        go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
     }
 
     private void FixedUpdate()
@@ -69,14 +71,14 @@ public class BlueberryBushLogic : NetworkBehaviour, IInteractable
         throw new System.NotImplementedException();
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    public void BlueberryLogicServerRpc()
-    {
-        canInteract = false;
-        spriteRenderer.sprite = emptySprite;
-        var go = Instantiate(blueberryItem, this.transform.position, Quaternion.identity); //Instantiate blueberry item
-        go.GetComponent<NetworkObject>().Spawn();
-        state = State.Empty; //Set the state to empty
-        StartCoroutine(GrowingPlant());
-    }
+    //[ServerRpc(RequireOwnership = false)]
+    //public void BlueberryLogicServerRpc()
+    //{
+    //    canInteract = false;
+    //    spriteRenderer.sprite = emptySprite;
+    //    var go = Instantiate(blueberryItem, this.transform.position, Quaternion.identity); //Instantiate blueberry item
+    //    go.GetComponent<NetworkObject>().Spawn();
+    //    state = State.Empty; //Set the state to empty
+    //    StartCoroutine(GrowingPlant());
+    //}
 }
