@@ -152,7 +152,7 @@
     <Compile Include="Assets\Scripts\Inventory Scripts\InventorySystem.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerCanvasController.cs" />
-    <Compile Include="Assets\HostClientManager.cs" />
+    <Compile Include="Assets\Scripts\HostClientManager.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\ItemPickup.cs" />
     <Compile Include="Assets\Scripts\MobSpawning.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingRotate.cs" />

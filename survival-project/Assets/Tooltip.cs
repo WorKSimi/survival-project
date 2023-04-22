@@ -21,20 +21,21 @@ public class Tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //if (eventData == null) return;
-        if (inventorySlot.AssignedInventorySlot.itemData == null) return;
-        tooltipManager.EnableTooltip(inventorySlot.AssignedInventorySlot.itemData.ItemType,
-            inventorySlot.AssignedInventorySlot.itemData.DisplayName,
-            inventorySlot.AssignedInventorySlot.itemData.Description,
-            inventorySlot.AssignedInventorySlot.itemData.itemDamage.ToString(),
-            inventorySlot.AssignedInventorySlot.itemData.DefenseValue.ToString(),
-            inventorySlot.AssignedInventorySlot.itemData.HealthHealed.ToString(),
-            inventorySlot.AssignedInventorySlot.itemData.attackRate.ToString(),
-            inventorySlot.AssignedInventorySlot.itemData.BlockHealth.ToString());
+        //if (inventorySlot.AssignedInventorySlot.itemData == null) return; //If item data doesn't exist, return
+        //if (inventorySlot.AssignedInventorySlot == null) return;
+
+            //tooltipManager.EnableTooltip(inventorySlot.AssignedInventorySlot.itemData.ItemType,
+            //inventorySlot.AssignedInventorySlot.itemData.DisplayName,
+            //inventorySlot.AssignedInventorySlot.itemData.Description,
+            //inventorySlot.AssignedInventorySlot.itemData.itemDamage.ToString(),
+            //inventorySlot.AssignedInventorySlot.itemData.DefenseValue.ToString(),
+            //inventorySlot.AssignedInventorySlot.itemData.HealthHealed.ToString(),
+            //inventorySlot.AssignedInventorySlot.itemData.attackRate.ToString(),
+            //inventorySlot.AssignedInventorySlot.itemData.BlockHealth.ToString());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        tooltipManager.DisableTooltip();
+        //tooltipManager.DisableTooltip();
     }
 }

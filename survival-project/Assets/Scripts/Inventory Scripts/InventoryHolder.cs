@@ -11,7 +11,7 @@ public abstract class InventoryHolder : NetworkBehaviour
     [SerializeField] private int inventorySize;
     [SerializeField] public InventorySystem inventorySystem;
     [SerializeField] protected int offset = 10;
-
+    
     public int Offset => offset;
 
     public InventorySystem InventorySystem => inventorySystem;
