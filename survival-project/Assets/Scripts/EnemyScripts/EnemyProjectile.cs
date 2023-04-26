@@ -40,5 +40,6 @@ public class EnemyProjectile : NetworkBehaviour
     void DestroyProjectile()
     {
         gameObject.GetComponent<NetworkObject>().Despawn();
+        Destroy(this.gameObject);
     }
 }

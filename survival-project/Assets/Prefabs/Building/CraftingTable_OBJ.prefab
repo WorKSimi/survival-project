@@ -829,6 +829,7 @@ MonoBehaviour:
   increaseAmount: {fileID: 345437461889858043}
   decreaseAmount: {fileID: 2954404433021903253}
   amountToCraftText: {fileID: 6027491634589567757}
+  amountToCraft: 1
 --- !u!1 &1749404406190007670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1051,7 @@ MonoBehaviour:
   wood: {fileID: 7389436694480070536, guid: 9900632c2b12b914c972bd43660349aa, type: 3}
   maxHealth: 5
   isResourceNode: 0
-  amountToDrop: 0
+  amountToDrop: 1
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!114 &-2360574602458698001

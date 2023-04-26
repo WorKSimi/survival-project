@@ -207,12 +207,9 @@ public class HotbarDisplay : StaticInventoryDisplay
                     {
                         if (player.GetComponent<UseItemManager>().TileFound() == false) //No tile found at this spot
                         {
-                            //if (player.GetComponent<UseItemManager>().PlayerDetector() == false) //No player found at this spot
-                            //{
-                                player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
-                                slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
-                                RefreshStaticDisplay();
-                            //}
+                            player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
+                            slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
+                            RefreshStaticDisplay();
                         }
                     }
                 break;
@@ -222,7 +219,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Sword":
-                player.GetComponent<UseItemManager>().UseSword(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime);
+                player.GetComponent<UseItemManager>().UseSword(itemData.itemDamage);
                 break;
 
                 case "Bow":

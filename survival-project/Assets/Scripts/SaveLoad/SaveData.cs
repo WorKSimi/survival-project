@@ -15,7 +15,7 @@ public class SaveData
     public SaveData()
     {
         collectedItems = new List<string>();
-        activeItems = new SerializableDictionary<string, ItemPickUpSaveData>();
+        //activeItems = new SerializableDictionary<string, ItemPickUpSaveData>();
         chestDictionary = new SerializableDictionary<string, InventorySaveData>();
         playerInventory = new InventorySaveData();
     }

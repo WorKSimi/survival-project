@@ -1,0 +1,744 @@
+fileFormatVersion: 2
+guid: abfef3f6c7326f6408adcdfceda0bb02
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Grass_Tile_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26fc5d9fff92a014eb79705ed5a7550f
+      internalID: 621134766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile_2
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73fbabe01d02f434c84a827527e933f2
+      internalID: 1402971572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 215c8f0294c32b140a01a66e6423af45
+      internalID: -1102640643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile_6
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e61f908e9fefa284d85f35151c0cc683
+      internalID: 1177583895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrowingDirt_Tile_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42a73748f5f90aa4dadf9085809fdd68
+      internalID: 1777223090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrowingDirt_Tile_2
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0187c0248ae5c34ca6e95e89692efbe
+      internalID: -2124422637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dirt_Tile_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73a3567ad43e73640bbd066e1b8bd5c4
+      internalID: -1432424617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dirt_Tile_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10d4d6599e6b1804196f87d90975fa51
+      internalID: -1850630959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fbfff922a7ba3444bd60954da4ba1fd
+      internalID: 1467662422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7910a2723de22e04b8d66973c466c9c1
+      internalID: 1547076411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5ab85fc2b7529d438e9fbc5df04bce0
+      internalID: 1784586859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_6
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 88
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46f7d8ec78313404e931fd611a8de888
+      internalID: -1040450188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a58395672e2bee42b8c588714542683
+      internalID: 742511339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile_4
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289da8cef12e71c42ba8e9fabb02cff4
+      internalID: -921544596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b77ccc9934ed8db4cadc4ac2362ecef1
+      internalID: 333918851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_Tile_8
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8c4bd5bba162c341b056ebf704e7ce2
+      internalID: 606262050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrowingDirt_Tile_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe1350e50da5f47478bdc2f433b778a0
+      internalID: 1793614243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GrowingDirt_Tile_4
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 872dd5fbba653c94686fe9631f22cb47
+      internalID: 1756024236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dirt_Tile_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac7033ffb5ae15542a888f879012dd6d
+      internalID: -1437306190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dirt_Tile_4
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0caaeaac77e4bd24d8ff89345c975106
+      internalID: -361739701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91285dd4590962047a09a3ef6ea90a28
+      internalID: 1167465773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 206ed27c637bb2e4cb4b5b793cef3b86
+      internalID: -536458685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_7
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4afcb0ac0d009b34f8bcd24aee2aaeb0
+      internalID: -1359517807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stone_Tile_8
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 80
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79763c35561f19c40bf0bae7638a74d2
+      internalID: -454906952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      NewDirt,NewStone,NewGrass_25: 1945738775
+      NewDirt,NewStone,NewGrass_99: -652632275
+      Dirt_Tile_4: -361739701
+      NewDirt,NewStone,NewGrass_82: 2094607538
+      NewDirt,NewStone,NewGrass_12: -1023221347
+      Grass_Tile_4: -921544596
+      NewDirt,NewStone,NewGrass_83: 594959498
+      NewDirt,NewStone,NewGrass_96: 823393821
+      NewDirt,NewStone,NewGrass_17: 448564001
+      NewDirt,NewStone,NewGrass_22: 300504301
+      NewDirt,NewStone,NewGrass_64: -550408496
+      Dirt_Tile_1: -1432424617
+      NewDirt,NewStone,NewGrass_9: -1707193528
+      GrowingDirt_Tile_1: 1777223090
+      NewDirt,NewStone,NewGrass_102: -1316061012
+      NewDirt,NewStone,NewGrass_23: 1802590362
+      NewDirt,NewStone,NewGrass_62: 1067524128
+      NewDirt,NewStone,NewGrass_73: -1519152602
+      NewDirt,NewStone,NewGrass_98: -92081362
+      Stone_Wall_4: -780438316
+      NewDirt,NewStone,NewGrass_15: 1882488058
+      NewDirt,NewStone,NewGrass_45: -466343065
+      NewDirt,NewStone,NewGrass_14: -1462358962
+      NewDirt,NewStone,NewGrass_29: 52798319
+      NewDirt,NewStone,NewGrass_95: -481278104
+      Grass_Tile_8: 606262050
+      NewDirt,NewStone,NewGrass_11: -915859355
+      Grass_Tile_2: 1402971572
+      NewDirt,NewStone,NewGrass_27: -1405629367
+      NewDirt,NewStone,NewGrass_26: -193275058
+      NewDirt,NewStone,NewGrass_69: -2009192743
+      NewDirt,NewStone,NewGrass_31: 427684604
+      NewDirt,NewStone,NewGrass_75: 1689638889
+      NewDirt,NewStone,NewGrass_19: -136416245
+      NewDirt,NewStone,NewGrass_101: 1075924267
+      Grass_Tile_7: 333918851
+      NewDirt,NewStone,NewGrass_84: -1334854579
+      Dirt_Tile_3: -1437306190
+      Grass_Wall_3: 128240210
+      NewDirt,NewStone,NewGrass_16: 1564267004
+      GrowingDirt_Tile_2: -2124422637
+      NewDirt,NewStone,NewGrass_103: 2136850323
+      NewDirt,NewStone,NewGrass_44: 666615047
+      NewDirt,NewStone,NewGrass_68: -1376780850
+      NewDirt,NewStone,NewGrass_71: -1369622424
+      NewDirt,NewStone,NewGrass_20: -1910282731
+      NewDirt,NewStone,NewGrass_86: -1386235470
+      NewDirt,NewStone,NewGrass_78: 1439993638
+      Stone_Tile_7: -1359517807
+      NewDirt,NewStone,NewGrass_87: -923158956
+      NewDirt,NewStone,NewGrass_104: -1202972493
+      NewDirt,NewStone,NewGrass_76: -553064421
+      NewDirt,NewStone,NewGrass_30: -834931371
+      Stone_Wall_1: 1179807577
+      Grass_Tile_5: -1102640643
+      NewDirt,NewStone,NewGrass_5: 398097263
+      NewDirt,NewStone,NewGrass_13: -86100716
+      NewDirt,NewStone,NewGrass_8: -34727486
+      NewDirt,NewStone,NewGrass_70: -251781949
+      Grass_Tile_3: 742511339
+      Grass_Wall_4: -1543809792
+      NewDirt,NewStone,NewGrass_61: 593127623
+      GrowingDirt_Tile_3: 1793614243
+      NewDirt,NewStone,NewGrass_94: 787031675
+      NewDirt,NewStone,NewGrass_7: 341396975
+      NewDirt,NewStone,NewGrass_80: 856598960
+      NewDirt,NewStone,NewGrass_72: 2017966305
+      Grass_Wall_2: -462193736
+      Dirt_Wall_3: -514547368
+      Dirt_Wall_2: -869149949
+      NewDirt,NewStone,NewGrass_63: 826987941
+      Stone_Tile_5: 1784586859
+      NewDirt,NewStone,NewGrass_28: -1399078951
+      Stone_Tile_1: 1467662422
+      Stone_Tile_2: 1547076411
+      NewDirt,NewStone,NewGrass_90: -1406563323
+      NewDirt,NewStone,NewGrass_66: -1413204088
+      NewDirt,NewStone,NewGrass_92: -291052568
+      NewDirt,NewStone,NewGrass_89: -713408912
+      Grass_Tile_6: 1177583895
+      NewDirt,NewStone,NewGrass_93: 1753337330
+      NewDirt,NewStone,NewGrass_91: 34118277
+      Stone_Tile_8: -454906952
+      Stone_Tile_4: -536458685
+      NewDirt,NewStone,NewGrass_88: 1142432747
+      Dirt_Wall_1: 929749549
+      NewDirt,NewStone,NewGrass_79: -1967894025
+      NewDirt,NewStone,NewGrass_100: -6181403
+      NewDirt,NewStone,NewGrass_46: -1439790062
+      NewDirt,NewStone,NewGrass_4: -578741254
+      NewDirt,NewStone,NewGrass_3: -1313264283
+      NewDirt,NewStone,NewGrass_77: -1251455733
+      NewDirt,NewStone,NewGrass_24: 1424306645
+      NewDirt,NewStone,NewGrass_1: 732022453
+      Grass_Wall_1: 817202700
+      NewDirt,NewStone,NewGrass_74: 848428940
+      Stone_Wall_3: 160889272
+      NewDirt,NewStone,NewGrass_18: 668640099
+      Dirt_Wall_4: 1853902116
+      NewDirt,NewStone,NewGrass_21: -1482882165
+      Stone_Tile_3: 1167465773
+      Stone_Wall_2: -953901191
+      Stone_Tile_6: -1040450188
+      NewDirt,NewStone,NewGrass_85: 1910783778
+      NewDirt,NewStone,NewGrass_10: -1614517258
+      NewDirt,NewStone,NewGrass_2: -635479672
+      NewDirt,NewStone,NewGrass_65: 1752288698
+      NewDirt,NewStone,NewGrass_47: -746772142
+      GrowingDirt_Tile_4: 1756024236
+      NewDirt,NewStone,NewGrass_60: 1223732954
+      NewDirt,NewStone,NewGrass_67: 367093276
+      NewDirt,NewStone,NewGrass_81: 2082627014
+      NewDirt,NewStone,NewGrass_97: -2000490267
+      Dirt_Tile_2: -1850630959
+      Grass_Tile_1: 621134766
+      NewDirt,NewStone,NewGrass_6: -486309546
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

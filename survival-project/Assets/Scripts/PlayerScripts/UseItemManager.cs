@@ -261,13 +261,6 @@ public class UseItemManager : NetworkBehaviour
                     hoveredWall = hit.transform;
                     var wallScript = hoveredWall.GetComponent<Wall>();
                     wallScript.TakeDamage(itemDamage);
-
-                    if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
-                    {
-                        wallScript.Die(); //Spawn the items
-                        wallScript.DestroyAndDespawnThisObject();
-                        wallTilemap.SetTile(mousePos, null); 
-                    }
                 }
             }
         }
@@ -285,13 +278,6 @@ public class UseItemManager : NetworkBehaviour
                     hoveredWall = hit.transform;
                     var wallScript = hoveredWall.GetComponent<Wall>();
                     wallScript.DamageWallServerRpc(itemDamage);
-
-                    if (wallScript.currentHealth <= 0)
-                    {
-                        wallScript.DieServerRpc();
-                        wallScript.DestroyAndDespawnThisObjectServerRpc();
-                        TileNullServerRpc(mousePos);
-                    }
                 }
             }
         }
@@ -329,13 +315,6 @@ public class UseItemManager : NetworkBehaviour
                         hoveredWall = hit.transform;
                         var wallScript = hoveredWall.GetComponent<Wall>();
                         wallScript.TakeDamage(itemDamage);
-
-                        if (wallScript.currentHealth <= 0) //If the wall health is <= 0 and item spawned
-                        {
-                            wallScript.Die(); //Spawn the items
-                            wallScript.DestroyAndDespawnThisObject();
-                            wallTilemap.SetTile(mousePos, null);
-                        }
                     }
                 }
             }
@@ -358,60 +337,42 @@ public class UseItemManager : NetworkBehaviour
                         hoveredWall = hit.transform;
                         var wallScript = hoveredWall.GetComponent<Wall>();
                         wallScript.DamageWallServerRpc(itemDamage);
-                        if (wallScript.currentHealth <= 0)
-                        {
-                            wallScript.DieServerRpc();
-                            wallScript.DestroyAndDespawnThisObjectServerRpc();
-                            TileNullServerRpc(mousePos);
-                        }
                     }
                 }
             }
         }
     }
 
-    public void UseSword(float itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime)
+    public void UseSword(float itemDamage)
     {
-        if (Time.time >= nextAttackTime)
+        if (IsHost)
         {
-            if (IsHost)
+            if (Time.time >= nextAttackTime) //If not on cooldown
             {
-                if (projectilePrefab != null)
-                {
-                    LaunchProjectile(itemDamage, projectilePrefab, defaultProjectileRotation, projectileSpeed, projectileLifetime);
-                }
-                else Debug.Log("This weapon has no projectile, not firing");
-
                 SwingTweenAnimation(); //Swing animation
                 Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
                 foreach (Collider2D enemy in hitEnemies) // Damage enemies
                 {
                     enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
                 }
-                nextAttackTime = Time.time + 1f / attackRate;
+                nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
             }
-            else if (IsClient)
+        }
+        if (IsClient)
+        {
+            if (Time.time >= nextAttackTime) //If not on cooldown
             {
-                if (projectilePrefab != null)
-                {
-                    Vector3 fireLocation = firePoint.position;
-                    Vector3 projectileDirection = firePoint.up;
-                    Quaternion tempRotation = projectileRotationObject.rotation;
-                    SwordSlashProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);
-                }
-                else Debug.Log("This weapon has no projectile, not firing");
-
                 SwingTweenAnimation(); //Swing animation
                 Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
                 foreach (Collider2D enemy in hitEnemies) // Damage enemies
                 {
-                    enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
+                    enemy.GetComponent<EnemyHealth>().TakeDamageServerRpc(itemDamage);
                 }
-                nextAttackTime = Time.time + 1f / attackRate;
+                nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
             }
         }
     }
-
+            
     public void UseFood(int healthHealed)
     {
         playerHealth.HealHealth(healthHealed);
@@ -500,9 +461,10 @@ public class UseItemManager : NetworkBehaviour
 
             else if (IsClient)
             {
+                //ProjectileTest(itemDamage * chargeMultiplier, projectilePrefab, projectileRotationObject, projectileSpeed * chargeMultiplier, projectileLifetime);
                 Vector3 fireLocation = firePoint.position;
                 Vector3 projectileDirection = firePoint.up;
-                Quaternion tempRotation = projectileRotationObject.rotation;
+                Quaternion tempRotation = projectileRotationObject.rotation;              
                 LaunchArrowProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);
                 nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
             }
@@ -511,10 +473,7 @@ public class UseItemManager : NetworkBehaviour
     
     private void LaunchProjectile(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     {
-        Debug.Log("Start of launch function: " + projectileLifetime);
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
-
-        Debug.Log("Right before pass in: " + projectileLifetime);
         Projectile projectileScript = bullet.GetComponent<Projectile>();
         projectileScript.Projectiledamage = itemDamage;
         projectileScript.Projectilelifetime = projectileLifetime;
@@ -525,7 +484,18 @@ public class UseItemManager : NetworkBehaviour
         rb.velocity = firePoint.up * projectileSpeed;              
     }
 
-    [ServerRpc]
+    private void ProjectileTest(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
+    {
+        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
+        Projectile projectileScript = bullet.GetComponent<Projectile>();
+        projectileScript.Projectiledamage = itemDamage;
+        projectileScript.Projectilelifetime = projectileLifetime;
+        projectileScript.StartDestructionCoroutine();
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = firePoint.up * projectileSpeed;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     public void LaunchArrowProjectileServerRpc(float itemDamage,  float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
     {
         GameObject bullet = Instantiate(arrowPrefab, spawnLocation, quaternion);

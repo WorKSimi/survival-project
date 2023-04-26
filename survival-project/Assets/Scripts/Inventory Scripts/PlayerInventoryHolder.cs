@@ -11,6 +11,7 @@ public class PlayerInventoryHolder : InventoryHolder
     public static UnityAction<InventorySystem, int> OnPlayerInventoryDisplayRequested;
 
     [SerializeField] private GameObject personalCraftingMenu;
+    [SerializeField] private AnywhereCrafting anywhereCrafting;
     public RockSpawner rockSpawner;
     private bool isInventoryOpen;
 
@@ -38,9 +39,11 @@ public class PlayerInventoryHolder : InventoryHolder
             OnPlayerInventoryDisplayRequested?.Invoke(inventorySystem, offset); //Open it
             personalCraftingMenu.SetActive(false);
         }
-        if (Keyboard.current.cKey.wasPressedThisFrame)
+        if (Keyboard.current.cKey.wasPressedThisFrame) //Open crafting menu
         {
             personalCraftingMenu.SetActive(true);
+            anywhereCrafting.amountToCraft = 1; //Reset amount to craft
+            anywhereCrafting.amountToCraftText.SetText(anywhereCrafting.amountToCraft.ToString());
         }    
     }
 

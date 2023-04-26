@@ -54,12 +54,12 @@ public class Wall : NetworkBehaviour
     //    go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
     //}
 
-    [ServerRpc(RequireOwnership = false)]
-    public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
-    {
-        NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
-        networkObject.Despawn();
-    }
+    //[ServerRpc(RequireOwnership = false)]
+    //public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
+    //{
+    //    NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
+    //    networkObject.Despawn();
+    //}
 
     //[ServerRpc(RequireOwnership = false)]
     //public void SpawnItemsServerRpc(ServerRpcParams serverRpcParams = default)
@@ -76,47 +76,22 @@ public class Wall : NetworkBehaviour
         currentHealth -= damage;
         Debug.Log("Wall Hit");
 
-        //if (currentHealth <= 0)
-        //{
-        //    Die();           
-        //}
+        if (currentHealth <= 0)
+        {
+            Die();           
+        }
     }
 
     [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
     public void DamageWallServerRpc(float damage)
     {
-        Debug.Log("RPC LAUNCHED");
         TakeDamage(damage);
-        //Die();
     }
 
     public void Die()
     {
+        thisPosition = Vector3Int.FloorToInt(this.transform.position);
         if (wood != null) //If the item to drop is something
-        {
-            if (IsHost)
-            {
-                for (int i = 0; i < amountToDrop; i++)
-                {
-                    GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
-                    gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
-                }
-            }
-            //else if (IsClient)
-            //{
-            //    SpawnItemsServerRpc();
-            //}
-        }
-        if (isCrop == true)
-        {
-            Debug.Log("Do nothing, Crop death handled by crop script");
-        }
-    }
-
-    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
-    public void DieServerRpc()
-    {
-        if (wood != null)
         {
             for (int i = 0; i < amountToDrop; i++)
             {
@@ -124,23 +99,42 @@ public class Wall : NetworkBehaviour
                 gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
             }
         }
-
         if (isCrop == true)
         {
             Debug.Log("Do nothing, Crop death handled by crop script");
         }
+        this.gameObject.GetComponent<NetworkObject>().Despawn();
+        wallTilemap.SetTile(thisPosition, null);
     }
 
-    public void DestroyAndDespawnThisObject()
-    {
-        this.gameObject.GetComponent<NetworkObject>().Despawn();
-        Destroy(this.gameObject);
-    }
+    //[ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
+    //public void DieServerRpc()
+    //{
+    //    if (wood != null)
+    //    {
+    //        for (int i = 0; i < amountToDrop; i++)
+    //        {
+    //            GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
+    //            gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
+    //        }
+    //    }
 
-    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
-    public void DestroyAndDespawnThisObjectServerRpc()
-    {
-        this.gameObject.GetComponent<NetworkObject>().Despawn();
-        Destroy(this.gameObject);
-    }
+    //    if (isCrop == true)
+    //    {
+    //        Debug.Log("Do nothing, Crop death handled by crop script");
+    //    }
+    //}
+
+    //public void DestroyAndDespawnThisObject()
+    //{
+    //    this.gameObject.GetComponent<NetworkObject>().Despawn();
+    //    Destroy(this.gameObject);
+    //}
+
+    //[ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
+    //public void DestroyAndDespawnThisObjectServerRpc()
+    //{
+    //    this.gameObject.GetComponent<NetworkObject>().Despawn();
+    //    Destroy(this.gameObject);
+    //}
 }

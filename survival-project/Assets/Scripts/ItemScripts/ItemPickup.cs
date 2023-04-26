@@ -20,7 +20,7 @@ public class ItemPickup : NetworkBehaviour
 
     private void Awake()
     {
-        id = GetComponent<UniqueID>().ID;
+        //id = GetComponent<UniqueID>().ID;
         SaveLoad.OnLoadGame += LoadGame;
         itemSaveData = new ItemPickUpSaveData(ItemData, transform.position, transform.rotation);
 
@@ -31,7 +31,7 @@ public class ItemPickup : NetworkBehaviour
 
     private void Start()
     {
-        SaveGameManager.data.activeItems.Add(id, itemSaveData);
+        //SaveGameManager.data.activeItems.Add(id, itemSaveData);
     }
 
     private void Update()

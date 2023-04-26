@@ -7,15 +7,9 @@ public class Projectile : NetworkBehaviour
 {
     public float Projectiledamage;
     public float Projectilelifetime;
-
-    private void Awake()
-    {
-        //Debug.Log("Projectile on creation: " + Projectilelifetime);
-    }
-
+    
     public void StartDestructionCoroutine()
     {
-        //Debug.Log("Projectile on function call: " + Projectilelifetime);
         StartCoroutine(DestroyProjectileAfterTime(Projectilelifetime));
     }
 
@@ -37,11 +31,6 @@ public class Projectile : NetworkBehaviour
         {
             DestroyProjectile();
         }
-
-        else if (hitInfo.tag != "Enemy")
-        {
-            Debug.Log("Something other than enemy was hit!");
-        }
     }
 
     public IEnumerator DestroyProjectileAfterTime(float lifetime)
@@ -59,7 +48,7 @@ public class Projectile : NetworkBehaviour
         else if (IsClient)
         {
             DestroyObjectServerRpc(); //Destroy on server
-          //Destroy(this.gameObject); //Destroy on client
+            Destroy(this.gameObject); //Destroy on client
         }
     }
 

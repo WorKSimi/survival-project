@@ -40,8 +40,8 @@ public class AnywhereCrafting : MonoBehaviour
     [SerializeField] private Button increaseAmount;
     [SerializeField] private Button decreaseAmount;
 
-    [SerializeField] private TextMeshProUGUI amountToCraftText;
-    private int amountToCraft = 1;
+    public TextMeshProUGUI amountToCraftText;
+    public int amountToCraft = 1;
 
     public void IncreaseAmount()
     {
@@ -130,10 +130,10 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.FlintPick.Description); //Set description box text
 
         ComponentText.SetText("Wood"); //Set component name
-        ComponentAmount.SetText("x5"); //Set component amount 
+        ComponentAmount.SetText("x10"); //Set component amount 
 
         ComponentText2.SetText("Flint"); //Set second component
-        ComponentAmount2.SetText("x5"); //Set second component amount
+        ComponentAmount2.SetText("x10"); //Set second component amount
 
         selected = SelectedRecipe.FlintPickaxe;
     }
@@ -173,7 +173,7 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.WoodWall.Description); //Set description box text
 
         ComponentText.SetText("Wood"); //Set component name
-        ComponentAmount.SetText("x5"); //Set component amount 
+        ComponentAmount.SetText("x1"); //Set component amount 
 
         selected = SelectedRecipe.WoodWall;
     }
@@ -312,13 +312,13 @@ public class AnywhereCrafting : MonoBehaviour
             var woodComponent = new CraftRecipeItem
             {
                 displayName = "wood",
-                quantity = 5
+                quantity = 10
             };
 
             var flintComponent = new CraftRecipeItem
             {
                 displayName = "flint",
-                quantity = 5
+                quantity = 10
             };
 
             var components = new List<CraftRecipeItem>() { woodComponent, flintComponent };
@@ -359,7 +359,7 @@ public class AnywhereCrafting : MonoBehaviour
             var woodComponent = new CraftRecipeItem
             {
                 displayName = "wood",
-                quantity = 5
+                quantity = 1
             };
 
             var components = new List<CraftRecipeItem>() { woodComponent };

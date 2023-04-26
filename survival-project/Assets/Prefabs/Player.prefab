@@ -117,6 +117,7 @@ MonoBehaviour:
   increaseAmount: {fileID: 8324463003394898793}
   decreaseAmount: {fileID: 8557410412895084526}
   amountToCraftText: {fileID: 1267704078276980805}
+  amountToCraft: 1
 --- !u!1 &1635909743
 GameObject:
   m_ObjectHideFlags: 0
@@ -2040,6 +2041,7 @@ MonoBehaviour:
   increaseAmount: {fileID: 7727262916566379070}
   decreaseAmount: {fileID: 2795162951309640338}
   amountToCraftText: {fileID: 1959060244331378135}
+  amountToCraft: 1
 --- !u!1 &1624985811869566417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,10 +2645,9 @@ MonoBehaviour:
   thisPlayer: {fileID: 3430272870254572311}
   validTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
   currentSpawns: 0
-  maxSpawns: 0
+  maxSpawns: 5
   mobPool:
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
-  - {fileID: 4648358853205179229, guid: 7e6f924446c924b4ca057d4e1f3971af, type: 3}
 --- !u!1 &2156278191627496922
 GameObject:
   m_ObjectHideFlags: 0
@@ -5020,6 +5021,7 @@ MonoBehaviour:
     inventorySlots: []
   offset: 10
   personalCraftingMenu: {fileID: 849411669}
+  anywhereCrafting: {fileID: 169439273}
   rockSpawner: {fileID: 453644881913340907}
 --- !u!114 &898379684
 MonoBehaviour:

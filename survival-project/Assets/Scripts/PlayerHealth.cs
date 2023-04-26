@@ -23,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     public HealthBar healthBar;
     public Vector3Int respawnPoint = new Vector3Int(0, 0, 0);
     private SpriteRenderer spriteRend;
+    private bool didRespawn;
 
     private void Awake()
     {
@@ -61,10 +62,15 @@ public class PlayerHealth : MonoBehaviour
     public IEnumerator Die() //Function for player death
     {
         playerNetwork.state = PlayerNetwork.State.Dead; //Set state to dead
+        didRespawn = false;
         yield return new WaitForSeconds(respawnTime); //Wait for respawn time
-        this.gameObject.transform.position = respawnPoint; //Set player position back to respawn point
+        if (didRespawn == false)
+        {
+            this.gameObject.transform.position = respawnPoint; //Set player position back to respawn point
+            didRespawn = true;
+        }
+        
         playerNetwork.state = PlayerNetwork.State.Normal; //Set state back to normal
-
         currentHealth = maxHealth; //Set player health back to full
         healthBar.SetHealth(currentHealth); //Update the health bar
 

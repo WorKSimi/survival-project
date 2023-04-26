@@ -148,13 +148,12 @@ public class BeeEnemy : NetworkBehaviour
             fireDirection = (target.transform.position - this.transform.position).normalized;
             float angle = Mathf.Atan2(fireDirection.y, fireDirection.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
             GameObject bullet = Instantiate(stingerProjectile, transform.position, rotation);
+            bullet.GetComponent<NetworkObject>().Spawn();
             EnemyProjectile projectileScript = bullet.GetComponent<EnemyProjectile>();
             projectileScript.enemyProjectileDamage = enemyDamage.damage;
             projectileScript.enemyProjectileLifetime = projectileDuration;
             projectileScript.StartDestructionCoroutine();
-            bullet.GetComponent<NetworkObject>().Spawn();
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>(); 
             rb.velocity = fireDirection * projectileSpeed;
 
