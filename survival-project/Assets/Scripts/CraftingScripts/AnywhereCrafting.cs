@@ -76,7 +76,9 @@ public class AnywhereCrafting : MonoBehaviour
         Torch,
         WoodBow,
         WoodWall,
+        TinBar,
     }
+    
     public void SelectCraftingTable()
     {
         ClearComponents();
@@ -177,6 +179,19 @@ public class AnywhereCrafting : MonoBehaviour
 
         selected = SelectedRecipe.WoodWall;
     }
+    public void SelectTinBar()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.TinBar.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.TinBar.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.TinBar.Description); //Set description box text
+
+        ComponentText.SetText("Tin Ore"); //Set component name
+        ComponentAmount.SetText("x1"); //Set component amount 
+
+        selected = SelectedRecipe.TinBar;
+    }
 
     public void CraftItem()
     {
@@ -207,6 +222,10 @@ public class AnywhereCrafting : MonoBehaviour
         if (selected == SelectedRecipe.WoodWall)
         {
             CraftWoodWall();
+        }
+        if (selected == SelectedRecipe.TinBar)
+        {
+            CraftTinBar();
         }
         else Debug.Log("Nothing is selected to craft!");
     }
@@ -375,6 +394,26 @@ public class AnywhereCrafting : MonoBehaviour
         for (int i = 0; i < amountToCraft; i++)
         {
             Debug.Log("Trying to Craft Wood Bow");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 15
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodBow, 1);
+                Debug.Log("Crafted Wood Bow");
+            }
+        }
+    }
+    private void CraftTinBar()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Tin Bar");
             var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
 
             var woodComponent = new CraftRecipeItem

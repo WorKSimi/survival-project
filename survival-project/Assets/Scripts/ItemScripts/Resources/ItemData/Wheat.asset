@@ -10,20 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: WheatCrop
+  m_Name: Wheat
   m_EditorClassIdentifier: 
   ID: -1
   DisplayName: Wheat
-  Description: Golden wheat, farmed to perfection
+  Description: Wheat, can be cooked into food and also planted to make more!
   Icon: {fileID: 402775561, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 9999
   GoldValue: 0
-  ItemType: 
+  ItemType: Seed
   ItemPrefab: {fileID: 7389436694480070536, guid: 154544458d88504448946addf61310ce,
     type: 3}
   itemDamage: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
-  ItemTile: {fileID: 0}
+  attackRate: 0
+  DefenseValue: 0
+  BlockID: 0
+  TilemapID: 0
+  ItemTile: {fileID: 11400000, guid: 542825b8b0df0364582291f84fce022a, type: 2}
+  ItemTilemap: 
   HealthHealed: 0
+  BlockHealth: 0

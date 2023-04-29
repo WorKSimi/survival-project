@@ -21,6 +21,7 @@ public enum TileType
     WheatCrop,
     WoodWall,
     Flint,
+    StoneNode,
 }
 
 public enum TilemapType

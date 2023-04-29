@@ -23,6 +23,7 @@ public class MapGeneration : NetworkBehaviour
     public RuleTile caveEntranceTile;
     public RuleTile treeTile;
     public RuleTile flintTile;
+    public RuleTile stoneNodeTile;
 
     [Header("Dimensions")]
     public int width = 50;
@@ -123,13 +124,17 @@ public class MapGeneration : NetworkBehaviour
                 else if (height < 0.6f) //Grass
                 {
                     groundTilemap.SetTile(new Vector3Int(newX, newY, 0), grassTile);
-                    if (Random.value >= 0.97) //If 3 percent chance pass
+                    if (Random.value >= 0.98) //If 2 percent chance pass
                     {
                         wallTilemap.SetTile(new Vector3Int(newX, newY, 0), treeTile); //Spawn tree on tile
                     }
-                    else if (Random.value >= 0.98) 
+                    else if (Random.value >= 0.99) 
                     {
                         wallTilemap.SetTile(new Vector3Int(newX, newY, 0), flintTile); //Spawn Flint node on tile
+                    }
+                    else if (Random.value >= 0.99)
+                    {
+                        wallTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneNodeTile); //Spawn Stone node on tile
                     }
                     else if (Random.value >= 0.995) 
                     {

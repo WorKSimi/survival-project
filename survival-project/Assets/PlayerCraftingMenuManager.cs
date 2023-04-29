@@ -6,16 +6,24 @@ public class PlayerCraftingMenuManager : MonoBehaviour
 {
     public GameObject personalMenu;
     public GameObject craftingTableMenu;
+    public GameObject furnaceMenu;
 
     public void CraftingTableMenuSelect()
     {
-        personalMenu.SetActive(false);
+        DisableAllMenus();
         craftingTableMenu.SetActive(true);
+    }
+
+    public void FurnaceMenuSelect()
+    {
+        DisableAllMenus();
+        furnaceMenu.SetActive(true);
     }
 
     public void DisableAllMenus()
     {
         personalMenu.SetActive(false);
         craftingTableMenu.SetActive(false);
+        furnaceMenu.SetActive(false);
     }
 }

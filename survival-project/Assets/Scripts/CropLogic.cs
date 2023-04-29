@@ -12,7 +12,7 @@ public class CropLogic : MonoBehaviour
     private Vector3Int cropPosInt;
 
     [SerializeField] private GameObject cropItem;
-    [SerializeField] private GameObject cropSeed;
+    //[SerializeField] private GameObject cropSeed;
     [SerializeField] private RuleTile dryFarmTile;
 
     [SerializeField] private GameObject CropStage1;
@@ -57,7 +57,7 @@ public class CropLogic : MonoBehaviour
 
                 if (wallScript.currentHealth <= 0) //If this crop dies in stage 3
                 {
-                    Instantiate(cropSeed, this.transform.position, Quaternion.identity);
+                    Instantiate(cropItem, this.transform.position, Quaternion.identity);
                     wallTilemap.SetTile(cropPosInt, null);
                     Destroy(this.gameObject);
                 }
@@ -71,7 +71,7 @@ public class CropLogic : MonoBehaviour
 
                 if (wallScript.currentHealth <= 0) //If this crop dies in stage 3
                 {
-                    Instantiate(cropSeed, this.transform.position, Quaternion.identity);
+                    Instantiate(cropItem, this.transform.position, Quaternion.identity);
                     wallTilemap.SetTile(cropPosInt, null);
                     Destroy(this.gameObject);
                 }
@@ -85,8 +85,7 @@ public class CropLogic : MonoBehaviour
                 if (wallScript.currentHealth <= 0) //If this crop dies in stage 3
                 {                    
                     Instantiate(cropItem, this.transform.position, Quaternion.identity);
-                    Instantiate(cropSeed, this.transform.position, Quaternion.identity);
-                    Instantiate(cropSeed, this.transform.position, Quaternion.identity);
+                    Instantiate(cropItem, this.transform.position, Quaternion.identity);
                     wallTilemap.SetTile(cropPosInt, null);
                     groundTilemap.SetTile(cropPosInt, dryFarmTile); //Turn tile back to try
                     Destroy(this.gameObject);

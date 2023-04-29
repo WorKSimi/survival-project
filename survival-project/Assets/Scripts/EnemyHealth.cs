@@ -28,7 +28,7 @@ public class EnemyHealth : NetworkBehaviour
         currentHealth -= damage;
         flashEffect.Flash(); //Make enemy flash when hit
         healthBar.SetHealth(currentHealth); //Set health bar here
-        //hitSound.Play(); //Play hit sound
+        SyncHealthbarClientRpc(currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -38,16 +38,7 @@ public class EnemyHealth : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void TakeDamageServerRpc(float damage)
     {
-        healthbarObject.SetActive(true);
-        currentHealth -= damage;
-        flashEffect.Flash(); //Make enemy flash when hit
-        healthBar.SetHealth(currentHealth); //Set healthbar
-        //hitSound.Play(); //Play hit sound
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        TakeDamage(damage);
     }
 
     private void Die()
@@ -70,23 +61,6 @@ public class EnemyHealth : NetworkBehaviour
                 Destroy(this.gameObject); //Remove enemy
             }
         }
-        //else if (IsClient)
-        //{
-        //    if (droppedItem != null) //If the enemy has an item to drop
-        //    {
-        //        for (int i = 0; i < 5; i++) //Drop 5 of this enemies item drop
-        //        {
-        //            SpawnItemOnServerRpc();
-        //        }
-        //        this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
-        //        DespawnEnemyServerRpc();
-        //    }
-        //    else if (droppedItem == null) //If enemy has no item
-        //    {
-        //        this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
-        //        DespawnEnemyServerRpc();
-        //    }
-        //}
     }
 
     [ServerRpc(RequireOwnership = false)] //Fired by client executed on server
@@ -104,8 +78,9 @@ public class EnemyHealth : NetworkBehaviour
     }
 
     [ClientRpc] //Fired by server, executed on clients
-    public void SyncEnemyHealthbarClientRpc(float health)
+    public void SyncHealthbarClientRpc(float health)
     {
-
+        healthbarObject.SetActive(true);
+        healthBar.SetHealth(health);
     }
 }

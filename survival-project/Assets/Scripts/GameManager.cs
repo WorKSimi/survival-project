@@ -19,6 +19,7 @@ namespace Assets.Scripts
         public InventoryItemData Torch;
         public InventoryItemData WoodBow;
         public InventoryItemData WoodWall;
+        public InventoryItemData TinBar;
 
         protected void Start()
         {

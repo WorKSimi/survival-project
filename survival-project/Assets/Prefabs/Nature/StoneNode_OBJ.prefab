@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8496068699452573177}
   - component: {fileID: 3050062930715579047}
   m_Layer: 8
-  m_Name: FlintNode
+  m_Name: StoneNode_OBJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1829741519, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  m_Sprite: {fileID: -143193231, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +102,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16, y: -0.4}
+  m_Offset: {x: -0.02, y: -0.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -113,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.22, y: 0.32}
+  m_Size: {x: 0.89, y: 0.32}
   m_EdgeRadius: 0
 --- !u!114 &1889519589
 MonoBehaviour:
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08, type: 3}
+  wood: {fileID: 7389436694480070536, guid: d889face19770cd41820a59981d781bd, type: 3}
   maxHealth: 5
   isResourceNode: 1
   amountToDrop: 5
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 9074139596052639174}
   - component: {fileID: 7474661734639088412}
   m_Layer: 8
-  m_Name: FlintSprite
+  m_Name: StoneSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5392734770331360868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06, y: 0.37, z: 0}
+  m_LocalPosition: {x: -0.03, y: 0.22, z: 0}
   m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -249,7 +249,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1829741519, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  m_Sprite: {fileID: -143193231, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

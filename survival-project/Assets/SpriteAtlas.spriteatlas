@@ -470,6 +470,14 @@ SpriteAtlas:
   - {fileID: 564713083, guid: cadfe3fe7ef67fd4686b82fff0f8951c, type: 3}
   - {fileID: 21300000, guid: af029ffedac351a43b35124d31ad8dfa, type: 3}
   - {fileID: 21300000, guid: 2226fc3f279db28428100e2e2dd32e99, type: 3}
+  - {fileID: 1292197150, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -2134708012, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -1539166632, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -1281381116, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -448797806, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -2032552040, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -1464044400, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -1558747486, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   m_PackedSpriteNamesToIndex:
   - BobFaceLeft
   - GrassWallTopL
@@ -891,6 +899,14 @@ SpriteAtlas:
   - Player_Idle_Down
   - TestTinAxe
   - FaceSide
+  - Tin_Wall_Grass_1
+  - Tin_Wall_Grass_3
+  - Tin_Wall_Grass_2
+  - Tin_Wall_Grass_4
+  - Tin_Wall_Dirt_4
+  - Tin_Wall_Dirt_1
+  - Tin_Wall_Dirt_2
+  - Tin_Wall_Dirt_3
   m_RenderDataMap: {}
   m_Tag: SpriteAtlas
   m_IsVariant: 0

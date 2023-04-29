@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
+  m_Name: Tin Bar
+  m_EditorClassIdentifier: 
+  ID: -1
+  DisplayName: Tin Bar
+  Description: 'Soft metal forged into a bar for crafting
+
+'
+  Icon: {fileID: -1113904026, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  MaxStackSize: 999
+  GoldValue: 0
+  ItemType: Resource
+  ItemPrefab: {fileID: 7389436694480070536, guid: b06dd0b0ac82c504c9a1e1b645e3b443,
+    type: 3}
+  itemDamage: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  BlockID: 0
+  TilemapID: 0
+  ItemTile: {fileID: 0}
+  ItemTilemap: 
+  HealthHealed: 0
+  BlockHealth: 0
