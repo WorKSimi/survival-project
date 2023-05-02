@@ -72,6 +72,7 @@
     <Compile Include="Assets\LeanTween\Testing\TestingOptionalCancel.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\TooltipUI.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\TinAnvil.cs" />
     <Compile Include="Assets\Scripts\HotbarDisplay.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\ReadOnlyAttribute.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Assets\Scripts\NetworkManagerUI.cs" />
     <Compile Include="Assets\Scripts\MouseItemData.cs" />
     <Compile Include="Assets\WorldManager.cs" />
+    <Compile Include="Assets\Furnace.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -195,7 +197,6 @@
     <Compile Include="Assets\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\Furnace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

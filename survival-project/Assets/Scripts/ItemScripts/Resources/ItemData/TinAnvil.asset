@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: Tin Bar
+  m_Name: TinAnvil
   m_EditorClassIdentifier: 
-  ID: -1
-  DisplayName: Tin Bar
-  Description: 'Soft metal forged into a bar for crafting
+  ID: 34
+  DisplayName: Tin Anvil
+  Description: 'A anvil made of soft metal designed for building
 
 '
-  Icon: {fileID: -1446330293, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  Icon: {fileID: 1648695120, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 999
   GoldValue: 0
-  ItemType: Resource
-  ItemPrefab: {fileID: 7389436694480070536, guid: b06dd0b0ac82c504c9a1e1b645e3b443,
+  ItemType: Block
+  ItemPrefab: {fileID: 7389436694480070536, guid: b61375a6ca9cb0c48afd88d61e223fa8,
     type: 3}
   itemDamage: 0
   projectilePrefab: {fileID: 0}
@@ -31,7 +31,7 @@ MonoBehaviour:
   DefenseValue: 0
   BlockID: 0
   TilemapID: 0
-  ItemTile: {fileID: 0}
+  ItemTile: {fileID: 11400000, guid: f807a07d6bb019c43aaff6ab8cfb2373, type: 2}
   ItemTilemap: 
   HealthHealed: 0
   BlockHealth: 0

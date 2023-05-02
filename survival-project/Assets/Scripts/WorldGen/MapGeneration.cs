@@ -117,11 +117,11 @@ public class MapGeneration : NetworkBehaviour
                 {
                     waterTilemap.SetTile(new Vector3Int(newX, newY, 0), waterTile);
                 }
-                else if (height < 0.3f) //Sand
+                else if (height < 0.25f) //Sand
                 {
                     groundTilemap.SetTile(new Vector3Int(newX, newY, 0), sandTile);
                 }
-                else if (height < 0.6f) //Grass
+                else if (height < 0.5f) //Grass
                 {
                     groundTilemap.SetTile(new Vector3Int(newX, newY, 0), grassTile);
                     if (Random.value >= 0.98) //If 2 percent chance pass
@@ -149,7 +149,7 @@ public class MapGeneration : NetworkBehaviour
                         wallTilemap.SetTile(new Vector3Int(newX, newY, 0), brownShroomTile); //Spawn brown mushroom on tile
                     }
                 }
-                else if (height < 0.7f) //Dirt Ground
+                else if (height < 0.6f) //Dirt Ground
                 {
                     groundTilemap.SetTile(new Vector3Int(newX, newY, 0), dirtTile);
                     TrySpawnCaveEntrance(newX, newY);
@@ -158,7 +158,7 @@ public class MapGeneration : NetworkBehaviour
                 {
                     groundTilemap.SetTile(new Vector3Int(newX, newY, 0), dirtTile); //Set ground to dirt
                     wallTilemap.SetTile(new Vector3Int(newX, newY, 0), grassWallTile); //Set wall to grass wall
-                    if (Random.value >= 0.96) //4 percent chance each wall tile
+                    if (Random.value >= 0.95) //5 percent chance each wall tile
                     {
                         SpawnOreVein(newX, newY); //Gen an ore vein
                     }

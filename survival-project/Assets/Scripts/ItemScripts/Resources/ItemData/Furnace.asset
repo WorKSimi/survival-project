@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: Tin Bar
+  m_Name: Furnace
   m_EditorClassIdentifier: 
-  ID: -1
-  DisplayName: Tin Bar
-  Description: 'Soft metal forged into a bar for crafting
+  ID: 4
+  DisplayName: Furnace
+  Description: 'A furnace for smelting ores
 
 '
-  Icon: {fileID: -1446330293, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  Icon: {fileID: -1568652803, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 999
   GoldValue: 0
-  ItemType: Resource
-  ItemPrefab: {fileID: 7389436694480070536, guid: b06dd0b0ac82c504c9a1e1b645e3b443,
+  ItemType: Block
+  ItemPrefab: {fileID: 7389436694480070536, guid: 73db8bf4599a60241afd49ca9cddcd6a,
     type: 3}
   itemDamage: 0
   projectilePrefab: {fileID: 0}
@@ -29,9 +29,9 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
-  BlockID: 0
-  TilemapID: 0
-  ItemTile: {fileID: 0}
+  BlockID: 4
+  TilemapID: 1
+  ItemTile: {fileID: 11400000, guid: df4f417f3dde2be449d4b28b469b4dbb, type: 2}
   ItemTilemap: 
   HealthHealed: 0
   BlockHealth: 0

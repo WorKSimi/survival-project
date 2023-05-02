@@ -76,9 +76,19 @@ public class AnywhereCrafting : MonoBehaviour
         Torch,
         WoodBow,
         WoodWall,
+        WoodHelmet,
+        WoodChestplate,
         TinBar,
+        Furnace,
+        TinAnvil,
+        TinSword,
+        TinHelmet,
+        TinChestplate,
+        TinPickaxe,
     }
-    
+
+    //Region for selecting anywhere crafting
+    #region RecipeSelectFunctions_Anywhere
     public void SelectCraftingTable()
     {
         ClearComponents();
@@ -108,7 +118,6 @@ public class AnywhereCrafting : MonoBehaviour
 
         selected = SelectedRecipe.Campfire; //Set the selected item to campfire
     }
-
     public void SelectWoodClub()
     {
         ClearComponents();
@@ -121,6 +130,43 @@ public class AnywhereCrafting : MonoBehaviour
         ComponentAmount.SetText("x15"); //Set component amount 
 
         selected = SelectedRecipe.WoodClub;
+    }
+    public void SelectTorch()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.Torch.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.Torch.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.Torch.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x1"); //Set component amount 
+
+        selected = SelectedRecipe.Torch;
+    }
+
+    #endregion 
+
+    //Region for selecting crafting table recipes
+    #region RecipeSelectFunctions_CraftingTable
+    public void SelectFurnace()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.Furnace.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.Furnace.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.Furnace.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x10"); //Set component amount  
+
+        ComponentText2.SetText("Flint"); //Set second component
+        ComponentAmount2.SetText("x10"); //Set second component amount
+
+        ComponentText3.SetText("Stone"); //Set second component
+        ComponentAmount3.SetText("x10"); //Set second component amount
+
+        selected = SelectedRecipe.Furnace; //Set the selected item to Crafting Table
     }
 
     public void SelectFlintPick()
@@ -138,20 +184,6 @@ public class AnywhereCrafting : MonoBehaviour
         ComponentAmount2.SetText("x10"); //Set second component amount
 
         selected = SelectedRecipe.FlintPickaxe;
-    }
-
-    public void SelectTorch()
-    {
-        ClearComponents();
-
-        NameText.SetText(GameManager.Instance.Torch.DisplayName); //Set the text to what your crafting
-        RecipeIcon.sprite = GameManager.Instance.Torch.Icon; //Set icon to the item
-        ItemDescriptionText.SetText(GameManager.Instance.Torch.Description); //Set description box text
-
-        ComponentText.SetText("Wood"); //Set component name
-        ComponentAmount.SetText("x1"); //Set component amount 
-
-        selected = SelectedRecipe.Torch;
     }
     public void SelectWoodBow()
     {
@@ -179,6 +211,49 @@ public class AnywhereCrafting : MonoBehaviour
 
         selected = SelectedRecipe.WoodWall;
     }
+    public void SelectTinAnvil()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.TinAnvil.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.TinAnvil.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.TinAnvil.Description); //Set description box text
+
+        ComponentText.SetText("Tin Bar"); //Set component name
+        ComponentAmount.SetText("x5"); //Set component amount 
+
+        selected = SelectedRecipe.TinAnvil;
+    }
+    public void SelectWoodHelmet()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.WoodHelmet.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.WoodHelmet.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.WoodHelmet.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x10"); //Set component amount 
+
+        selected = SelectedRecipe.WoodHelmet;
+    }
+    public void SelectWoodChestplate()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.WoodChestplate.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.WoodChestplate.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.WoodChestplate.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x20"); //Set component amount 
+
+        selected = SelectedRecipe.WoodChestplate;
+    }
+    #endregion //Region for selecting crafting table recipes
+
+    //Region for selecting furnace recipes
+    #region RecipeSelectFunctions_Furnace
     public void SelectTinBar()
     {
         ClearComponents();
@@ -192,67 +267,76 @@ public class AnywhereCrafting : MonoBehaviour
 
         selected = SelectedRecipe.TinBar;
     }
+    #endregion
 
-    public void CraftItem()
-    {
-        if (selected == SelectedRecipe.CraftingTable)
-        {
-            CraftCraftingTable();
-        }
-        if (selected == SelectedRecipe.Campfire)
-        {
-            CraftCampfire();
-        }
-        if (selected == SelectedRecipe.WoodClub)
-        {
-            CraftWoodenClub();
-        }
-        if (selected == SelectedRecipe.FlintPickaxe)
-        {
-            CraftFlintPickaxe();
-        }
-        if (selected == SelectedRecipe.Torch)
-        {
-            CraftTorch();
-        }
-        if (selected == SelectedRecipe.WoodBow)
-        {
-            CraftWoodBow();
-        }
-        if (selected == SelectedRecipe.WoodWall)
-        {
-            CraftWoodWall();
-        }
-        if (selected == SelectedRecipe.TinBar)
-        {
-            CraftTinBar();
-        }
-        else Debug.Log("Nothing is selected to craft!");
-    }
-
-    private void Awake()
+    //Region for selecting tin anvil recipes
+    #region RecipeSelectFunctions_TinAnvil
+    public void SelectTinSword()
     {
         ClearComponents();
-        selected = SelectedRecipe.CraftingTable;
-        anywhereCraftingMenu.SetActive(false);
-    }
 
-    private void Update()
+        NameText.SetText(GameManager.Instance.TinSword.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.TinSword.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.TinSword.Description); //Set description box text
+
+        ComponentText.SetText("Tin Bar"); //Set component name
+        ComponentAmount.SetText("x10"); //Set component amount 
+
+        ComponentText2.SetText("Wood");
+        ComponentAmount2.SetText("x5");
+
+        selected = SelectedRecipe.TinSword;
+    }
+    public void SelectTinPickaxe()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            anywhereCraftingMenu.SetActive(false);
-            
-            Debug.Log("Personal Crafting Menu Off");
-        }
+        ClearComponents();
 
-        if (Keyboard.current.cKey.wasPressedThisFrame)
-        {
-            //anywhereCraftingMenu.SetActive(true);     
-            Debug.Log("Personal Crafting Menu On");
-        }
+        NameText.SetText(GameManager.Instance.TinPickaxe.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.TinPickaxe.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.TinPickaxe.Description); //Set description box text
+
+        ComponentText.SetText("Tin Bar"); //Set component name
+        ComponentAmount.SetText("x10"); //Set component amount 
+
+        ComponentText2.SetText("Wood");
+        ComponentAmount2.SetText("x5");
+
+        selected = SelectedRecipe.TinPickaxe;
     }
+    public void SelectTinHelmet()
+    {
+        ClearComponents();
 
+        NameText.SetText(GameManager.Instance.TinHelmet.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.TinHelmet.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.TinHelmet.Description); //Set description box text
+
+        ComponentText.SetText("Tin Bar"); //Set component name
+        ComponentAmount.SetText("x10"); //Set component amount 
+
+        selected = SelectedRecipe.TinHelmet;
+    }
+    public void SelectTinChestplate()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.TinChestplate.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.TinChestplate.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.TinChestplate.Description); //Set description box text
+
+        ComponentText.SetText("Tin Bar"); //Set component name
+        ComponentAmount.SetText("x20"); //Set component amount 
+
+        selected = SelectedRecipe.TinHelmet;
+    }
+    #endregion
+
+    /// <summary>
+    /// Seperator for Selection and Crafting Functions
+    /// </summary>
+
+    //Region for anywhere crafting functions
+    #region RecipeCraftingFunctions_Anywhere
     private void CraftCraftingTable()
     {
         for (int i = 0; i < amountToCraft; i++)
@@ -299,7 +383,6 @@ public class AnywhereCrafting : MonoBehaviour
             }
         }
     }
-
     private void CraftWoodenClub()
     {
         for (int i = 0; i < amountToCraft; i++)
@@ -317,6 +400,61 @@ public class AnywhereCrafting : MonoBehaviour
             {
                 playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodClub, 1);
                 Debug.Log("Crafted Wood Club");
+            }
+        }
+    }
+    private void CraftTorch()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Torch");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 1
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Torch, 2);
+                Debug.Log("Crafted Torch");
+            }
+        }
+    }
+    #endregion
+
+    //Region for crafting table crafting functions
+    #region RecipeCraftingFunctions_CraftingTable
+    private void CraftFurnace()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Furnace");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 10
+            };
+
+            var flintComponent = new CraftRecipeItem
+            {
+                displayName = "flint",
+                quantity = 10
+            };
+
+            var stoneComponent = new CraftRecipeItem
+            {
+                displayName = "stone",
+                quantity = 10
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent, flintComponent, stoneComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Furnace, 1);
+                Debug.Log("Crafted Furnace");
             }
         }
     }
@@ -348,26 +486,7 @@ public class AnywhereCrafting : MonoBehaviour
         }
     }
 
-    private void CraftTorch()
-    {
-        for (int i = 0; i < amountToCraft; i++)
-        {
-            Debug.Log("Trying to Craft Torch");
-            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
 
-            var woodComponent = new CraftRecipeItem
-            {
-                displayName = "wood",
-                quantity = 1
-            };
-
-            var components = new List<CraftRecipeItem>() { woodComponent };
-            {
-                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Torch, 2);
-                Debug.Log("Crafted Torch");
-            }
-        }
-    }
     private void CraftWoodWall()
     {
         for (int i = 0; i < amountToCraft; i++)
@@ -409,6 +528,67 @@ public class AnywhereCrafting : MonoBehaviour
             }
         }
     }
+    private void CraftTinAnvil()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Tin Anvil");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var tinComponent = new CraftRecipeItem
+            {
+                displayName = "tin bar",
+                quantity = 5
+            };
+
+            var components = new List<CraftRecipeItem>() { tinComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinAnvil, 1);
+                Debug.Log("Crafted Tin Anvil");
+            }
+        }
+    }
+
+    private void CraftWoodHelmet()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 10
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodHelmet, 1);
+            }
+        }
+    }
+    private void CraftWoodChestplate()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 20
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodChestplate, 1);
+            }
+        }
+    }
+    #endregion
+
+    //Region for furnace crafting functions
+    #region RecipeCraftingFunctions_Furnace
     private void CraftTinBar()
     {
         for (int i = 0; i < amountToCraft; i++)
@@ -416,19 +596,210 @@ public class AnywhereCrafting : MonoBehaviour
             Debug.Log("Trying to Craft Tin Bar");
             var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
 
-            var woodComponent = new CraftRecipeItem
+            var tinComponent = new CraftRecipeItem
             {
-                displayName = "wood",
-                quantity = 15
+                displayName = "tin ore",
+                quantity = 1
             };
 
-            var components = new List<CraftRecipeItem>() { woodComponent };
+            var components = new List<CraftRecipeItem>() { tinComponent };
             {
-                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodBow, 1);
-                Debug.Log("Crafted Wood Bow");
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinBar, 1);
+                Debug.Log("Crafted Tin Bar");
             }
         }
     }
+    #endregion
+
+    //Region for tinAnvil crafting functions
+    #region RecipeCraftingFunctions_TinAnvil
+    private void CraftTinSword()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Tin Sword");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var tinComponent = new CraftRecipeItem
+            {
+                displayName = "tin bar",
+                quantity = 15
+            };
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 5
+            };
+
+            var components = new List<CraftRecipeItem>() { tinComponent, woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinSword, 1);
+                Debug.Log("Crafted Tin Sword");
+            }
+        }
+    }
+    private void CraftTinPickaxe()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Tin Pickaxe");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var tinComponent = new CraftRecipeItem
+            {
+                displayName = "tin bar",
+                quantity = 15
+            };
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 5
+            };
+
+            var components = new List<CraftRecipeItem>() { tinComponent, woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinPickaxe, 1);
+                Debug.Log("Crafted Tin Pickaxe");
+            }
+        }
+    }
+    private void CraftTinHelmet()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Tin Helmet");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var tinComponent = new CraftRecipeItem
+            {
+                displayName = "tin bar",
+                quantity = 10
+            };
+
+            var components = new List<CraftRecipeItem>() { tinComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinHelmet, 1);
+                Debug.Log("Crafted Tin Helmet");
+            }
+        }
+    }
+    private void CraftTinChestplate()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Tin Chestplate");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var tinComponent = new CraftRecipeItem
+            {
+                displayName = "tin bar",
+                quantity = 20
+            };
+
+            var components = new List<CraftRecipeItem>() { tinComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinChestplate, 1);
+                Debug.Log("Crafted Tin Chestplate");
+            }
+        }
+    }
+    #endregion
+
+    public void CraftItem()
+    {
+        if (selected == SelectedRecipe.CraftingTable)
+        {
+            CraftCraftingTable();
+        }
+        if (selected == SelectedRecipe.Campfire)
+        {
+            CraftCampfire();
+        }
+        if (selected == SelectedRecipe.WoodClub)
+        {
+            CraftWoodenClub();
+        }
+        if (selected == SelectedRecipe.FlintPickaxe)
+        {
+            CraftFlintPickaxe();
+        }
+        if (selected == SelectedRecipe.Torch)
+        {
+            CraftTorch();
+        }
+        if (selected == SelectedRecipe.WoodBow)
+        {
+            CraftWoodBow();
+        }
+        if (selected == SelectedRecipe.WoodWall)
+        {
+            CraftWoodWall();
+        }
+        if (selected == SelectedRecipe.TinBar)
+        {
+            CraftTinBar();
+        }
+        if (selected == SelectedRecipe.Furnace)
+        {
+            CraftFurnace();
+        }
+        if (selected == SelectedRecipe.TinAnvil)
+        {
+            CraftTinAnvil();
+        }
+        if (selected == SelectedRecipe.TinSword)
+        {
+            CraftTinSword();
+        }
+        if (selected == SelectedRecipe.TinHelmet)
+        {
+            CraftTinHelmet();
+        }
+        if (selected == SelectedRecipe.TinChestplate)
+        {
+            CraftTinChestplate();
+        }
+        if (selected == SelectedRecipe.TinPickaxe)
+        {
+            CraftTinPickaxe();
+        }
+        if (selected == SelectedRecipe.WoodHelmet)
+        {
+            CraftWoodHelmet();
+        }
+        if (selected == SelectedRecipe.WoodChestplate)
+        {
+            CraftWoodChestplate();
+        }
+        else Debug.Log("Nothing is selected to craft!");
+    }
+
+    private void Awake()
+    {
+        ClearComponents();
+        selected = SelectedRecipe.CraftingTable;
+        anywhereCraftingMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            anywhereCraftingMenu.SetActive(false);
+            
+            Debug.Log("Personal Crafting Menu Off");
+        }
+
+        if (Keyboard.current.cKey.wasPressedThisFrame)
+        {
+            //anywhereCraftingMenu.SetActive(true);     
+            Debug.Log("Personal Crafting Menu On");
+        }
+    }
+
+
 
     private void ClearComponents()
     {

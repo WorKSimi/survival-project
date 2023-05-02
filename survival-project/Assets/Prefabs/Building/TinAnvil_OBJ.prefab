@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8366289397458614362}
   - component: {fileID: -2360574602458698001}
   - component: {fileID: -6960524365727753770}
-  - component: {fileID: 8173507676941580878}
+  - component: {fileID: 4597699217682730548}
   m_Layer: 6
-  m_Name: Furnace_OBJ
+  m_Name: TinAnvil_OBJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1568652803, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  m_Sprite: {fileID: 1648695120, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: 73db8bf4599a60241afd49ca9cddcd6a, type: 3}
+  wood: {fileID: 7389436694480070536, guid: b61375a6ca9cb0c48afd88d61e223fa8, type: 3}
   maxHealth: 5
   isResourceNode: 0
   amountToDrop: 1
@@ -176,7 +176,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &8173507676941580878
+--- !u!114 &4597699217682730548
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,6 +185,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1784105365037295680}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b75de75abacfac4282593affb2d0010, type: 3}
+  m_Script: {fileID: 11500000, guid: 0945b1c9d9ca4304fbac67ebcff16995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

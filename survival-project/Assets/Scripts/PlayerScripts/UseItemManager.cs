@@ -565,6 +565,14 @@ public class UseItemManager : NetworkBehaviour
         {
             return blockDatabase.craftingTable.BlockID;
         }
+        else if (ItemTile == blockDatabase.furnace.ItemTile)
+        {
+            return blockDatabase.furnace.BlockID;
+        }
+        else if (ItemTile == blockDatabase.tinAnvil.ItemTile)
+        {
+            return blockDatabase.tinAnvil.BlockID;
+        }
         else return 0;
     }
 
@@ -582,6 +590,14 @@ public class UseItemManager : NetworkBehaviour
         {
             return blockDatabase.craftingTable.TilemapID;
         }
+        else if (ItemTile == blockDatabase.furnace.ItemTile)
+        {
+            return blockDatabase.furnace.TilemapID;
+        }
+        else if (ItemTile == blockDatabase.tinAnvil.ItemTile)
+        {
+            return blockDatabase.tinAnvil.TilemapID;
+        }
         else return 0;
     }
 
@@ -598,6 +614,14 @@ public class UseItemManager : NetworkBehaviour
         else if (integer == blockDatabase.craftingTable.BlockID)
         {
             return blockDatabase.craftingTable.ItemTile;
+        }
+        else if (integer == blockDatabase.furnace.BlockID)
+        {
+            return blockDatabase.furnace.ItemTile;
+        }
+        else if (integer == blockDatabase.tinAnvil.BlockID)
+        {
+            return blockDatabase.tinAnvil.ItemTile;
         }
         else return null;
     }

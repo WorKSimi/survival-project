@@ -19,7 +19,15 @@ namespace Assets.Scripts
         public InventoryItemData Torch;
         public InventoryItemData WoodBow;
         public InventoryItemData WoodWall;
+        public InventoryItemData WoodHelmet;
+        public InventoryItemData WoodChestplate;
         public InventoryItemData TinBar;
+        public InventoryItemData Furnace;
+        public InventoryItemData TinAnvil;
+        public InventoryItemData TinSword;
+        public InventoryItemData TinHelmet;
+        public InventoryItemData TinChestplate;
+        public InventoryItemData TinPickaxe;
 
         protected void Start()
         {

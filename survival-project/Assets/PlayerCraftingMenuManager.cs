@@ -7,6 +7,7 @@ public class PlayerCraftingMenuManager : MonoBehaviour
     public GameObject personalMenu;
     public GameObject craftingTableMenu;
     public GameObject furnaceMenu;
+    public GameObject anvilMenu;
 
     public void CraftingTableMenuSelect()
     {
@@ -20,10 +21,17 @@ public class PlayerCraftingMenuManager : MonoBehaviour
         furnaceMenu.SetActive(true);
     }
 
+    public void AnvilMenuSelect()
+    {
+        DisableAllMenus();
+        anvilMenu.SetActive(true);
+    }
+
     public void DisableAllMenus()
     {
         personalMenu.SetActive(false);
         craftingTableMenu.SetActive(false);
         furnaceMenu.SetActive(false);
+        anvilMenu.SetActive(false);
     }
 }
