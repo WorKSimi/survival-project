@@ -37,6 +37,7 @@ public class MapGeneration : NetworkBehaviour
     public Grid undergroundGrid; //Grid for the underground, it is at a lower z axis
     public bool useFalloff;
     public int worldOffset = 0; //Use this to determine where in the world this island will spawn
+    public int caveOffset = 0;
 
     [Header("Height Map")]
     public Wave[] heightWaves;
@@ -65,8 +66,6 @@ public class MapGeneration : NetworkBehaviour
         firstcaveSpawned = false;
         currentCaveEntrances = 0;
         GetTilemaps();
-        //GenerateForestSurface();
-        //GenerateForestUnderground();
     }
 
     void GetTilemaps()
@@ -167,7 +166,7 @@ public class MapGeneration : NetworkBehaviour
         }
     }
 
-    void GenerateForestUnderground()
+    public void GenerateForestUnderground()
     {
         heightWaves[0].seed = Random.Range(1.0f, 999.0f);
         heightWaves[1].seed = Random.Range(1.0f, 999.0f);
@@ -179,18 +178,18 @@ public class MapGeneration : NetworkBehaviour
             {
                 //Instantiate tile on tilemap based on height value               
                 var height = heightMap[x, y];
-                var newX = (x + worldOffset);
-                var newY = (y + worldOffset);
+                var newX = (x + caveOffset);
+                var newY = (y - 50);
 
-                if (height < 0.5f) //Open Space
+                if (height < 0.4f) //Open Space
                 {
-                    undergroundGroundTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneTile); //Stone Floor
+                    groundTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneTile); //Stone Floor
                 }
 
                 else if (height < 1.0f) //Closed Space
                 {
-                    //undergroundGroundTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneTile); //Set ground to stone
-                    //undergroundWallTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneWall); //Set wall to stone wall
+                    groundTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneTile); //Set ground to stone
+                    wallTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneWall); //Set wall to stone wall
                 }
             }
         }

@@ -70,6 +70,7 @@ public class WorldDataCollector : NetworkBehaviour
     {
         world1name = world1InputField.text; //Set world 1 name to be what player entered
         mapGenerator.GenerateForestSurface(); //Generate World
+        mapGenerator.GenerateForestUnderground();
         SaveWorldData(file1); //When world generates, save it to slot 1
         slot1Text.text = world1name; 
         SingleplayerMenu.SetActive(true);
@@ -248,6 +249,12 @@ public class WorldDataCollector : NetworkBehaviour
 
             case ("stonenodetile"):
                 return TileType.StoneNode;
+
+            case ("stonetile"):
+                return TileType.StoneTile;
+
+            case ("stonewall"):
+                return TileType.StoneWall;
         }
     }
 
@@ -347,6 +354,12 @@ public class WorldDataCollector : NetworkBehaviour
 
             case (TileType.StoneNode):
                 return ruleTiles[17];
+
+            case (TileType.StoneTile):
+                return ruleTiles[18];
+
+            case (TileType.StoneWall):
+                return ruleTiles[19];
         }
     }
 }

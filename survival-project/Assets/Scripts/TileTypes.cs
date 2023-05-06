@@ -22,6 +22,8 @@ public enum TileType
     WoodWall,
     Flint,
     StoneNode,
+    StoneTile,
+    StoneWall,
 }
 
 public enum TilemapType
