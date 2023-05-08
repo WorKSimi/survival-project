@@ -70,7 +70,7 @@ public class WorldDataCollector : NetworkBehaviour
     {
         world1name = world1InputField.text; //Set world 1 name to be what player entered
         mapGenerator.GenerateForestSurface(); //Generate World
-        mapGenerator.GenerateForestUnderground();
+        //mapGenerator.GenerateForestUnderground();
         SaveWorldData(file1); //When world generates, save it to slot 1
         slot1Text.text = world1name; 
         SingleplayerMenu.SetActive(true);
