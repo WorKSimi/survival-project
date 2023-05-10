@@ -8675,8 +8675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2b2a4d9e53a57429f2549fad214e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testBlock: {fileID: 2976247172256185871, guid: 74b48bb5fe333f141ab604f5fdc04176,
-    type: 3}
   healCooldownComplete: 0
   facingRight: 0
   facingLeft: 0

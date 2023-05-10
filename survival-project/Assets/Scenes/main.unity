@@ -384,7 +384,6 @@ MonoBehaviour:
   - seed: 100
     frequency: 0.1
     amplitude: 0.5
-  chunkTestPrefab: {fileID: 0}
 --- !u!4 &377106537
 Transform:
   m_ObjectHideFlags: 0
@@ -1226,17 +1225,6 @@ MonoBehaviour:
     - Override: 0
       Prefab: {fileID: 4648358853205179229, guid: 7e6f924446c924b4ca057d4e1f3971af,
         type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 3179713049715907885, guid: 48f4181159e1c4340b54addb52cd16f8,
-        type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 0}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}

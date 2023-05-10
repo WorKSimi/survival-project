@@ -54,7 +54,6 @@ public class MapGeneration : NetworkBehaviour
     private Tilemap undergroundCarpetTilemap; //Underground carpet tilemap
 
     private GameObject[] caveEntrances; //Creates an array to store cave entrances
-    public GameObject chunkTestPrefab;
     private int currentCaveEntrances;
     private int maxCaveEntrances = 5;
     bool firstcaveSpawned;
@@ -163,17 +162,6 @@ public class MapGeneration : NetworkBehaviour
                         SpawnOreVein(newX, newY); //Gen an ore vein
                     }
                 }
-            }
-        }       
-    }
-    private void GenerateChunksTest()
-    {
-        for (int a = 0; a < 8; a++)
-        {
-            for (int b = 0; b < 8; b++)
-            {
-                var go = Instantiate(chunkTestPrefab, new Vector3(32 + (64 * a), 32 + (64 * b), 0), Quaternion.identity);
-                go.name = "Chunk" + a.ToString() + b.ToString();
             }
         }
     }
