@@ -263,6 +263,10 @@ public class HotbarDisplay : StaticInventoryDisplay
                     }
                     break;
 
+                case "Test":
+                    player.GetComponent<UseItemManager>().UseTest();
+                    break;
+
                 default:
                 Debug.Log($"Default Case");
                 break;
