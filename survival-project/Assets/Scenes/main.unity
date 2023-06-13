@@ -352,11 +352,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b6ff246447b114ca6be63341890caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterTile: {fileID: 11400000, guid: 725aad9d7fb3f7f439d80efcfc794ac0, type: 2}
-  sandTile: {fileID: 11400000, guid: 90cde903930b2114cae4bf428610ff80, type: 2}
-  grassTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
+  waterTile: {fileID: 0}
+  sandTile: {fileID: 0}
+  grassTile: {fileID: 0}
   grassWallTile: {fileID: 11400000, guid: 958afdba8e41f2f439542e7e3aa37811, type: 2}
-  dirtTile: {fileID: 11400000, guid: eb7f67eb814ae9849939a4957f22d2a9, type: 2}
+  dirtTile: {fileID: 0}
   tinOre: {fileID: 11400000, guid: b8954c1434060b740ad009a95b94cb94, type: 2}
   stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
   stoneWall: {fileID: 11400000, guid: ba0f9a2d77529934badc4bd92e934977, type: 2}
@@ -2310,32 +2310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b13599a1dcc3b6438f557c1711843cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemaps:
-  - {fileID: 957752368}
-  - {fileID: 1855597033}
-  - {fileID: 809883320}
-  - {fileID: 535307171}
-  ruleTiles:
-  - {fileID: 11400000, guid: ae6b57dc89cd2bd4e83fc06a5e9a8a0f, type: 2}
-  - {fileID: 11400000, guid: c3cf8e17ebdd63a49bcd963c2e847f68, type: 2}
-  - {fileID: 11400000, guid: f973e57f5504b6241b9cc0ae6914db29, type: 2}
-  - {fileID: 11400000, guid: 2858add7abd26604f92d0d22d08a6866, type: 2}
-  - {fileID: 11400000, guid: eb7f67eb814ae9849939a4957f22d2a9, type: 2}
-  - {fileID: 11400000, guid: 8463ba57b7a56354783d081270886d7e, type: 2}
-  - {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
-  - {fileID: 11400000, guid: 958afdba8e41f2f439542e7e3aa37811, type: 2}
-  - {fileID: 11400000, guid: 7280d62daa0790c489be55e84b2f548c, type: 2}
-  - {fileID: 11400000, guid: 90cde903930b2114cae4bf428610ff80, type: 2}
-  - {fileID: 11400000, guid: b8954c1434060b740ad009a95b94cb94, type: 2}
-  - {fileID: 11400000, guid: 6869f94d1d9329146b296a81745f5818, type: 2}
-  - {fileID: 11400000, guid: 725aad9d7fb3f7f439d80efcfc794ac0, type: 2}
-  - {fileID: 11400000, guid: e2eedf0acb1cb5248b10ade8fde91faa, type: 2}
-  - {fileID: 11400000, guid: 542825b8b0df0364582291f84fce022a, type: 2}
-  - {fileID: 11400000, guid: 804de162d757ebe47b4b91a44de2a626, type: 2}
-  - {fileID: 11400000, guid: 2c3316cb667a93046a6400947309ee74, type: 2}
-  - {fileID: 11400000, guid: a79709bfb9e80d34a85ecef3bd4553e0, type: 2}
-  - {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
-  - {fileID: 11400000, guid: ba0f9a2d77529934badc4bd92e934977, type: 2}
   mapGenerator: {fileID: 0}
   createWorld1Menu: {fileID: 0}
   SingleplayerMenu: {fileID: 0}
@@ -2343,10 +2317,14 @@ MonoBehaviour:
   slot1Text: {fileID: 0}
   slot1HostText: {fileID: 0}
   mapGrid: {fileID: 0}
-  wallTilemap: {fileID: 0}
-  carpetTilemap: {fileID: 0}
-  groundTilemap: {fileID: 0}
-  waterTilemap: {fileID: 0}
+  waterTile: {fileID: 3179713049715907885, guid: c97824065019e8e4080f48be638c8347,
+    type: 3}
+  dirtTile: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
+    type: 3}
+  grassTile: {fileID: 3179713049715907885, guid: 045f301c42d865a44adba958ee5a7d53,
+    type: 3}
+  sandTile: {fileID: 3179713049715907885, guid: 7f9c817b12788c142bade97dbaf95dbb,
+    type: 3}
   file1: /WorldData1.json
 --- !u!4 &1818656842
 Transform:

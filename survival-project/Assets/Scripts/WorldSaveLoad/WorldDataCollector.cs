@@ -20,8 +20,8 @@ public class Startup
 
 public class WorldDataCollector : NetworkBehaviour
 {
-    public Tilemap[] tilemaps;
-    public RuleTile[] ruleTiles;
+    //public Tilemap[] tilemaps;
+    //public RuleTile[] ruleTiles;
     public MapGeneration mapGenerator;
 
     public GameObject createWorld1Menu;
@@ -32,12 +32,11 @@ public class WorldDataCollector : NetworkBehaviour
 
     public Grid mapGrid;
     private string world1name;
-
-    [SerializeField] private Tilemap wallTilemap;
-    [SerializeField] private Tilemap carpetTilemap;
-    [SerializeField] private Tilemap groundTilemap;
-    [SerializeField] private Tilemap waterTilemap;
-    private List<TileData> tilesOnMap = new List<TileData>();
+    [Header("Tile Objects")]
+    public GameObject waterTile;
+    public GameObject dirtTile;
+    public GameObject grassTile;
+    public GameObject sandTile;
 
     public string file1 = "/WorldData1.json";
 
@@ -83,32 +82,11 @@ public class WorldDataCollector : NetworkBehaviour
     }
     
     private void SaveWorldData(string saveFile)
-    {
-        foreach (Tilemap tilemap in tilemaps) //Go through tilemaps
-        {
-            for (int x = tilemap.cellBounds.min.x; x < tilemap.cellBounds.max.x; x++)
-            {
-                for (int y = tilemap.cellBounds.min.y; y < tilemap.cellBounds.max.y; y++) //Loop through each spot
-                {
-                    var currentTile = tilemap.GetTile(new Vector3Int(x, y, 0)); //Get tile at that spot
-                    if (currentTile != null)
-                    {
-                        var tile = new TileData
-                        {
-                            tileLocation = new Vector3Int(x, y, 0),
-                            tileType = TileDataComparision(currentTile.name.ToString()),
-                            tilemapType = TilemapDecider(tilemap.name.ToString())
-                        };
-                        tilesOnMap.Add(tile);
-                    }                   
-                }
-            }
-        }
-
+    {    
         var CurrentWorldData = new WorldData
         {
             WorldName = world1name,
-            tilesOnMapList = tilesOnMap
+            mapGridArray = mapGenerator.GridMap
         };
 
         string json = JsonConvert.SerializeObject(CurrentWorldData, Formatting.Indented, new JsonSerializerSettings
@@ -124,17 +102,33 @@ public class WorldDataCollector : NetworkBehaviour
         WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
         List<TileData> loadedTiles = new List<TileData>();
 
-        foreach (TileData tile in worldData.tilesOnMapList) //For each tile in saved list, add to loaded tiles list
-        {
-            loadedTiles.Add(tile);
-        }
+        int[,] mapArray = worldData.mapGridArray;
 
-        foreach (TileData tile in loadedTiles) //For each tile in loaded tiles list, do this stuff
+        int length = 100;
+        int width = 100;
+
+        for (int x = 0; x < width; x++)
         {
-            Tilemap tilemap = TilemapChecker(tile.tilemapType);
-            RuleTile tile1 = TileReturner(tile.tileType);
-            tilemap.SetTile(tile.tileLocation, tile1);
-        }
+            for (int y = 0; y < length; y++)
+            {               
+                if (mapArray[x,y] == 1)
+                {
+                    Instantiate(waterTile, new Vector3Int(x, y, 0), Quaternion.identity);
+                }
+                else if (mapArray[x, y] == 2)
+                {
+                    Instantiate(sandTile, new Vector3Int(x, y, 0), Quaternion.identity);
+                }
+                else if (mapArray[x, y] == 3)
+                {
+                    Instantiate(grassTile, new Vector3Int(x, y, 0), Quaternion.identity);
+                }
+                else if (mapArray[x, y] == 4)
+                {
+                    Instantiate(dirtTile, new Vector3Int(x, y, 0), Quaternion.identity);
+                }
+            }
+        }     
     }
 
     public void LoadClientWorldData(string saveFile) //This is an alternate load function, that only loads tiles without a game object. This is for clients, as the server only needs to load and spawn object tiles
@@ -142,225 +136,12 @@ public class WorldDataCollector : NetworkBehaviour
         string json = File.ReadAllText(Application.persistentDataPath + saveFile);
         if (json == null) return;
         WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
-        List<TileData> loadedTiles = new List<TileData>();
-
-        foreach (TileData tile in worldData.tilesOnMapList) //For each tile in saved list, add to loaded tiles list
-        {           
-            loadedTiles.Add(tile); //If the tile doesn't have a game object, add it to the list
-        }
-
-        foreach (TileData tile in loadedTiles) //For each tile in loaded tiles list, do this stuff
-        {
-            var tile1 = TileReturner(tile.tileType);
-            if (tile1.m_DefaultGameObject == null)  //If the tile has NO game object
-            {
-                var theTile = tile.tileType; //Get tile enum
-                var theTilemap = tile.tilemapType; //Get tilemap enum
-                var theLocation = tile.tileLocation; //Get tile location
-                SetTileClientRpc(theTile, theTilemap, theLocation); //Send info for client to load it
-            }
-            else //if tile DOES have a game object
-            {
-                Debug.Log("Do nothing, object found!");
-            }
-        }
+        List<TileData> loadedTiles = new List<TileData>();                    
     }
-
-    [ClientRpc] //Fired by server, executed on client
-    private void SetTileClientRpc(TileType tileType, TilemapType tilemapType, Vector3Int tileLocation)
-    {
-        Tilemap tilemap = TilemapChecker(tilemapType); 
-        RuleTile tile1 = TileReturner(tileType);
-        tilemap.SetTile(tileLocation, tile1); 
-    }
-
-    //private void SpawnAllObjectsOnNetwork()
-    //{
-    //    GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();
-    //    foreach (GameObject gameObject in allObjects)
-    //    {
-    //        if (gameObject.GetComponent<NetworkObject>()) //If the object has a network object component
-    //        {
-    //            gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn that object
-    //        }
-    //    }
-    //}
 
     private void DeleteWorldData(string saveFilePath)
     {
         if (File.Exists(saveFilePath)) File.Delete(saveFilePath); //If the file exists, delete it
-    }
-
-    public TileType TileDataComparision(string tileName)
-    {
-        switch (tileName.ToLower())
-        {
-            default:
-            case ("blueberrytile"):
-            return TileType.Blueberry;
-
-            case ("brownshroomtile"):
-                return TileType.BrownShroom;
-
-            case ("caveentrancetile"):
-                return TileType.CaveEntrance;
-
-            case ("craftingtabletile"):
-                return TileType.CraftingTable;
-
-            case ("dirttile"):
-                return TileType.Dirt;
-
-            case ("dryfarmtile"):
-                return TileType.DryFarm;
-
-            case ("wetfarmtile"):
-                return TileType.WetFarm;
-
-            case ("grasstile"):
-                return TileType.Grass;
-
-            case ("grasswalltile"):
-                return TileType.GrassWall;
-
-            case ("redshroomtile"):
-                return TileType.RedShroom;
-
-            case ("sandtile"):
-                return TileType.Sand;
-
-            case ("tinoretile"):
-                return TileType.TinOre;
-
-            case ("treetile"):
-                return TileType.Tree;
-
-            case ("watertile"):
-                return TileType.Water;
-
-            case ("wheatcroptile"):
-                return TileType.WheatCrop;
-
-            case ("woodwalltile"):
-                return TileType.WoodWall;
-
-            case ("flinttile"):
-                return TileType.Flint;
-
-            case ("stonenodetile"):
-                return TileType.StoneNode;
-
-            case ("stonetile"):
-                return TileType.StoneTile;
-
-            case ("stonewall"):
-                return TileType.StoneWall;
-        }
-    }
-
-    private TilemapType TilemapDecider(string tilemapName)
-    {
-        switch (tilemapName.ToLower())
-        {
-            default:
-            case ("groundtilemap"):
-            return TilemapType.Ground;
-
-            case ("watertilemap"):
-                return TilemapType.Water;
-
-            case ("carpettilemap"):
-                return TilemapType.Carpet;
-
-            case ("walltilemap"):
-                return TilemapType.Wall;
-        }
-    }
-
-    private Tilemap TilemapChecker(TilemapType tilemapType)
-    {
-        switch (tilemapType)
-        {
-            default:
-            case (TilemapType.Ground):
-                return tilemaps[0];
-
-            case (TilemapType.Water):
-                return tilemaps[1];
-
-            case (TilemapType.Carpet):
-                return tilemaps[3];
-
-            case (TilemapType.Wall):
-                return tilemaps[2];
-        }
-    }
-
-    public RuleTile TileReturner(TileType tiletype)
-    {
-        switch (tiletype)
-        {
-            default:
-            case (TileType.Blueberry):
-                return ruleTiles[0];
-
-            case (TileType.BrownShroom):
-                return ruleTiles[1];
-
-            case (TileType.CaveEntrance):
-                return ruleTiles[2];
-
-            case (TileType.CraftingTable):
-                return ruleTiles[3];
-
-            case (TileType.Dirt):
-                return ruleTiles[4];
-
-            case (TileType.DryFarm):
-                return ruleTiles[5];
-
-            case (TileType.Grass):
-                return ruleTiles[6];
-
-            case (TileType.GrassWall):
-                return ruleTiles[7];
-
-            case (TileType.RedShroom):
-                return ruleTiles[8];
-
-            case (TileType.Sand):
-                return ruleTiles[9];
-
-            case (TileType.TinOre):
-                return ruleTiles[10];
-
-            case (TileType.Tree):
-                return ruleTiles[11];
-
-            case (TileType.Water):
-                return ruleTiles[12];
-
-            case (TileType.WetFarm):
-                return ruleTiles[13];
-
-            case (TileType.WheatCrop):
-                return ruleTiles[14];
-
-            case (TileType.WoodWall):
-                return ruleTiles[15];
-
-            case (TileType.Flint):
-                return ruleTiles[16];
-
-            case (TileType.StoneNode):
-                return ruleTiles[17];
-
-            case (TileType.StoneTile):
-                return ruleTiles[18];
-
-            case (TileType.StoneWall):
-                return ruleTiles[19];
-        }
-    }
+    }   
 }
 

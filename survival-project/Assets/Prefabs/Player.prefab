@@ -4767,7 +4767,7 @@ MonoBehaviour:
   thisPlayer: {fileID: 3430272870254572311}
   validTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
   currentSpawns: 0
-  maxSpawns: 5
+  maxSpawns: 0
   mobPool:
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
 --- !u!1 &2079502706955108354
