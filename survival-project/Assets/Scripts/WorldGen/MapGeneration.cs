@@ -26,11 +26,12 @@ public class MapGeneration : NetworkBehaviour
     public RuleTile stoneNodeTile;
 
     [Header("Dimensions")]
-    public int width = 100;
-    public int height = 100;
+    public int width;
+    public int height;
     public int falloffSize = 100;
     public float scale = 1.0f;
     public Vector2 offset;
+    public int chunkSize;
 
     [Header("Other Stuff")]
     public Grid surfaceGrid; //Grid for the surface of the world
@@ -39,10 +40,8 @@ public class MapGeneration : NetworkBehaviour
     public int worldOffset = 0; //Use this to determine where in the world this island will spawn
     public int caveOffset = 0;
     public int[,] GridMap;
-    public GameObject chunk1;
-    public GameObject chunk2;
-    public GameObject chunk3;
-    public GameObject chunk4;
+    public GameObject chunkHolder;
+    public List<GameObject> worldChunks;
 
     [Header("Height Map")]
     public Wave[] heightWaves;
@@ -80,6 +79,7 @@ public class MapGeneration : NetworkBehaviour
 
     public void GenerateForestSurface()
     {
+        GenerateChunks();
         float seed = Random.Range(-9999f, 9999f); //seed for world gen
         int seedInt = (int)seed;
         Random.InitState(seedInt);
@@ -106,19 +106,19 @@ public class MapGeneration : NetworkBehaviour
                 if (height < 0.2f) //Water
                 {
                     var go = Instantiate(waterTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
+                    //ChunkCheck(x, y, go);
                     //AddTileToGridmap(newX, newY, 1);                  
                 }
                 else if (height < 0.25f) //Sand
                 {                    
                     var go = Instantiate(sandTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
+                    //ChunkCheck(x, y, go);
                     //AddTileToGridmap(newX, newY, 2);
                 }
                 else if (height < 0.5f) //Grass
                 {
                     var go = Instantiate(grassTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
+                    //ChunkCheck(x, y, go);
                     //AddTileToGridmap(newX, newY, 3);
 
                     //if (Random.value >= 0.98) //If 2 percent chance pass
@@ -149,7 +149,7 @@ public class MapGeneration : NetworkBehaviour
                 else if (height < 0.6f) //Dirt Ground
                 {
                     var go = Instantiate(dirtTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
+                    //ChunkCheck(x, y, go);
                     //AddTileToGridmap(newX, newY, 4);
                     //TrySpawnCaveEntrance(newX, newY);
                 }
@@ -166,25 +166,41 @@ public class MapGeneration : NetworkBehaviour
         }
     }
 
-    private void ChunkCheck(int x, int y, GameObject tile)
+    //Create list of chunks
+
+    private void GenerateChunks()
     {
-        if (x < 64 && y < 64)
+        var value1 = width * height;
+        var value2 = value1 / chunkSize;
+        var chunkAmount = value2 / chunkSize;
+
+        for (int i = 0; i < chunkAmount; i++)
         {
-            tile.transform.parent = chunk1.transform;
-        }
-        else if (x >= 64 && y < 64)
-        {
-            tile.transform.parent = chunk2.transform;
-        }
-        else if (x < 64 && y >= 64)
-        {
-            tile.transform.parent = chunk3.transform;
-        }
-        else if (x >= 64 && y >= 64)
-        {
-            tile.transform.parent = chunk4.transform;
+            GameObject chunk = new GameObject();
+            chunk.name = i.ToString();
+            chunk.transform.parent = chunkHolder.transform;
         }
     }
+
+    //private void ChunkCheck(int x, int y, GameObject tile)
+    //{
+    //    if (x < 64 && y < 64)
+    //    {
+    //        tile.transform.parent = chunk1.transform;
+    //    }
+    //    else if (x >= 64 && y < 64)
+    //    {
+    //        tile.transform.parent = chunk2.transform;
+    //    }
+    //    else if (x < 64 && y >= 64)
+    //    {
+    //        tile.transform.parent = chunk3.transform;
+    //    }
+    //    else if (x >= 64 && y >= 64)
+    //    {
+    //        tile.transform.parent = chunk4.transform;
+    //    }
+    //}
 
     //public void GenerateForestUnderground()
     //{
