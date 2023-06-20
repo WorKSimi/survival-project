@@ -41,7 +41,7 @@ public class MapGeneration : NetworkBehaviour
     public int caveOffset = 0;
     public int[,] GridMap;
     public GameObject chunkHolder;
-    public List<GameObject> worldChunks;
+    public GameObject[] worldChunks;
 
     [Header("Height Map")]
     public Wave[] heightWaves;
@@ -74,7 +74,6 @@ public class MapGeneration : NetworkBehaviour
     private void AddTileToGridmap(int x, int y, int value)
     {
         GridMap[x, y] = value;
-        Debug.Log(GridMap[x, y]);
     }
 
     public void GenerateForestSurface()
@@ -106,20 +105,20 @@ public class MapGeneration : NetworkBehaviour
                 if (height < 0.2f) //Water
                 {
                     var go = Instantiate(waterTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    //ChunkCheck(x, y, go);
-                    //AddTileToGridmap(newX, newY, 1);                  
+                    ChunkCheck(x, y, go);
+                    AddTileToGridmap(newX, newY, 1);                  
                 }
                 else if (height < 0.25f) //Sand
                 {                    
                     var go = Instantiate(sandTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    //ChunkCheck(x, y, go);
-                    //AddTileToGridmap(newX, newY, 2);
+                    ChunkCheck(x, y, go);
+                    AddTileToGridmap(newX, newY, 2);
                 }
                 else if (height < 0.5f) //Grass
                 {
                     var go = Instantiate(grassTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    //ChunkCheck(x, y, go);
-                    //AddTileToGridmap(newX, newY, 3);
+                    ChunkCheck(x, y, go);
+                    AddTileToGridmap(newX, newY, 3);
 
                     //if (Random.value >= 0.98) //If 2 percent chance pass
                     //{
@@ -149,8 +148,8 @@ public class MapGeneration : NetworkBehaviour
                 else if (height < 0.6f) //Dirt Ground
                 {
                     var go = Instantiate(dirtTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    //ChunkCheck(x, y, go);
-                    //AddTileToGridmap(newX, newY, 4);
+                    ChunkCheck(x, y, go);
+                    AddTileToGridmap(newX, newY, 4);
                     //TrySpawnCaveEntrance(newX, newY);
                 }
                 else if (height < 1.0f) //Dirt Wall
@@ -173,34 +172,282 @@ public class MapGeneration : NetworkBehaviour
         var value1 = width * height;
         var value2 = value1 / chunkSize;
         var chunkAmount = value2 / chunkSize;
-
+        worldChunks = new GameObject[chunkAmount]; //Array size is equal to amount of chunks
         for (int i = 0; i < chunkAmount; i++)
         {
             GameObject chunk = new GameObject();
             chunk.name = i.ToString();
             chunk.transform.parent = chunkHolder.transform;
+            worldChunks[i] = chunk; //Set chunk created to position in array
         }
     }
 
-    //private void ChunkCheck(int x, int y, GameObject tile)
-    //{
-    //    if (x < 64 && y < 64)
-    //    {
-    //        tile.transform.parent = chunk1.transform;
-    //    }
-    //    else if (x >= 64 && y < 64)
-    //    {
-    //        tile.transform.parent = chunk2.transform;
-    //    }
-    //    else if (x < 64 && y >= 64)
-    //    {
-    //        tile.transform.parent = chunk3.transform;
-    //    }
-    //    else if (x >= 64 && y >= 64)
-    //    {
-    //        tile.transform.parent = chunk4.transform;
-    //    }
-    //}
+    private void ChunkCheck(int x, int y, GameObject tile)
+    {
+        if (x >= 0 && x <= 64 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[0].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[1].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[2].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[3].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[4].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[5].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[6].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 0 && y <= 64)
+        {
+            tile.transform.parent = worldChunks[7].transform;
+        }
+
+        else if (x >= 0 && x <= 64 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[8].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[9].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[10].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[11].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[12].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[13].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[14].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 65 && y <= 128)
+        {
+            tile.transform.parent = worldChunks[15].transform;
+        }
+
+        else if (x >= 0 && x <= 64 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[16].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[17].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[18].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[19].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[20].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[21].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[22].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 129 && y <= 192)
+        {
+            tile.transform.parent = worldChunks[23].transform;
+        }
+
+        else if (x >= 0 && x <= 64 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[24].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[25].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[26].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[27].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[28].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[29].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[30].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 193 && y <= 256)
+        {
+            tile.transform.parent = worldChunks[31].transform;
+        }
+
+        else if (x >= 0 && x <= 64 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[32].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[33].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[34].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[35].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[36].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[37].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[38].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 257 && y <= 320)
+        {
+            tile.transform.parent = worldChunks[39].transform;
+        }
+
+        else if (x >= 0 && x <= 64 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[40].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[41].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[42].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[43].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[44].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[45].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[46].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 321 && y <= 384)
+        {
+            tile.transform.parent = worldChunks[47].transform;
+        }
+
+        else if (x >= 0 && x <= 64 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[48].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[49].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[50].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[51].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[52].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[53].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[54].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 385 && y <= 448)
+        {
+            tile.transform.parent = worldChunks[55].transform;
+        }
+
+        else if (x >= 0 && x <= 64 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[56].transform;
+        }
+        else if (x >= 65 && x <= 128 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[57].transform;
+        }
+        else if (x >= 129 && x <= 192 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[58].transform;
+        }
+        else if (x >= 193 && x <= 256 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[59].transform;
+        }
+        else if (x >= 257 && x <= 320 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[60].transform;
+        }
+        else if (x >= 321 && x <= 384 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[61].transform;
+        }
+        else if (x >= 385 && x <= 448 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[62].transform;
+        }
+        else if (x >= 449 && x <= 512 && y >= 449 && y <= 512)
+        {
+            tile.transform.parent = worldChunks[63].transform;
+        }
+    }
 
     //public void GenerateForestUnderground()
     //{

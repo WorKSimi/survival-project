@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6873390194384476485}
   - component: {fileID: 7508499217017516268}
   - component: {fileID: 7503096250632733046}
-  - component: {fileID: 862147772962653558}
   - component: {fileID: 5877093104626245369}
   m_Layer: 5
   m_Name: InventorySlot_UI
@@ -145,22 +144,6 @@ MonoBehaviour:
   assignedInventorySlot:
     _itemID: -1
     stackSize: -1
---- !u!114 &862147772962653558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541418976165865394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &5877093104626245369
 MonoBehaviour:
   m_ObjectHideFlags: 0
