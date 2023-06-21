@@ -41,6 +41,7 @@ public class MapGeneration : NetworkBehaviour
     public int caveOffset = 0;
     public int[,] GridMap;
     public GameObject chunkHolder;
+    public GameObject chunkPrefab;
     public GameObject[] worldChunks;
 
     [Header("Height Map")]
@@ -87,82 +88,82 @@ public class MapGeneration : NetworkBehaviour
 
         GridMap = new int[width, height];
 
-        heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
-        for (int x = 0; x < width; ++x)
-        {
-            for (int y = 0; y < height; ++y) //Cycle through the noise map
-            {
-                if (useFalloff)
-                {
-                    heightMap[x, y] = Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y]);
-                }
+        //heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
+        //for (int x = 0; x < width; ++x)
+        //{
+        //    for (int y = 0; y < height; ++y) //Cycle through the noise map
+        //    {
+        //        if (useFalloff)
+        //        {
+        //            heightMap[x, y] = Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y]);
+        //        }
 
-                //Instantiate tile on tilemap based on height value               
-                var height = heightMap[x, y];
-                var newX = (x + worldOffset);
-                var newY = (y + worldOffset);
+        //        //Instantiate tile on tilemap based on height value               
+        //        var height = heightMap[x, y];
+        //        var newX = (x + worldOffset);
+        //        var newY = (y + worldOffset);
 
-                if (height < 0.2f) //Water
-                {
-                    var go = Instantiate(waterTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
-                    AddTileToGridmap(newX, newY, 1);                  
-                }
-                else if (height < 0.25f) //Sand
-                {                    
-                    var go = Instantiate(sandTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
-                    AddTileToGridmap(newX, newY, 2);
-                }
-                else if (height < 0.5f) //Grass
-                {
-                    var go = Instantiate(grassTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
-                    AddTileToGridmap(newX, newY, 3);
+        //        if (height < 0.2f) //Water
+        //        {
+        //            var go = Instantiate(waterTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
+        //            ChunkCheck(x, y, go);
+        //            AddTileToGridmap(newX, newY, 1);                  
+        //        }
+        //        else if (height < 0.25f) //Sand
+        //        {                    
+        //            var go = Instantiate(sandTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
+        //            ChunkCheck(x, y, go);
+        //            AddTileToGridmap(newX, newY, 2);
+        //        }
+        //        else if (height < 0.5f) //Grass
+        //        {
+        //            var go = Instantiate(grassTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
+        //            ChunkCheck(x, y, go);
+        //            AddTileToGridmap(newX, newY, 3);
 
-                    //if (Random.value >= 0.98) //If 2 percent chance pass
-                    //{
-                    //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), treeTile); //Spawn tree on tile
-                    //}
-                    //else if (Random.value >= 0.99) 
-                    //{
-                    //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), flintTile); //Spawn Flint node on tile
-                    //}
-                    //else if (Random.value >= 0.99)
-                    //{
-                    //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneNodeTile); //Spawn Stone node on tile
-                    //}
-                    //else if (Random.value >= 0.995) 
-                    //{
-                    //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), blueberryTile); //Spawn blueberry bush on tile
-                    //}
-                    //else if (Random.value >= 0.995) 
-                    //{
-                    //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), redShroomTile); //Spawn Red Mushroom on tile
-                    //}
-                    //else if (Random.value >= 0.995) 
-                    //{
-                    //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), brownShroomTile); //Spawn brown mushroom on tile
-                    //}
-                }
-                else if (height < 0.6f) //Dirt Ground
-                {
-                    var go = Instantiate(dirtTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    ChunkCheck(x, y, go);
-                    AddTileToGridmap(newX, newY, 4);
-                    //TrySpawnCaveEntrance(newX, newY);
-                }
-                else if (height < 1.0f) //Dirt Wall
-                {
-                    //Instantiate(dirtTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), grassWallTile); //Set wall to grass wall
-                    //if (Random.value >= 0.95) //5 percent chance each wall tile
-                    //{
-                    //    SpawnOreVein(newX, newY); //Gen an ore vein
-                    //}
-                }
-            }
-        }
+        //            //if (Random.value >= 0.98) //If 2 percent chance pass
+        //            //{
+        //            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), treeTile); //Spawn tree on tile
+        //            //}
+        //            //else if (Random.value >= 0.99) 
+        //            //{
+        //            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), flintTile); //Spawn Flint node on tile
+        //            //}
+        //            //else if (Random.value >= 0.99)
+        //            //{
+        //            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneNodeTile); //Spawn Stone node on tile
+        //            //}
+        //            //else if (Random.value >= 0.995) 
+        //            //{
+        //            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), blueberryTile); //Spawn blueberry bush on tile
+        //            //}
+        //            //else if (Random.value >= 0.995) 
+        //            //{
+        //            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), redShroomTile); //Spawn Red Mushroom on tile
+        //            //}
+        //            //else if (Random.value >= 0.995) 
+        //            //{
+        //            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), brownShroomTile); //Spawn brown mushroom on tile
+        //            //}
+        //        }
+        //        else if (height < 0.6f) //Dirt Ground
+        //        {
+        //            var go = Instantiate(dirtTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
+        //            ChunkCheck(x, y, go);
+        //            AddTileToGridmap(newX, newY, 4);
+        //            //TrySpawnCaveEntrance(newX, newY);
+        //        }
+        //        else if (height < 1.0f) //Dirt Wall
+        //        {
+        //            //Instantiate(dirtTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
+        //            //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), grassWallTile); //Set wall to grass wall
+        //            //if (Random.value >= 0.95) //5 percent chance each wall tile
+        //            //{
+        //            //    SpawnOreVein(newX, newY); //Gen an ore vein
+        //            //}
+        //        }
+        //    }
+        //}
     }
 
     //Create list of chunks
@@ -173,12 +174,19 @@ public class MapGeneration : NetworkBehaviour
         var value2 = value1 / chunkSize;
         var chunkAmount = value2 / chunkSize;
         worldChunks = new GameObject[chunkAmount]; //Array size is equal to amount of chunks
-        for (int i = 0; i < chunkAmount; i++)
+
+        for (int i = 0; i < 16; i++)
         {
-            GameObject chunk = new GameObject();
+            GameObject chunk = Instantiate(chunkPrefab, transform.position, Quaternion.identity);
             chunk.name = i.ToString();
             chunk.transform.parent = chunkHolder.transform;
-            worldChunks[i] = chunk; //Set chunk created to position in array
+            worldChunks[i] = chunk;
+            var chunkData = chunk.GetComponent<Chunk>();
+
+            chunkData.xMin = (32 * i) + 1;
+            chunkData.xMax = (32 * i) + 32;
+            Debug.Log(chunkData.xMin);
+            Debug.Log(chunkData.xMax);
         }
     }
 

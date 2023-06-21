@@ -144,6 +144,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\DynamicInventoryDisplay.cs" />
     <Compile Include="Assets\Scripts\WorldSaveLoad\TileData.cs" />
+    <Compile Include="Assets\ChunkManager.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\PlayerInventoryHolder.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopItemList.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
@@ -198,7 +199,7 @@
     <Compile Include="Assets\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\ChunkManager.cs" />
+    <Compile Include="Assets\Chunk.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

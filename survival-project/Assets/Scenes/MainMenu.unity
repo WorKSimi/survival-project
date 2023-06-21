@@ -2676,13 +2676,15 @@ MonoBehaviour:
   falloffSize: 512
   scale: 1
   offset: {x: 0, y: 0}
-  chunkSize: 64
+  chunkSize: 32
   surfaceGrid: {fileID: 0}
   undergroundGrid: {fileID: 0}
   useFalloff: 1
   worldOffset: 0
   caveOffset: 105
   chunkHolder: {fileID: 1127357791}
+  chunkPrefab: {fileID: 896390250357294075, guid: a867ba98b5f068e4b97d95daa8bec421,
+    type: 3}
   worldChunks: []
   heightWaves:
   - seed: 100
@@ -4717,6 +4719,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 596956918}
+  chunkManagerObject: {fileID: 0}
+  chunkManager: {fileID: 0}
   createWorld1Menu: {fileID: 1398613189}
   SingleplayerMenu: {fileID: 216619917}
   world1InputField: {fileID: 1149025890}
@@ -4727,6 +4731,7 @@ MonoBehaviour:
   dirtTile: {fileID: 0}
   grassTile: {fileID: 0}
   sandTile: {fileID: 0}
+  worldChunks: []
   file1: /WorldData1.json
 --- !u!4 &1008295335
 Transform:

@@ -26,8 +26,6 @@ public class ChunkManager : MonoBehaviour
     }
 
     //Make a function that takes in the current chunk, and enable or disables chunks based
-
-    //pass in current chunk!
     private void EnableChunks(int chunk)
     {
         if (currentChunk == 0)
@@ -57,6 +55,54 @@ public class ChunkManager : MonoBehaviour
             worldChunks[9].SetActive(true);
             worldChunks[10].SetActive(true);
             worldChunks[11].SetActive(true);
+        }
+        else if (currentChunk == 3)
+        {
+            DisableAllChunks();
+            worldChunks[2].SetActive(true);
+            worldChunks[3].SetActive(true);
+            worldChunks[4].SetActive(true);
+            worldChunks[10].SetActive(true);
+            worldChunks[11].SetActive(true);
+            worldChunks[12].SetActive(true);
+        }
+        else if (currentChunk == 4)
+        {
+            DisableAllChunks();
+            worldChunks[3].SetActive(true);
+            worldChunks[4].SetActive(true);
+            worldChunks[5].SetActive(true);
+            worldChunks[11].SetActive(true);
+            worldChunks[12].SetActive(true);
+            worldChunks[13].SetActive(true);
+        }
+        else if (currentChunk == 5)
+        {
+            DisableAllChunks();
+            worldChunks[4].SetActive(true);
+            worldChunks[5].SetActive(true);
+            worldChunks[6].SetActive(true);
+            worldChunks[12].SetActive(true);
+            worldChunks[13].SetActive(true);
+            worldChunks[14].SetActive(true);
+        }
+        else if (currentChunk == 6)
+        {
+            DisableAllChunks();
+            worldChunks[5].SetActive(true);
+            worldChunks[6].SetActive(true);
+            worldChunks[7].SetActive(true);
+            worldChunks[13].SetActive(true);
+            worldChunks[14].SetActive(true);
+            worldChunks[15].SetActive(true);
+        }
+        else if (currentChunk == 4)
+        {
+            DisableAllChunks();
+            worldChunks[6].SetActive(true);
+            worldChunks[7].SetActive(true);
+            worldChunks[14].SetActive(true);
+            worldChunks[15].SetActive(true);
         }
     }
 
