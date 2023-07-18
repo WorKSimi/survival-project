@@ -6,16 +6,12 @@ public class Chunk : MonoBehaviour
 {
     //Data for each chunk
 
-    //It should have two values to get the range for each cord
-    //Chunk X Minimum
-    //Chunk X Maximum
+    public int chunkCordX;
+    public int chunkCordY;
 
-    //Chunk Y Minimum
-    //Chunk Y Maximum
     public int xMax;
     public int xMin;
 
     public int yMax;
-    public int yMinx;
-    
+    public int yMin;
 }

@@ -131,6 +131,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\SnailEnemy.cs" />
+    <Compile Include="Assets\Chunk.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
     <Compile Include="Assets\AuthenticateRelay.cs" />
     <Compile Include="Assets\Lobbymanager.cs" />
@@ -199,7 +200,6 @@
     <Compile Include="Assets\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\Chunk.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
