@@ -39,6 +39,7 @@ public class WorldDataCollector : NetworkBehaviour
     public GameObject dirtTile;
     public GameObject grassTile;
     public GameObject sandTile;
+    public GameObject grassWall;
     public GameObject[] worldChunks;
     public GameObject chunkHolder;
     public GameObject chunkPrefab;
@@ -141,6 +142,11 @@ public class WorldDataCollector : NetworkBehaviour
                     else if (mapArray[x, y] == 4)
                     {
                         var go = Instantiate(dirtTile, new Vector3Int(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+                    }
+                    else if (mapArray[x, y] == 5)
+                    {
+                        var go = Instantiate(grassWall, new Vector3Int(x, y, 0), Quaternion.identity);
                         go.transform.parent = chunk.transform;
                     }
                 }

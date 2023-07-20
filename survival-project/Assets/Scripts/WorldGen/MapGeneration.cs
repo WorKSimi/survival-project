@@ -10,7 +10,7 @@ public class MapGeneration : NetworkBehaviour
     public GameObject waterTile;
     public GameObject sandTile;
     public GameObject grassTile;
-    public RuleTile grassWallTile;
+    public GameObject grassWall;
     public GameObject dirtTile;
     public RuleTile tinOre;
     public RuleTile stoneTile;
@@ -165,12 +165,9 @@ public class MapGeneration : NetworkBehaviour
                     }
                     else if (height < 1.0f) //Dirt Wall
                     {
-                        //Instantiate(dirtTile, new Vector3Int(newX, newY, 0), Quaternion.identity);
-                        //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), grassWallTile); //Set wall to grass wall
-                        //if (Random.value >= 0.95) //5 percent chance each wall tile
-                        //{
-                        //    SpawnOreVein(newX, newY); //Gen an ore vein
-                        //}
+                        var go = Instantiate(grassWall, new Vector3Int(newX, newY, 0), Quaternion.identity);                      
+                        go.transform.parent = chunk.transform;
+                        AddTileToGridmap(newX, newY, 5);
                     }
                 }
             }

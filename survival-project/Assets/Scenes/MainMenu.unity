@@ -2067,7 +2067,8 @@ MonoBehaviour:
     type: 3}
   grassTile: {fileID: 3179713049715907885, guid: 045f301c42d865a44adba958ee5a7d53,
     type: 3}
-  grassWallTile: {fileID: 11400000, guid: 958afdba8e41f2f439542e7e3aa37811, type: 2}
+  grassWall: {fileID: 2976247172256185871, guid: 731eca6dec09ccc47babd22d9cdc8cf4,
+    type: 3}
   dirtTile: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
     type: 3}
   tinOre: {fileID: 11400000, guid: b8954c1434060b740ad009a95b94cb94, type: 2}
@@ -3645,6 +3646,8 @@ MonoBehaviour:
   grassTile: {fileID: 0}
   sandTile: {fileID: 0}
   worldChunks: []
+  chunkHolder: {fileID: 0}
+  chunkPrefab: {fileID: 0}
   file1: /WorldData1.json
 --- !u!4 &1008295335
 Transform:

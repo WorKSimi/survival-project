@@ -355,7 +355,7 @@ MonoBehaviour:
   waterTile: {fileID: 0}
   sandTile: {fileID: 0}
   grassTile: {fileID: 0}
-  grassWallTile: {fileID: 11400000, guid: 958afdba8e41f2f439542e7e3aa37811, type: 2}
+  grassWall: {fileID: 0}
   dirtTile: {fileID: 0}
   tinOre: {fileID: 11400000, guid: b8954c1434060b740ad009a95b94cb94, type: 2}
   stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
@@ -2406,6 +2406,8 @@ MonoBehaviour:
   grassTile: {fileID: 3179713049715907885, guid: 045f301c42d865a44adba958ee5a7d53,
     type: 3}
   sandTile: {fileID: 3179713049715907885, guid: 7f663d1cef965c94db64dff0ed208121,
+    type: 3}
+  grassWall: {fileID: 2976247172256185871, guid: 731eca6dec09ccc47babd22d9cdc8cf4,
     type: 3}
   worldChunks: []
   chunkHolder: {fileID: 1621312221}
