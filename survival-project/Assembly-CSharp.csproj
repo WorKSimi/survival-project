@@ -169,6 +169,7 @@
     <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\ChunkController.cs" />
     <Compile Include="Assets\PlayerCraftingMenuManager.cs" />
     <Compile Include="Assets\Scripts\ProximityOptimization\ProximityRegistration.cs" />
     <Compile Include="Assets\LeanTween\Testing\FollowingTests.cs" />

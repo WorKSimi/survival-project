@@ -14,4 +14,14 @@ public class Chunk : MonoBehaviour
 
     public int yMax;
     public int yMin;
+
+    public void EnableChunk() //This function turns the chunk on
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DisableChunk()
+    {
+        gameObject.SetActive(false);
+    }
 }

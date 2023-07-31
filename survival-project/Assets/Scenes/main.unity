@@ -1997,27 +1997,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 993104148}
-  - component: {fileID: 993104147}
+  - component: {fileID: 993104149}
   m_Layer: 0
-  m_Name: ChunkManager
+  m_Name: ChunkController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &993104147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993104146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 219ac9b23f101ee4096c2dc1f0206a04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  worldDataCollector: {fileID: 1818656841}
 --- !u!4 &993104148
 Transform:
   m_ObjectHideFlags: 0
@@ -2033,6 +2020,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &993104149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993104146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59cbf741eb16b094b8d9fceaa8d39da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldChunksHolder: []
 --- !u!1 &1597443741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapGenerator: {fileID: 0}
   chunkManagerObject: {fileID: 993104146}
-  chunkManager: {fileID: 993104147}
+  chunkManager: {fileID: 0}
   createWorld1Menu: {fileID: 0}
   SingleplayerMenu: {fileID: 0}
   world1InputField: {fileID: 0}
@@ -2413,6 +2413,7 @@ MonoBehaviour:
   chunkHolder: {fileID: 1621312221}
   chunkPrefab: {fileID: 896390250357294075, guid: a867ba98b5f068e4b97d95daa8bec421,
     type: 3}
+  chunkController: {fileID: 993104149}
   file1: /WorldData1.json
 --- !u!4 &1818656842
 Transform:

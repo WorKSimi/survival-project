@@ -43,6 +43,7 @@ public class WorldDataCollector : NetworkBehaviour
     public GameObject[] worldChunks;
     public GameObject chunkHolder;
     public GameObject chunkPrefab;
+    public ChunkController chunkController;
     private int chunkSize = 32;
 
     private int width = 512;
@@ -151,7 +152,10 @@ public class WorldDataCollector : NetworkBehaviour
                     }
                 }
             }
+            chunk.GetComponent<Chunk>().DisableChunk();
         }
+        chunkController.worldChunksHolder = worldChunks;
+        chunkController.chunksLoaded = true;
     }
 
     public void LoadClientWorldData(string saveFile) //This is an alternate load function, that only loads tiles without a game object. This is for clients, as the server only needs to load and spawn object tiles
