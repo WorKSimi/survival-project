@@ -18,9 +18,7 @@ public class BlueberryBushLogic : NetworkBehaviour, IInteractable
     private void Awake()
     {
         canInteract = true;
-        GrownBushObject.SetActive(true);
-        GameObject go = this.gameObject;
-        go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
+        GrownBushObject.SetActive(true);       
     }
 
     public void Interact(Interactor interactor, out bool interactSuccessful) //When you interact with bush

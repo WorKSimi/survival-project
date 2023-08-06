@@ -34,12 +34,21 @@ public class WorldDataCollector : NetworkBehaviour
 
     public Grid mapGrid;
     private string world1name;
+    private float seed;
+
     [Header("Tile Objects")]
-    public GameObject waterTile;
-    public GameObject dirtTile;
-    public GameObject grassTile;
-    public GameObject sandTile;
-    public GameObject grassWall;
+    public GameObject water_Tile;
+    public GameObject dirt_Tile;
+    public GameObject grass_Tile;
+    public GameObject sand_Tile;
+    public GameObject grass_Wall;
+    public GameObject tree_Tile;
+    public GameObject tin_Wall;
+    
+    public GameObject redShroom_Tile;
+    public GameObject brownShroom_Tile;
+    public GameObject blueberry_Tile;
+
     public GameObject[] worldChunks;
     public GameObject chunkHolder;
     public GameObject chunkPrefab;
@@ -48,6 +57,7 @@ public class WorldDataCollector : NetworkBehaviour
 
     private int width = 512;
     private int height = 512;
+    
 
     public string file1 = "/WorldData1.json";
 
@@ -78,9 +88,11 @@ public class WorldDataCollector : NetworkBehaviour
 
     public void CreateWorld1() //This function runs when you click Generate on make world screen.
     {
+        var seed2 = Random.Range(-9999f, 9999f); //seed for world gen
+        seed = seed2;
+        Debug.Log("Seed on creation: " + seed);
         world1name = world1InputField.text; //Set world 1 name to be what player entered
-        mapGenerator.GenerateForestSurface(); //Generate World
-        //mapGenerator.GenerateForestUnderground();
+        mapGenerator.GenerateForestSurface(seed2); //Generate World
         SaveWorldData(file1); //When world generates, save it to slot 1
         slot1Text.text = world1name; 
         SingleplayerMenu.SetActive(true);
@@ -93,11 +105,13 @@ public class WorldDataCollector : NetworkBehaviour
     }
     
     private void SaveWorldData(string saveFile)
-    {    
+    {
+        Debug.Log("Seed on saving: " + seed);
         var CurrentWorldData = new WorldData
         {
             WorldName = world1name,
-            mapGridArray = mapGenerator.GridMap
+            mapGridArray = mapGenerator.GridMap,
+            WorldSeed = seed,
         };
 
         string json = JsonConvert.SerializeObject(CurrentWorldData, Formatting.Indented, new JsonSerializerSettings
@@ -107,6 +121,9 @@ public class WorldDataCollector : NetworkBehaviour
         System.IO.File.WriteAllText(Application.persistentDataPath + saveFile, json);
     }
 
+    //float progress;
+    //public int ProgressPercentage { get { return (int)(100 * progress); } }
+
     public void LoadWorldData(string saveFile)
     {
         string json = File.ReadAllText(Application.persistentDataPath + saveFile);
@@ -114,47 +131,10 @@ public class WorldDataCollector : NetworkBehaviour
         List<TileData> loadedTiles = new List<TileData>();
 
         int[,] mapArray = worldData.mapGridArray;
+        float seedler = worldData.WorldSeed;
+        Debug.Log("Seed on Load: " + seedler);
 
-        GenerateChunks();
-     
-        foreach (GameObject chunk in worldChunks)
-        {
-            var chunkScript = chunk.GetComponent<Chunk>();
-
-            for (int x = chunkScript.xMin; x <= chunkScript.xMax; x++)
-            {
-                for (int y = chunkScript.yMin; y <= chunkScript.yMax; y++)
-                {
-                    if (mapArray[x, y] == 1)
-                    {
-                        var go = Instantiate(waterTile, new Vector3Int(x, y, 0), Quaternion.identity);
-                        go.transform.parent = chunk.transform;
-                    }
-                    else if (mapArray[x, y] == 2)
-                    {
-                        var go = Instantiate(sandTile, new Vector3Int(x, y, 0), Quaternion.identity);
-                        go.transform.parent = chunk.transform;
-                    }
-                    else if (mapArray[x, y] == 3)
-                    {
-                        var go = Instantiate(grassTile, new Vector3Int(x, y, 0), Quaternion.identity);
-                        go.transform.parent = chunk.transform;
-                    }
-                    else if (mapArray[x, y] == 4)
-                    {
-                        var go = Instantiate(dirtTile, new Vector3Int(x, y, 0), Quaternion.identity);
-                        go.transform.parent = chunk.transform;
-                    }
-                    else if (mapArray[x, y] == 5)
-                    {
-                        var go = Instantiate(grassWall, new Vector3Int(x, y, 0), Quaternion.identity);
-                        go.transform.parent = chunk.transform;
-                    }
-                }
-            }
-            chunk.GetComponent<Chunk>().DisableChunk();
-        }
-        chunkController.worldChunksHolder = worldChunks;
+        mapGenerator.GenerateForestSurface(seedler); //Regenerate world using the saved seed.
         chunkController.chunksLoaded = true;
     }
 
@@ -163,7 +143,12 @@ public class WorldDataCollector : NetworkBehaviour
         string json = File.ReadAllText(Application.persistentDataPath + saveFile);
         if (json == null) return;
         WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
-        List<TileData> loadedTiles = new List<TileData>();                    
+        //List<TileData> loadedTiles = new List<TileData>();
+
+        int[,] mapArray = worldData.mapGridArray;
+        var seedler = worldData.WorldSeed;
+
+        LoadDataClientRpc(seedler);
     }
 
     private void DeleteWorldData(string saveFilePath)
@@ -171,35 +156,15 @@ public class WorldDataCollector : NetworkBehaviour
         if (File.Exists(saveFilePath)) File.Delete(saveFilePath); //If the file exists, delete it
     }
 
-    private void GenerateChunks()
+    //Create chunks on client
+    //Go through mapData on Server, send each tile to Client and instantiate
+    //Then on client, go through each tile and assign to chunks
+
+    //Generate Chunks on client
+    [ClientRpc] //Fired by Server, Executed on Client
+    private void LoadDataClientRpc(float seed) //Take in map data, load world on client based on that
     {
-        int chunkCount = -1;
-        var value1 = width * height;
-        var value2 = value1 / chunkSize;
-        var chunkAmount = value2 / chunkSize;
-        worldChunks = new GameObject[chunkAmount]; //Array size is equal to amount of chunks
-
-        for (int a = 0; a < 16; a++)
-        {
-            for (int b = 0; b < 16; b++)
-            {
-                chunkCount++;
-                GameObject chunk = Instantiate(chunkPrefab, transform.position, Quaternion.identity);
-                chunk.name = chunkCount.ToString();
-                chunk.transform.parent = chunkHolder.transform;
-                worldChunks[chunkCount] = chunk;
-                var chunkData = chunk.GetComponent<Chunk>();
-
-                chunkData.chunkCordX = a;
-                chunkData.chunkCordY = b;
-
-                chunkData.xMin = (32 * a);
-                chunkData.xMax = (32 * a) + 31;
-
-                chunkData.yMin = (32 * b);
-                chunkData.yMax = (32 * b) + 31;
-            }
-        }
+        mapGenerator.GenerateForestSurface(seed);
     }
 }
 

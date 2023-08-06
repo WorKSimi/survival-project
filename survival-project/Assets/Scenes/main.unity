@@ -339,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &377106536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,34 +352,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2b6ff246447b114ca6be63341890caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterTile: {fileID: 0}
-  sandTile: {fileID: 0}
-  grassTile: {fileID: 0}
-  grassWall: {fileID: 0}
-  dirtTile: {fileID: 0}
-  tinOre: {fileID: 11400000, guid: b8954c1434060b740ad009a95b94cb94, type: 2}
+  waterTile: {fileID: 3179713049715907885, guid: c97824065019e8e4080f48be638c8347,
+    type: 3}
+  sandTile: {fileID: 3179713049715907885, guid: 7f663d1cef965c94db64dff0ed208121,
+    type: 3}
+  grassTile: {fileID: 3179713049715907885, guid: 045f301c42d865a44adba958ee5a7d53,
+    type: 3}
+  grassWall: {fileID: 2976247172256185871, guid: 731eca6dec09ccc47babd22d9cdc8cf4,
+    type: 3}
+  dirtTile: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
+    type: 3}
+  tinOreWall: {fileID: 2976247172256185871, guid: 795156ae338301a48a4b606fc5af0359,
+    type: 3}
   stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
   stoneWall: {fileID: 11400000, guid: ba0f9a2d77529934badc4bd92e934977, type: 2}
-  redShroomTile: {fileID: 11400000, guid: 7280d62daa0790c489be55e84b2f548c, type: 2}
-  brownShroomTile: {fileID: 11400000, guid: c3cf8e17ebdd63a49bcd963c2e847f68, type: 2}
-  blueberryTile: {fileID: 11400000, guid: ae6b57dc89cd2bd4e83fc06a5e9a8a0f, type: 2}
+  redShroomTile: {fileID: 3179713049715907885, guid: 95b8241c74ab0a04e9df07b7e859710c,
+    type: 3}
+  brownShroomTile: {fileID: 3179713049715907885, guid: 707e4a9e2c951884194f38119d23a1cf,
+    type: 3}
+  blueberryTile: {fileID: 3179713049715907885, guid: a94e3cdf164674040849a6001c345489,
+    type: 3}
   caveEntranceTile: {fileID: 11400000, guid: f973e57f5504b6241b9cc0ae6914db29, type: 2}
-  treeTile: {fileID: 11400000, guid: 6869f94d1d9329146b296a81745f5818, type: 2}
-  flintTile: {fileID: 0}
-  stoneNodeTile: {fileID: 0}
-  width: 200
-  height: 200
-  falloffSize: 200
+  treeTile: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523,
+    type: 3}
+  flintTile: {fileID: 11400000, guid: 2c3316cb667a93046a6400947309ee74, type: 2}
+  stoneNodeTile: {fileID: 11400000, guid: a79709bfb9e80d34a85ecef3bd4553e0, type: 2}
+  width: 512
+  height: 512
+  falloffSize: 512
   scale: 1
   offset: {x: 0, y: 0}
-  chunkSize: 0
-  surfaceGrid: {fileID: 501389062}
-  undergroundGrid: {fileID: 0}
+  chunkSize: 32
   useFalloff: 1
-  worldOffset: -50
-  caveOffset: 0
-  chunkHolder: {fileID: 0}
-  chunkPrefab: {fileID: 0}
+  worldOffset: 0
+  caveOffset: 105
+  chunkHolder: {fileID: 1621312221}
+  chunkPrefab: {fileID: 896390250357294075, guid: a867ba98b5f068e4b97d95daa8bec421,
+    type: 3}
   worldChunks: []
   heightWaves:
   - seed: 100
@@ -1101,12 +1110,6 @@ MonoBehaviour:
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523,
-        type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
       Prefab: {fileID: 3179713049715907885, guid: 95b8241c74ab0a04e9df07b7e859710c,
         type: 3}
       SourcePrefabToOverride: {fileID: 0}
@@ -1131,19 +1134,7 @@ MonoBehaviour:
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
-      Prefab: {fileID: 2976247172256185871, guid: acf27515a40869840ba4d80400ae885b,
-        type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
       Prefab: {fileID: 2976247172256185871, guid: 74b48bb5fe333f141ab604f5fdc04176,
-        type: 3}
-      SourcePrefabToOverride: {fileID: 0}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 2976247172256185871, guid: 731eca6dec09ccc47babd22d9cdc8cf4,
         type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
@@ -1228,6 +1219,36 @@ MonoBehaviour:
       OverridingTargetPrefab: {fileID: 0}
     - Override: 0
       Prefab: {fileID: 4648358853205179229, guid: 7e6f924446c924b4ca057d4e1f3971af,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 2976247172256185871, guid: 731eca6dec09ccc47babd22d9cdc8cf4,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 2976247172256185871, guid: 795156ae338301a48a4b606fc5af0359,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 3179713049715907885, guid: c97824065019e8e4080f48be638c8347,
+        type: 3}
+      SourcePrefabToOverride: {fileID: 0}
+      SourceHashToOverride: 0
+      OverridingTargetPrefab: {fileID: 0}
+    - Override: 0
+      Prefab: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
         type: 3}
       SourcePrefabToOverride: {fileID: 0}
       SourceHashToOverride: 0
@@ -2033,6 +2054,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldChunksHolder: []
+  currentChunk: {fileID: 0}
+  chunksLoaded: 0
 --- !u!1 &1597443741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2390,7 +2413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b13599a1dcc3b6438f557c1711843cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapGenerator: {fileID: 0}
+  mapGenerator: {fileID: 377106536}
   chunkManagerObject: {fileID: 993104146}
   chunkManager: {fileID: 0}
   createWorld1Menu: {fileID: 0}
@@ -2399,15 +2422,25 @@ MonoBehaviour:
   slot1Text: {fileID: 0}
   slot1HostText: {fileID: 0}
   mapGrid: {fileID: 0}
-  waterTile: {fileID: 3179713049715907885, guid: c97824065019e8e4080f48be638c8347,
+  water_Tile: {fileID: 3179713049715907885, guid: c97824065019e8e4080f48be638c8347,
     type: 3}
-  dirtTile: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
+  dirt_Tile: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
     type: 3}
-  grassTile: {fileID: 3179713049715907885, guid: 045f301c42d865a44adba958ee5a7d53,
+  grass_Tile: {fileID: 3179713049715907885, guid: 045f301c42d865a44adba958ee5a7d53,
     type: 3}
-  sandTile: {fileID: 3179713049715907885, guid: 7f663d1cef965c94db64dff0ed208121,
+  sand_Tile: {fileID: 3179713049715907885, guid: 7f663d1cef965c94db64dff0ed208121,
     type: 3}
-  grassWall: {fileID: 2976247172256185871, guid: 731eca6dec09ccc47babd22d9cdc8cf4,
+  grass_Wall: {fileID: 2976247172256185871, guid: 731eca6dec09ccc47babd22d9cdc8cf4,
+    type: 3}
+  tree_Tile: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523,
+    type: 3}
+  tin_Wall: {fileID: 2976247172256185871, guid: 795156ae338301a48a4b606fc5af0359,
+    type: 3}
+  redShroom_Tile: {fileID: 3179713049715907885, guid: 95b8241c74ab0a04e9df07b7e859710c,
+    type: 3}
+  brownShroom_Tile: {fileID: 3179713049715907885, guid: 707e4a9e2c951884194f38119d23a1cf,
+    type: 3}
+  blueberry_Tile: {fileID: 3179713049715907885, guid: a94e3cdf164674040849a6001c345489,
     type: 3}
   worldChunks: []
   chunkHolder: {fileID: 1621312221}

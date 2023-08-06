@@ -68,20 +68,20 @@ public class UseItemManager : NetworkBehaviour
     void Awake()
     {
         healCooldownComplete = true;
-        var gridObject = GameObject.FindWithTag("Grid");
-        grid = gridObject.GetComponent<Grid>();
+        //var gridObject = GameObject.FindWithTag("Grid");
+        //grid = gridObject.GetComponent<Grid>();
 
-        var wallmapObject = GameObject.FindWithTag("WallTilemap");
-        wallTilemap = wallmapObject.GetComponent<Tilemap>();
+        //var wallmapObject = GameObject.FindWithTag("WallTilemap");
+        //wallTilemap = wallmapObject.GetComponent<Tilemap>();
 
-        var groundMapObject = GameObject.FindWithTag("GroundTilemap");
-        groundTilemap = groundMapObject.GetComponent<Tilemap>();
+        //var groundMapObject = GameObject.FindWithTag("GroundTilemap");
+        //groundTilemap = groundMapObject.GetComponent<Tilemap>();
 
-        var interactivemapObject = GameObject.FindWithTag("InteractiveTilemap");
-        interactiveTilemap = interactivemapObject.GetComponent<Tilemap>();
+        //var interactivemapObject = GameObject.FindWithTag("InteractiveTilemap");
+        //interactiveTilemap = interactivemapObject.GetComponent<Tilemap>();
 
-        var watermapObject = GameObject.FindWithTag("WaterTilemap");
-        waterTilemap = watermapObject.GetComponent<Tilemap>();
+        //var watermapObject = GameObject.FindWithTag("WaterTilemap");
+        //waterTilemap = watermapObject.GetComponent<Tilemap>();
 
         m_transform = weaponAnchor.transform;
         swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
@@ -96,28 +96,28 @@ public class UseItemManager : NetworkBehaviour
         if (!IsOwner) return; //If not owner return
         playerPos2 = thisPlayer.transform.position;
         mouseWorldPos = playerCam.ScreenToWorldPoint(Input.mousePosition);
-        playerPos = grid.WorldToCell(transform.position);
-        mousePos = grid.WorldToCell(mouseWorldPos);
+        //playerPos = grid.WorldToCell(transform.position);
+        //mousePos = grid.WorldToCell(mouseWorldPos);
 
-        if (IsInRange() == true) //If is in range is true
-        {
-            if (HoldingPickOrBlock == true) //if your holding pick or block
-            {
-                interactiveTilemap.SetTile(previousMousePos, null);
-                interactiveTilemap.SetTile(mousePos, hoverTile);
-                previousMousePos = mousePos;
-            }
-        }
-        else if (IsInRange() == false) //If not in range 
-        {
-            interactiveTilemap.SetTile(mousePos, null); //Set interactive tilemap to null at mouse
-            interactiveTilemap.SetTile(previousMousePos, null); //Set to null at previous mouse pos
-        }
-        if (HoldingPickOrBlock == false) //OR not holding block
-        {
-            interactiveTilemap.SetTile(mousePos, null); //Set interactive tilemap to null at mouse
-            interactiveTilemap.SetTile(previousMousePos, null); //Set to null at previous mouse pos
-        }
+        //if (IsInRange() == true) //If is in range is true
+        //{
+        //    if (HoldingPickOrBlock == true) //if your holding pick or block
+        //    {
+        //        interactiveTilemap.SetTile(previousMousePos, null);
+        //        interactiveTilemap.SetTile(mousePos, hoverTile);
+        //        previousMousePos = mousePos;
+        //    }
+        //}
+        //else if (IsInRange() == false) //If not in range 
+        //{
+        //    interactiveTilemap.SetTile(mousePos, null); //Set interactive tilemap to null at mouse
+        //    interactiveTilemap.SetTile(previousMousePos, null); //Set to null at previous mouse pos
+        //}
+        //if (HoldingPickOrBlock == false) //OR not holding block
+        //{
+        //    interactiveTilemap.SetTile(mousePos, null); //Set interactive tilemap to null at mouse
+        //    interactiveTilemap.SetTile(previousMousePos, null); //Set to null at previous mouse pos
+        //}
         FacingDirection();
 
         Vector2 direction = playerCam.ScreenToWorldPoint
@@ -180,10 +180,12 @@ public class UseItemManager : NetworkBehaviour
         else return false;
     }
 
-    public bool TileFound()
+    public bool TileFound() 
     {
-        Vector3Int mousePos = GetMousePosition(); //Gets mouse position
-        if (wallTilemap.GetTile(mousePos))
+        var ray = playerCam.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.GetRayIntersection(ray);
+
+        if (hit.transform.CompareTag("Wall")) //If the ray hits a wall
         {
             Debug.Log("Tile occupied, can not place block!");
             return true;
@@ -260,7 +262,19 @@ public class UseItemManager : NetworkBehaviour
                     var hit = Physics2D.GetRayIntersection(ray);
                     hoveredWall = hit.transform;
                     var wallScript = hoveredWall.GetComponent<Wall>();
+
                     wallScript.TakeDamage(itemDamage);
+
+                    if (wallScript.currentHealth <= 0)
+                    {
+                        wallScript.Die();
+                        //Send message to clients to delete wall at this position on their game
+                    }
+                    else
+                    {
+                        //Send message to clients to take the damage to that tile on their end.
+                    }
+                    //If damage doesnt kill it, send message to apply damage on clients.
                 }
             }
         }
@@ -275,19 +289,36 @@ public class UseItemManager : NetworkBehaviour
                 {
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                     var hit = Physics2D.GetRayIntersection(ray);
-                    hoveredWall = hit.transform;
-                    var wallScript = hoveredWall.GetComponent<Wall>();
-                    wallScript.DamageWallServerRpc(itemDamage);
+                    var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
+
+                    DamageWallServerRpc(tilePosition, itemDamage);
+                    //hoveredWall = hit.transform;
+                    //var wallScript = hoveredWall.GetComponent<Wall>();
+                    //wallScript.DamageWallServerRpc(itemDamage);
                 }
             }
         }
+
+        //If you hit a wall, get the position of the wall 
+
+        //Through an rpc, send the host the position and the itemDamage
+
+        //Host will get this info, and apply the damage to the tile at that spot
+
+        //Then, host will send a message to all clients to do the same.
     }
 
     [ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
-    public void TileNullServerRpc(Vector3Int tilePosition)
+    private void DamageWallServerRpc(Vector3Int position, float damage)
     {
-        wallTilemap.SetTile(tilePosition, null); //Set tile to null
+        var ray = Physics.Raycast(position, Vector3.forward, 10f);
     }
+
+    //[ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
+    //public void TileNullServerRpc(Vector3Int tilePosition)
+    //{
+    //    wallTilemap.SetTile(tilePosition, null); //Set tile to null
+    //}
 
     public void UseRock(float itemDamage)
     {

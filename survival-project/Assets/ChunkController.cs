@@ -17,6 +17,7 @@ public class ChunkController : MonoBehaviour
     private bool playerFound = false; //Bool for if player is found, off by default
     private bool coroutineStarted = false;
 
+    private Chunk previousChunk;
 
     private void Update()
     {
@@ -32,17 +33,23 @@ public class ChunkController : MonoBehaviour
                 ChunkManagement(); //Begin chunk management
             }
         }
-        else Debug.Log("Chunks not loaded, please wait.");
+        //else Debug.Log("Chunks not loaded, please wait.");
     }
 
     private void ChunkManagement()
     {
         GetPlayerChunk(); //Get player chunk
-        DisableEnableChunks(); //Enable and disable the proper chunks            
+
+        //if (currentChunk != previousChunk) //If chunks changed
+        //{
+            DisableEnableChunks(); //Enable and disable the proper chunks  
+        //}          
     }
 
     private void GetPlayerChunk()
     {
+        //if (currentChunk != null) previousChunk = currentChunk; //if there is a current chunk, set the previous chunk to the current chunk
+
         //Now, to find which chunk the player is in, take the players X and Y cord.
         playerXCord = player.transform.position.x;
         playerYCord = player.transform.position.y;

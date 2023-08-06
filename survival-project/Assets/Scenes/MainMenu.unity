@@ -2071,14 +2071,19 @@ MonoBehaviour:
     type: 3}
   dirtTile: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
     type: 3}
-  tinOre: {fileID: 11400000, guid: b8954c1434060b740ad009a95b94cb94, type: 2}
+  tinOreWall: {fileID: 2976247172256185871, guid: 795156ae338301a48a4b606fc5af0359,
+    type: 3}
   stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
   stoneWall: {fileID: 11400000, guid: ba0f9a2d77529934badc4bd92e934977, type: 2}
-  redShroomTile: {fileID: 11400000, guid: 7280d62daa0790c489be55e84b2f548c, type: 2}
-  brownShroomTile: {fileID: 11400000, guid: c3cf8e17ebdd63a49bcd963c2e847f68, type: 2}
-  blueberryTile: {fileID: 11400000, guid: ae6b57dc89cd2bd4e83fc06a5e9a8a0f, type: 2}
+  redShroomTile: {fileID: 3179713049715907885, guid: 95b8241c74ab0a04e9df07b7e859710c,
+    type: 3}
+  brownShroomTile: {fileID: 3179713049715907885, guid: 707e4a9e2c951884194f38119d23a1cf,
+    type: 3}
+  blueberryTile: {fileID: 3179713049715907885, guid: a94e3cdf164674040849a6001c345489,
+    type: 3}
   caveEntranceTile: {fileID: 11400000, guid: f973e57f5504b6241b9cc0ae6914db29, type: 2}
-  treeTile: {fileID: 11400000, guid: 6869f94d1d9329146b296a81745f5818, type: 2}
+  treeTile: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523,
+    type: 3}
   flintTile: {fileID: 11400000, guid: 2c3316cb667a93046a6400947309ee74, type: 2}
   stoneNodeTile: {fileID: 11400000, guid: a79709bfb9e80d34a85ecef3bd4553e0, type: 2}
   width: 512
@@ -3641,13 +3646,17 @@ MonoBehaviour:
   slot1Text: {fileID: 1537840979}
   slot1HostText: {fileID: 1842084847}
   mapGrid: {fileID: 0}
-  waterTile: {fileID: 0}
-  dirtTile: {fileID: 0}
-  grassTile: {fileID: 0}
-  sandTile: {fileID: 0}
+  water_Tile: {fileID: 0}
+  dirt_Tile: {fileID: 0}
+  grass_Tile: {fileID: 0}
+  sand_Tile: {fileID: 0}
+  grass_Wall: {fileID: 0}
+  tree_Tile: {fileID: 0}
+  tin_Wall: {fileID: 0}
   worldChunks: []
   chunkHolder: {fileID: 0}
   chunkPrefab: {fileID: 0}
+  chunkController: {fileID: 0}
   file1: /WorldData1.json
 --- !u!4 &1008295335
 Transform:

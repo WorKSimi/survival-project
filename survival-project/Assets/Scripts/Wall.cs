@@ -12,11 +12,14 @@ public class Wall : NetworkBehaviour
     [SerializeField] private bool isResourceNode;
     [SerializeField] private int amountToDrop;
 
-    private GameObject gridObject;
-    private GameObject wallmapObject;
-    private Grid grid;
-    private Tilemap wallTilemap;
+    //private GameObject gridObject;
+    //private GameObject wallmapObject;
+    //private Grid grid;
+    //private Tilemap wallTilemap;
+
     public InventoryItemData inventoryItemData;
+
+    [SerializeField] private GameObject groundTile;
 
     //private Vector3Int mousePos;
     private Vector3Int thisPosition;
@@ -28,58 +31,15 @@ public class Wall : NetworkBehaviour
         currentHealth = maxHealth;
     }
 
-    void Awake()
-    {
-        gridObject = GameObject.FindWithTag("Grid");
-        grid = gridObject.GetComponent<Grid>();
-
-        wallmapObject = GameObject.FindWithTag("WallTilemap");
-        wallTilemap = wallmapObject.GetComponent<Tilemap>();
-        thisPosition = grid.WorldToCell(gameObject.transform.position);
-
-        GameObject go = this.gameObject;
-        go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
-    }
-
-    //public void SpawnWall()
-    //{
-    //    GameObject go = this.gameObject;
-    //    go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
-    //}
-
-    //[ServerRpc(RequireOwnership = false)]
-    //public void SpawnWallServerRpc()
-    //{
-    //    GameObject go = this.gameObject;
-    //    go.GetComponent<NetworkObject>().Spawn(); //On awake, spawn this object on network
-    //}
-
-    //[ServerRpc(RequireOwnership = false)]
-    //public void DestroyObjectServerRpc(ServerRpcParams serverRpcParams = default)
-    //{
-    //    NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
-    //    networkObject.Despawn();
-    //}
-
-    //[ServerRpc(RequireOwnership = false)]
-    //public void SpawnItemsServerRpc(ServerRpcParams serverRpcParams = default)
-    //{
-    //    for (int i = 0; i < amountToDrop; i++)
-    //    {
-    //        GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
-    //        gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
-    //    }
-    //}
-
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         Debug.Log("Wall Hit");
 
-        if (currentHealth <= 0)
-        {
-            Die();           
-        }
+        //if (currentHealth <= 0)
+        //{
+        //    Die();           
+        //}
     }
 
     [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
@@ -91,6 +51,7 @@ public class Wall : NetworkBehaviour
     public void Die()
     {
         thisPosition = Vector3Int.FloorToInt(this.transform.position);
+
         if (wood != null) //If the item to drop is something
         {
             for (int i = 0; i < amountToDrop; i++)
@@ -99,42 +60,18 @@ public class Wall : NetworkBehaviour
                 gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
             }
         }
+
         if (isCrop == true)
         {
             Debug.Log("Do nothing, Crop death handled by crop script");
         }
+
+        if (groundTile != null) //If the object has a ground tile
+        {
+            var go = Instantiate(groundTile, thisPosition, Quaternion.identity); //Instantiate in normal ground tile
+            go.GetComponent<NetworkObject>().Spawn(); //Spawn it in
+        }
+
         this.gameObject.GetComponent<NetworkObject>().Despawn();
-        wallTilemap.SetTile(thisPosition, null);
     }
-
-    //[ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
-    //public void DieServerRpc()
-    //{
-    //    if (wood != null)
-    //    {
-    //        for (int i = 0; i < amountToDrop; i++)
-    //        {
-    //            GameObject gameObject = Instantiate(wood, transform.position, Quaternion.identity); //Instantiate Item
-    //            gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
-    //        }
-    //    }
-
-    //    if (isCrop == true)
-    //    {
-    //        Debug.Log("Do nothing, Crop death handled by crop script");
-    //    }
-    //}
-
-    //public void DestroyAndDespawnThisObject()
-    //{
-    //    this.gameObject.GetComponent<NetworkObject>().Despawn();
-    //    Destroy(this.gameObject);
-    //}
-
-    //[ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
-    //public void DestroyAndDespawnThisObjectServerRpc()
-    //{
-    //    this.gameObject.GetComponent<NetworkObject>().Despawn();
-    //    Destroy(this.gameObject);
-    //}
 }

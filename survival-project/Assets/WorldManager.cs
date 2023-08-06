@@ -73,15 +73,15 @@ public class WorldManager : NetworkBehaviour
             //Set all tiles on the map from the file
             worldDataCollector.LoadWorldData(worldDataCollector.file1);
 
-            //Spawn every object in the network 
-            GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>(); //Find all game objects in scene
-            foreach (GameObject gameObject in allObjects)
-            {
-                if (gameObject.GetComponent<NetworkObject>()) //If the object has a network object component
-                {
-                    gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn all objects
-                }
-            }           
+            ////Spawn every object in the network 
+            //GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>(); //Find all game objects in scene
+            //foreach (GameObject gameObject in allObjects)
+            //{
+            //    if (gameObject.GetComponent<NetworkObject>()) //If the object has a network object component
+            //    {
+            //        gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn all objects
+            //    }
+            //}           
         }
 
         else if (hostClientManager.IsHost == false) //Client   
@@ -120,7 +120,7 @@ public class WorldManager : NetworkBehaviour
         AskForDataServerRpc(); //Send server a hello
     }
 
-    [ServerRpc] //FIRED BY CLIENT, RAN ON SERVER
+    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
     public void AskForDataServerRpc() //Fired by client Ran on Server
     {
         worldDataCollector.LoadClientWorldData(worldDataCollector.file1);

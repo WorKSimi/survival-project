@@ -6,6 +6,7 @@ using Unity.Netcode;
 public class WorldData
 {
     public string WorldName; //World data saves a world name
+    public float WorldSeed;
     public int[,] mapGridArray;
 }
 
