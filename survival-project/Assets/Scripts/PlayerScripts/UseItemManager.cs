@@ -273,8 +273,8 @@ public class UseItemManager : NetworkBehaviour
                     else
                     {
                         //Send message to clients to take the damage to that tile on their end.
+                        //Make an rpc to tell all clients except host to find and hurt tile at this position.
                     }
-                    //If damage doesnt kill it, send message to apply damage on clients.
                 }
             }
         }
@@ -311,7 +311,15 @@ public class UseItemManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
     private void DamageWallServerRpc(Vector3Int position, float damage)
     {
-        var ray = Physics.Raycast(position, Vector3.forward, 10f);
+        Debug.Log(position);
+        var vec2 = (Vector2Int)position; //Turn position to vector 2
+        RaycastHit2D hit; //Variable for racyast
+
+        hit = Physics2D.Raycast(vec2, Vector2.up, 0.2f); //Set hit to raycast
+        Debug.Log(hit.collider.gameObject.name); //Debug the name     
+
+        //It works! However, only when the host and client have the same chunk loaded. To fix this, I will have to have each client load the chunks
+        //Around other players as well!
     }
 
     //[ServerRpc(RequireOwnership = false)] //Launched by client, ran on server

@@ -14,7 +14,10 @@ public class HostClientManager : MonoBehaviour
     {
         DontDestroyOnLoad(this); //Dont Destroy this on load
         IsHost = false;
+
     }
+
+    
 
     public void PlayerClickedHost()
     {

@@ -4,13 +4,14 @@ using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.Tilemaps;
 
-public class Wall : NetworkBehaviour
+public class Wall : MonoBehaviour
 {
     [SerializeField] private bool isCrop;
     [SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
     [SerializeField] private bool isResourceNode;
     [SerializeField] private int amountToDrop;
+    [SerializeField] private Grass grassScript;
 
     //private GameObject gridObject;
     //private GameObject wallmapObject;
@@ -19,7 +20,7 @@ public class Wall : NetworkBehaviour
 
     public InventoryItemData inventoryItemData;
 
-    [SerializeField] private GameObject groundTile;
+    //[SerializeField] private GameObject groundTile;
 
     //private Vector3Int mousePos;
     private Vector3Int thisPosition;
@@ -35,11 +36,6 @@ public class Wall : NetworkBehaviour
     {
         currentHealth -= damage;
         Debug.Log("Wall Hit");
-
-        //if (currentHealth <= 0)
-        //{
-        //    Die();           
-        //}
     }
 
     [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
@@ -64,14 +60,19 @@ public class Wall : NetworkBehaviour
         if (isCrop == true)
         {
             Debug.Log("Do nothing, Crop death handled by crop script");
-        }
+        }        
 
-        if (groundTile != null) //If the object has a ground tile
+        if (grassScript != null) //If this wall object is on grass
         {
-            var go = Instantiate(groundTile, thisPosition, Quaternion.identity); //Instantiate in normal ground tile
-            go.GetComponent<NetworkObject>().Spawn(); //Spawn it in
-        }
+            grassScript.DisableAllStates(); //Turn into normal grass
+            //Send message to all clients (except host) to also disable states.
 
-        this.gameObject.GetComponent<NetworkObject>().Despawn();
+            //Will have to update changed tiles on this position later to account for the state
+        }
+        else //Wall is not on grass
+        {
+            Destroy(this.gameObject); //Destroy this object
+            //Send message to all clients (except host) to destroy as well.
+        }
     }
 }

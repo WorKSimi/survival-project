@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class ChunkController : MonoBehaviour
+public class ChunkController : NetworkBehaviour
 {
     //We got the world splitting into chunks properly
     //We need a holder to hold all of these chunks
+    public NetworkManager networkManager;
     public GameObject[] worldChunksHolder;
-    private GameObject player; //Holds player object
+    private GameObject localPlayer; //Holds player objects
+    private GameObject[] players;
 
     private float playerXCord;
     private float playerYCord;
+
     public Chunk currentChunk;
+    //public List<Chunk> currentChunks = new List<Chunk>(); //List to hold all current chunks for each player
 
     public bool chunksLoaded = false; //Bool for if chunks are loaded. This is off by default.
-    private bool playerFound = false; //Bool for if player is found, off by default
+    public bool playersFound = false; //Bool for if player is found, off by default
     private bool coroutineStarted = false;
 
     private Chunk previousChunk;
@@ -23,36 +28,45 @@ public class ChunkController : MonoBehaviour
     {
         if (chunksLoaded == true)
         {
-            if (playerFound == false) //player not found yet
+            if (playersFound == false) //players not found yet
             {
-                player = GameObject.FindGameObjectWithTag("Player"); //Set the player object to the player
-                playerFound = true; //Set player as found
+                FindPlayers();
             }
-            else if (playerFound == true) //If player is found, and chunks are loaded
+            else if (playersFound == true) //If player is found, and chunks are loaded
             {
                 ChunkManagement(); //Begin chunk management
             }
         }
-        //else Debug.Log("Chunks not loaded, please wait.");
+    }
+
+    private void FindPlayers()
+    {
+        //players = GameObject.FindGameObjectsWithTag("Player"); //Find all player objects in game and add to array
+
+        localPlayer = networkManager.LocalClient.PlayerObject.gameObject;
+
+        //foreach (var player in players)
+        //{
+            //if (player isLocalPlayer)
+        //}
+        
+        //if the player is the local player
+        //Set player to that
+        //If not dont do it
+
+        playersFound = true;
     }
 
     private void ChunkManagement()
     {
-        GetPlayerChunk(); //Get player chunk
-
-        //if (currentChunk != previousChunk) //If chunks changed
-        //{
-            DisableEnableChunks(); //Enable and disable the proper chunks  
-        //}          
+        GetPlayerChunks(); //Get player chunk
+        DisableEnableChunks(); //Enable and disable the proper chunks          
     }
 
-    private void GetPlayerChunk()
+    private void GetPlayerChunks()
     {
-        //if (currentChunk != null) previousChunk = currentChunk; //if there is a current chunk, set the previous chunk to the current chunk
-
-        //Now, to find which chunk the player is in, take the players X and Y cord.
-        playerXCord = player.transform.position.x;
-        playerYCord = player.transform.position.y;
+        playerXCord = localPlayer.transform.position.x;
+        playerYCord = localPlayer.transform.position.y;
 
         //For every chunk, check with the players cords and see if it is greater than the minimum and less than the maximum
         foreach (var chunkObject in worldChunksHolder)
@@ -60,18 +74,21 @@ public class ChunkController : MonoBehaviour
             var chunk = chunkObject.GetComponent<Chunk>();
             if (chunk.xMin < playerXCord && chunk.xMax > playerXCord && chunk.yMin < playerYCord && chunk.yMax > playerYCord)
             {
-                 currentChunk = chunk; //When you find the right chunk, set that as the players current chunk.
+                currentChunk = chunk;
             }
         }
+
     }
     //Disable all chunks
     //Now, enable the chunks with cords in the cardinal and diagnol directions.
 
     private void DisableEnableChunks()
     {
-        foreach (GameObject chunkObject in worldChunksHolder)
+
+        foreach (var chunkObject in worldChunksHolder)
         {
             Chunk chunk = chunkObject.GetComponent<Chunk>();
+
             if (chunk == currentChunk)
             {
                 chunk.EnableChunk(); //Current Chunk
@@ -112,6 +129,6 @@ public class ChunkController : MonoBehaviour
             {
                 chunk.DisableChunk();
             }
-        }
+        }             
     }
 }

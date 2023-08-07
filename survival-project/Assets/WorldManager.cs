@@ -20,6 +20,7 @@ public class WorldManager : NetworkBehaviour
     public WorldDataCollector worldDataCollector;
     public HostClientManager hostClientManager;
     public NetworkManager networkManager;
+    public ChunkController chunkController;
     //public String JoinCode { get; private set; }
     private String JoinCode;
     public String clientJoinCode;
@@ -115,14 +116,21 @@ public class WorldManager : NetworkBehaviour
         NetworkManager.Singleton.StartClient();
     }
 
-    public void OnConnectedToServer(ulong clientId)
+    public void OnConnectedToServer(ulong clientId) //Called on Client when you have successfully connected to server
     {
+        if (IsHost) return; //If your the host, ABORT! DONT DO THIS SHIT!
+        if (IsServer) return; //If your the server, ALSO ABORT!
+
+        Debug.Log("Client connected, asking server form info");
         AskForDataServerRpc(); //Send server a hello
+        //We need to tell the host that a new player has joined, so players found must be set to false. This will cause it to
+        //Grab the players again and have chunks work with all
     }
 
     [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
     public void AskForDataServerRpc() //Fired by client Ran on Server
     {
+        Debug.Log("Ask for Data RPC!");
         worldDataCollector.LoadClientWorldData(worldDataCollector.file1);
     }
 

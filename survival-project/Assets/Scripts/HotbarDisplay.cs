@@ -198,6 +198,7 @@ public class HotbarDisplay : StaticInventoryDisplay
             InventoryItemData itemData = slots[_currentIndex].AssignedInventorySlot.ItemData;
             switch (itemData.ItemType) //Switch statement that runs different code from use item manager depending on item type.
             {
+                //Note, later just make this call a script on held object that does stuff unique to it. (Unique code for pick / bow ect instead of the 1 megaScript)
                 case "Axe":
                 player.GetComponent<UseItemManager>().UseAxe(itemData.itemDamage);
                 break;

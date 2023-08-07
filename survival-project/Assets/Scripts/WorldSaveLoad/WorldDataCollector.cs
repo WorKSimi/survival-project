@@ -53,6 +53,8 @@ public class WorldDataCollector : NetworkBehaviour
     public GameObject chunkHolder;
     public GameObject chunkPrefab;
     public ChunkController chunkController;
+
+    private WorldData worldDataStorage; //This stores the world data when it is loaded for the first time. Easier to send to client this way.
     private int chunkSize = 32;
 
     private int width = 512;
@@ -92,7 +94,8 @@ public class WorldDataCollector : NetworkBehaviour
         seed = seed2;
         Debug.Log("Seed on creation: " + seed);
         world1name = world1InputField.text; //Set world 1 name to be what player entered
-        mapGenerator.GenerateForestSurface(seed2); //Generate World
+        //mapGenerator.GenerateForestSurface(seed2); //Generate World
+        StartCoroutine(mapGenerator.GenerateForestSurface(seed2));
         SaveWorldData(file1); //When world generates, save it to slot 1
         slot1Text.text = world1name; 
         SingleplayerMenu.SetActive(true);
@@ -128,27 +131,28 @@ public class WorldDataCollector : NetworkBehaviour
     {
         string json = File.ReadAllText(Application.persistentDataPath + saveFile);
         WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
+        worldDataStorage = worldData; //Store the world data in the variable on script.
         List<TileData> loadedTiles = new List<TileData>();
 
-        int[,] mapArray = worldData.mapGridArray;
+        //int[,] mapArray = worldData.mapGridArray;
         float seedler = worldData.WorldSeed;
         Debug.Log("Seed on Load: " + seedler);
 
-        mapGenerator.GenerateForestSurface(seedler); //Regenerate world using the saved seed.
+        StartCoroutine(mapGenerator.GenerateForestSurface(seedler));
         chunkController.chunksLoaded = true;
     }
 
     public void LoadClientWorldData(string saveFile) //This is an alternate load function, that only loads tiles without a game object. This is for clients, as the server only needs to load and spawn object tiles
     {
-        string json = File.ReadAllText(Application.persistentDataPath + saveFile);
-        if (json == null) return;
-        WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
+        //string json = File.ReadAllText(Application.persistentDataPath + saveFile);
+        //if (json == null) return;
+        //WorldData worldData = JsonConvert.DeserializeObject<WorldData>(json);
         //List<TileData> loadedTiles = new List<TileData>();
 
-        int[,] mapArray = worldData.mapGridArray;
-        var seedler = worldData.WorldSeed;
-
-        LoadDataClientRpc(seedler);
+        //int[,] mapArray = worldData.mapGridArray;
+        Debug.Log("Sending seed to client!");
+        var seed9 = worldDataStorage.WorldSeed;
+        LoadDataClientRpc(seed9);
     }
 
     private void DeleteWorldData(string saveFilePath)
@@ -164,7 +168,10 @@ public class WorldDataCollector : NetworkBehaviour
     [ClientRpc] //Fired by Server, Executed on Client
     private void LoadDataClientRpc(float seed) //Take in map data, load world on client based on that
     {
-        mapGenerator.GenerateForestSurface(seed);
+        if (IsHost) return; //If your the host ABORT!
+        Debug.Log("Seed on Client Load: " + seed);
+        Debug.Log("Thanks for the seed! Generating Map...");
+        StartCoroutine(mapGenerator.GenerateForestSurface(seed));
     }
 }
 
