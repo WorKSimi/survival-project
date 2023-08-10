@@ -9,13 +9,15 @@ public class ChunkController : NetworkBehaviour
     //We need a holder to hold all of these chunks
     public NetworkManager networkManager;
     public GameObject[] worldChunksHolder;
-    private GameObject localPlayer; //Holds player objects
+    private GameObject localPlayer; //Holds local player object
     private GameObject[] players;
 
     private float playerXCord;
     private float playerYCord;
 
-    public Chunk currentChunk;
+    public Chunk currentChunk; //Stores local players current chunk
+    public string currentChunkName; //Stores name of the current chunk
+
     //public List<Chunk> currentChunks = new List<Chunk>(); //List to hold all current chunks for each player
 
     public bool chunksLoaded = false; //Bool for if chunks are loaded. This is off by default.
@@ -42,19 +44,9 @@ public class ChunkController : NetworkBehaviour
     private void FindPlayers()
     {
         //players = GameObject.FindGameObjectsWithTag("Player"); //Find all player objects in game and add to array
-
         localPlayer = networkManager.LocalClient.PlayerObject.gameObject;
-
-        //foreach (var player in players)
-        //{
-            //if (player isLocalPlayer)
-        //}
-        
-        //if the player is the local player
-        //Set player to that
-        //If not dont do it
-
-        playersFound = true;
+        localPlayer.GetComponent<UseItemManager>().chunkController = this;
+        playersFound = true;     
     }
 
     private void ChunkManagement()
@@ -75,6 +67,7 @@ public class ChunkController : NetworkBehaviour
             if (chunk.xMin < playerXCord && chunk.xMax > playerXCord && chunk.yMin < playerYCord && chunk.yMax > playerYCord)
             {
                 currentChunk = chunk;
+                currentChunkName = chunk.gameObject.name;
             }
         }
 
@@ -84,7 +77,6 @@ public class ChunkController : NetworkBehaviour
 
     private void DisableEnableChunks()
     {
-
         foreach (var chunkObject in worldChunksHolder)
         {
             Chunk chunk = chunkObject.GetComponent<Chunk>();

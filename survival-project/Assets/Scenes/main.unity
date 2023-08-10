@@ -2322,7 +2322,7 @@ GameObject:
   - component: {fileID: 993104150}
   m_Layer: 0
   m_Name: ChunkController
-  m_TagString: Untagged
+  m_TagString: ChunkController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2357,6 +2357,7 @@ MonoBehaviour:
   networkManager: {fileID: 802663359}
   worldChunksHolder: []
   currentChunk: {fileID: 0}
+  currentChunkName: 
   chunksLoaded: 0
   playersFound: 0
 --- !u!114 &993104150

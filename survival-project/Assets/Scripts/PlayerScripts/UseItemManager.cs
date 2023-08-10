@@ -14,6 +14,8 @@ public class UseItemManager : NetworkBehaviour
     private Tilemap waterTilemap;
     public bool healCooldownComplete;
 
+    public ChunkController chunkController;
+
     public bool facingRight; //Bool for if the player is facing right
     public bool facingLeft; //Bool if the player is facing left
     public BlockDatabase blockDatabase; //Database of all tiles in game
@@ -291,7 +293,10 @@ public class UseItemManager : NetworkBehaviour
                     var hit = Physics2D.GetRayIntersection(ray);
                     var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
 
-                    DamageWallServerRpc(tilePosition, itemDamage);
+                    string chunkName = chunkController.currentChunkName;
+                    int chunkInt = int.Parse(chunkName);                   
+                    
+                    DamageWallServerRpc(tilePosition, itemDamage, chunkInt);
                     //hoveredWall = hit.transform;
                     //var wallScript = hoveredWall.GetComponent<Wall>();
                     //wallScript.DamageWallServerRpc(itemDamage);
@@ -309,17 +314,38 @@ public class UseItemManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
-    private void DamageWallServerRpc(Vector3Int position, float damage)
+    private void DamageWallServerRpc(Vector3Int position, float damage, int chunkNumber)
     {
         Debug.Log(position);
+        Debug.Log(chunkNumber);
+
         var vec2 = (Vector2Int)position; //Turn position to vector 2
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var player in players)
+        {
+            var itemManager = player.GetComponent<UseItemManager>();
+            if (itemManager.chunkController == null)
+            {
+                itemManager.chunkController = GameObject.FindGameObjectWithTag("ChunkController").GetComponent<ChunkController>();
+            }
+        }
+
+        GameObject chunkTileIn = chunkController.worldChunksHolder[chunkNumber];
+
+        var chunkScript = chunkTileIn.GetComponent<Chunk>();
+        chunkScript.EnableChunk();
+
         RaycastHit2D hit; //Variable for racyast
+        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Set hit to raycast   
+        var wallScript = hit.transform.GetComponent<Wall>();
+        wallScript.TakeDamage(damage);
 
-        hit = Physics2D.Raycast(vec2, Vector2.up, 0.2f); //Set hit to raycast
-        Debug.Log(hit.collider.gameObject.name); //Debug the name     
-
-        //It works! However, only when the host and client have the same chunk loaded. To fix this, I will have to have each client load the chunks
-        //Around other players as well!
+        if (wallScript.currentHealth <= 0)
+        {
+            wallScript.Die();
+        }
     }
 
     //[ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
@@ -375,7 +401,7 @@ public class UseItemManager : NetworkBehaviour
                         var hit = Physics2D.GetRayIntersection(ray);
                         hoveredWall = hit.transform;
                         var wallScript = hoveredWall.GetComponent<Wall>();
-                        wallScript.DamageWallServerRpc(itemDamage);
+                        //wallScript.DamageWallServerRpc(itemDamage);
                     }
                 }
             }

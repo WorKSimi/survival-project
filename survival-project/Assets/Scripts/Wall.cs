@@ -36,13 +36,14 @@ public class Wall : MonoBehaviour
     {
         currentHealth -= damage;
         Debug.Log("Wall Hit");
+        Die();
     }
 
-    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
-    public void DamageWallServerRpc(float damage)
-    {
-        TakeDamage(damage);
-    }
+    //[ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
+    //public void DamageWallServerRpc(float damage)
+    //{
+    //    TakeDamage(damage);
+    //}
 
     public void Die()
     {
@@ -65,8 +66,8 @@ public class Wall : MonoBehaviour
         if (grassScript != null) //If this wall object is on grass
         {
             grassScript.DisableAllStates(); //Turn into normal grass
-            //Send message to all clients (except host) to also disable states.
 
+            //Send message to all clients (except host) to also disable states.
             //Will have to update changed tiles on this position later to account for the state
         }
         else //Wall is not on grass
