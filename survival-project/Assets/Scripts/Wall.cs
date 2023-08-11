@@ -36,7 +36,7 @@ public class Wall : MonoBehaviour
     {
         currentHealth -= damage;
         Debug.Log("Wall Hit");
-        Die();
+        //Die();
     }
 
     //[ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
@@ -74,6 +74,29 @@ public class Wall : MonoBehaviour
         {
             Destroy(this.gameObject); //Destroy this object
             //Send message to all clients (except host) to destroy as well.
+        }
+    }   
+
+    public void DeleteWall() //This function removes the object locally without any other stuff.
+    {
+        thisPosition = Vector3Int.FloorToInt(this.transform.position);
+
+        if (isCrop == true) //If its a crop.
+        {
+            Debug.Log("Do nothing, Crop death handled by crop script");
+        }
+
+        if (grassScript != null) //If this wall object is on grass
+        {
+            grassScript.DisableAllStates(); //Turn into normal grass
+
+            //Send message to all clients (except host) to also disable states.
+            //Will have to update changed tiles on this position later to account for the state
+        }
+
+        else //Wall is not on grass
+        {
+            Destroy(this.gameObject); //Destroy this object locally.
         }
     }
 }

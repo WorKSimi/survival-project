@@ -296,21 +296,10 @@ public class UseItemManager : NetworkBehaviour
                     string chunkName = chunkController.currentChunkName;
                     int chunkInt = int.Parse(chunkName);                   
                     
-                    DamageWallServerRpc(tilePosition, itemDamage, chunkInt);
-                    //hoveredWall = hit.transform;
-                    //var wallScript = hoveredWall.GetComponent<Wall>();
-                    //wallScript.DamageWallServerRpc(itemDamage);
+                    DamageWallServerRpc(tilePosition, itemDamage, chunkInt); //Communicate to server to damage wall                   
                 }
             }
         }
-
-        //If you hit a wall, get the position of the wall 
-
-        //Through an rpc, send the host the position and the itemDamage
-
-        //Host will get this info, and apply the damage to the tile at that spot
-
-        //Then, host will send a message to all clients to do the same.
     }
 
     [ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
@@ -344,15 +333,38 @@ public class UseItemManager : NetworkBehaviour
 
         if (wallScript.currentHealth <= 0)
         {
-            wallScript.Die();
+            wallScript.Die(); //Kill wall on host end. Spawn in item.
+            KillWallClientRpc(position, damage, chunkNumber); //RPC to remove wall on all clients EXCEPT HOST! Its already done here.
         }
     }
 
-    //[ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
-    //public void TileNullServerRpc(Vector3Int tilePosition)
-    //{
-    //    wallTilemap.SetTile(tilePosition, null); //Set tile to null
-    //}
+    [ClientRpc] //Launched by server, ran on clients
+    private void KillWallClientRpc(Vector3Int position, float damage, int chunkNumber)
+    {
+        if (IsHost) return; //If your the host, dont do this.
+        
+        var vec2 = (Vector2Int)position; //Turn position to vector 2
+
+        //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        //foreach (var player in players)
+        //{
+        //    var itemManager = player.GetComponent<UseItemManager>();
+        //    if (itemManager.chunkController == null)
+        //    {
+        //        itemManager.chunkController = GameObject.FindGameObjectWithTag("ChunkController").GetComponent<ChunkController>();
+        //    }
+        //}
+
+        GameObject chunkTileIn = chunkController.worldChunksHolder[chunkNumber];
+        var chunkScript = chunkTileIn.GetComponent<Chunk>();
+        chunkScript.EnableChunk();
+
+        RaycastHit2D hit; //Variable for racyast
+        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Set hit to raycast   
+        var wallScript = hit.transform.GetComponent<Wall>();
+        wallScript.DeleteWall();
+    }
 
     public void UseRock(float itemDamage)
     {
