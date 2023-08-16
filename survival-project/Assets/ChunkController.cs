@@ -43,7 +43,6 @@ public class ChunkController : NetworkBehaviour
 
     private void FindPlayers()
     {
-        //players = GameObject.FindGameObjectsWithTag("Player"); //Find all player objects in game and add to array
         localPlayer = networkManager.LocalClient.PlayerObject.gameObject;
         localPlayer.GetComponent<UseItemManager>().chunkController = this;
         playersFound = true;     

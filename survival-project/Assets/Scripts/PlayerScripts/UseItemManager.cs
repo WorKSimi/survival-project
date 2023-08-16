@@ -70,8 +70,8 @@ public class UseItemManager : NetworkBehaviour
     void Awake()
     {
         healCooldownComplete = true;
-        //var gridObject = GameObject.FindWithTag("Grid");
-        //grid = gridObject.GetComponent<Grid>();
+        var gridObject = GameObject.FindWithTag("Grid");
+        grid = gridObject.GetComponent<Grid>();
 
         //var wallmapObject = GameObject.FindWithTag("WallTilemap");
         //wallTilemap = wallmapObject.GetComponent<Tilemap>();
@@ -182,20 +182,39 @@ public class UseItemManager : NetworkBehaviour
         else return false;
     }
 
-    public bool TileFound() 
+    public bool TileFound()
     {
         var ray = playerCam.ScreenPointToRay(Input.mousePosition);
         var hit = Physics2D.GetRayIntersection(ray);
 
-        if (hit.transform.CompareTag("Wall")) //If the ray hits a wall
+        if (hit.transform == null)
         {
-            Debug.Log("Tile occupied, can not place block!");
-            return true;
+            Debug.Log("Hit has no transform! No Object Found!");
+            return false;
         }
         else
         {
-            Debug.Log("No Tile found, placing block");
-            return false;
+            Debug.Log(hit.transform.name);
+            if (hit.transform.CompareTag("Wall"))
+            {
+                Debug.Log("Wall found!");
+                return true;
+            }
+            else return false;
+        }
+    }
+    
+    private void FindPlayersChunkController()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var player in players)
+        {
+            var itemManager = player.GetComponent<UseItemManager>();
+            if (itemManager.chunkController == null)
+            {
+                itemManager.chunkController = GameObject.FindGameObjectWithTag("ChunkController").GetComponent<ChunkController>();
+            }
         }
     }
 
@@ -229,6 +248,7 @@ public class UseItemManager : NetworkBehaviour
     public void UseAxe(float itemDamage)
     {
         Debug.Log("AXE USED!");
+        Debug.Log("AXE USED!");
         if (Time.time >= nextAttackTime)
         {
             Collider2D[] hitTrees = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, treeLayers); // Detect trees in range of attack
@@ -243,11 +263,11 @@ public class UseItemManager : NetworkBehaviour
 
 
 
-    [ServerRpc(RequireOwnership = false)]
-    public void PlaceBlockServerRpc(Vector3Int tilePosition)
-    {
-        wallTilemap.SetTile(tilePosition, null); //Set tile to null
-    }
+    //[ServerRpc(RequireOwnership = false)]
+    //public void PlaceBlockServerRpc(Vector3Int tilePosition)
+    //{
+    //    wallTilemap.SetTile(tilePosition, null); //Set tile to null
+    //}
 
     public void UsePick(float itemDamage)
     {
@@ -262,6 +282,8 @@ public class UseItemManager : NetworkBehaviour
                 {
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                     var hit = Physics2D.GetRayIntersection(ray);
+                    var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
+
                     hoveredWall = hit.transform;
                     var wallScript = hoveredWall.GetComponent<Wall>();
 
@@ -270,12 +292,12 @@ public class UseItemManager : NetworkBehaviour
                     if (wallScript.currentHealth <= 0)
                     {
                         wallScript.Die();
-                        //Send message to clients to delete wall at this position on their game
-                    }
-                    else
-                    {
-                        //Send message to clients to take the damage to that tile on their end.
-                        //Make an rpc to tell all clients except host to find and hurt tile at this position.
+
+                        FindPlayersChunkController();
+                        string chunkName = chunkController.currentChunkName;
+                        int chunkInt = int.Parse(chunkName);
+
+                        KillWallClientRpc(tilePosition, chunkInt);
                     }
                 }
             }
@@ -289,13 +311,15 @@ public class UseItemManager : NetworkBehaviour
 
                 if (IsInRange()) //If your in range
                 {
+                    FindPlayersChunkController();
+
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                     var hit = Physics2D.GetRayIntersection(ray);
                     var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
 
                     string chunkName = chunkController.currentChunkName;
-                    int chunkInt = int.Parse(chunkName);                   
-                    
+                    int chunkInt = int.Parse(chunkName);
+
                     DamageWallServerRpc(tilePosition, itemDamage, chunkInt); //Communicate to server to damage wall                   
                 }
             }
@@ -310,16 +334,7 @@ public class UseItemManager : NetworkBehaviour
 
         var vec2 = (Vector2Int)position; //Turn position to vector 2
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (var player in players)
-        {
-            var itemManager = player.GetComponent<UseItemManager>();
-            if (itemManager.chunkController == null)
-            {
-                itemManager.chunkController = GameObject.FindGameObjectWithTag("ChunkController").GetComponent<ChunkController>();
-            }
-        }
+        FindPlayersChunkController();
 
         GameObject chunkTileIn = chunkController.worldChunksHolder[chunkNumber];
 
@@ -334,36 +349,30 @@ public class UseItemManager : NetworkBehaviour
         if (wallScript.currentHealth <= 0)
         {
             wallScript.Die(); //Kill wall on host end. Spawn in item.
-            KillWallClientRpc(position, damage, chunkNumber); //RPC to remove wall on all clients EXCEPT HOST! Its already done here.
+            KillWallClientRpc(position, chunkNumber); //RPC to remove wall on all clients EXCEPT HOST! Its already done here.
         }
     }
 
     [ClientRpc] //Launched by server, ran on clients
-    private void KillWallClientRpc(Vector3Int position, float damage, int chunkNumber)
+    private void KillWallClientRpc(Vector3Int position, int chunkNumber)
     {
         if (IsHost) return; //If your the host, dont do this.
-        
+
         var vec2 = (Vector2Int)position; //Turn position to vector 2
-
-        //GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-
-        //foreach (var player in players)
-        //{
-        //    var itemManager = player.GetComponent<UseItemManager>();
-        //    if (itemManager.chunkController == null)
-        //    {
-        //        itemManager.chunkController = GameObject.FindGameObjectWithTag("ChunkController").GetComponent<ChunkController>();
-        //    }
-        //}
-
+       
         GameObject chunkTileIn = chunkController.worldChunksHolder[chunkNumber];
         var chunkScript = chunkTileIn.GetComponent<Chunk>();
         chunkScript.EnableChunk();
 
         RaycastHit2D hit; //Variable for racyast
-        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Set hit to raycast   
-        var wallScript = hit.transform.GetComponent<Wall>();
-        wallScript.DeleteWall();
+        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Set hit to raycast
+
+        if (hit.transform.CompareTag("Wall"))
+        {
+            var wallScript = hit.transform.GetComponent<Wall>();
+            wallScript.DeleteWall();
+        }
+      
     }
 
     public void UseRock(float itemDamage)
@@ -449,7 +458,7 @@ public class UseItemManager : NetworkBehaviour
             }
         }
     }
-            
+
     public void UseFood(int healthHealed)
     {
         playerHealth.HealHealth(healthHealed);
@@ -541,13 +550,13 @@ public class UseItemManager : NetworkBehaviour
                 //ProjectileTest(itemDamage * chargeMultiplier, projectilePrefab, projectileRotationObject, projectileSpeed * chargeMultiplier, projectileLifetime);
                 Vector3 fireLocation = firePoint.position;
                 Vector3 projectileDirection = firePoint.up;
-                Quaternion tempRotation = projectileRotationObject.rotation;              
+                Quaternion tempRotation = projectileRotationObject.rotation;
                 LaunchArrowProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);
                 nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
             }
         }
     }
-    
+
     private void LaunchProjectile(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     {
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
@@ -558,7 +567,7 @@ public class UseItemManager : NetworkBehaviour
 
         bullet.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = firePoint.up * projectileSpeed;              
+        rb.velocity = firePoint.up * projectileSpeed;
     }
 
     private void ProjectileTest(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
@@ -573,12 +582,12 @@ public class UseItemManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void LaunchArrowProjectileServerRpc(float itemDamage,  float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
+    public void LaunchArrowProjectileServerRpc(float itemDamage, float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
     {
         GameObject bullet = Instantiate(arrowPrefab, spawnLocation, quaternion);
         bullet.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = fireDirection * projectileSpeed;        
+        rb.velocity = fireDirection * projectileSpeed;
         Projectile projectile = bullet.GetComponent<Projectile>();
         projectile.Projectiledamage = itemDamage;
         projectile.Projectilelifetime = projectileLifetime;
@@ -602,113 +611,73 @@ public class UseItemManager : NetworkBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(attackPoint.position, new Vector3 (1.5f, 1.5f, 0));
+        Gizmos.DrawWireCube(attackPoint.position, new Vector3(1.5f, 1.5f, 0));
     }
-    public void PlaceBlock(RuleTile ItemTile) //Takes in a ItemTile based on what your holding and places it
+    public void PlaceBlock(GameObject BlockPrefab, int ItemID) //Takes in a ItemTile based on what your holding and places it
     {
         if (IsHost) //If host, do this and then spawn it on network
         {
-            Vector3Int mousePos = GetMousePosition(); //Gets mouse position                
-            wallTilemap.SetTile(mousePos, ItemTile); //Sets tile on the tilemap where your mouse is
+            Vector3Int mousePos = GetMousePosition(); //Gets mouse position
+            Debug.Log(mousePos);
+            var go = Instantiate(BlockPrefab, mousePos, Quaternion.identity); //Instantiate Wall
+            string chunkName = chunkController.currentChunkName; //Name of Chunk
+            int chunkInt = int.Parse(chunkName);            //Int of Chunk
+            GameObject chunkIn = chunkController.worldChunksHolder[chunkInt]; //Object of Chunk player is In
+            go.transform.parent = chunkIn.transform; //Tile is parented to chunk.
+
+            PlaceBlockOnClientRpc(chunkInt, ItemID, mousePos);
         }
         else if (IsClient)
         {
-            int tileId = CheckTile(ItemTile);
-            int tilemapId = CheckTilemap(ItemTile);
-            Vector3Int posToPlaceTile = mousePos;
-            PlaceBlockServerRpc(tileId, tilemapId, posToPlaceTile);
+            //int tileId = CheckTile(ItemTile);
+            //int tilemapId = CheckTilemap(ItemTile);
+            //Vector3Int posToPlaceTile = mousePos;
+            //PlaceBlockServerRpc(tileId, tilemapId, posToPlaceTile);
         }
     }
+
+    [ClientRpc] //Fire by server, execute by client
+    public void PlaceBlockOnClientRpc(int chunkNum, int tileID, Vector3Int tilePosition)
+    {
+        if (IsHost) return; //If your the host DONT DO IT!
+        var blockObject = blockDatabase.TileReturner(tileID);
+
+        var go = Instantiate(blockObject, tilePosition, Quaternion.identity);
+        GameObject chunkIn = chunkController.worldChunksHolder[chunkNum];
+        go.transform.parent = chunkIn.transform;
+    }
+
 
     [ServerRpc(RequireOwnership = false)] //Fired by Client, Execute by Server
     public void PlaceBlockServerRpc(int tileId, int tilemapId, Vector3Int position) 
     {
-        var tile = TileReturner(tileId); //Get tile
-        var tilemap = TilemapReturner(tilemapId); //Get tilemap
-        tilemap.SetTile(position, tile); //Set the tile
+        //var tile = TileReturner(tileId); //Get tile
+        //var tilemap = TilemapReturner(tilemapId); //Get tilemap
+        //tilemap.SetTile(position, tile); //Set the tile
     }
 
-    public int CheckTile(RuleTile ItemTile)
-    {
-        if (ItemTile == blockDatabase.woodWallData.ItemTile)
-        {
-            return blockDatabase.woodWallData.BlockID;
-        }
-        else if (ItemTile == blockDatabase.torchWallData.ItemTile)
-        {
-            return blockDatabase.torchWallData.BlockID;
-        }
-        else if (ItemTile == blockDatabase.craftingTable.ItemTile)
-        {
-            return blockDatabase.craftingTable.BlockID;
-        }
-        else if (ItemTile == blockDatabase.furnace.ItemTile)
-        {
-            return blockDatabase.furnace.BlockID;
-        }
-        else if (ItemTile == blockDatabase.tinAnvil.ItemTile)
-        {
-            return blockDatabase.tinAnvil.BlockID;
-        }
-        else return 0;
-    }
-
-    public int CheckTilemap(RuleTile ItemTile)
-    {
-        if (ItemTile == blockDatabase.woodWallData.ItemTile)
-        {
-            return blockDatabase.woodWallData.TilemapID;
-        }
-        else if (ItemTile == blockDatabase.torchWallData.ItemTile)
-        {
-            return blockDatabase.torchWallData.TilemapID;
-        }
-        else if (ItemTile == blockDatabase.craftingTable.ItemTile)
-        {
-            return blockDatabase.craftingTable.TilemapID;
-        }
-        else if (ItemTile == blockDatabase.furnace.ItemTile)
-        {
-            return blockDatabase.furnace.TilemapID;
-        }
-        else if (ItemTile == blockDatabase.tinAnvil.ItemTile)
-        {
-            return blockDatabase.tinAnvil.TilemapID;
-        }
-        else return 0;
-    }
-
-    public RuleTile TileReturner(int integer)
-    {
-        if (integer == blockDatabase.woodWallData.BlockID)
-        {
-            return blockDatabase.woodWallData.ItemTile;
-        }
-        else if (integer == blockDatabase.torchWallData.BlockID)
-        {
-            return blockDatabase.torchWallData.ItemTile;
-        }
-        else if (integer == blockDatabase.craftingTable.BlockID)
-        {
-            return blockDatabase.craftingTable.ItemTile;
-        }
-        else if (integer == blockDatabase.furnace.BlockID)
-        {
-            return blockDatabase.furnace.ItemTile;
-        }
-        else if (integer == blockDatabase.tinAnvil.BlockID)
-        {
-            return blockDatabase.tinAnvil.ItemTile;
-        }
-        else return null;
-    }
-
-    public Tilemap TilemapReturner(int integer)
-    {
-        if (integer == 1)
-        {
-            return wallTilemap;
-        }
-        else return null;
-    }
+    //public GameObject TileReturner(int tileID)
+    //{
+    //    if (tileID == blockDatabase.woodWallData.ID)
+    //    {
+    //        return blockDatabase.woodWallData.BlockPrefab;
+    //    }
+    //    else if (tileID == blockDatabase.torchWallData.ID)
+    //    {
+    //        return blockDatabase.torchWallData.BlockPrefab;
+    //    }
+    //    else if (tileID == blockDatabase.craftingTable.ID)
+    //    {
+    //        return blockDatabase.craftingTable.BlockPrefab;
+    //    }
+    //    else if (tileID == blockDatabase.furnace.ID)
+    //    {
+    //        return blockDatabase.furnace.BlockPrefab;
+    //    }
+    //    else if (tileID == blockDatabase.tinAnvil.ID)
+    //    {
+    //        return blockDatabase.tinAnvil.BlockPrefab;
+    //    }
+    //    else return null;
+    //}
 }

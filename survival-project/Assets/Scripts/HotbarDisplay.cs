@@ -208,7 +208,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                     {
                         if (player.GetComponent<UseItemManager>().TileFound() == false) //No tile found at this spot
                         {
-                            player.GetComponent<UseItemManager>().PlaceBlock(itemData.ItemTile);
+                            player.GetComponent<UseItemManager>().PlaceBlock(itemData.BlockPrefab, itemData.ID);
                             slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
                             RefreshStaticDisplay();
                         }
@@ -251,18 +251,18 @@ public class HotbarDisplay : StaticInventoryDisplay
                     player.GetComponent<UseItemManager>().UseHoe();
                     break;
 
-                case "Seed":
-                    var seedTile = slots[_currentIndex].AssignedInventorySlot.ItemData.ItemTile;
-                    if (player.GetComponent<UseItemManager>().MouseOverCropland() == true) //if mouse over farmland
-                    {
-                        if (player.GetComponent<UseItemManager>().TileFound() == false)
-                        {
-                            player.GetComponent<UseItemManager>().UseSeed(seedTile); //Use Seed
-                            slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1); //Remove 1 seed from stack
-                            RefreshStaticDisplay();
-                        }
-                    }
-                    break;
+                //case "Seed":
+                //    var seedTile = slots[_currentIndex].AssignedInventorySlot.ItemData.ItemTile;
+                //    if (player.GetComponent<UseItemManager>().MouseOverCropland() == true) //if mouse over farmland
+                //    {
+                //        if (player.GetComponent<UseItemManager>().TileFound() == false)
+                //        {
+                //            player.GetComponent<UseItemManager>().UseSeed(seedTile); //Use Seed
+                //            slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1); //Remove 1 seed from stack
+                //            RefreshStaticDisplay();
+                //        }
+                //    }
+                //    break;
 
                 default:
                 Debug.Log($"Default Case");

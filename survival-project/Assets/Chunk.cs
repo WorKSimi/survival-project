@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chunk : MonoBehaviour
 {
     //Data for each chunk
+    public bool chunkActive;
 
     public int chunkCordX;
     public int chunkCordY;
@@ -18,10 +19,12 @@ public class Chunk : MonoBehaviour
     public void EnableChunk() //This function turns the chunk on
     {
         gameObject.SetActive(true);
+        chunkActive = true;
     }
 
     public void DisableChunk()
     {
         gameObject.SetActive(false);
+        chunkActive = false;
     }
 }

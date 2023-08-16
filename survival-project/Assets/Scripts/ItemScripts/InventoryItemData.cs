@@ -36,9 +36,9 @@ public class InventoryItemData : ScriptableObject
 
     [Header("Other")]
     public int BlockID;
-    public int TilemapID; //1 = Wall
-    public RuleTile ItemTile;
-    public string ItemTilemap;
+    //public int TilemapID; //1 = Wall
+    public GameObject BlockPrefab;
+    //public string ItemTilemap;
     public int HealthHealed;
     public int BlockHealth;
 

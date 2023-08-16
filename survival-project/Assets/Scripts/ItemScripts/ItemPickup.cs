@@ -74,7 +74,7 @@ public class ItemPickup : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void DestroyObjectServerRpc()
     {
         NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();

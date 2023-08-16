@@ -2092,14 +2092,13 @@ MonoBehaviour:
   scale: 1
   offset: {x: 0, y: 0}
   chunkSize: 32
-  surfaceGrid: {fileID: 0}
-  undergroundGrid: {fileID: 0}
   useFalloff: 1
   worldOffset: 0
   caveOffset: 105
   chunkHolder: {fileID: 1127357791}
   chunkPrefab: {fileID: 896390250357294075, guid: a867ba98b5f068e4b97d95daa8bec421,
     type: 3}
+  chunkController: {fileID: 0}
   worldChunks: []
   heightWaves:
   - seed: 100
@@ -3653,6 +3652,9 @@ MonoBehaviour:
   grass_Wall: {fileID: 0}
   tree_Tile: {fileID: 0}
   tin_Wall: {fileID: 0}
+  redShroom_Tile: {fileID: 0}
+  brownShroom_Tile: {fileID: 0}
+  blueberry_Tile: {fileID: 0}
   worldChunks: []
   chunkHolder: {fileID: 0}
   chunkPrefab: {fileID: 0}

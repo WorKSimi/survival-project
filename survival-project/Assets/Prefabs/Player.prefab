@@ -8638,8 +8638,8 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 0
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
+  SyncRotAngleX: 0
+  SyncRotAngleY: 0
   SyncRotAngleZ: 0
   SyncScaleX: 0
   SyncScaleY: 0
@@ -8676,6 +8676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healCooldownComplete: 0
+  chunkController: {fileID: 0}
   facingRight: 0
   facingLeft: 0
   blockDatabase: {fileID: 6855878134517386755}
