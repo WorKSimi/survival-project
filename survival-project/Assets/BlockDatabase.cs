@@ -12,6 +12,7 @@ public class BlockDatabase : MonoBehaviour
 
     public GameObject TileReturner(int tileID)
     {
+        //TURN THIS INTO SWITCH STATEMENT LATER PLEASE
         if (tileID == woodWallData.ID)
         {
             return woodWallData.BlockPrefab;

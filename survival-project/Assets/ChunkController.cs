@@ -9,8 +9,9 @@ public class ChunkController : NetworkBehaviour
     //We need a holder to hold all of these chunks
     public NetworkManager networkManager;
     public GameObject[] worldChunksHolder;
-    private GameObject localPlayer; //Holds local player object
-    private GameObject[] players;
+
+    public GameObject localPlayer; //Holds local player object
+    public List<GameObject> otherPlayers = new List<GameObject>();
 
     private float playerXCord;
     private float playerYCord;
@@ -25,6 +26,25 @@ public class ChunkController : NetworkBehaviour
     private bool coroutineStarted = false;
 
     private Chunk previousChunk;
+
+    public void OnConnectedToServer(ulong clientId) //Called on Client when you have successfully connected to server
+    {
+        NewPlayerConnectedServerRpc();
+    }
+
+    [ServerRpc] //Fired by client / execute on server
+    private void NewPlayerConnectedServerRpc()
+    {
+        playersFound = false; //Set this on host to players not found, it will re-find with new players that joined
+        NewPlayerConnectedClientRpc();
+    }
+
+    [ClientRpc] //Fired by server / execute on client
+    private void NewPlayerConnectedClientRpc()
+    {
+        if (IsHost) return; //If your the host dont do shit, its already done.
+        playersFound = false; //Set this on all clients to players not found, it will re-find with new players that joined
+    }
 
     private void Update()
     {
@@ -45,7 +65,21 @@ public class ChunkController : NetworkBehaviour
     {
         localPlayer = networkManager.LocalClient.PlayerObject.gameObject;
         localPlayer.GetComponent<UseItemManager>().chunkController = this;
+        GetNonLocalPlayers();
         playersFound = true;     
+    }
+
+    private void GetNonLocalPlayers()
+    {
+        GameObject[] tempHolder = GameObject.FindGameObjectsWithTag("Player");
+        
+        foreach (var player in tempHolder)
+        {
+            if (player != localPlayer) //if the player is not the local player
+            {
+                otherPlayers.Add(player); //if the player is not the local one, add it to the list
+            }           
+        }
     }
 
     private void ChunkManagement()
@@ -70,6 +104,7 @@ public class ChunkController : NetworkBehaviour
             }
         }
 
+           
     }
     //Disable all chunks
     //Now, enable the chunks with cords in the cardinal and diagnol directions.
