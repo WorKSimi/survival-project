@@ -409,9 +409,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 98ca61fe24a197fe4880cdfe3a89cdfed889cdfeb690cdfeea90cdfe7e34f2fe363ef2fed43ef2feb245f2fee645f2fe18c0bfff0ac5c9ff46cfc9ffe2dac9ff54dbc9ff56e4c9fff4e4c9ffd2ebc9ff06ecc9ff24fbffffbcd60000
+      m_SelectedIDs: 6ef80000
+      m_LastClickedID: 63598
+      m_ExpandedIDs: 685251fe2e1d87fe5ef0bcfe52f9bcfef0f9bcfece00bdfe0201bdfe7ea828ff52c328fff0c328ffceca28ff02cb28ff04965efff26094ff842bcaff0cf6ffff24fbffff7cf80000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -727,9 +727,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 31.479317, y: 17.929495, z: -0.60818326}
+    m_Target: {x: 70.073616, y: 70.45897, z: 0}
     speed: 2
-    m_Value: {x: 32.37032, y: 18.648859, z: -0.62239385}
+    m_Value: {x: 101.347435, y: 59.90157, z: -0.2430656}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -779,9 +779,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 30.158083
+    m_Target: 112.83315
     speed: 2
-    m_Value: 31.579144
+    m_Value: 107.97431
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1887,22 +1887,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Scripts/PlayerScripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Scripts/PlayerScripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Unity Projects\survival-project\survival-project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 379}
-    m_SelectedIDs: 64770000
-    m_LastClickedID: 30564
-    m_ExpandedIDs: 000000005c7600005e76000060760000627600006476000066760000687600006a7600006c7600006e76000070760000727600007476000076760000787600007a7600007c7600007e760000807600008276000084760000867600008876000000ca9a3b
+    scrollPos: {x: 0, y: 152}
+    m_SelectedIDs: 6e770000
+    m_LastClickedID: 30574
+    m_ExpandedIDs: 000000005c7600005e76000060760000627600006476000066760000687600006a7600006c7600006e76000070760000727600007476000076760000787600007a7600007c7600007e7600008076000082760000847600008876000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

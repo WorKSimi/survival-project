@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerNetwork : NetworkBehaviour
 {
-    private float moveSpeed = 8f; //Float for the move speed of this player
+    private float moveSpeed = 7f; //Float for the move speed of this player
     private float waterMoveSpeed = 4f; //Speed for when you want players to go slow
     private float deadSpeed = 0f;
     private float currentMoveSpeed; //Variable to store what the players CURRENT move speed is

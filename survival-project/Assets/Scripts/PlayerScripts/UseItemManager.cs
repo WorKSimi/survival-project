@@ -271,10 +271,10 @@ public class UseItemManager : NetworkBehaviour
                     {
                         wallScript.Die();
                        
-                        string chunkName = chunkController.currentChunkName;
-                        int chunkInt = int.Parse(chunkName);
+                        //string chunkName = chunkController.currentChunkName;
+                        //int chunkInt = int.Parse(chunkName);
 
-                        KillWallClientRpc(tilePosition, chunkInt);
+                        KillWallClientRpc(tilePosition, 0);
                     }
                 }
             }
@@ -294,10 +294,10 @@ public class UseItemManager : NetworkBehaviour
                     var hit = Physics2D.GetRayIntersection(ray);
                     var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
 
-                    string chunkName = chunkController.currentChunkName;
-                    int chunkInt = int.Parse(chunkName);
+                    //string chunkName = chunkController.currentChunkName;
+                    //int chunkInt = int.Parse(chunkName);
 
-                    DamageWallServerRpc(tilePosition, itemDamage, chunkInt); //Communicate to server to damage wall                   
+                    DamageWallServerRpc(tilePosition, itemDamage, 1); //Communicate to server to damage wall                   
                 }
             }
         }
@@ -605,8 +605,8 @@ public class UseItemManager : NetworkBehaviour
         {
             Vector3Int mousePos = GetMousePosition(); //Gets mouse position
             var go = Instantiate(BlockPrefab, mousePos, Quaternion.identity); //Instantiate Wall
-            string chunkName = chunkController.currentChunkName; //Name of Chunk
-            int chunkInt = int.Parse(chunkName);            //Int of Chunk
+            //string chunkName = chunkController.currentChunkName; //Name of Chunk
+            int chunkInt = 5;            //Int of Chunk
             GameObject chunkIn = chunkController.worldChunksHolder[chunkInt]; //Object of Chunk player is In
             go.transform.parent = chunkIn.transform; //Tile is parented to chunk.
 
@@ -620,8 +620,8 @@ public class UseItemManager : NetworkBehaviour
         else if (IsClient)
         {
             Vector3Int mousePos = GetMousePosition(); //Get position where tile will go
-            string chunkName = chunkController.currentChunkName; //Name of Chunk
-            int chunkInt = int.Parse(chunkName);            //Get int of chunk your in.
+            //string chunkName = chunkController.currentChunkName; //Name of Chunk
+            int chunkInt = 5;            //Get int of chunk your in.
             PlaceBlockServerRpc(chunkInt, ItemID, mousePos);
         }
     }

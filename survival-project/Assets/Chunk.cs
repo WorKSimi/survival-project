@@ -25,7 +25,7 @@ public class Chunk : MonoBehaviour
 
     public void DisableChunk()
     {
-        if (placingBlock == true) return; //If other scripts are using this chunk, temporarily stop it from being disabled.
+        //if (placingBlock == true) return; //If other scripts are using this chunk, temporarily stop it from being disabled.
         gameObject.SetActive(false);
         chunkActive = false;
     }
