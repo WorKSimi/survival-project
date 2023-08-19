@@ -10,13 +10,14 @@ public class ChunkController : NetworkBehaviour
     private List<PlayerChunk> otherPlayers = new List<PlayerChunk>();
     public bool chunksLoaded = false; //Bool for if chunks are loaded. This is off by default.
     public bool playersFound = false; //Bool for if player is found, off by default
-    
+    private Chunk originChunk;
 
     private void Start()
     {
         StartCoroutine(SearchForPlayers());
     }
 
+    
     private struct PlayerChunk
     {
         public GameObject player;
@@ -29,14 +30,20 @@ public class ChunkController : NetworkBehaviour
         {
             yield return new WaitForSeconds(3); //Wait 3 seconds
 
-            GetNonLocalPlayers();
-            DisableEnableChunks();
+            if (chunksLoaded == true)
+            {
+                originChunk = worldChunksHolder[0].GetComponent<Chunk>();
+                GetNonLocalPlayers();
+                DisableEnableChunks();
+            }      
         }
     }
 
 
     private void GetNonLocalPlayers()
     {
+        //if (chunksLoaded == false) return; //Abort if chunks arent loaded.
+
         otherPlayers.Clear(); //Clear list
 
         GameObject[] tempHolder = GameObject.FindGameObjectsWithTag("Player"); //Find objects with player tag
@@ -50,11 +57,11 @@ public class ChunkController : NetworkBehaviour
             otherPlayers.Add(playerChunk);              
         }        
         
-        foreach (var player in otherPlayers)
-        {
-            if (player.currentChunk == null) return;
-            Debug.Log(player.currentChunk.transform.name);
-        }
+        //foreach (var player in otherPlayers)
+        //{
+        //    if (player.currentChunk == null) return;
+        //    Debug.Log(player.currentChunk.transform.name);
+        //}
     }
 
    
@@ -67,19 +74,18 @@ public class ChunkController : NetworkBehaviour
             if (chunk.xMin < x && chunk.xMax > x && chunk.yMin < y && chunk.yMax > y)
             {
                 return chunk;
-            }           
+            }
         }
-        return null;
+        return originChunk;
     }
 
     private void DisableEnableChunks()
     {
-        foreach (var player in otherPlayers)
+        foreach (var chunkObject in worldChunksHolder)
         {
-            var currentChunk = player.currentChunk;
-
-            foreach (var chunkObject in worldChunksHolder)
+            foreach (var player in otherPlayers)
             {
+                var currentChunk = player.currentChunk;                
                 Chunk chunk = chunkObject.GetComponent<Chunk>();
 
                 if (chunk == currentChunk)
@@ -123,6 +129,6 @@ public class ChunkController : NetworkBehaviour
                     chunk.DisableChunk();
                 }
             }
-        }
+        }        
     }
 }

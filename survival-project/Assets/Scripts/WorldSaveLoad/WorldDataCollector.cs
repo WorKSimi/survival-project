@@ -139,7 +139,7 @@ public class WorldDataCollector : NetworkBehaviour
         Debug.Log("Seed on Load: " + seedler);
 
         StartCoroutine(mapGenerator.GenerateForestSurface(seedler));
-        chunkController.chunksLoaded = true;
+        //chunkController.chunksLoaded = true;
     }
 
     public void LoadClientWorldData(string saveFile) //This is an alternate load function, that only loads tiles without a game object. This is for clients, as the server only needs to load and spawn object tiles
