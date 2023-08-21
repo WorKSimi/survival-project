@@ -22,6 +22,7 @@ public class ChunkController : NetworkBehaviour
     {
         public GameObject player;
         public Chunk currentChunk;
+        public Chunk previousChunk;
     };
 
     private IEnumerator SearchForPlayers()
@@ -33,7 +34,9 @@ public class ChunkController : NetworkBehaviour
             if (chunksLoaded == true)
             {
                 originChunk = worldChunksHolder[0].GetComponent<Chunk>();
+
                 GetNonLocalPlayers();
+                ChunkReset();
                 DisableEnableChunks();
             }      
         }
@@ -42,8 +45,6 @@ public class ChunkController : NetworkBehaviour
 
     private void GetNonLocalPlayers()
     {
-        //if (chunksLoaded == false) return; //Abort if chunks arent loaded.
-
         otherPlayers.Clear(); //Clear list
 
         GameObject[] tempHolder = GameObject.FindGameObjectsWithTag("Player"); //Find objects with player tag
@@ -53,82 +54,109 @@ public class ChunkController : NetworkBehaviour
             PlayerChunk playerChunk = new PlayerChunk();
 
             playerChunk.player = player; //Set player as this player
-            playerChunk.currentChunk = GetPlayerChunk(player.transform.position.x, player.transform.position.y); //Set player current chunk as this
+
+            if (playerChunk.currentChunk == null) //If no current chunk
+            {
+                playerChunk.previousChunk = originChunk; //Prev chunk is the OG
+            }
+            else //If there IS a current chunk
+            {
+                playerChunk.previousChunk = playerChunk.currentChunk; //Previous chunk is the current chunk
+            }
+        
+            playerChunk.currentChunk = GetPlayerChunk(player.transform.position.x, player.transform.position.y, playerChunk); //Set player current chunk as this
             otherPlayers.Add(playerChunk);              
         }        
-        
-        //foreach (var player in otherPlayers)
-        //{
-        //    if (player.currentChunk == null) return;
-        //    Debug.Log(player.currentChunk.transform.name);
-        //}
     }
 
    
-    private Chunk GetPlayerChunk(float x, float y)
+    private Chunk GetPlayerChunk(float x, float y, PlayerChunk player)
     {
         //For every chunk, check with the players cords and see if it is greater than the minimum and less than the maximum  
         foreach (var chunkObject in worldChunksHolder)
-        {
+        {   
             var chunk = chunkObject.GetComponent<Chunk>();
+
             if (chunk.xMin < x && chunk.xMax > x && chunk.yMin < y && chunk.yMax > y)
             {
-                return chunk;
+                return chunk; //Get Chunk
             }
         }
-        return originChunk;
+        return player.previousChunk; //If cant get the right chunk, return previous one.
+    }
+
+    private void ChunkReset()
+    {
+        foreach (var chunkObject in worldChunksHolder)
+        {
+            var chunk = chunkObject.GetComponent<Chunk>();
+            chunk.toBeEnabled = false;
+        }
     }
 
     private void DisableEnableChunks()
-    {
+    {       
         foreach (var chunkObject in worldChunksHolder)
         {
             foreach (var player in otherPlayers)
             {
-                var currentChunk = player.currentChunk;                
+                var currentChunk = player.currentChunk;
                 Chunk chunk = chunkObject.GetComponent<Chunk>();
 
                 if (chunk == currentChunk)
                 {
                     chunk.EnableChunk(); //Current Chunk
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX + 1 && chunk.chunkCordY == currentChunk.chunkCordY)
                 {
                     chunk.EnableChunk(); //Chunk to the Right
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX - 1 && chunk.chunkCordY == currentChunk.chunkCordY)
                 {
                     chunk.EnableChunk(); //Chunk to the Left
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX && chunk.chunkCordY == currentChunk.chunkCordY + 1)
                 {
                     chunk.EnableChunk(); //Chunk to the Above
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX && chunk.chunkCordY == currentChunk.chunkCordY - 1)
                 {
                     chunk.EnableChunk(); //Chunk to the Down
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX + 1 && chunk.chunkCordY == currentChunk.chunkCordY + 1)
                 {
                     chunk.EnableChunk(); //Chunk to the Up Right
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX - 1 && chunk.chunkCordY == currentChunk.chunkCordY - 1)
                 {
                     chunk.EnableChunk(); //Chunk to the Down Left
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX + 1 && chunk.chunkCordY == currentChunk.chunkCordY - 1)
                 {
                     chunk.EnableChunk(); //Chunk to the Down Right
+                    chunk.toBeEnabled = true;
                 }
                 else if (chunk.chunkCordX == currentChunk.chunkCordX - 1 && chunk.chunkCordY == currentChunk.chunkCordY + 1)
                 {
                     chunk.EnableChunk(); //Chunk to the Up Left
+                    chunk.toBeEnabled = true;
+                }
+                else if (chunk.toBeEnabled == true)
+                {
+                    chunk.EnableChunk(); 
                 }
                 else
                 {
                     chunk.DisableChunk();
                 }
             }
-        }        
+        }
     }
 }
