@@ -10,13 +10,17 @@ public class Chunk : MonoBehaviour
     public bool toBeEnabled;
 
     public int chunkCordX;
-    public int chunkCordY;
+    public int chunkCordY;    
 
     public int xMax;
     public int xMin;
-
     public int yMax;
     public int yMin;
+
+    public int CavexMax;
+    public int CavexMin;
+    public int CaveyMax;
+    public int CaveyMin;
 
     public void EnableChunk() //This function turns the chunk on
     {

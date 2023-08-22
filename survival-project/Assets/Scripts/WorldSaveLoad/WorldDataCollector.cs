@@ -138,7 +138,7 @@ public class WorldDataCollector : NetworkBehaviour
         float seedler = worldData.WorldSeed;
         Debug.Log("Seed on Load: " + seedler);
 
-        StartCoroutine(mapGenerator.GenerateForestSurface(seedler));
+        StartCoroutine(mapGenerator.GenerateForestSurface(seedler));       
         //chunkController.chunksLoaded = true;
     }
 

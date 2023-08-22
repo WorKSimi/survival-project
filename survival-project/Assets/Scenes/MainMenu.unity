@@ -247,6 +247,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 159699628}
   m_CullTransparentMesh: 1
+--- !u!1 &200992336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200992337}
+  m_Layer: 0
+  m_Name: CaveChunkHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200992337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200992336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205133489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,19 +2104,12 @@ MonoBehaviour:
     type: 3}
   tinOreWall: {fileID: 2976247172256185871, guid: 795156ae338301a48a4b606fc5af0359,
     type: 3}
-  stoneTile: {fileID: 11400000, guid: f2b8c2cf3600ba64cb966c3d1f6b1b0b, type: 2}
-  stoneWall: {fileID: 11400000, guid: ba0f9a2d77529934badc4bd92e934977, type: 2}
-  redShroomTile: {fileID: 3179713049715907885, guid: 95b8241c74ab0a04e9df07b7e859710c,
+  stoneTile: {fileID: 3179713049715907885, guid: 7dfacac24ec743b45b8140997a52a9f5,
     type: 3}
-  brownShroomTile: {fileID: 3179713049715907885, guid: 707e4a9e2c951884194f38119d23a1cf,
+  stoneWall: {fileID: 2976247172256185871, guid: eb52e2350d8274447a346fb033bc3695,
     type: 3}
   blueberryTile: {fileID: 3179713049715907885, guid: a94e3cdf164674040849a6001c345489,
     type: 3}
-  caveEntranceTile: {fileID: 11400000, guid: f973e57f5504b6241b9cc0ae6914db29, type: 2}
-  treeTile: {fileID: 3179713049715907885, guid: 33bc0e81ab4d82c4484a1ba9370a1523,
-    type: 3}
-  flintTile: {fileID: 11400000, guid: 2c3316cb667a93046a6400947309ee74, type: 2}
-  stoneNodeTile: {fileID: 11400000, guid: a79709bfb9e80d34a85ecef3bd4553e0, type: 2}
   width: 512
   height: 512
   falloffSize: 512
@@ -2094,12 +2118,13 @@ MonoBehaviour:
   chunkSize: 32
   useFalloff: 1
   worldOffset: 0
-  caveOffset: 105
   chunkHolder: {fileID: 1127357791}
+  caveChunkHolder: {fileID: 200992336}
   chunkPrefab: {fileID: 896390250357294075, guid: a867ba98b5f068e4b97d95daa8bec421,
     type: 3}
   chunkController: {fileID: 0}
   worldChunks: []
+  caveChunks: []
   heightWaves:
   - seed: 100
     frequency: 0.05

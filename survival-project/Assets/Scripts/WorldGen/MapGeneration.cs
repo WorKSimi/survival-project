@@ -14,17 +14,17 @@ public class MapGeneration : NetworkBehaviour
     public GameObject grassWall;
     public GameObject dirtTile;
     public GameObject tinOreWall;
-    public RuleTile stoneTile;
-    public RuleTile stoneWall;
+    public GameObject stoneTile;
+    public GameObject stoneWall;
 
     [Header("Object Tiles")]
-    public GameObject redShroomTile;
-    public GameObject brownShroomTile;
+    //public GameObject redShroomTile;
+    //public GameObject brownShroomTile;
     public GameObject blueberryTile;
-    public RuleTile caveEntranceTile;
-    public GameObject treeTile;
-    public RuleTile flintTile;
-    public RuleTile stoneNodeTile;
+    //public RuleTile caveEntranceTile;
+    //public GameObject treeTile;
+    //public RuleTile flintTile;
+    //public RuleTile stoneNodeTile;
 
     [Header("Dimensions")]
     public int width;
@@ -35,16 +35,17 @@ public class MapGeneration : NetworkBehaviour
     public int chunkSize;
 
     [Header("Other Stuff")]
-    //public Grid surfaceGrid; //Grid for the surface of the world
-    //public Grid undergroundGrid; //Grid for the underground, it is at a lower z axis
+
     public bool useFalloff;
     public int worldOffset = 0; //Use this to determine where in the world this island will spawn
-    public int caveOffset = 0;
+    private int caveOffset = 600; //Spawn cave 600 units away from the normal world gen.
     public int[,] GridMap;
     public GameObject chunkHolder;
+    public GameObject caveChunkHolder;
     public GameObject chunkPrefab;
     public GameObject chunkController;
     public GameObject[] worldChunks;
+    public GameObject[] caveChunks;
 
     [Header("Height Map")]
     public Wave[] heightWaves;
@@ -72,6 +73,7 @@ public class MapGeneration : NetworkBehaviour
     void Start()
     {
         falloffMap = FalloffGenerator.GenerateFalloffMap(falloffSize);
+        //fallofMap2 = FalloffGenerator.GenerateFalloffMap()
         firstcaveSpawned = false;
         currentCaveEntrances = 0;
     }
@@ -107,7 +109,6 @@ public class MapGeneration : NetworkBehaviour
 
     public IEnumerator GenerateForestSurface(float seedNumber)
     {
-        //if (!IsLocalPlayer) yield break; //If your not local player, dont do anything!
         Debug.Log("World Generation has Begun!");
 
         var seed = seedNumber;
@@ -118,7 +119,8 @@ public class MapGeneration : NetworkBehaviour
         GridMap = new int[width, height];
 
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
-    
+        
+        
         GenerateChunks();
 
         foreach (GameObject chunk in worldChunks)
@@ -218,12 +220,13 @@ public class MapGeneration : NetworkBehaviour
             }
             chunk.GetComponent<Chunk>().DisableChunk();
             yield return null; //Wait 1 frame
-        }
+        } //OPTIMIZE THIS LATER ^^^^
         if (chunkController != null) //If theres a chunk controller.
         {
-            chunkController.GetComponent<ChunkController>().worldChunksHolder = worldChunks; //Set the chunk holder in the controller.
-            chunkController.GetComponent<ChunkController>().chunksLoaded = true;
+            var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
+            chunkcontrollerScript.worldChunksHolder = worldChunks; //Set the chunk holder in the controller.
         }
+        yield return StartCoroutine(GenerateForestUnderground(seedNumber)); //When surface is made, do cave! 
     }
 
 
@@ -241,6 +244,7 @@ public class MapGeneration : NetworkBehaviour
         go3.transform.parent = chunkObject.transform;
         //AddTileToGridmap(x, y, 7);
     }
+
     private void GenerateChunks()
     {
         int chunkCount = -1;
@@ -272,34 +276,102 @@ public class MapGeneration : NetworkBehaviour
         }
     }
 
-    //public void GenerateForestUnderground()
-    //{
-    //    heightWaves[0].seed = Random.Range(1.0f, 999.0f);
-    //    heightWaves[1].seed = Random.Range(1.0f, 999.0f);
+    private void GenerateCaveChunks()
+    {
+        int chunkCount = -1;
+        var value1 = width * height;
+        var value2 = value1 / chunkSize;
+        var chunkAmount = value2 / chunkSize;
+        caveChunks = new GameObject[chunkAmount]; //Array size is equal to amount of chunks
 
-    //    heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
-    //    for (int x = 0; x < width; ++x)
-    //    {
-    //        for (int y = 0; y < height; ++y) //Cycle through the noise map
-    //        {
-    //            //Instantiate tile on tilemap based on height value               
-    //            var height = heightMap[x, y];
-    //            var newX = (x + caveOffset);
-    //            var newY = (y - 50);
+        for (int a = 0; a < 16; a++)
+        {
+            for (int b = 0; b < 16; b++)
+            {
+                chunkCount++;
+                GameObject chunk = Instantiate(chunkPrefab, transform.position, Quaternion.identity);
+                chunk.name = "Cave_" + chunkCount.ToString();
+                chunk.transform.parent = caveChunkHolder.transform;
+                caveChunks[chunkCount] = chunk;
+                var chunkData = chunk.GetComponent<Chunk>();
+                
+                chunkData.chunkCordX = a;
+                chunkData.chunkCordY = b;
 
-    //            if (height < 0.4f) //Open Space
-    //            {
-    //                groundTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneTile); //Stone Floor
-    //            }
+                chunkData.CavexMin = (32 * a);
+                chunkData.CavexMax = (32 * a) + 31;
 
-    //            else if (height < 1.0f) //Closed Space
-    //            {
-    //                groundTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneTile); //Set ground to stone
-    //                wallTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneWall); //Set wall to stone wall
-    //            }
-    //        }
-    //    }
-    //}
+                chunkData.CaveyMin = (32 * b);
+                chunkData.CaveyMax = (32 * b) + 31;
+
+                chunkData.xMin = (chunkData.CavexMin + caveOffset);
+                chunkData.xMax = (chunkData.CavexMax + caveOffset);
+
+                chunkData.yMin += chunkData.CaveyMin;
+                chunkData.yMax += chunkData.CaveyMax;
+
+                chunkData.DisableChunk();
+            }
+        }
+    }
+
+    public IEnumerator GenerateForestUnderground(float seedNumber)
+    {
+        Debug.Log("Cave Generation has Begun!");
+
+        var seed = seedNumber;
+
+        heightWaves[0].seed = seed + 100;
+        heightWaves[1].seed = seed + 1000;
+
+        GridMap = new int[width, height];
+
+        heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
+
+        GenerateCaveChunks();
+
+        foreach (GameObject chunk in caveChunks)
+        {
+            var chunkScript = chunk.GetComponent<Chunk>();
+            {
+                for (int x = chunkScript.CavexMin; x <= chunkScript.CavexMax; x++)
+                {
+                    for (int y = chunkScript.CaveyMin; y <= chunkScript.CaveyMax; y++)
+                    {
+                        if (useFalloff)
+                        {
+                            heightMap[x, y] = (Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y]));
+                        }
+
+                        var height = heightMap[x, y];
+                        var newX = (x + caveOffset);
+                        var newY = (y);
+
+                        if (height < 0.4f) //Closed Space
+                        {
+                            var go = Instantiate(stoneWall, new Vector3(newX, newY, 0), Quaternion.identity);
+                            go.transform.parent = chunk.transform;
+                        }
+
+                        else if (height < 1.0f) //Open Space
+                        {
+                            var go = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                            go.transform.parent = chunk.transform;
+                        }
+                    }
+                }
+            }
+            yield return null;
+        }
+        if (chunkController != null) //If theres a chunk controller.
+        {
+            var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
+            chunkcontrollerScript.caveChunksHolder = caveChunks;
+            chunkcontrollerScript.chunksLoaded = true;
+        }
+    }
+
+    
 
 
     //void TrySpawnCaveEntrance(int x, int y) //This function handles spawning cave entrances in the world
