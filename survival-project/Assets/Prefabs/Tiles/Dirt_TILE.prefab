@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3179713049715907886}
   - component: {fileID: 3179713049715907887}
+  - component: {fileID: 3503402914840817803}
   m_Layer: 8
   m_Name: Dirt_TILE
   m_TagString: Untagged
@@ -84,3 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3503402914840817803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179713049715907885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f254381dae04704fae6e72c24fc0587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -1432424617, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  - {fileID: -1850630959, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  - {fileID: -1437306190, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  - {fileID: -361739701, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  spriteRenderer: {fileID: 3179713049715907887}

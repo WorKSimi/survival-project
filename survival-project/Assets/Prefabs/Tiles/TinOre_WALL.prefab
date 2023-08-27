@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2976247172256185876}
   - component: {fileID: 2976247172256185877}
   - component: {fileID: 2976247172256185872}
+  - component: {fileID: 1895934697897573520}
   m_Layer: 8
   m_Name: TinOre_WALL
   m_TagString: Wall
@@ -129,6 +130,24 @@ MonoBehaviour:
   maxHealth: 5
   isResourceNode: 0
   amountToDrop: 1
+  grassScript: {fileID: 0}
   inventoryItemData: {fileID: 0}
-  groundTile: {fileID: 0}
   currentHealth: 0
+--- !u!114 &1895934697897573520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2976247172256185871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f254381dae04704fae6e72c24fc0587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 1292197150, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -1539166632, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -2134708012, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: -1281381116, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  spriteRenderer: {fileID: 2976247172256185876}

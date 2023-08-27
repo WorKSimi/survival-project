@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3179713049715907886}
   - component: {fileID: 3179713049715907887}
+  - component: {fileID: 1575986053030635938}
   m_Layer: 8
   m_Name: Stone_TILE
   m_TagString: Untagged
@@ -70,8 +71,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1452972441
-  m_SortingLayer: -1
+  m_SortingLayerID: 619488507
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 1784586859, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -84,3 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1575986053030635938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179713049715907885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f254381dae04704fae6e72c24fc0587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 1784586859, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  - {fileID: -1040450188, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  - {fileID: -1359517807, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  - {fileID: -454906952, guid: abfef3f6c7326f6408adcdfceda0bb02, type: 3}
+  spriteRenderer: {fileID: 3179713049715907887}

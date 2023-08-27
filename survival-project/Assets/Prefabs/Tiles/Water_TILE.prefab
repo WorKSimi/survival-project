@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3179713049715907886}
   - component: {fileID: 3179713049715907887}
+  - component: {fileID: 5750825834274909021}
   m_Layer: 8
   m_Name: Water_TILE
   m_TagString: Untagged
@@ -52,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 342508a392878a440b83bfe2a927d5a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,3 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5750825834274909021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3179713049715907885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f254381dae04704fae6e72c24fc0587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: -280668087, guid: dc55773ccb4f73e4e91a4700c65cc538, type: 3}
+  - {fileID: 1282357931, guid: dc55773ccb4f73e4e91a4700c65cc538, type: 3}
+  - {fileID: -1606387348, guid: dc55773ccb4f73e4e91a4700c65cc538, type: 3}
+  - {fileID: 967802725, guid: dc55773ccb4f73e4e91a4700c65cc538, type: 3}
+  spriteRenderer: {fileID: 3179713049715907887}

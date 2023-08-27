@@ -30,8 +30,7 @@ MonoBehaviour:
   attackRate: 0
   DefenseValue: 0
   BlockID: 4
-  TilemapID: 1
-  ItemTile: {fileID: 11400000, guid: df4f417f3dde2be449d4b28b469b4dbb, type: 2}
-  ItemTilemap: 
+  BlockPrefab: {fileID: 1784105365037295680, guid: ed7ef22e13feb3b40989c0942ee64bdc,
+    type: 3}
   HealthHealed: 0
   BlockHealth: 0

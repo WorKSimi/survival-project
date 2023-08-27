@@ -71,19 +71,7 @@ public class UseItemManager : NetworkBehaviour
     {
         healCooldownComplete = true;
         var gridObject = GameObject.FindWithTag("Grid");
-        grid = gridObject.GetComponent<Grid>();
-
-        //var wallmapObject = GameObject.FindWithTag("WallTilemap");
-        //wallTilemap = wallmapObject.GetComponent<Tilemap>();
-
-        //var groundMapObject = GameObject.FindWithTag("GroundTilemap");
-        //groundTilemap = groundMapObject.GetComponent<Tilemap>();
-
-        //var interactivemapObject = GameObject.FindWithTag("InteractiveTilemap");
-        //interactiveTilemap = interactivemapObject.GetComponent<Tilemap>();
-
-        //var watermapObject = GameObject.FindWithTag("WaterTilemap");
-        //waterTilemap = watermapObject.GetComponent<Tilemap>();
+        grid = gridObject.GetComponent<Grid>();      
 
         m_transform = weaponAnchor.transform;
         swordSprite = weaponSprite.GetComponent<SpriteRenderer>();
@@ -260,6 +248,7 @@ public class UseItemManager : NetworkBehaviour
                 {
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                     var hit = Physics2D.GetRayIntersection(ray);
+                    if (hit == false) return; //Return if nothing is hit.
                     var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
 
                     hoveredWall = hit.transform;
@@ -269,10 +258,7 @@ public class UseItemManager : NetworkBehaviour
 
                     if (wallScript.currentHealth <= 0)
                     {
-                        wallScript.Die();
-                       
-                 
-
+                        wallScript.Die();                                       
                         KillWallClientRpc(tilePosition, 0);
                     }
                 }
@@ -291,10 +277,9 @@ public class UseItemManager : NetworkBehaviour
 
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                     var hit = Physics2D.GetRayIntersection(ray);
+                    if (hit == false) return; //Return if nothing is hit.
                     var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
-
-                    
-
+                  
                     DamageWallServerRpc(tilePosition, itemDamage, 1); //Communicate to server to damage wall                   
                 }
             }
@@ -304,8 +289,7 @@ public class UseItemManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)] //Launched by client, ran on server
     private void DamageWallServerRpc(Vector3Int position, float damage, int chunkNumber)
     {
-        var vec2 = (Vector2Int)position; //Turn position to vector 2      
-
+        var vec2 = (Vector2Int)position; //Turn position to vector 2     
         RaycastHit2D hit; //Variable for racyast
         hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Set hit to raycast
         
@@ -359,12 +343,22 @@ public class UseItemManager : NetworkBehaviour
                     nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
 
                     if (IsInRange()) //If your in range
-                    {
+                    {                       
                         var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                         var hit = Physics2D.GetRayIntersection(ray);
+                        if (hit == false) return; //Return if nothing is hit.
+
+                        var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
                         hoveredWall = hit.transform;
                         var wallScript = hoveredWall.GetComponent<Wall>();
+
                         wallScript.TakeDamage(itemDamage);
+
+                        if (wallScript.currentHealth <= 0)
+                        {
+                            wallScript.Die();
+                            KillWallClientRpc(tilePosition, 0);
+                        }
                     }
                 }
             }
@@ -382,11 +376,12 @@ public class UseItemManager : NetworkBehaviour
 
                     if (IsInRange()) //If your in range
                     {
+                        FindPlayersChunkController();
                         var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                         var hit = Physics2D.GetRayIntersection(ray);
-                        hoveredWall = hit.transform;
-                        var wallScript = hoveredWall.GetComponent<Wall>();
-                        //wallScript.DamageWallServerRpc(itemDamage);
+                        if (hit == false) return; //Return if nothing is hit.
+                        var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
+                        DamageWallServerRpc(tilePosition, itemDamage, 1); //Communicate to server to damage wall   
                     }
                 }
             }
@@ -582,17 +577,8 @@ public class UseItemManager : NetworkBehaviour
         if (IsHost) //If host, do this and then spawn it on network
         {
             Vector3Int mousePos = GetMousePosition(); //Gets mouse position
-            var go = Instantiate(BlockPrefab, mousePos, Quaternion.identity); //Instantiate Wall
-            //string chunkName = chunkController.currentChunkName; //Name of Chunk
-            //int chunkInt = 5;            //Int of Chunk
-            //GameObject chunkIn = chunkController.worldChunksHolder[chunkInt]; //Object of Chunk player is In
-            //go.transform.parent = chunkIn.transform; //Tile is parented to chunk.
-
-            //if (chunkIn.activeInHierarchy == false) //If the chunk is NOT active
-            //{
-            //    go.SetActive(false); //Make sure the tile is also NOT ACTIVE!
-            //}
-
+            Debug.Log(mousePos);
+            Instantiate(BlockPrefab, mousePos, Quaternion.identity); //Instantiate Wall           
             PlaceBlockOnClientRpc(ItemID, mousePos);
         }
         else if (IsClient)
@@ -635,33 +621,5 @@ public class UseItemManager : NetworkBehaviour
         //{
         //    go.SetActive(false); //Make sure the tile is also NOT ACTIVE!
         //}
-    }
-
-
-    
-
-    //public GameObject TileReturner(int tileID)
-    //{
-    //    if (tileID == blockDatabase.woodWallData.ID)
-    //    {
-    //        return blockDatabase.woodWallData.BlockPrefab;
-    //    }
-    //    else if (tileID == blockDatabase.torchWallData.ID)
-    //    {
-    //        return blockDatabase.torchWallData.BlockPrefab;
-    //    }
-    //    else if (tileID == blockDatabase.craftingTable.ID)
-    //    {
-    //        return blockDatabase.craftingTable.BlockPrefab;
-    //    }
-    //    else if (tileID == blockDatabase.furnace.ID)
-    //    {
-    //        return blockDatabase.furnace.BlockPrefab;
-    //    }
-    //    else if (tileID == blockDatabase.tinAnvil.ID)
-    //    {
-    //        return blockDatabase.tinAnvil.BlockPrefab;
-    //    }
-    //    else return null;
-    //}
+    }  
 }

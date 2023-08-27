@@ -12,6 +12,7 @@ public class Wall : MonoBehaviour
     [SerializeField] private bool isResourceNode;
     [SerializeField] private int amountToDrop;
     [SerializeField] private Grass grassScript;
+    [SerializeField] private GameObject groundObject; //This ground spawns under wall when destroyed.
 
     //private GameObject gridObject;
     //private GameObject wallmapObject;
@@ -72,8 +73,11 @@ public class Wall : MonoBehaviour
         }
         else //Wall is not on grass
         {
-            Destroy(this.gameObject); //Destroy this object
-            //Send message to all clients (except host) to destroy as well.
+            if (groundObject != null)
+            {
+                Instantiate(groundObject, thisPosition, Quaternion.identity);
+            }
+            Destroy(this.gameObject); //Destroy this object           
         }
     }   
 

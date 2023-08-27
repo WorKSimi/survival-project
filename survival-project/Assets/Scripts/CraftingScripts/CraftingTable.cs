@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class CraftingTable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject craftingTableMenu;
+    //[SerializeField] private GameObject craftingTableMenu;
     private Interactor CurrentInteractor;
 
     private void Awake()

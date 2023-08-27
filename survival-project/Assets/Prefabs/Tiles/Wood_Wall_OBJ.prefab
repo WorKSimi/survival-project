@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2976247172256185879}
   - component: {fileID: 2976247172256185877}
   - component: {fileID: 2976247172256185872}
+  - component: {fileID: 4077094351501825626}
   m_Layer: 8
   m_Name: Wood_Wall_OBJ
   m_TagString: Wall
@@ -50,7 +51,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.23862839}
     oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -78,8 +79,27 @@ MonoBehaviour:
   isResourceNode: 0
   amountToDrop: 1
   grassScript: {fileID: 0}
+  groundObject: {fileID: 0}
   inventoryItemData: {fileID: 0}
   currentHealth: 0
+--- !u!114 &4077094351501825626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2976247172256185871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f254381dae04704fae6e72c24fc0587, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 24885080, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  - {fileID: -426242270, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  - {fileID: 2725642, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  - {fileID: 515669647, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  spriteRenderer: {fileID: 1058073125126210248}
 --- !u!1 &6311318742497702499
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,6 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 722099126716369250}
   - component: {fileID: 1058073125126210248}
+  - component: {fileID: 8263592865864521900}
   m_Layer: 8
   m_Name: Wood_Wall_IMAGE
   m_TagString: Untagged
@@ -132,7 +153,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 342508a392878a440b83bfe2a927d5a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,3 +185,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8263592865864521900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311318742497702499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b5c6247fafbde478d07d2925a262cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -7,13 +7,18 @@ using Unity.Netcode;
 
 public class MapGeneration : NetworkBehaviour
 {
-    [Header("Tiles")]
+    [Header("Surface Tiles")]
     public GameObject waterTile;
     public GameObject sandTile;
     public GameObject grassTile;
     public GameObject grassWall;
     public GameObject dirtTile;
     public GameObject tinOreWall;
+    public GameObject caveEntrance;
+    public GameObject caveExit;
+
+    [Header("Underground Tiles")]
+    public GameObject pitTile;
     public GameObject stoneTile;
     public GameObject stoneWall;
 
@@ -63,10 +68,10 @@ public class MapGeneration : NetworkBehaviour
 
     private GameObject[] caveEntrances; //Creates an array to store cave entrances
     private int currentCaveEntrances;
-    private int maxCaveEntrances = 5;
+    private int maxCaveEntrances = 8;
     bool firstcaveSpawned;
 
-    
+    List<Vector3> caveEntranceLocations = new List<Vector3>();
 
     // ground, carpet, wall, interactive
     // Start is called before the first frame update
@@ -120,7 +125,6 @@ public class MapGeneration : NetworkBehaviour
 
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
         
-        
         GenerateChunks();
 
         foreach (GameObject chunk in worldChunks)
@@ -161,46 +165,52 @@ public class MapGeneration : NetworkBehaviour
                                 go.GetComponent<Grass>().EnableTree();
                             }
 
-                            else if (RandomCheck(seed, 0.995, counter)) //If 2 percent chance pass 
+                            else if (RandomCheck(seed, 0.995, counter)) //Spawn red mushroom
                             {
                                 var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
                                 go.transform.parent = chunk.transform;
                                 go.GetComponent<Grass>().EnableRedMushroom();
                             }
 
-                            else if (RandomCheck(seed, 0.995, counter)) 
+                            else if (RandomCheck(seed, 0.995, counter)) //Spawn brown mushroom
                             {
                                 var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
                                 go.transform.parent = chunk.transform;
                                 go.GetComponent<Grass>().EnableBrownMushroom();
                             }
 
-                            else if (RandomCheck(seed, 0.995, counter)) //If 2 percent chance pass 
+                            else if (RandomCheck(seed, 0.995, counter)) //Spawn stone node
+                            {
+                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go.transform.parent = chunk.transform;
+                                go.GetComponent<Grass>().EnableStoneNode();
+                            }
+
+                            else if (RandomCheck(seed, 0.995, counter)) //Spawn flint node
+                            {
+                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go.transform.parent = chunk.transform;
+                                go.GetComponent<Grass>().EnableFlintNode();
+                            }
+
+                            else if (RandomCheck(seed, 0.995, counter)) //Spawn blueberry bush
                             {
                                 var go = Instantiate(blueberryTile, new Vector3(newX, newY, 0), Quaternion.identity);
                                 go.transform.parent = chunk.transform;
                             }
-                            else //If tree isnt placed, do normal grass tile
+                            else //Spawn normal Grass
                             {
                                 var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
                                 go.transform.parent = chunk.transform;
                                 go.GetComponent<Grass>().DisableAllStates(); 
-                            }
-                            //else if (Random.value >= 0.99) 
-                            //{
-                            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), flintTile); //Spawn Flint node on tile
-                            //}
-                            //else if (Random.value >= 0.99)
-                            //{
-                            //    //wallTilemap.SetTile(new Vector3Int(newX, newY, 0), stoneNodeTile); //Spawn Stone node on tile
-                            //}
+                            }                           
                         }
                         else if (height < 0.6f) //Dirt Ground
                         {
                             var go = Instantiate(dirtTile, new Vector3(newX, newY, 0), Quaternion.identity);
                             go.transform.parent = chunk.transform;
                             //AddTileToGridmap(newX, newY, 5);
-                            //TrySpawnCaveEntrance(newX, newY);
+                            TrySpawnCaveEntrance(newX, newY, chunkScript);
                         }
                         else if (height < 1.0f) //Wall
                         {
@@ -226,9 +236,9 @@ public class MapGeneration : NetworkBehaviour
             var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
             chunkcontrollerScript.worldChunksHolder = worldChunks; //Set the chunk holder in the controller.
         }
+        StoreEntranceLocations();
         yield return StartCoroutine(GenerateForestUnderground(seedNumber)); //When surface is made, do cave! 
     }
-
 
     private void SpawnOreVein(float x, float y, GameObject chunkObject) //This function generates ore veins. Its currently very simple
     {
@@ -337,25 +347,27 @@ public class MapGeneration : NetworkBehaviour
                 for (int x = chunkScript.CavexMin; x <= chunkScript.CavexMax; x++)
                 {
                     for (int y = chunkScript.CaveyMin; y <= chunkScript.CaveyMax; y++)
-                    {
-                        if (useFalloff)
-                        {
-                            heightMap[x, y] = (Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y]));
-                        }
-
+                    {                       
                         var height = heightMap[x, y];
                         var newX = (x + caveOffset);
                         var newY = (y);
+                        //var pos = new Vector3(x, y, 0);
 
-                        if (height < 0.4f) //Closed Space
+                        if (height < 0.1f) //Empty Pit
                         {
-                            var go = Instantiate(stoneWall, new Vector3(newX, newY, 0), Quaternion.identity);
+                            var go = Instantiate(pitTile, new Vector3(newX, newY, 0), Quaternion.identity);
                             go.transform.parent = chunk.transform;
                         }
 
-                        else if (height < 1.0f) //Open Space
+                        else if (height < 0.4f) //Open Space
                         {
                             var go = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                            go.transform.parent = chunk.transform;
+                        }
+
+                        else if (height < 1.0f) //Closed Space
+                        {
+                            var go = Instantiate(stoneWall, new Vector3(newX, newY, 0), Quaternion.identity);
                             go.transform.parent = chunk.transform;
                         }
                     }
@@ -363,47 +375,97 @@ public class MapGeneration : NetworkBehaviour
             }
             yield return null;
         }
+        //SpawnCaveExits(); //Finally, spawn cave exits.
+
         if (chunkController != null) //If theres a chunk controller.
         {
             var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
             chunkcontrollerScript.caveChunksHolder = caveChunks;
             chunkcontrollerScript.chunksLoaded = true;
         }
+        Debug.Log("Cave Gen Finished!");
     }
 
-    
+    void TrySpawnCaveEntrance(int x, int y, Chunk chunk) //This function handles spawning cave entrances in the world
+    {
+        if (firstcaveSpawned == false) //First cave has not been spawned
+        {
+            var go = Instantiate(caveEntrance, new Vector3(x, y, 0), Quaternion.identity);
+            //go.transform.parent = chunk.transform;
+            currentCaveEntrances++; //Add 1 to current cave count
+            firstcaveSpawned = true; //Set the first cave spawned variable to true
+        }
 
+        else if (firstcaveSpawned == true) //The first cave HAS been spawned
+        {
+            //Find all cave entrances and add to array
+            caveEntrances = GameObject.FindGameObjectsWithTag("CaveEntrance");
+            var shouldSpawn = true;
+            foreach (GameObject ce in caveEntrances) //Do this for every cave entrance in the array
+            {
+                float minDistance = 50f; //Min distance caves can be from eachother;
+                float dist = Vector3.Distance(ce.transform.position, new Vector3(x, y, 0)); //Get distance between each cave entrance and where to place
 
-    //void TrySpawnCaveEntrance(int x, int y) //This function handles spawning cave entrances in the world
-    //{
-    //    if (firstcaveSpawned == false) //First cave has not been spawned
-    //    {
-    //        wallTilemap.SetTile(new Vector3Int(x, y, 0), caveEntranceTile); //Spawn first cave entrance            
-    //        currentCaveEntrances++; //Add 1 to current cave count
-    //        firstcaveSpawned = true; //Set the first cave spawned variable to true
-    //    }
+                if (dist < minDistance) //If the distance between the cave entrance and the spot is less then the minimum
+                {
+                    shouldSpawn = false;
+                }
+            }
+            if (currentCaveEntrances >= maxCaveEntrances) shouldSpawn = false; //If current cave is more than max, dont spawn anymore.
+            if (shouldSpawn == true)
+            {
+                Instantiate(caveEntrance, new Vector3(x, y, 0), Quaternion.identity);
+                currentCaveEntrances++;  //Add 1 to current cave count
+            }
+        }
+    }
 
-    //    else if (firstcaveSpawned == true) //The first cave HAS been spawned
-    //    {
-    //        //Find all cave entrances and add to array
-    //        caveEntrances = GameObject.FindGameObjectsWithTag("CaveEntrance");
-    //        var shouldSpawn = true;
-    //        foreach (GameObject ce in caveEntrances) //Do this for every cave entrance in the array
-    //        {
-    //            float minDistance = 50f; //Min distance caves can be from eachother;
-    //            float dist = Vector3.Distance(ce.transform.position, new Vector3(x, y, 0)); //Get distance between each cave entrance and where to place
+    private void StoreEntranceLocations()
+    {
+        caveEntrances = GameObject.FindGameObjectsWithTag("CaveEntrance");
+        foreach (GameObject ce in caveEntrances) 
+        {
+            Vector3 position = ce.transform.position; 
+            caveEntranceLocations.Add(position);
+        }
+    }
 
-    //            if (dist < minDistance) //If the distance between the cave entrance and the spot is less then the minimum
-    //            {
-    //                shouldSpawn = false;
-    //                Debug.Log("Cannot Place Cave, too close"); //DONT place entrance
-    //            }
-    //        }
-    //        if (shouldSpawn == true)
-    //        {
-    //            wallTilemap.SetTile(new Vector3Int(x, y, 0), caveEntranceTile); //Spawn a cave entrance
-    //            currentCaveEntrances++;  //Add 1 to current cave count
-    //        }
-    //    }
-    //}  
+    private void SpawnCaveExits()
+    {       
+        foreach (var caveEntranceLocation in caveEntranceLocations) //Foreach cave entrance location
+        {
+            foreach (var chunkObject in caveChunks) //Foreach chunk in cave chunks
+            {
+                var chunk = chunkObject.GetComponent<Chunk>();
+                var x = caveEntranceLocation.x;
+                var y = caveEntranceLocation.y;
+
+                if (chunk.xMin < x && chunk.xMax > x && chunk.yMin < y && chunk.yMax > y) //If the cave exit is in the right chunk...
+                {
+                    chunk.EnableChunk();
+
+                    Vector2Int vec2 = new Vector2Int((int)x, (int)y); //Turn exit position to vector 2     
+                    RaycastHit2D hit; //Variable for racyast
+                    hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Blast raycast where 
+
+                    if (hit == false) //if hit nothing.
+                    {
+                        Instantiate(caveExit, caveEntranceLocation, Quaternion.identity); //Spawn cave exit at that position
+                        chunk.DisableChunk(); //Turn chunk back off
+                    }
+                    else if (hit.transform.CompareTag("Wall")) //if hit a wall
+                    {
+                        Destroy(hit.transform.gameObject); //Destroy the wall
+                        Instantiate(caveExit, caveEntranceLocation, Quaternion.identity); //Spawn cave exit at that position
+                        chunk.DisableChunk(); //Turn chunk back off
+                    }
+                    else //If hit not a wall...
+                    {
+                        Instantiate(caveExit, caveEntranceLocation, Quaternion.identity); //Spawn cave exit at that position
+                        chunk.DisableChunk(); //Turn chunk back off
+                    }
+                }
+            }
+        }   
+    }
 }

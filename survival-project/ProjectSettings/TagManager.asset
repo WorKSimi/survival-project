@@ -21,6 +21,8 @@ TagManager:
   - ToolTipObject
   - ToolTipName
   - InventorySlot
+  - Wall
+  - ChunkController
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - Walls
   - Enemies
   - Player
-  - 
+  - Underground
   - 
   - 
   - 
@@ -60,6 +62,12 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Underground-Ground
+    uniqueID: 619488507
+    locked: 0
+  - name: Underground
+    uniqueID: 153948749
     locked: 0
   - name: Player
     uniqueID: 3822340725

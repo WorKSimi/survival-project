@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7389436694480070535}
   - component: {fileID: 7389436694480070531}
   - component: {fileID: -2083750711423560777}
+  - component: {fileID: -4694466723984159630}
   m_Layer: 0
   m_Name: BrownShroom_ITEM
   m_TagString: Untagged
@@ -152,3 +153,15 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &-4694466723984159630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389436694480070536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21b5c6247fafbde478d07d2925a262cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

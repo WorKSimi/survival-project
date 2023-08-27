@@ -66,6 +66,7 @@
     <Compile Include="Assets\RPCManager.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingSequencer.cs" />
     <Compile Include="Assets\RotateToTarget.cs" />
+    <Compile Include="Assets\CaveExit.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
     <Compile Include="Assets\Scripts\CraftingScripts\AnywhereCrafting.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\AutoLoadPipelineAsset.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Assets\Scripts\CropLogic.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSystem.cs" />
+    <Compile Include="Assets\RandomSprite.cs" />
     <Compile Include="Assets\Scripts\InteractToBreak.cs" />
     <Compile Include="Assets\LeanTween\Testing\Testing248.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="Assets\LeanTween\Testing\TestingSceneSwitching.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
     <Compile Include="Assets\PlayerBuffsDebuffs.cs" />
+    <Compile Include="Assets\PlayerSortingLayerUnderground.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\Database.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\UniqueID.cs" />
@@ -196,6 +199,7 @@
     <Compile Include="Assets\BlockDatabase.cs" />
     <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\EnemyDamage.cs" />
+    <Compile Include="Assets\CaveEntrance.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\BeeEnemy.cs" />
     <Compile Include="Assets\Scripts\SnailEnum.cs" />
     <Compile Include="Assets\Scripts\Interactor.cs" />
