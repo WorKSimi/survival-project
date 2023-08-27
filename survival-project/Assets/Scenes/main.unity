@@ -2823,6 +2823,7 @@ MonoBehaviour:
   TinHelmet: {fileID: 11400000, guid: 4c849ea98e8ef7d4b8629af1bf446bdd, type: 2}
   TinChestplate: {fileID: 11400000, guid: cb0ae26130ee4a94f9daf26f10173436, type: 2}
   TinPickaxe: {fileID: 11400000, guid: 0e356de06f61c934e88cb383c82c4cdf, type: 2}
+  WoodFloor: {fileID: 11400000, guid: 1b43db425d450c44bbef77e4fdd95f09, type: 2}
 --- !u!4 &893543216
 Transform:
   m_ObjectHideFlags: 0

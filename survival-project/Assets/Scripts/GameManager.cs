@@ -28,6 +28,7 @@ namespace Assets.Scripts
         public InventoryItemData TinHelmet;
         public InventoryItemData TinChestplate;
         public InventoryItemData TinPickaxe;
+        public InventoryItemData WoodFloor;
 
         protected void Start()
         {

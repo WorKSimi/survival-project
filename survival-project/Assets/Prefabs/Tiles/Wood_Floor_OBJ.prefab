@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 2976247172256185877}
   - component: {fileID: 2976247172256185872}
   - component: {fileID: 4077094351501825626}
+  - component: {fileID: 8964557101078172941}
+  - component: {fileID: 7383444909756618758}
   m_Layer: 8
-  m_Name: Wood_Wall_OBJ
-  m_TagString: Wall
+  m_Name: Wood_Floor_OBJ
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,8 +32,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 722099126716369250}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,15 +46,15 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.23862839}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 2}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -74,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: a2c3b1011c7bfcc4e9d291fecc2893ba, type: 3}
+  wood: {fileID: 7389436694480070536, guid: 3c319bfc75f84ab479585d53c28dea3d, type: 3}
   maxHealth: 5
   isResourceNode: 0
   amountToDrop: 1
@@ -95,51 +96,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 24885080, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
-  - {fileID: -426242270, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
-  - {fileID: 2725642, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
-  - {fileID: 515669647, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
-  spriteRenderer: {fileID: 1058073125126210248}
---- !u!1 &6311318742497702499
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 722099126716369250}
-  - component: {fileID: 1058073125126210248}
-  - component: {fileID: 4825299038490925099}
-  m_Layer: 8
-  m_Name: Wood_Wall_IMAGE
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &722099126716369250
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311318742497702499}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2976247172256185879}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1058073125126210248
+  - {fileID: 1671616272, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  - {fileID: 2085108035, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  - {fileID: -854765610, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  - {fileID: 1926793497, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  spriteRenderer: {fileID: 8964557101078172941}
+--- !u!212 &8964557101078172941
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311318742497702499}
+  m_GameObject: {fileID: 2976247172256185871}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -153,7 +121,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 342508a392878a440b83bfe2a927d5a4, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -171,27 +139,27 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -426242270, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  m_SortingLayerID: 1452972441
+  m_SortingLayer: -1
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1671616272, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4825299038490925099
+--- !u!114 &7383444909756618758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311318742497702499}
+  m_GameObject: {fileID: 2976247172256185871}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a83c3489c8547734289be1820dc851a9, type: 3}

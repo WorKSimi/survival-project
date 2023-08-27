@@ -11,7 +11,6 @@ public class PlayerSortingLayerUnderground : MonoBehaviour
     void Start()
     {
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>(); //Player sprite renderer
-        //thisPlayer = this.gameObject;
     }
 
     // Update is called once per frame

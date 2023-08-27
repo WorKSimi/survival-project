@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: TinAnvil
+  m_Name: Wood Floor
   m_EditorClassIdentifier: 
-  ID: 34
-  DisplayName: Tin Anvil
-  Description: 'A anvil made of soft metal designed for building
-
-'
-  Icon: {fileID: 1648695120, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
-  MaxStackSize: 999
-  GoldValue: 0
+  ID: -1
+  DisplayName: Wood Floor
+  Description: A wood flor that is woody.
+  Icon: {fileID: 1671616272, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
+  MaxStackSize: 99
+  GoldValue: 1
   ItemType: Block
-  ItemPrefab: {fileID: 7389436694480070536, guid: b61375a6ca9cb0c48afd88d61e223fa8,
+  ItemPrefab: {fileID: 7389436694480070536, guid: 3c319bfc75f84ab479585d53c28dea3d,
     type: 3}
   itemDamage: 0
   projectilePrefab: {fileID: 0}
@@ -30,7 +28,7 @@ MonoBehaviour:
   attackRate: 0
   DefenseValue: 0
   BlockID: 0
-  BlockPrefab: {fileID: 1784105365037295680, guid: 4d7eb52877fe1064993a2953556ee57a,
+  BlockPrefab: {fileID: 2976247172256185871, guid: d1dc37d3e9d7a4c469c7eb8e28fc6c96,
     type: 3}
   HealthHealed: 0
   BlockHealth: 0

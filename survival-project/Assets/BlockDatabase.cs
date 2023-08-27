@@ -9,6 +9,7 @@ public class BlockDatabase : MonoBehaviour
     public InventoryItemData craftingTable; //ID - 3
     public InventoryItemData furnace; //ID - 4
     public InventoryItemData tinAnvil; //ID - 5
+    public InventoryItemData woodFloor;
     
 
     public GameObject TileReturner(int tileID)
@@ -33,6 +34,10 @@ public class BlockDatabase : MonoBehaviour
         else if (tileID == tinAnvil.ID)
         {
             return tinAnvil.BlockPrefab;
+        }
+        else if (tileID == woodFloor.ID)
+        {
+            return woodFloor.BlockPrefab;
         }
         else return null;
     }

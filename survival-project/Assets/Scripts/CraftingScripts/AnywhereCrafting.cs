@@ -85,6 +85,7 @@ public class AnywhereCrafting : MonoBehaviour
         TinHelmet,
         TinChestplate,
         TinPickaxe,
+        WoodFloor,
     }
 
     //Region for selecting anywhere crafting
@@ -249,6 +250,19 @@ public class AnywhereCrafting : MonoBehaviour
         ComponentAmount.SetText("x20"); //Set component amount 
 
         selected = SelectedRecipe.WoodChestplate;
+    }
+    public void SelectWoodFloor()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.WoodFloor.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.WoodFloor.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.WoodFloor.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x1"); //Set component amount 
+
+        selected = SelectedRecipe.WoodFloor;
     }
     #endregion //Region for selecting crafting table recipes
 
@@ -585,6 +599,27 @@ public class AnywhereCrafting : MonoBehaviour
             }
         }
     }
+
+    private void CraftWoodFloor()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Wood Floor");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 1
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.WoodFloor, 2);
+                Debug.Log("Crafted WoodFloor");
+            }
+        }
+    }
     #endregion
 
     //Region for furnace crafting functions
@@ -772,6 +807,10 @@ public class AnywhereCrafting : MonoBehaviour
         if (selected == SelectedRecipe.WoodChestplate)
         {
             CraftWoodChestplate();
+        }
+        if (selected == SelectedRecipe.WoodFloor)
+        {
+            CraftWoodFloor();
         }
         else Debug.Log("Nothing is selected to craft!");
     }

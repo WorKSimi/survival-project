@@ -131,6 +131,8 @@ MonoBehaviour:
   isResourceNode: 0
   amountToDrop: 1
   grassScript: {fileID: 0}
+  groundObject: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
+    type: 3}
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!114 &1895934697897573520
