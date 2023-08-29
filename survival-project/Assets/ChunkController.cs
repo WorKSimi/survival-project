@@ -40,7 +40,6 @@ public class ChunkController : NetworkBehaviour
                 GetNonLocalPlayers();
                 ChunkReset();
                 DisableEnableChunks();
-
             }    
         }
     }
@@ -186,6 +185,7 @@ public class ChunkController : NetworkBehaviour
                 foreach (var chunkObject in caveChunksHolder)
                 {
                     var currentChunk = player.currentChunk;
+                    if (currentChunk == null) return;
                     Chunk chunk = chunkObject.GetComponent<Chunk>();
 
                     if (chunk == currentChunk)

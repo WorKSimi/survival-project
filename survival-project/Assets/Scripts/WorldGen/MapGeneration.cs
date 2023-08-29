@@ -372,7 +372,9 @@ public class MapGeneration : NetworkBehaviour
                 }
             }
             yield return null;
-        }      
+        }
+
+        SpawnCaveExits(); //Spawn cave exits
 
         if (chunkController != null) //If theres a chunk controller.
         {
@@ -415,6 +417,55 @@ public class MapGeneration : NetworkBehaviour
                 currentCaveEntrances++;  //Add 1 to current cave count
             }
         }
+    }
+
+    private void SpawnCaveExits()
+    {
+        caveEntrances = GameObject.FindGameObjectsWithTag("CaveEntrance"); //Get all cave entrances
+        List<Vector3Int> caveExitSpots = new List<Vector3Int>();
+
+        foreach (var caveEntrance in caveEntrances) //For each cave entrance
+        {
+            var caveExitPosition = new Vector3Int((int)caveEntrance.transform.position.x + caveOffset, (int)caveEntrance.transform.position.y, 0);
+            caveExitSpots.Add(caveExitPosition);
+        }
+
+        foreach (var caveExitSpot in caveExitSpots)
+        {
+            var x = caveExitSpot.x;
+            var y = caveExitSpot.y;
+
+            foreach (var chunkObj in caveChunks) //Foreach cave chunk
+            {
+                var chunk = chunkObj.GetComponent<Chunk>();
+                if (chunk.xMin < x && chunk.xMax > x && chunk.yMin < y && chunk.yMax > y) //if cave exit is to be placed in this chunk
+                {
+                    chunk.EnableChunk(); //Turn the chunk on.
+
+                    var vec2 = new Vector2Int(x, y); //Get position in vector 2    
+                    RaycastHit2D hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Shoot raycast at that spot to place exit
+
+                    if (hit == false) //If NOTHING was hit
+                    {
+                        Instantiate(caveExit, caveExitSpot, Quaternion.identity); //Spawn cave exit at that location
+                        chunk.DisableChunk(); //Turn chunk back off.
+                    }
+                    else if (hit.transform.CompareTag("Wall")) //If raycast hits a wall.
+                    {
+                        hit.transform.GetComponent<Wall>().DeleteWall(); //Kill the wall
+                        Instantiate(caveExit, caveExitSpot, Quaternion.identity); //Spawn cave exit at that location
+                        chunk.DisableChunk(); //Turn chunk back off.
+                    }
+                    else //If raycast hits not a wall 
+                    {
+                        Instantiate(caveExit, caveExitSpot, Quaternion.identity); //Spawn cave exit at that location
+                        chunk.DisableChunk(); //Turn chunk back off.
+                    }    
+                }
+            }
+        }
+
+        
     }
 
    

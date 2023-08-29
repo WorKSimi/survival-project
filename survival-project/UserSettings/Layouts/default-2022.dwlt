@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -319,21 +319,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Prefabs/Tiles
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Prefabs/Tiles
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Unity Projects\survival-project\survival-project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 197}
-    m_SelectedIDs: e6760000
-    m_LastClickedID: 30438
+    scrollPos: {x: 0, y: 185}
+    m_SelectedIDs: 807f0000
+    m_LastClickedID: 32640
     m_ExpandedIDs: 0000000070760000727600007476000076760000787600007a7600007c7600007e76000080760000827600008476000086760000887600008a7600008c7600008e76000090760000927600009476000096760000987600009a760000de76000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: fe77ffff9c78ffff987effffd07effffae7ffffff083fffffe8fffff629effff009ffffff8a4ffff2ca5ffffbcecffff5aedffff52f3ffff86f3ffff24fbffffc8f10000
+      m_ExpandedIDs: f2a6ffff94a7ffff78adffffacadffffe0bbffff84bcffff7cc2ffffb0c2ffff24fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -768,9 +768,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 80.824715, y: 151.75175, z: -5.875616}
+    m_Target: {x: 599.8311, y: 273.01846, z: -6.673205}
     speed: 2
-    m_Value: {x: 83.74777, y: 149.50848, z: -5.679841}
+    m_Value: {x: 599.8311, y: 273.01846, z: -6.673205}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -820,9 +820,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 454.63712
+    m_Target: 375.86972
     speed: 2
-    m_Value: 435.05945
+    m_Value: 375.86972
   m_Ortho:
     m_Target: 1
     speed: 2
