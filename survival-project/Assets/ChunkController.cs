@@ -57,13 +57,9 @@ public class ChunkController : NetworkBehaviour
 
             playerChunk.player = player; //Set player as this player
 
-            if (playerChunk.currentChunk == null) //If no current chunk
+            if (playerChunk.currentChunk != null) //If player current chunk is not null
             {
-                playerChunk.previousChunk = originChunk; //Prev chunk is the OG
-            }
-            else //If there IS a current chunk
-            {
-                playerChunk.previousChunk = playerChunk.currentChunk; //Previous chunk is the current chunk
+                playerChunk.previousChunk = playerChunk.currentChunk; //Set previous chunk to current chunk
             }
             
             if (player.transform.position.x >= 550) //If player is outside the bounds of the surface
@@ -84,7 +80,7 @@ public class ChunkController : NetworkBehaviour
         {   
             var chunk = chunkObject.GetComponent<Chunk>();
 
-            if (chunk.xMin < x && chunk.xMax > x && chunk.yMin < y && chunk.yMax > y)
+            if (chunk.xMin <= x && chunk.xMax >= x && chunk.yMin <= y && chunk.yMax >= y)
             {
                 return chunk; //Get Chunk
             }
@@ -127,8 +123,9 @@ public class ChunkController : NetworkBehaviour
                 foreach (var chunkObject in worldChunksHolder)
                 {
                     var currentChunk = player.currentChunk;
+                    if (currentChunk == null) return; //if the current chunk is null return
                     Chunk chunk = chunkObject.GetComponent<Chunk>();
-
+                    
                     if (chunk == currentChunk)
                     {
                         chunk.EnableChunk(); //Current Chunk

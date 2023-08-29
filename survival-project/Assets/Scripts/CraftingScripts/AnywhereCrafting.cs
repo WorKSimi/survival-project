@@ -294,7 +294,7 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.TinSword.Description); //Set description box text
 
         ComponentText.SetText("Tin Bar"); //Set component name
-        ComponentAmount.SetText("x10"); //Set component amount 
+        ComponentAmount.SetText("x15"); //Set component amount 
 
         ComponentText2.SetText("Wood");
         ComponentAmount2.SetText("x5");
@@ -310,7 +310,7 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.TinPickaxe.Description); //Set description box text
 
         ComponentText.SetText("Tin Bar"); //Set component name
-        ComponentAmount.SetText("x10"); //Set component amount 
+        ComponentAmount.SetText("x15"); //Set component amount 
 
         ComponentText2.SetText("Wood");
         ComponentAmount2.SetText("x5");

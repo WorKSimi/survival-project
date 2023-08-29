@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickUpRadius: 0.61
-  ItemData: {fileID: 11400000, guid: acc65a0426b07af4399460e288c38371, type: 2}
+  ItemData: {fileID: 11400000, guid: 1b43db425d450c44bbef77e4fdd95f09, type: 2}
   _rotationSpeed: 20
   itemSaveData:
     ItemData: {fileID: 0}

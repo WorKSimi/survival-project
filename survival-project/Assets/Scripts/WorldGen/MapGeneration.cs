@@ -71,8 +71,6 @@ public class MapGeneration : NetworkBehaviour
     private int maxCaveEntrances = 8;
     bool firstcaveSpawned;
 
-    List<Vector3> caveEntranceLocations = new List<Vector3>();
-
     // ground, carpet, wall, interactive
     // Start is called before the first frame update
     void Start()
@@ -214,7 +212,7 @@ public class MapGeneration : NetworkBehaviour
                         }
                         else if (height < 1.0f) //Wall
                         {
-                            if (RandomCheck(seed, 0.99, counter)) //If 2 percent chance pass, spawn ore vein of tin
+                            if (RandomCheck(seed, 0.95, counter)) //Spawn tin ore
                             {
                                 SpawnOreVein(newX, newY, chunk) ;
                             }
@@ -236,7 +234,7 @@ public class MapGeneration : NetworkBehaviour
             var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
             chunkcontrollerScript.worldChunksHolder = worldChunks; //Set the chunk holder in the controller.
         }
-        StoreEntranceLocations();
+        
         yield return StartCoroutine(GenerateForestUnderground(seedNumber)); //When surface is made, do cave! 
     }
 
@@ -244,15 +242,15 @@ public class MapGeneration : NetworkBehaviour
     {
         var go = Instantiate(tinOreWall, new Vector3(x, y, 0), Quaternion.identity); //Spawn ore 
         go.transform.parent = chunkObject.transform;
-        //AddTileToGridmap(x, y, 7);
+        ////AddTileToGridmap(x, y, 7);
 
-        var go2 = Instantiate(tinOreWall, new Vector3(x - 1, y, 0), Quaternion.identity); //Spawn ore to right
-        go2.transform.parent = chunkObject.transform;
-        //AddTileToGridmap(x, y, 7);
+        //var go2 = Instantiate(tinOreWall, new Vector3(x - 1, y, 0), Quaternion.identity); //Spawn ore to right
+        //go2.transform.parent = chunkObject.transform;
+        ////AddTileToGridmap(x, y, 7);
 
-        var go3 = Instantiate(tinOreWall, new Vector3(x, y - 1, 0), Quaternion.identity); //Spawn ore down
-        go3.transform.parent = chunkObject.transform;
-        //AddTileToGridmap(x, y, 7);
+        //var go3 = Instantiate(tinOreWall, new Vector3(x, y - 1, 0), Quaternion.identity); //Spawn ore down
+        //go3.transform.parent = chunkObject.transform;
+        ////AddTileToGridmap(x, y, 7);
     }
 
     private void GenerateChunks()
@@ -374,8 +372,7 @@ public class MapGeneration : NetworkBehaviour
                 }
             }
             yield return null;
-        }
-        //SpawnCaveExits(); //Finally, spawn cave exits.
+        }      
 
         if (chunkController != null) //If theres a chunk controller.
         {
@@ -420,52 +417,5 @@ public class MapGeneration : NetworkBehaviour
         }
     }
 
-    private void StoreEntranceLocations()
-    {
-        caveEntrances = GameObject.FindGameObjectsWithTag("CaveEntrance");
-        foreach (GameObject ce in caveEntrances) 
-        {
-            Vector3 position = ce.transform.position; 
-            caveEntranceLocations.Add(position);
-        }
-    }
-
-    private void SpawnCaveExits()
-    {       
-        foreach (var caveEntranceLocation in caveEntranceLocations) //Foreach cave entrance location
-        {
-            foreach (var chunkObject in caveChunks) //Foreach chunk in cave chunks
-            {
-                var chunk = chunkObject.GetComponent<Chunk>();
-                var x = caveEntranceLocation.x;
-                var y = caveEntranceLocation.y;
-
-                if (chunk.xMin < x && chunk.xMax > x && chunk.yMin < y && chunk.yMax > y) //If the cave exit is in the right chunk...
-                {
-                    chunk.EnableChunk();
-
-                    Vector2Int vec2 = new Vector2Int((int)x, (int)y); //Turn exit position to vector 2     
-                    RaycastHit2D hit; //Variable for racyast
-                    hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Blast raycast where 
-
-                    if (hit == false) //if hit nothing.
-                    {
-                        Instantiate(caveExit, caveEntranceLocation, Quaternion.identity); //Spawn cave exit at that position
-                        chunk.DisableChunk(); //Turn chunk back off
-                    }
-                    else if (hit.transform.CompareTag("Wall")) //if hit a wall
-                    {
-                        Destroy(hit.transform.gameObject); //Destroy the wall
-                        Instantiate(caveExit, caveEntranceLocation, Quaternion.identity); //Spawn cave exit at that position
-                        chunk.DisableChunk(); //Turn chunk back off
-                    }
-                    else //If hit not a wall...
-                    {
-                        Instantiate(caveExit, caveEntranceLocation, Quaternion.identity); //Spawn cave exit at that position
-                        chunk.DisableChunk(); //Turn chunk back off
-                    }
-                }
-            }
-        }   
-    }
+   
 }

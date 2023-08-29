@@ -82,6 +82,7 @@
     <Compile Include="Assets\LeanTween\Testing\Testing240.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingDescr.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSlot.cs" />
+    <Compile Include="Assets\TeleportPlayerOnSpawn.cs" />
     <Compile Include="Assets\Scripts\WorldGen\NoiseGenerator.cs" />
     <Compile Include="Assets\Input\PlayerControls.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\EnemyProjectile.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingColorTweening.cs" />
     <Compile Include="Assets\Scripts\WorldGen\MapGeneration.cs" />
+    <Compile Include="Assets\ObjectLayerSorting.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\TileTypes.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveGameManager.cs" />
@@ -206,7 +208,6 @@
     <Compile Include="Assets\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\ObjectLayerSorting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

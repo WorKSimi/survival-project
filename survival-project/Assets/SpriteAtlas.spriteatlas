@@ -51,19 +51,6 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: c49a68300dd23e5479f3dca49368c84f, type: 3}
-  - {fileID: 1248099999, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: 1227847666, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: 1513599197, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: 1604217810, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: 1103794339, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: 1632657172, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: -1889491826, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: 526458182, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: -1853442327, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: -147644838, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: 1306058761, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: -513389720, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
-  - {fileID: -1174736403, guid: 18622b2141dc56646b577027c67e6e20, type: 3}
   - {fileID: 21300000, guid: 861e7d31f92d58242bfbaee68e8d5fc9, type: 3}
   - {fileID: 21300000, guid: 59da8151259ab0349bd25cc31144539c, type: 3}
   - {fileID: -146881550, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
@@ -147,7 +134,6 @@ SpriteAtlas:
   - {fileID: -130131874, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
   - {fileID: 76778199, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
   - {fileID: 21300000, guid: 5aad2fd81f43471489e1cdc90e932354, type: 3}
-  - {fileID: 21300000, guid: af36bc29c1976644981c33519d2a2461, type: 3}
   - {fileID: 21300000, guid: cee5a2894ffa647458734011aa71a73d, type: 3}
   - {fileID: 21300000, guid: 9fd43b99065c86340825f3eb3c1d3540, type: 3}
   - {fileID: 540291374, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
@@ -482,19 +468,6 @@ SpriteAtlas:
   - {fileID: -1558747486, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   m_PackedSpriteNamesToIndex:
   - BobFaceLeft
-  - GrassWallTopL
-  - GrassWallSideR
-  - GrassWallRightCorner
-  - GrassWallTopR
-  - GrassWallSideL
-  - GrassWallCenter
-  - GrassWallTopSide
-  - GrassWallBotRight
-  - GrassWallBottomSide
-  - GrassWallCornerTopR
-  - GrassWallBotLeft
-  - GrassWallCornerTopL
-  - GrassWallLeftCorner
   - PinkFace
   - BobFaceDown
   - Tin_Arrow
@@ -578,7 +551,6 @@ SpriteAtlas:
   - Bee_Attack2_Up
   - Bee_Attack1_Side
   - Placeholder CaveEntrance
-  - New Piskel (46)
   - TestDirt
   - FaceUp
   - Tree_Sapling

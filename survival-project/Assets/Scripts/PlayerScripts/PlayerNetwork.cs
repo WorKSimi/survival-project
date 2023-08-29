@@ -66,7 +66,7 @@ public class PlayerNetwork : NetworkBehaviour
         currentMoveSpeed = moveSpeed;
 
         var tilemapObject = GameObject.FindWithTag("WaterTilemap");
-        waterTilemap = tilemapObject.GetComponent<Tilemap>();    
+        waterTilemap = tilemapObject.GetComponent<Tilemap>();       
     }
 
     private void Update()
