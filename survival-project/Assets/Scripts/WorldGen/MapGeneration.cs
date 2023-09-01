@@ -71,6 +71,9 @@ public class MapGeneration : NetworkBehaviour
     private int maxCaveEntrances = 8;
     bool firstcaveSpawned;
 
+    private GameObject localPlayer;
+    private WorldLoadingScreen worldLoad;
+
     // ground, carpet, wall, interactive
     // Start is called before the first frame update
     void Start()
@@ -122,8 +125,13 @@ public class MapGeneration : NetworkBehaviour
         GridMap = new int[width, height];
 
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
-        
+
+        worldLoad = NetworkManager.LocalClient.PlayerObject.gameObject.GetComponent<WorldLoadingScreen>();
+
         GenerateChunks();
+
+        int chunkCounter = 0;
+        int max = worldChunks.Length;
 
         foreach (GameObject chunk in worldChunks)
         {
@@ -177,7 +185,7 @@ public class MapGeneration : NetworkBehaviour
                                 go.GetComponent<Grass>().EnableBrownMushroom();
                             }
 
-                            else if (RandomCheck(seed, 0.995, counter)) //Spawn stone node
+                            else if (RandomCheck(seed, 0.990, counter)) //Spawn stone node
                             {
                                 var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
                                 go.transform.parent = chunk.transform;
@@ -227,14 +235,20 @@ public class MapGeneration : NetworkBehaviour
                 }                 
             }
             chunk.GetComponent<Chunk>().DisableChunk();
+
+            chunkCounter++;
+            float amount = ((float)chunkCounter / (float)max) * 100;
+            worldLoad.UpdateLoadBar(amount);
             yield return null; //Wait 1 frame
+
         } //OPTIMIZE THIS LATER ^^^^
         if (chunkController != null) //If theres a chunk controller.
         {
             var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
             chunkcontrollerScript.worldChunksHolder = worldChunks; //Set the chunk holder in the controller.
         }
-        
+        worldLoad.SurfaceLoaded();
+
         yield return StartCoroutine(GenerateForestUnderground(seedNumber)); //When surface is made, do cave! 
     }
 
@@ -242,15 +256,6 @@ public class MapGeneration : NetworkBehaviour
     {
         var go = Instantiate(tinOreWall, new Vector3(x, y, 0), Quaternion.identity); //Spawn ore 
         go.transform.parent = chunkObject.transform;
-        ////AddTileToGridmap(x, y, 7);
-
-        //var go2 = Instantiate(tinOreWall, new Vector3(x - 1, y, 0), Quaternion.identity); //Spawn ore to right
-        //go2.transform.parent = chunkObject.transform;
-        ////AddTileToGridmap(x, y, 7);
-
-        //var go3 = Instantiate(tinOreWall, new Vector3(x, y - 1, 0), Quaternion.identity); //Spawn ore down
-        //go3.transform.parent = chunkObject.transform;
-        ////AddTileToGridmap(x, y, 7);
     }
 
     private void GenerateChunks()
@@ -338,6 +343,9 @@ public class MapGeneration : NetworkBehaviour
 
         GenerateCaveChunks();
 
+        int chunkCounter = 0;
+        int max = caveChunks.Length;
+
         foreach (GameObject chunk in caveChunks)
         {
             var chunkScript = chunk.GetComponent<Chunk>();
@@ -371,6 +379,10 @@ public class MapGeneration : NetworkBehaviour
                     }
                 }
             }
+            chunkCounter++;
+            float amount = ((float)chunkCounter / (float)max) * 100;
+            worldLoad.UpdateLoadBar(amount);
+
             yield return null;
         }
 
@@ -382,6 +394,8 @@ public class MapGeneration : NetworkBehaviour
             chunkcontrollerScript.caveChunksHolder = caveChunks;
             chunkcontrollerScript.chunksLoaded = true;
         }
+        StartCoroutine(worldLoad.AllLoadingComplete());
+
         Debug.Log("Cave Gen Finished!");
     }
 

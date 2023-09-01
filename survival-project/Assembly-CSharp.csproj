@@ -100,6 +100,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\LogoCinematic.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\UseItemManager.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingIssue.cs" />
+    <Compile Include="Assets\WorldLoadingScreen.cs" />
     <Compile Include="Assets\TooltipImage.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\RendererFeatures\KeepFrame\KeepFrameFeature.cs" />
     <Compile Include="Assets\Scripts\ProximityOptimization\ProximityActivationManager.cs" />
