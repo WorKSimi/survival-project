@@ -239,7 +239,7 @@ public class UseItemManager : NetworkBehaviour
     private float attackRate = 2f; //How many times you can attack per second
     float nextAttackTime = 0f;
 
-    public void UseAxe(float itemDamage)
+    public void UseAxe(float itemDamage, float attackRate)
     {
         Debug.Log("AXE USED!");
         Debug.Log("AXE USED!");
@@ -255,7 +255,7 @@ public class UseItemManager : NetworkBehaviour
         }
     }
 
-    public void UsePick(float itemDamage)
+    public void UsePick(float itemDamage, float attackRate)
     {
         FindPlayersChunkController();
 
@@ -345,7 +345,7 @@ public class UseItemManager : NetworkBehaviour
         }
     }
 
-    public void UseRock(float itemDamage)
+    public void UseRock(float itemDamage, float attackRate)
     {
         Debug.Log("The rock has been used");
         if (Time.time >= nextAttackTime)
@@ -410,7 +410,7 @@ public class UseItemManager : NetworkBehaviour
         }
     }
 
-    public void UseSword(float itemDamage)
+    public void UseSword(float itemDamage, float attackRate)
     {
         if (IsHost)
         {
@@ -516,7 +516,7 @@ public class UseItemManager : NetworkBehaviour
         LeanTween.rotateAround(weaponSprite, dir, weaponDegreeChange, 0.2f).setEaseInOutQuart();
         tween.setOnComplete(() => { swungWeapon = !swungWeapon; slashAnimator.SetBool("isSlashing", false); });
     }
-    public void UseBow(float itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime, float chargeMultiplier)
+    public void UseBow(float itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime, float chargeMultiplier, float attackRate)
     {
         if (Time.time >= nextAttackTime)
         {

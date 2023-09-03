@@ -25,11 +25,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
-  attackRate: 0
+  attackRate: 2
   DefenseValue: 0
   BlockID: 0
-  TilemapID: 0
-  ItemTile: {fileID: 0}
-  ItemTilemap: 
+  BlockPrefab: {fileID: 0}
   HealthHealed: 0
   BlockHealth: 0

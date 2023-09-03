@@ -176,7 +176,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                 if (Input.GetMouseButtonUp(0)) //If Let go of left click
                 {
                     InventoryItemData itemData = slots[_currentIndex].AssignedInventorySlot.ItemData;
-                    player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime, chargeModifier);
+                    player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime, chargeModifier, itemData.attackRate);
                 }
             }
         }
@@ -200,7 +200,7 @@ public class HotbarDisplay : StaticInventoryDisplay
             {
                 //Note, later just make this call a script on held object that does stuff unique to it. (Unique code for pick / bow ect instead of the 1 megaScript)
                 case "Axe":
-                player.GetComponent<UseItemManager>().UseAxe(itemData.itemDamage);
+                player.GetComponent<UseItemManager>().UseAxe(itemData.itemDamage, itemData.attackRate);
                 break;
 
                 case "Block":
@@ -228,11 +228,11 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Pick":
-                player.GetComponent<UseItemManager>().UsePick(itemData.itemDamage);
+                player.GetComponent<UseItemManager>().UsePick(itemData.itemDamage, itemData.attackRate);
                 break;
 
                 case "Sword":
-                player.GetComponent<UseItemManager>().UseSword(itemData.itemDamage);
+                player.GetComponent<UseItemManager>().UseSword(itemData.itemDamage, itemData.attackRate);
                 break;
 
                 case "Bow":
@@ -240,7 +240,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                 break;
 
                 case "Rock":
-                player.GetComponent<UseItemManager>().UseRock(itemData.itemDamage);
+                player.GetComponent<UseItemManager>().UseRock(itemData.itemDamage, itemData.attackRate);
                 break;
 
                 case "Food":

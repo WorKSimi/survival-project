@@ -19,8 +19,8 @@ public class WorldLoadingScreen : MonoBehaviour
     private Color color;
     private Color transparentColor;
 
-    private float fadeOutDuration = 1f;
-    private float fadeInDuration = 1f;
+    private float fadeOutDuration = 0.5f;
+    private float fadeInDuration = 0.5f;
     
 
     // Start is called before the first frame update
@@ -77,22 +77,15 @@ public class WorldLoadingScreen : MonoBehaviour
         yield return StartCoroutine(DoFade(transparentColor, color, fadeInDuration));
     }
 
-    public void CaveFadeIn()
-    {
-        caveLoadingScreen.SetActive(true);
-        StartCoroutine(FadeIn());
-    }
-    public void CaveFadeOut()
-    {
-        caveLoadingScreen.SetActive(true);
-        StartCoroutine(FadeOut());
-    }
-
-    public IEnumerator CaveTest()
+    public IEnumerator CaveDoFade(Vector3 position)
     {
         caveLoadingScreen.SetActive(true);
         StartCoroutine(FadeIn()); //Fade In to Black
-        yield return new WaitForSeconds(3f); //Wait 3 seconds
+        yield return new WaitForSeconds(0.5f); //Wait 0.5 seconds
+        this.gameObject.transform.position = position; //Teleport Player
+        yield return new WaitForSeconds(2f); //Wait 1 Seconds
         StartCoroutine(FadeOut()); //Fade Out to Not Black
+        yield return new WaitForSeconds(0.5f); //Wait 0.5 seconds
+        caveLoadingScreen.SetActive(false);
     }
 }

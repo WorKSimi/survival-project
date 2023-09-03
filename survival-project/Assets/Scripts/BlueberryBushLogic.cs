@@ -5,42 +5,31 @@ using UnityEngine.Events;
 using Unity.Netcode;
 using UnityEngine.InputSystem;
 
-public class BlueberryBushLogic : NetworkBehaviour, IInteractable
+public class BlueberryBushLogic : MonoBehaviour//, IInteractable
 {
     [SerializeField] private GameObject GrownBushObject;
     [SerializeField] private GameObject DeadBushObject;
     [SerializeField] private int growTime = 300; //in seconds
     [SerializeField] private GameObject blueberryItem; //Holds the blueberry
-    private bool canInteract;
+    private bool isActive; //Check to see if the bush is active or not.
     public UnityAction<IInteractable> OnInteractionComplete { get; set; }
 
-
+    
     private void Awake()
     {
-        canInteract = true;
-        GrownBushObject.SetActive(true);       
+        isActive = true; //The blue berry bush is active
+        GrownBushObject.SetActive(true); //Bush will be set active
+        DeadBushObject.SetActive(false); //Dead bush is deactive.
     }
 
-    public void Interact(Interactor interactor, out bool interactSuccessful) //When you interact with bush
+    private void BlueberryBushHit() //Function for the blue berry bush getting hit.
     {
-        interactSuccessful = true;
-        if (IsHost)
+        if (isActive) //If the blueberry bush is on.
         {
-            if (canInteract == true)
-            {
-                canInteract = false;
-                GrownBushObject.SetActive(false);
-                DeadBushObject.SetActive(true);
-                BushDeactiveSyncClientRpc(); //Syncs bushes on clients
-                var go = Instantiate(blueberryItem, this.transform.position, Quaternion.identity); //Instantiate blueberry item
-                go.GetComponent<NetworkObject>().Spawn();
-                StartCoroutine(GrowingPlant());
-            }
-            else return;
-        }
-        else if (IsClient)
-        {
-            BlueberryInteractServerRpc();
+            isActive = false; //Set active flag to false.
+            GrownBushObject.SetActive(false);
+            DeadBushObject.SetActive(true);
+            StartCoroutine(GrowingPlant());
         }
     }
 
@@ -48,42 +37,9 @@ public class BlueberryBushLogic : NetworkBehaviour, IInteractable
     {
         yield return new WaitForSeconds(growTime); //Wait for how long grow time is set for (in seconds)     
         GrownBushObject.SetActive(true); //Turn bush back to grown
-        DeadBushObject.SetActive(false);
-        BushActiveSyncClientRpc();
-        canInteract = true; //Can interact again
+        DeadBushObject.SetActive(false); 
+        isActive = true; //Set active flag back to true
         yield break; //End the couroutine
     }
-    public void EndInteraction()
-    {
-        throw new System.NotImplementedException();
-    }
 
-    [ServerRpc(RequireOwnership = false)] //Fired by client, executed on server
-    public void BlueberryInteractServerRpc()
-    {
-        if (canInteract == true)
-        {
-            canInteract = false;
-            GrownBushObject.SetActive(false);
-            DeadBushObject.SetActive(true);
-            BushDeactiveSyncClientRpc(); //Syncs bushes on clients
-            var go = Instantiate(blueberryItem, this.transform.position, Quaternion.identity); //Instantiate blueberry item
-            go.GetComponent<NetworkObject>().Spawn();
-            StartCoroutine(GrowingPlant());
-        }
-    }
-
-    [ClientRpc] //Fired by server, executed on client
-    public void BushActiveSyncClientRpc()
-    {
-        GrownBushObject.SetActive(true);
-        DeadBushObject.SetActive(false);
-    }
-
-    [ClientRpc] //Fired by server, executed on client
-    public void BushDeactiveSyncClientRpc()
-    {
-        GrownBushObject.SetActive(false);
-        DeadBushObject.SetActive(true);
-    }
 }

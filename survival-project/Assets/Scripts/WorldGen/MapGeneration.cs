@@ -227,7 +227,10 @@ public class MapGeneration : NetworkBehaviour
                             }
                             else //If tin pass fails, spawn a normal wall
                             {
-                                var go = Instantiate(grassWall, new Vector3(newX, newY, 0), Quaternion.identity);
+                                var go = Instantiate(grassWall, new Vector3(newX, newY, 0), Quaternion.identity); //Grass Wall
+                                go.transform.parent = chunk.transform;
+
+                                var go2 = Instantiate(dirtTile, new Vector3(newX, newY, 0), Quaternion.identity); //Dirt Ground
                                 go.transform.parent = chunk.transform;
                                 //AddTileToGridmap(newX, newY, 6);
                             }
@@ -257,6 +260,9 @@ public class MapGeneration : NetworkBehaviour
     {
         var go = Instantiate(tinOreWall, new Vector3(x, y, 0), Quaternion.identity); //Spawn ore 
         go.transform.parent = chunkObject.transform;
+
+        var go2 = Instantiate(dirtTile, new Vector3(x, y, 0), Quaternion.identity);
+        go2.transform.parent = chunkObject.transform;
     }
 
     private void GenerateChunks()
@@ -376,6 +382,9 @@ public class MapGeneration : NetworkBehaviour
                         {
                             var go = Instantiate(stoneWall, new Vector3(newX, newY, 0), Quaternion.identity);
                             go.transform.parent = chunk.transform;
+
+                            var go2 = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                            go2.transform.parent = chunk.transform;
                         }
                     }
                 }
@@ -479,10 +488,6 @@ public class MapGeneration : NetworkBehaviour
                     }    
                 }
             }
-        }
-
-        
-    }
-
-   
+        }   
+    } 
 }

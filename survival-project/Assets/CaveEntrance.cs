@@ -18,8 +18,7 @@ public class CaveEntrance : MonoBehaviour, IInteractable
     {
         interactSuccessful = true;
         var test = interactor.GetComponent<WorldLoadingScreen>();
-        test.StartCoroutine(test.CaveTest());
-        interactor.transform.position = exitPosition;     
+        test.StartCoroutine(test.CaveDoFade(exitPosition));  
     }
     public void EndInteraction()
     {

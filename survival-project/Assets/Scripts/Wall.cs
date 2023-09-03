@@ -7,12 +7,15 @@ using UnityEngine.Tilemaps;
 public class Wall : MonoBehaviour
 {
     [SerializeField] private bool isCrop;
+    [SerializeField] private bool isBlueberryBush; //Flag for if this is on a blueberry bush.
     [SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
     [SerializeField] private bool isResourceNode;
     [SerializeField] private int amountToDrop;
     [SerializeField] private Grass grassScript;
-    [SerializeField] private GameObject groundObject; //This ground spawns under wall when destroyed.
+    //[SerializeField] private GameObject groundObject; //This ground spawns under wall when destroyed.
+
+    private BlueberryBushLogic blueBerryBush;
 
     //private GameObject gridObject;
     //private GameObject wallmapObject;
@@ -71,12 +74,18 @@ public class Wall : MonoBehaviour
             //Send message to all clients (except host) to also disable states.
             //Will have to update changed tiles on this position later to account for the state
         }
+
+        if (isBlueberryBush) //If this is a blueberry bush
+        {
+            var blueberryScript = this.gameObject.GetComponent<BlueberryBushLogic>();
+        }
+
         else //Wall is not on grass
         {
-            if (groundObject != null)
-            {
-                Instantiate(groundObject, thisPosition, Quaternion.identity);
-            }
+            //if (groundObject != null)
+            //{
+            //    Instantiate(groundObject, thisPosition, Quaternion.identity);
+            //}
             Destroy(this.gameObject); //Destroy this object           
         }
     }   
