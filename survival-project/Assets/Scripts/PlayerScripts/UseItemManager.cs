@@ -191,6 +191,28 @@ public class UseItemManager : NetworkBehaviour
             else return false;
         }
     }
+
+    public bool FloorFound()
+    {
+        var ray = playerCam.ScreenPointToRay(Input.mousePosition);
+        var hit = Physics2D.GetRayIntersection(ray);
+
+        if (hit.transform == null)
+        {
+            Debug.Log("Hit has no transform! No Object Found!");
+            return false;
+        }
+        else
+        {
+            Debug.Log(hit.transform.name);
+            if (hit.transform.CompareTag("Floor"))
+            {
+                Debug.Log("Floor found!");
+                return true;
+            }
+            else return false;
+        }
+    }
     
     private void FindPlayersChunkController()
     {

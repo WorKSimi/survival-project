@@ -16,11 +16,11 @@ public class CaveEntrance : MonoBehaviour, IInteractable
     }
     public void Interact(Interactor interactor, out bool interactSuccessful) //When you interact with cave entrance
     {
-        //TODO - ADD FADE IN AND OUT BLACK SCREEN EFFECT.
-        interactSuccessful = true;        
+        interactSuccessful = true;
+        var test = interactor.GetComponent<WorldLoadingScreen>();
+        test.StartCoroutine(test.CaveTest());
         interactor.transform.position = exitPosition;     
     }
-
     public void EndInteraction()
     {
         throw new System.NotImplementedException();

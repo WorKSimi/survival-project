@@ -127,6 +127,7 @@ public class MapGeneration : NetworkBehaviour
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
 
         worldLoad = NetworkManager.LocalClient.PlayerObject.gameObject.GetComponent<WorldLoadingScreen>();
+        NetworkManager.LocalClient.PlayerObject.gameObject.GetComponent<PlayerNetwork>().state = PlayerNetwork.State.Loading; //Set player to loading (lock movement).
 
         GenerateChunks();
 
@@ -395,6 +396,7 @@ public class MapGeneration : NetworkBehaviour
             chunkcontrollerScript.chunksLoaded = true;
         }
         StartCoroutine(worldLoad.AllLoadingComplete());
+        NetworkManager.LocalClient.PlayerObject.gameObject.GetComponent<PlayerNetwork>().state = PlayerNetwork.State.Normal; //Set player to Normal
 
         Debug.Log("Cave Gen Finished!");
     }

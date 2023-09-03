@@ -23,6 +23,7 @@ TagManager:
   - InventorySlot
   - Wall
   - ChunkController
+  - Floor
   layers:
   - Default
   - TransparentFX

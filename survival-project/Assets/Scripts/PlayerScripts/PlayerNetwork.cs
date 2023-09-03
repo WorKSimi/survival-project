@@ -51,6 +51,7 @@ public class PlayerNetwork : NetworkBehaviour
         Normal, //The normal state of player
         Rolling, //When player is Dodge-Rolling
         Dead, //When the player is dead
+        Loading, //When the player is Loading
     }
 
     private void Start()
@@ -118,6 +119,10 @@ public class PlayerNetwork : NetworkBehaviour
 
             case State.Dead:
                 rb.velocity = moveDir * deadSpeed; //Lock player movement when dead
+                break;
+
+            case State.Loading:
+                rb.velocity = moveDir * deadSpeed; //lock player movement when loading.
                 break;
         }
     }

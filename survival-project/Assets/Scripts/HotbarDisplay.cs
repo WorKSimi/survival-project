@@ -215,6 +215,18 @@ public class HotbarDisplay : StaticInventoryDisplay
                     }
                 break;
 
+                case "Floor":
+                    if (player.GetComponent<UseItemManager>().IsInRange()) //Mouse is in valid range
+                    {
+                        if (player.GetComponent<UseItemManager>().TileFound() == false && player.GetComponent<UseItemManager>().FloorFound() == false) //If no wall
+                        {
+                            player.GetComponent<UseItemManager>().PlaceBlock(itemData.BlockPrefab, itemData.ID);
+                            slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
+                            RefreshStaticDisplay();
+                        }
+                    }
+                break;
+
                 case "Pick":
                 player.GetComponent<UseItemManager>().UsePick(itemData.itemDamage);
                 break;
