@@ -8,6 +8,7 @@ public class MobSpawning : NetworkBehaviour
 {
     [SerializeField] private GameObject thisPlayer;
     [SerializeField] private RuleTile validTile; //Tile that mobs can spawn on
+    public bool doMobSpawn = false; //Flag to see if mob spawn should happen
 
     private Vector3 playerPos;
 
@@ -39,7 +40,11 @@ public class MobSpawning : NetworkBehaviour
     void Update()
     {
         playerPos = thisPlayer.transform.position;
-        SpawnMob();
+
+        if (doMobSpawn == true)
+        {
+            SpawnMob();
+        }    
     }
 
     private void CheckIfCanSpawn(Vector3 spawnPos) //This function takes in a spawn position, and checks conditions to see if a spawn is possible

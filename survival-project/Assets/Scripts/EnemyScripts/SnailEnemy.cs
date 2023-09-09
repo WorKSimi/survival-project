@@ -63,9 +63,7 @@ public class SnailEnemy : NetworkBehaviour
     //Whenever checking distance, do it for each player in the array
     
     private void Update()
-    {
-        players = GameObject.FindGameObjectsWithTag("Player");
-
+    {       
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
@@ -208,6 +206,8 @@ public class SnailEnemy : NetworkBehaviour
     
     private void FindTarget()
     {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
         float targetRange = 10f;
         foreach (GameObject player in players) //For each player in players
         {

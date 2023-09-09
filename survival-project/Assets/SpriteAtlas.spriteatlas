@@ -51,6 +51,7 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: c49a68300dd23e5479f3dca49368c84f, type: 3}
+  - {fileID: 21300000, guid: 3f8787806226c2341841ac9a370ce36a, type: 3}
   - {fileID: 21300000, guid: 861e7d31f92d58242bfbaee68e8d5fc9, type: 3}
   - {fileID: 21300000, guid: 59da8151259ab0349bd25cc31144539c, type: 3}
   - {fileID: -146881550, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
@@ -68,6 +69,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3fedbd7352690cf43bb32794f696a8bc, type: 3}
   - {fileID: 21300000, guid: 64055fa368e07ce4aa1876fc0e90f62f, type: 3}
   - {fileID: 21300000, guid: f2b187d3f5759c940867c3bdb7104d81, type: 3}
+  - {fileID: 21300000, guid: f7988b263d1d0c8448910994d37cb0ff, type: 3}
   - {fileID: 21300000, guid: 69592e26efe101541b93faa6ad4b1a26, type: 3}
   - {fileID: 21300000, guid: a552c536116b12c4ea8321851876c201, type: 3}
   - {fileID: 21300000, guid: 0f3dbf464204fc24a8e56c49ce5af276, type: 3}
@@ -140,6 +142,7 @@ SpriteAtlas:
   - {fileID: 288578347, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
   - {fileID: 264322884, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
   - {fileID: 21300000, guid: 31bc8dc9828322648afe8bf975d3dea3, type: 3}
+  - {fileID: 21300000, guid: 127dfdc9603dc724f85f8a828f482d99, type: 3}
   - {fileID: 21300000, guid: bae75ad9067ef1246a107c15ca9d9822, type: 3}
   - {fileID: 21300000, guid: 590e12caf89f850408472110bc1a1748, type: 3}
   - {fileID: 358003908, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
@@ -346,6 +349,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0fa0fe5d595c78943ac6c8f15bd315bd, type: 3}
   - {fileID: 21300000, guid: ba1211edd8a64b94aa913e0ad0d91a49, type: 3}
   - {fileID: 21300000, guid: 2f55a5ed42e5ca0499ad8a78c9dcce37, type: 3}
+  - {fileID: 21300000, guid: e319810e28da5104994c90d040632f2c, type: 3}
   - {fileID: 21300000, guid: eaeb2f1e6eb30a34798c9547096328fc, type: 3}
   - {fileID: -291226259, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   - {fileID: 710560559, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
@@ -458,6 +462,8 @@ SpriteAtlas:
   - {fileID: 564713083, guid: cadfe3fe7ef67fd4686b82fff0f8951c, type: 3}
   - {fileID: 21300000, guid: af029ffedac351a43b35124d31ad8dfa, type: 3}
   - {fileID: 21300000, guid: 2226fc3f279db28428100e2e2dd32e99, type: 3}
+  - {fileID: 21300000, guid: 239cab6f46d83614badbd360dbc3663e, type: 3}
+  - {fileID: 21300000, guid: f53dd09fc9676a648a646ab8be9c5da9, type: 3}
   - {fileID: 1292197150, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   - {fileID: -2134708012, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   - {fileID: -1539166632, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
@@ -466,8 +472,10 @@ SpriteAtlas:
   - {fileID: -2032552040, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   - {fileID: -1464044400, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   - {fileID: -1558747486, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
+  - {fileID: 21300000, guid: c523c3af6497fdb4db138984716a6df6, type: 3}
   m_PackedSpriteNamesToIndex:
   - BobFaceLeft
+  - PalmWoodPlaceholder
   - PinkFace
   - BobFaceDown
   - Tin_Arrow
@@ -485,6 +493,7 @@ SpriteAtlas:
   - FoodTimerPH
   - torchPlaceholder
   - FaceRight
+  - SeaShellPlaceholder
   - FaceForward
   - TestWaterTile
   - TestSandTile
@@ -557,6 +566,7 @@ SpriteAtlas:
   - Snailord_Side
   - Tree_Grown
   - WheatSeed
+  - palmtreePlaceholder
   - HighlightShitty
   - PlaceholderExit
   - TinBar
@@ -763,6 +773,7 @@ SpriteAtlas:
   - Hoe
   - ShitFlint
   - TestWoodTile
+  - coconutPlaceholder
   - PlaceholderBed
   - Flint_Shovel
   - Bread_Item
@@ -875,6 +886,8 @@ SpriteAtlas:
   - Player_Idle_Down
   - TestTinAxe
   - FaceSide
+  - SeashellPlaceholder 1
+  - palmtreePlaceholder 1
   - Tin_Wall_Grass_1
   - Tin_Wall_Grass_3
   - Tin_Wall_Grass_2
@@ -883,6 +896,7 @@ SpriteAtlas:
   - Tin_Wall_Dirt_1
   - Tin_Wall_Dirt_2
   - Tin_Wall_Dirt_3
+  - CoconutPlaceholder 1
   m_RenderDataMap: {}
   m_Tag: SpriteAtlas
   m_IsVariant: 0

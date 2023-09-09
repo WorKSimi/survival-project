@@ -125,12 +125,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08, type: 3}
+  isBlueberryBush: 0
   maxHealth: 10
-  isResourceNode: 1
-  amountToDrop: 5
   grassScript: {fileID: 5877730994609202490}
-  groundObject: {fileID: 0}
+  itemToDrop1: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08,
+    type: 3}
+  amountToDrop1: 5
+  itemToDrop2: {fileID: 0}
+  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!1 &3179713049715907885
@@ -393,12 +395,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: d889face19770cd41820a59981d781bd, type: 3}
+  isBlueberryBush: 0
   maxHealth: 10
-  isResourceNode: 1
-  amountToDrop: 5
   grassScript: {fileID: 5877730994609202490}
-  groundObject: {fileID: 0}
+  itemToDrop1: {fileID: 7389436694480070536, guid: d889face19770cd41820a59981d781bd,
+    type: 3}
+  amountToDrop1: 5
+  itemToDrop2: {fileID: 0}
+  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!1 &4809542527591160671
@@ -500,12 +504,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: a5513ee3061cc8c4295813a01e2d4f2f, type: 3}
+  isBlueberryBush: 0
   maxHealth: 1
-  isResourceNode: 0
-  amountToDrop: 1
   grassScript: {fileID: 5877730994609202490}
-  groundObject: {fileID: 0}
+  itemToDrop1: {fileID: 7389436694480070536, guid: a5513ee3061cc8c4295813a01e2d4f2f,
+    type: 3}
+  amountToDrop1: 1
+  itemToDrop2: {fileID: 0}
+  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!61 &5991173502114110025
@@ -659,12 +665,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f, type: 3}
+  isBlueberryBush: 0
   maxHealth: 10
-  isResourceNode: 1
-  amountToDrop: 5
   grassScript: {fileID: 5877730994609202490}
-  groundObject: {fileID: 0}
+  itemToDrop1: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f,
+    type: 3}
+  amountToDrop1: 5
+  itemToDrop2: {fileID: 0}
+  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!1 &7111011537572724121
@@ -792,11 +800,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: 2281a7cd3beb92b45bfa4dfdca363f08, type: 3}
+  isBlueberryBush: 0
   maxHealth: 1
-  isResourceNode: 0
-  amountToDrop: 1
   grassScript: {fileID: 5877730994609202490}
-  groundObject: {fileID: 0}
+  itemToDrop1: {fileID: 7389436694480070536, guid: 2281a7cd3beb92b45bfa4dfdca363f08,
+    type: 3}
+  amountToDrop1: 1
+  itemToDrop2: {fileID: 0}
+  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0

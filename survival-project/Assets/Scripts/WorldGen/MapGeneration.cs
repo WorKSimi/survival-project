@@ -9,6 +9,7 @@ public class MapGeneration : NetworkBehaviour
 {
     [Header("Surface Tiles")]
     public GameObject waterTile;
+    public GameObject deepWaterTile;
     public GameObject sandTile;
     public GameObject grassTile;
     public GameObject grassWall;
@@ -16,6 +17,10 @@ public class MapGeneration : NetworkBehaviour
     public GameObject tinOreWall;
     public GameObject caveEntrance;
     public GameObject caveExit;
+
+    [Header("Beach Tiles")]
+    public GameObject palmTree;
+    public GameObject seaShell;
 
     [Header("Underground Tiles")]
     public GameObject pitTile;
@@ -25,7 +30,7 @@ public class MapGeneration : NetworkBehaviour
     [Header("Object Tiles")]
     //public GameObject redShroomTile;
     //public GameObject brownShroomTile;
-    public GameObject blueberryTile;
+    //public GameObject blueberryTile;
     //public RuleTile caveEntranceTile;
     //public GameObject treeTile;
     //public RuleTile flintTile;
@@ -151,17 +156,40 @@ public class MapGeneration : NetworkBehaviour
                         var newX = (x );
                         var newY = (y );
 
-                        if (height < 0.2f) //Water
+                        if (height < 0.05f) //Deep Water
                         {
-                            var go = Instantiate(waterTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                            var go = Instantiate(deepWaterTile, new Vector3(newX, newY, 0), Quaternion.identity);
                             go.transform.parent = chunk.transform;
                             //AddTileToGridmap(newX, newY, 1);
                         }
-                        else if (height < 0.25f) //Sand
+                        else if (height < 0.2f) //Water
                         {
-                            var go = Instantiate(sandTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                            go.transform.parent = chunk.transform;
-                            //AddTileToGridmap(newX, newY, 2);
+                            var go = Instantiate(waterTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                            go.transform.parent = chunk.transform;                           
+                        }
+                        else if (height < 0.3f) //Sand
+                        {
+                            if (RandomCheck(seed, 0.99, counter)) //Spawn Palm Tree
+                            {
+                                var go = Instantiate(palmTree, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go.transform.parent = chunk.transform;
+
+                                var go2 = Instantiate(sandTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go2.transform.parent = chunk.transform;
+                            }
+                            else if(RandomCheck(seed, 0.99, counter)) //Spawn sea shell
+                            {
+                                var go = Instantiate(seaShell, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go.transform.parent = chunk.transform;
+
+                                var go2 = Instantiate(sandTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go2.transform.parent = chunk.transform;
+                            }
+                            else //Spawn sand with nothing
+                            {
+                                var go = Instantiate(sandTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go.transform.parent = chunk.transform;
+                            }                                        
                         }
                         else if (height < 0.5f) //Grass
                         {                          
@@ -200,11 +228,11 @@ public class MapGeneration : NetworkBehaviour
                                 go.GetComponent<Grass>().EnableFlintNode();
                             }
 
-                            else if (RandomCheck(seed, 0.995, counter)) //Spawn blueberry bush
-                            {
-                                var go = Instantiate(blueberryTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                            }
+                            ////else if (RandomCheck(seed, 0.995, counter)) //Spawn blueberry bush
+                            ////{
+                            ////    var go = Instantiate(blueberryTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                            ////    go.transform.parent = chunk.transform;
+                            ////}
                             else //Spawn normal Grass
                             {
                                 var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);

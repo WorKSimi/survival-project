@@ -127,12 +127,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: 5302907679e65ac439910b2d1490a91c, type: 3}
+  isBlueberryBush: 0
   maxHealth: 1
-  isResourceNode: 0
-  amountToDrop: 1
   grassScript: {fileID: 0}
-  groundObject: {fileID: 0}
+  itemToDrop1: {fileID: 7389436694480070536, guid: 5302907679e65ac439910b2d1490a91c,
+    type: 3}
+  amountToDrop1: 1
+  itemToDrop2: {fileID: 0}
+  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!114 &8054704892721130825

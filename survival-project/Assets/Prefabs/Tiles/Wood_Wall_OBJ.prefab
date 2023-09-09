@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2976247172256185877}
   - component: {fileID: 2976247172256185872}
   - component: {fileID: 4077094351501825626}
+  - component: {fileID: -4214866777148135162}
   m_Layer: 8
   m_Name: Wood_Wall_OBJ
   m_TagString: Wall
@@ -74,12 +75,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: a2c3b1011c7bfcc4e9d291fecc2893ba, type: 3}
+  isBlueberryBush: 0
   maxHealth: 5
-  isResourceNode: 0
-  amountToDrop: 1
   grassScript: {fileID: 0}
-  groundObject: {fileID: 0}
+  itemToDrop1: {fileID: 7389436694480070536, guid: a2c3b1011c7bfcc4e9d291fecc2893ba,
+    type: 3}
+  amountToDrop1: 1
+  itemToDrop2: {fileID: 0}
+  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
 --- !u!114 &4077094351501825626
@@ -100,6 +103,18 @@ MonoBehaviour:
   - {fileID: 2725642, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   - {fileID: 515669647, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   spriteRenderer: {fileID: 1058073125126210248}
+--- !u!114 &-4214866777148135162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2976247172256185871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83c3489c8547734289be1820dc851a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6311318742497702499
 GameObject:
   m_ObjectHideFlags: 0

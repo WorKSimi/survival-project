@@ -8,6 +8,7 @@ public class WorldLoadingScreen : MonoBehaviour
 {
     [SerializeField] private GameObject caveLoadingScreen;
     [SerializeField] private Image caveLoadingScreenImage;
+    [SerializeField] private GameObject mobSpawner;
 
     [SerializeField] private Color myColor;
 
@@ -53,6 +54,7 @@ public class WorldLoadingScreen : MonoBehaviour
         this.gameObject.transform.position = new Vector3(100f, 100f, 0);
         yield return new WaitForSeconds(2f); //Wait 2 seconds for chunks to load.
         worldLoadScreenObject.SetActive(false);
+        mobSpawner.GetComponent<MobSpawning>().doMobSpawn = true;
     }
 
     private IEnumerator DoFade(Color a, Color b, float duration)

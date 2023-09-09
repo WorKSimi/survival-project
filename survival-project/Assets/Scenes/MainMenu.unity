@@ -2094,6 +2094,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterTile: {fileID: 3179713049715907885, guid: c97824065019e8e4080f48be638c8347,
     type: 3}
+  deepWaterTile: {fileID: 3179713049715907885, guid: 04edf63991e8d1148a4ad0509e782dd1,
+    type: 3}
   sandTile: {fileID: 3179713049715907885, guid: 7f663d1cef965c94db64dff0ed208121,
     type: 3}
   grassTile: {fileID: 3179713049715907885, guid: 045f301c42d865a44adba958ee5a7d53,
@@ -2103,6 +2105,8 @@ MonoBehaviour:
   dirtTile: {fileID: 3179713049715907885, guid: dfba5332bec9d564b8118e13d7c63c30,
     type: 3}
   tinOreWall: {fileID: 2976247172256185871, guid: 795156ae338301a48a4b606fc5af0359,
+    type: 3}
+  palmTree: {fileID: 2976247172256185871, guid: 048e1b4828b8eb845a2aab90ab438b86,
     type: 3}
   caveEntrance: {fileID: 7320463855911632571, guid: 65856c89687eb714bad1c84570aadbcd,
     type: 3}

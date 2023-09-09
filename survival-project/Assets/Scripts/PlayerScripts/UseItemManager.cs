@@ -269,7 +269,7 @@ public class UseItemManager : NetworkBehaviour
                 if (IsInRange()) //If your in range
                 {
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
-                    var hit = Physics2D.GetRayIntersection(ray);
+                    var hit = Physics2D.GetRayIntersection(ray, wallLayers);
                     if (hit == false) return; //Return if nothing is hit.
                     var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
 
@@ -298,7 +298,7 @@ public class UseItemManager : NetworkBehaviour
                     FindPlayersChunkController();
 
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
-                    var hit = Physics2D.GetRayIntersection(ray);
+                    var hit = Physics2D.GetRayIntersection(ray, wallLayers);
                     if (hit == false) return; //Return if nothing is hit.
                     var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
                   
@@ -313,7 +313,7 @@ public class UseItemManager : NetworkBehaviour
     {
         var vec2 = (Vector2Int)position; //Turn position to vector 2     
         RaycastHit2D hit; //Variable for racyast
-        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Set hit to raycast
+        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f, wallLayers); //Set hit to raycast
         
         if (hit.transform.CompareTag("Wall"))
         {

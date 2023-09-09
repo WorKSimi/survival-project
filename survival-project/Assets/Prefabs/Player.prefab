@@ -4779,8 +4779,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisPlayer: {fileID: 3430272870254572311}
   validTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
+  doMobSpawn: 0
   currentSpawns: 0
-  maxSpawns: 0
+  maxSpawns: 3
   mobPool:
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
 --- !u!1 &2079502706955108354
@@ -9012,6 +9013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   caveLoadingScreen: {fileID: 6495259878317700223}
   caveLoadingScreenImage: {fileID: 1556844492567166557}
+  mobSpawner: {fileID: 2044489689833348785}
   myColor: {r: 0, g: 0, b: 0, a: 0.50980395}
   worldLoadScreenObject: {fileID: 5991346129540351899}
   slider: {fileID: 4455269702389363218}
