@@ -32,6 +32,8 @@ public class WorldManager : NetworkBehaviour
         NetworkManager.OnClientConnectedCallback += OnConnectedToServer;
     }
 
+
+
     public async void LoadWorld()
     {
         if (hostClientManager.IsHost == true) //If your Host
@@ -42,6 +44,7 @@ public class WorldManager : NetworkBehaviour
             try
             {
                 allocation = await RelayService.Instance.CreateAllocationAsync(maxConnections);
+                
             }
             catch (Exception e)
             {
@@ -85,6 +88,8 @@ public class WorldManager : NetworkBehaviour
             //}           
         }
 
+
+
         else if (hostClientManager.IsHost == false) //Client   
         {
             clientJoinCode = hostClientManager.clientJoinCode;
@@ -92,6 +97,8 @@ public class WorldManager : NetworkBehaviour
             StartClient(clientJoinCode);        
         }       
     }
+
+
 
     public async void StartClient(string joinCode)
     {

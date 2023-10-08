@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3050062930715579047}
   m_Layer: 8
   m_Name: Seashell_OBJ
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,9 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  isBlueberryBush: 0
   maxHealth: 1
-  grassScript: {fileID: 0}
   itemToDrop1: {fileID: 7389436694480070536, guid: ffae908596ff34e489184343c366ec9d,
     type: 3}
   amountToDrop1: 1

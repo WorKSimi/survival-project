@@ -53,6 +53,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c49a68300dd23e5479f3dca49368c84f, type: 3}
   - {fileID: 21300000, guid: 3f8787806226c2341841ac9a370ce36a, type: 3}
   - {fileID: 21300000, guid: 861e7d31f92d58242bfbaee68e8d5fc9, type: 3}
+  - {fileID: 21300000, guid: 86460541c5d2ba843a9d54711c63ce4c, type: 3}
   - {fileID: 21300000, guid: 59da8151259ab0349bd25cc31144539c, type: 3}
   - {fileID: -146881550, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
   - {fileID: 910543348, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
@@ -69,7 +70,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3fedbd7352690cf43bb32794f696a8bc, type: 3}
   - {fileID: 21300000, guid: 64055fa368e07ce4aa1876fc0e90f62f, type: 3}
   - {fileID: 21300000, guid: f2b187d3f5759c940867c3bdb7104d81, type: 3}
-  - {fileID: 21300000, guid: f7988b263d1d0c8448910994d37cb0ff, type: 3}
+  - {fileID: 21300000, guid: f9e2d424cc580d44bbb616e64778d9f3, type: 3}
+  - {fileID: 21300000, guid: 88ae8e24a6b48874292fa121cda5fe34, type: 3}
+  - {fileID: 21300000, guid: 88da36c4d9e70264da241a920475c298, type: 3}
   - {fileID: 21300000, guid: 69592e26efe101541b93faa6ad4b1a26, type: 3}
   - {fileID: 21300000, guid: a552c536116b12c4ea8321851876c201, type: 3}
   - {fileID: 21300000, guid: 0f3dbf464204fc24a8e56c49ce5af276, type: 3}
@@ -461,7 +464,9 @@ SpriteAtlas:
   - {fileID: 1054043398, guid: cadfe3fe7ef67fd4686b82fff0f8951c, type: 3}
   - {fileID: 564713083, guid: cadfe3fe7ef67fd4686b82fff0f8951c, type: 3}
   - {fileID: 21300000, guid: af029ffedac351a43b35124d31ad8dfa, type: 3}
+  - {fileID: 21300000, guid: c34c270f4c92c244ba4cd751e3faba52, type: 3}
   - {fileID: 21300000, guid: 2226fc3f279db28428100e2e2dd32e99, type: 3}
+  - {fileID: 21300000, guid: 2b3f064f05da8f049843aebc3af09a33, type: 3}
   - {fileID: 21300000, guid: 239cab6f46d83614badbd360dbc3663e, type: 3}
   - {fileID: 21300000, guid: f53dd09fc9676a648a646ab8be9c5da9, type: 3}
   - {fileID: 1292197150, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
@@ -477,6 +482,7 @@ SpriteAtlas:
   - BobFaceLeft
   - PalmWoodPlaceholder
   - PinkFace
+  - clockPlaceholder
   - BobFaceDown
   - Tin_Arrow
   - Flint_Arrow
@@ -493,7 +499,9 @@ SpriteAtlas:
   - FoodTimerPH
   - torchPlaceholder
   - FaceRight
-  - SeaShellPlaceholder
+  - AnvilUpgradeKit
+  - PlaceHolderPipe
+  - IronWallPlaceholder
   - FaceForward
   - TestWaterTile
   - TestSandTile
@@ -885,7 +893,9 @@ SpriteAtlas:
   - Player_Idle_Side
   - Player_Idle_Down
   - TestTinAxe
+  - herbplaceholder
   - FaceSide
+  - AnnoyingSquirrelPlaceholder-min
   - SeashellPlaceholder 1
   - palmtreePlaceholder 1
   - Tin_Wall_Grass_1

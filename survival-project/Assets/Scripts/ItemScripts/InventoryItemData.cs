@@ -34,6 +34,11 @@ public class InventoryItemData : ScriptableObject
     [Header("Equipment and Armor")]
     public int DefenseValue;
 
+    [Header("Pipe and Herb")]
+    public float pipeHealCooldown; //Int for the healing cooldown
+    public float pipeHealTime; //Time it takes to heal
+    public int herbHealValue; //Amount healed by herb
+
     [Header("Other")]
     public int BlockID;
     //public int TilemapID; //1 = Wall

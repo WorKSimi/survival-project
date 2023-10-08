@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
+  m_Name: Iron Anvil
+  m_EditorClassIdentifier: 
+  ID: 34
+  DisplayName: Iron Anvil
+  Description: An anvil made out of reliable iron. Can make much more stuff.
+  Icon: {fileID: -70214082, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  MaxStackSize: 999
+  GoldValue: 0
+  ItemType: Block
+  ItemPrefab: {fileID: 7389436694480070536, guid: bda47a8299a33724a8445c2dad64ca86,
+    type: 3}
+  itemDamage: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 1784105365037295680, guid: 7a6d823e51ea75845bc0d7163bad11b8,
+    type: 3}
+  HealthHealed: 0
+  BlockHealth: 0

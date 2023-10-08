@@ -7,6 +7,7 @@ public class EnemyProjectile : NetworkBehaviour
 {
     public int enemyProjectileDamage;
     public float enemyProjectileLifetime;
+    private float projectileLifetime;
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         if (hitInfo == null) return; //If collider hit info doesn't exist return
@@ -27,10 +28,10 @@ public class EnemyProjectile : NetworkBehaviour
         }
     }
 
-    public void StartDestructionCoroutine()
+    public void StartDestructionCoroutine(float lifetime)
     {
         //Debug.Log("Projectile on function call: " + Projectilelifetime);
-        StartCoroutine(DestroyProjectileAfterTime(enemyProjectileLifetime));
+        StartCoroutine(DestroyProjectileAfterTime(lifetime));
     }
     public IEnumerator DestroyProjectileAfterTime(float lifetime)
     {

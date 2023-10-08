@@ -79,6 +79,7 @@ public class AnywhereCrafting : MonoBehaviour
         WoodHelmet,
         WoodChestplate,
         TinBar,
+        IronBar,
         Furnace,
         TinAnvil,
         TinSword,
@@ -86,6 +87,8 @@ public class AnywhereCrafting : MonoBehaviour
         TinChestplate,
         TinPickaxe,
         WoodFloor,
+        Chest,
+        IronAnvil,
     }
 
     //Region for selecting anywhere crafting
@@ -264,6 +267,19 @@ public class AnywhereCrafting : MonoBehaviour
 
         selected = SelectedRecipe.WoodFloor;
     }
+    public void SelectChest()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.Chest.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.Chest.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.Chest.Description); //Set description box text
+
+        ComponentText.SetText("Wood"); //Set component name
+        ComponentAmount.SetText("x10"); //Set component amount 
+
+        selected = SelectedRecipe.Chest;
+    }
     #endregion //Region for selecting crafting table recipes
 
     //Region for selecting furnace recipes
@@ -281,6 +297,20 @@ public class AnywhereCrafting : MonoBehaviour
 
         selected = SelectedRecipe.TinBar;
     }
+
+    public void SelectIronBar()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.IronBar.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.IronBar.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.IronBar.Description); //Set description box text
+
+        ComponentText.SetText("Iron Ore"); //Set component name
+        ComponentAmount.SetText("x1"); //Set component amount 
+
+        selected = SelectedRecipe.IronBar;
+    }
     #endregion
 
     //Region for selecting tin anvil recipes
@@ -294,7 +324,7 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.TinSword.Description); //Set description box text
 
         ComponentText.SetText("Tin Bar"); //Set component name
-        ComponentAmount.SetText("x15"); //Set component amount 
+        ComponentAmount.SetText("x10"); //Set component amount 
 
         ComponentText2.SetText("Wood");
         ComponentAmount2.SetText("x5");
@@ -310,7 +340,7 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.TinPickaxe.Description); //Set description box text
 
         ComponentText.SetText("Tin Bar"); //Set component name
-        ComponentAmount.SetText("x15"); //Set component amount 
+        ComponentAmount.SetText("x10"); //Set component amount 
 
         ComponentText2.SetText("Wood");
         ComponentAmount2.SetText("x5");
@@ -339,9 +369,22 @@ public class AnywhereCrafting : MonoBehaviour
         ItemDescriptionText.SetText(GameManager.Instance.TinChestplate.Description); //Set description box text
 
         ComponentText.SetText("Tin Bar"); //Set component name
-        ComponentAmount.SetText("x20"); //Set component amount 
+        ComponentAmount.SetText("x10"); //Set component amount 
 
         selected = SelectedRecipe.TinHelmet;
+    }
+    public void SelectIronAnvil()
+    {
+        ClearComponents();
+
+        NameText.SetText(GameManager.Instance.IronAnvil.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.IronAnvil.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.IronAnvil.Description); //Set description box text
+
+        ComponentText.SetText("Iron Bar"); //Set component name
+        ComponentAmount.SetText("x5"); //Set component amount 
+
+        selected = SelectedRecipe.IronAnvil;
     }
     #endregion
 
@@ -620,6 +663,27 @@ public class AnywhereCrafting : MonoBehaviour
             }
         }
     }
+
+    private void CraftChest()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Chest");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var woodComponent = new CraftRecipeItem
+            {
+                displayName = "wood",
+                quantity = 10
+            };
+
+            var components = new List<CraftRecipeItem>() { woodComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Chest, 1);
+                Debug.Log("Crafted Chest");
+            }
+        }
+    }
     #endregion
 
     //Region for furnace crafting functions
@@ -644,6 +708,26 @@ public class AnywhereCrafting : MonoBehaviour
             }
         }
     }
+    private void CraftIronBar()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Iron Bar");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var tinComponent = new CraftRecipeItem
+            {
+                displayName = "iron ore",
+                quantity = 1
+            };
+
+            var components = new List<CraftRecipeItem>() { tinComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.IronBar, 1);
+                Debug.Log("Crafted Iron Bar");
+            }
+        }
+    }
     #endregion
 
     //Region for tinAnvil crafting functions
@@ -658,7 +742,7 @@ public class AnywhereCrafting : MonoBehaviour
             var tinComponent = new CraftRecipeItem
             {
                 displayName = "tin bar",
-                quantity = 15
+                quantity = 10
             };
 
             var woodComponent = new CraftRecipeItem
@@ -684,7 +768,7 @@ public class AnywhereCrafting : MonoBehaviour
             var tinComponent = new CraftRecipeItem
             {
                 displayName = "tin bar",
-                quantity = 15
+                quantity = 10
             };
 
             var woodComponent = new CraftRecipeItem
@@ -730,13 +814,33 @@ public class AnywhereCrafting : MonoBehaviour
             var tinComponent = new CraftRecipeItem
             {
                 displayName = "tin bar",
-                quantity = 20
+                quantity = 10
             };
 
             var components = new List<CraftRecipeItem>() { tinComponent };
             {
                 playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinChestplate, 1);
                 Debug.Log("Crafted Tin Chestplate");
+            }
+        }
+    }
+    private void CraftIronAnvil()
+    {
+        for (int i = 0; i < amountToCraft; i++)
+        {
+            Debug.Log("Trying to Craft Iron Anvil");
+            var playerInventoryHolder = thisPlayer.GetComponent<PlayerInventoryHolder>();
+
+            var ironComponent = new CraftRecipeItem
+            {
+                displayName = "iron bar",
+                quantity = 5
+            };
+
+            var components = new List<CraftRecipeItem>() { ironComponent };
+            {
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.IronAnvil, 1);
+                Debug.Log("Crafted Iron Chestplate");
             }
         }
     }
@@ -811,6 +915,18 @@ public class AnywhereCrafting : MonoBehaviour
         if (selected == SelectedRecipe.WoodFloor)
         {
             CraftWoodFloor();
+        }
+        if (selected == SelectedRecipe.Chest)
+        {
+            CraftChest();
+        }
+        if (selected == SelectedRecipe.IronAnvil)
+        {
+            CraftIronAnvil();
+        }
+        if (selected == SelectedRecipe.IronBar)
+        {
+            CraftIronBar();
         }
         else Debug.Log("Nothing is selected to craft!");
     }

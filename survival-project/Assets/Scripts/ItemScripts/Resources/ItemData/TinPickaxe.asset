@@ -21,7 +21,7 @@ MonoBehaviour:
   ItemType: Pick
   ItemPrefab: {fileID: 7389436694480070536, guid: fa59577ec9aeb264ea63536b75dbe37c,
     type: 3}
-  itemDamage: 5
+  itemDamage: 10
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0

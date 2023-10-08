@@ -263,6 +263,15 @@ public class HotbarDisplay : StaticInventoryDisplay
                     player.GetComponent<UseItemManager>().UseHoe();
                     break;
 
+                case "Chest":         
+                    if (player.GetComponent<UseItemManager>().TileFound() == false) //If no Wall
+                    {
+                        player.GetComponent<UseItemManager>().PlaceChest(itemData.BlockPrefab, itemData.ID);
+                        slots[_currentIndex].AssignedInventorySlot.RemoveFromStack(1);
+                        RefreshStaticDisplay();
+                    }
+                    break;
+
                 //case "Seed":
                 //    var seedTile = slots[_currentIndex].AssignedInventorySlot.ItemData.ItemTile;
                 //    if (player.GetComponent<UseItemManager>().MouseOverCropland() == true) //if mouse over farmland

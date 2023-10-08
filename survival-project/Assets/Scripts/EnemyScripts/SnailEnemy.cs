@@ -107,7 +107,7 @@ public class SnailEnemy : NetworkBehaviour
                 {                                 
                     state = SnailState.AttackingTarget;                  
                 }
-                TargetToFar(); //Sees if player is too far or not
+                //TargetToFar(); //Sees if player is too far or not
                 break;
 
             case SnailState.AttackingTarget:

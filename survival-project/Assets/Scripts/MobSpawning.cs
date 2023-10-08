@@ -79,13 +79,13 @@ public class MobSpawning : NetworkBehaviour
                 CheckIfCanSpawn(spawnPos);
                 if (canSpawnMob == false) return; //If can spawn mob is false (it failed the parameters) then go back
 
-                int number = Random.Range(0, 1);
+                //int number = Random.Range(0, 1);
                 int element = Random.Range(0, mobPool.Length);
 
                 var snail = Instantiate(mobPool[element], spawnPos, Quaternion.identity);
                 snail.GetComponent<NetworkObject>().Spawn();
                 currentSpawns++;
-                var snailScript = snail.GetComponent<SnailEnemy>();
+                //var snailScript = snail.GetComponent<SnailEnemy>();
                 var snailHealthScript = snail.GetComponent<EnemyHealth>();
                 //snailScript.playerWhoSpawned = thisPlayer;
                 //snailScript.startingPosition = spawnPos;
@@ -110,7 +110,7 @@ public class MobSpawning : NetworkBehaviour
     {
         var snail = Instantiate(mobPool[0], spawnPosition, Quaternion.identity);
         snail.GetComponent<NetworkObject>().Spawn();
-        var snailScript = snail.GetComponent<SnailEnemy>();
+        //var snailScript = snail.GetComponent<SnailEnemy>();
         var snailHealthScript = snail.GetComponent<EnemyHealth>();
         //snailScript.playerWhoSpawned = thisPlayer;
         //snailScript.startingPosition = spawnPosition;

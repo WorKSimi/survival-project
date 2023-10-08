@@ -271,8 +271,8 @@ public class UseItemManager : NetworkBehaviour
                     var ray = playerCam.ScreenPointToRay(Input.mousePosition);
                     var hit = Physics2D.GetRayIntersection(ray, wallLayers);
                     if (hit == false) return; //Return if nothing is hit.
-                    var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
 
+                    var tilePosition = Vector3Int.FloorToInt(hit.transform.position);
                     hoveredWall = hit.transform;
                     var wallScript = hoveredWall.GetComponent<Wall>();
 
@@ -281,7 +281,7 @@ public class UseItemManager : NetworkBehaviour
                     if (wallScript.currentHealth <= 0)
                     {
                         wallScript.Die();                                       
-                        KillWallClientRpc(tilePosition, 0);
+                        KillWallClientRpc(tilePosition);
                     }
                 }
             }
@@ -313,7 +313,7 @@ public class UseItemManager : NetworkBehaviour
     {
         var vec2 = (Vector2Int)position; //Turn position to vector 2     
         RaycastHit2D hit; //Variable for racyast
-        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f, wallLayers); //Set hit to raycast
+        hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Set hit to raycast
         
         if (hit.transform.CompareTag("Wall"))
         {
@@ -323,13 +323,13 @@ public class UseItemManager : NetworkBehaviour
             if (wallScript.currentHealth <= 0)
             {
                 wallScript.Die(); //Kill wall on host end. Spawn in item.
-                KillWallClientRpc(position, chunkNumber); //RPC to remove wall on all clients EXCEPT HOST! Its already done here.
+                KillWallClientRpc(position); //RPC to remove wall on all clients EXCEPT HOST! Its already done here.
             }
         }           
     }
 
     [ClientRpc] //Launched by server, ran on clients
-    private void KillWallClientRpc(Vector3Int position, int chunkNumber)
+    private void KillWallClientRpc(Vector3Int position)
     {
         if (IsHost) return; //If your the host, dont do this.
 
@@ -379,7 +379,7 @@ public class UseItemManager : NetworkBehaviour
                         if (wallScript.currentHealth <= 0)
                         {
                             wallScript.Die();
-                            KillWallClientRpc(tilePosition, 0);
+                            KillWallClientRpc(tilePosition);
                         }
                     }
                 }
@@ -538,6 +538,29 @@ public class UseItemManager : NetworkBehaviour
         }
     }
 
+    public void PlaceChest(GameObject chestObject, int itemID)
+    {
+        if (IsHost) //If host, do this and then spawn it on network
+        {
+            Vector3Int mousePos = GetMousePosition(); //Gets mouse position
+            var go = Instantiate(chestObject, mousePos, Quaternion.identity); //Instantiate Chest
+            go.GetComponent<NetworkObject>().Spawn(); //Spawn Chest on Network
+        }
+        else if (IsClient) //If your a client
+        {
+            Vector3Int mousePos = GetMousePosition(); //Get position where tile will go
+            PlaceChestServerRpc(mousePos, itemID);
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)] //Fire by client, execute on server
+    private void PlaceChestServerRpc(Vector3 position, int itemID)
+    {
+        var obj = blockDatabase.TileReturner(itemID);
+        var go = Instantiate(obj, position, Quaternion.identity); //Instantiate Chest
+        go.GetComponent<NetworkObject>().Spawn(); //Spawn Chest on Network
+    }
+
     private void LaunchProjectile(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     {
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
@@ -599,7 +622,6 @@ public class UseItemManager : NetworkBehaviour
         if (IsHost) //If host, do this and then spawn it on network
         {
             Vector3Int mousePos = GetMousePosition(); //Gets mouse position
-            Debug.Log(mousePos);
             Instantiate(BlockPrefab, mousePos, Quaternion.identity); //Instantiate Wall           
             PlaceBlockOnClientRpc(ItemID, mousePos);
         }

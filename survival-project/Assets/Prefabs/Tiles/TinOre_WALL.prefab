@@ -100,7 +100,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01, y: 0.02}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.25}
@@ -111,7 +111,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &2976247172256185872
 MonoBehaviour:
@@ -126,12 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  isBlueberryBush: 0
-  maxHealth: 5
-  grassScript: {fileID: 0}
+  maxHealth: 8
   itemToDrop1: {fileID: 7389436694480070536, guid: b06dd0b0ac82c504c9a1e1b645e3b443,
     type: 3}
-  amountToDrop1: 1
+  amountToDrop1: 2
   itemToDrop2: {fileID: 0}
   amountToDrop2: 0
   inventoryItemData: {fileID: 0}

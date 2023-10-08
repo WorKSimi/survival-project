@@ -66,45 +66,12 @@ public class PlayerNetwork : NetworkBehaviour
         state = State.Normal;
         currentMoveSpeed = moveSpeed;
 
-        var tilemapObject = GameObject.FindWithTag("WaterTilemap");
-        waterTilemap = tilemapObject.GetComponent<Tilemap>();       
+        //var tilemapObject = GameObject.FindWithTag("WaterTilemap");
+        //waterTilemap = tilemapObject.GetComponent<Tilemap>(); 
     }
 
-    private void Update()
-    {
-        if (!IsOwner) return;
-        playerPos = thisPlayer.transform.position;
-        playerGridPos = waterTilemap.WorldToCell(playerPos);       
 
-        mousePos = Input.mousePosition;
-        screenPos = playerCam.WorldToScreenPoint(playerPos);
-        distance = (mousePos - screenPos);
-
-        PlayerDirection();
-        switch (state)
-        {
-            case State.Normal:
-                playerHealth.invincibile = false;
-                MovementInput();
-                animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
-                helmetAnimator.SetFloat("Speed", rb.velocity.sqrMagnitude);
-                chestplateAnimator.SetFloat("Speed", rb.velocity.sqrMagnitude);
-                break;
-
-            case State.Rolling:
-                playerHealth.invincibile = true;
-                float rollSpeedDropMultiplier = 2f;
-                rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
-
-                float rollSpeedMinimum = 8f;
-                if (rollSpeed < rollSpeedMinimum)
-                {
-                    state = State.Normal;
-                }
-                break;
-        }
-    }
-
+    
     private void FixedUpdate()
     {
         switch (state)
@@ -118,18 +85,31 @@ public class PlayerNetwork : NetworkBehaviour
                 break;
 
             case State.Dead:
-                rb.velocity = moveDir * deadSpeed; //Lock player movement when dead
+                //rb.velocity = moveDir * deadSpeed; //Lock player movement when dead
+                rb.velocity = moveDir * currentMoveSpeed;
                 break;
 
             case State.Loading:
-                rb.velocity = moveDir * deadSpeed; //lock player movement when loading.
+                //rb.velocity = moveDir * deadSpeed; //lock player movement when loading.
+                rb.velocity = moveDir * currentMoveSpeed;
                 break;
         }
     }
 
+    private void Update()
+    {
+        PlayerDirection();
+        MovementInput();
+    }
+
     private void PlayerDirection()
     {
-        if (distance.x > 0 && distance.y < 10 && distance.y > -10) //face right
+        playerPos = this.transform.position;
+        mousePos = playerCam.ScreenToWorldPoint(Input.mousePosition);
+        distance = mousePos - playerPos;
+        animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
+
+        if (distance.x > 0 && distance.y < 0.1 && distance.y > -0.1) //face right
         {
             animator.SetBool("FacingRight", true);
             animator.SetBool("FacingLeft", false);
@@ -149,7 +129,7 @@ public class PlayerNetwork : NetworkBehaviour
             chestplateSpriteRenderer.flipX = false;
         }
 
-        if (distance.x < 0 && distance.y < 10 && distance.y > -10) //face left
+        if (distance.x < 0 && distance.y < 0.1 && distance.y > -0.1) //face left
         {
             animator.SetBool("FacingRight", false);
             animator.SetBool("FacingLeft", true);
@@ -169,7 +149,7 @@ public class PlayerNetwork : NetworkBehaviour
             chestplateSpriteRenderer.flipX = true;
         }
 
-        if (distance.y > 0 && distance.x > -10 && distance.x < 10) //Face up
+        if (distance.y > 0 && distance.x > -0.1 && distance.x < 0.1) //Face up
         {
             animator.SetBool("FacingRight", false);
             animator.SetBool("FacingLeft", false);
@@ -185,7 +165,7 @@ public class PlayerNetwork : NetworkBehaviour
             chestplateAnimator.SetBool("FacingUp", true);
         }
 
-        if (distance.y < 0 && distance.x > -10 && distance.x < 10) //Face down
+        if (distance.y < 0 && distance.x > -0.1 && distance.x < 0.1) //Face down
         {
             animator.SetBool("FacingRight", false);
             animator.SetBool("FacingLeft", false);
@@ -202,14 +182,14 @@ public class PlayerNetwork : NetworkBehaviour
         }
     }
 
-    private void IsPlayerInWater()
-    {
-        if (waterTilemap.GetTile(playerGridPos)) //If a tile on water tilemap is gotten at player position
-        {
-            currentMoveSpeed = waterMoveSpeed; //Set current move speed to water speed
-        }
-        else currentMoveSpeed = moveSpeed;
-    }
+    //private void IsPlayerInWater()
+    //{
+    //    if (waterTilemap.GetTile(playerGridPos)) //If a tile on water tilemap is gotten at player position
+    //    {
+    //        currentMoveSpeed = waterMoveSpeed; //Set current move speed to water speed
+    //    }
+    //    else currentMoveSpeed = moveSpeed;
+    //}
     
     private void MovementInput()
     {
@@ -241,19 +221,19 @@ public class PlayerNetwork : NetworkBehaviour
         if (moveX != 0 || moveY != 0) //Player is not idle
         {
             lastMoveDir = moveDir; 
-            IsPlayerInWater(); //Check if player is in water. Don't have to do this if not moving!
+            //IsPlayerInWater(); //Check if player is in water. Don't have to do this if not moving!
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            if (Time.time >= nextDodgeTime)
-            {
-                rollDir = lastMoveDir; //Set direction of roll to direction of movement
-                rollSpeed = 20f; //Speed of Dodge Roll
-                state = State.Rolling; //Set player state to rolling
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //{
+        //    if (Time.time >= nextDodgeTime)
+        //    {
+        //        rollDir = lastMoveDir; //Set direction of roll to direction of movement
+        //        rollSpeed = 20f; //Speed of Dodge Roll
+        //        state = State.Rolling; //Set player state to rolling
 
-                nextDodgeTime = Time.time + 1f / dodgeRate; //Dodge cooldown
-            }
-        }
+        //        nextDodgeTime = Time.time + 1f / dodgeRate; //Dodge cooldown
+        //    }
+        //}
     }
 }

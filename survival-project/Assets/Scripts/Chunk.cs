@@ -10,7 +10,9 @@ public class Chunk : MonoBehaviour
     public bool toBeEnabled;
 
     public int chunkCordX;
-    public int chunkCordY;    
+    public int chunkCordY;
+
+    public bool chunkInitialLoad = false; //Flag for if chunk is being loaded for the first time. False by default.
 
     public int xMax;
     public int xMin;

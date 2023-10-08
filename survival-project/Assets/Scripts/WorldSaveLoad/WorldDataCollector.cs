@@ -95,7 +95,7 @@ public class WorldDataCollector : NetworkBehaviour
         Debug.Log("Seed on creation: " + seed);
         world1name = world1InputField.text; //Set world 1 name to be what player entered
         //mapGenerator.GenerateForestSurface(seed2); //Generate World
-        StartCoroutine(mapGenerator.GenerateForestSurface(seed2));
+        //StartCoroutine(mapGenerator.GenerateForestSurface(seed2));
         SaveWorldData(file1); //When world generates, save it to slot 1
         slot1Text.text = world1name; 
         SingleplayerMenu.SetActive(true);
@@ -138,7 +138,10 @@ public class WorldDataCollector : NetworkBehaviour
         float seedler = worldData.WorldSeed;
         Debug.Log("Seed on Load: " + seedler);
 
-        StartCoroutine(mapGenerator.GenerateForestSurface(seedler));       
+        mapGenerator.GenerateWorldSeed(seedler); //Generate the World Seed.
+
+        //StartCoroutine(mapGenerator.GenerateForestSurface(seedler));
+        //
         //chunkController.chunksLoaded = true;
     }
 
@@ -171,7 +174,7 @@ public class WorldDataCollector : NetworkBehaviour
         if (IsHost) return; //If your the host ABORT!
         Debug.Log("Seed on Client Load: " + seed);
         Debug.Log("Thanks for the seed! Generating Map...");
-        StartCoroutine(mapGenerator.GenerateForestSurface(seed));
+        //StartCoroutine(mapGenerator.GenerateForestSurface(seed));
     }
 }
 

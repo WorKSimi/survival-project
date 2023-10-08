@@ -126,9 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  isBlueberryBush: 0
-  maxHealth: 5
-  grassScript: {fileID: 0}
+  maxHealth: 8
   itemToDrop1: {fileID: 7389436694480070536, guid: d889face19770cd41820a59981d781bd,
     type: 3}
   amountToDrop1: 1

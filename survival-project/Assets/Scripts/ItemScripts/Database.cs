@@ -49,4 +49,9 @@ public class Database : ScriptableObject
     {
         return _itemDatabase.Find(i => i.ID == id);
     }
+
+    public InventoryItemData GetItemByString(string name)
+    {
+        return _itemDatabase.Find(i => i.name == name);
+    }
 }

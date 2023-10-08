@@ -26,15 +26,16 @@ public class MapGeneration : NetworkBehaviour
     public GameObject pitTile;
     public GameObject stoneTile;
     public GameObject stoneWall;
+    public GameObject ironOre;
 
     [Header("Object Tiles")]
-    //public GameObject redShroomTile;
-    //public GameObject brownShroomTile;
+    public GameObject redShroom;
+    public GameObject brownShroom;
     //public GameObject blueberryTile;
     //public RuleTile caveEntranceTile;
-    //public GameObject treeTile;
-    //public RuleTile flintTile;
-    //public RuleTile stoneNodeTile;
+    public GameObject treeObject;
+    public GameObject flintNode;
+    public GameObject stoneNode;
 
     [Header("Dimensions")]
     public int width;
@@ -46,6 +47,7 @@ public class MapGeneration : NetworkBehaviour
 
     [Header("Other Stuff")]
 
+    [SerializeField] private MusicManager musicManager;
     public bool useFalloff;
     public int worldOffset = 0; //Use this to determine where in the world this island will spawn
     private int caveOffset = 600; //Spawn cave 600 units away from the normal world gen.
@@ -62,15 +64,6 @@ public class MapGeneration : NetworkBehaviour
     public float[,] heightMap;
     float[,] falloffMap;
 
-    //private Tilemap wallTilemap; //Surface wall tilemap
-    //private Tilemap groundTilemap; //Surface ground tilemap
-    //private Tilemap waterTilemap; //Tilemap for water
-    //private Tilemap carpetTilemap; //Surface carpet tilemap
-
-    //private Tilemap undergroundWallTilemap; //Underground wall tilemap
-    //private Tilemap undergroundGroundTilemap; //Underground ground tilemap
-    //private Tilemap undergroundCarpetTilemap; //Underground carpet tilemap
-
     private GameObject[] caveEntrances; //Creates an array to store cave entrances
     private int currentCaveEntrances;
     private int maxCaveEntrances = 8;
@@ -78,9 +71,8 @@ public class MapGeneration : NetworkBehaviour
 
     private GameObject localPlayer;
     private WorldLoadingScreen worldLoad;
+    private float worldSeed;
 
-    // ground, carpet, wall, interactive
-    // Start is called before the first frame update
     void Start()
     {
         falloffMap = FalloffGenerator.GenerateFalloffMap(falloffSize);
@@ -116,14 +108,11 @@ public class MapGeneration : NetworkBehaviour
         }    
     }
 
-
-
-    public IEnumerator GenerateForestSurface(float seedNumber)
+    public void GenerateWorldSeed(float seedNumber)
     {
-        Debug.Log("World Generation has Begun!");
+        var seed = seedNumber; //Seed for this func
+        worldSeed = seedNumber; //Seed for the chunk script.
 
-        var seed = seedNumber;
-        
         heightWaves[0].seed = seed;
         heightWaves[1].seed = seed + 500;
 
@@ -131,158 +120,150 @@ public class MapGeneration : NetworkBehaviour
 
         heightMap = NoiseGenerator.Generate(width, height, scale, heightWaves, offset); //height map
 
-        worldLoad = NetworkManager.LocalClient.PlayerObject.gameObject.GetComponent<WorldLoadingScreen>();
-        NetworkManager.LocalClient.PlayerObject.gameObject.GetComponent<PlayerNetwork>().state = PlayerNetwork.State.Loading; //Set player to loading (lock movement).
-
         GenerateChunks();
+        GenerateCaveChunks();
 
-        int chunkCounter = 0;
-        int max = worldChunks.Length;
-
-        foreach (GameObject chunk in worldChunks)
-        {
-            var chunkScript = chunk.GetComponent<Chunk>();
-            {
-                for (int x = chunkScript.xMin; x <= chunkScript.xMax; x++)
-                {
-                    for (int y = chunkScript.yMin; y <= chunkScript.yMax; y++)
-                    {
-                        if (useFalloff)
-                        {
-                            heightMap[x, y] = Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y]);
-                        }
-
-                        var height = heightMap[x, y];
-                        var newX = (x );
-                        var newY = (y );
-
-                        if (height < 0.05f) //Deep Water
-                        {
-                            var go = Instantiate(deepWaterTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                            go.transform.parent = chunk.transform;
-                            //AddTileToGridmap(newX, newY, 1);
-                        }
-                        else if (height < 0.2f) //Water
-                        {
-                            var go = Instantiate(waterTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                            go.transform.parent = chunk.transform;                           
-                        }
-                        else if (height < 0.3f) //Sand
-                        {
-                            if (RandomCheck(seed, 0.99, counter)) //Spawn Palm Tree
-                            {
-                                var go = Instantiate(palmTree, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-
-                                var go2 = Instantiate(sandTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go2.transform.parent = chunk.transform;
-                            }
-                            else if(RandomCheck(seed, 0.99, counter)) //Spawn sea shell
-                            {
-                                var go = Instantiate(seaShell, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-
-                                var go2 = Instantiate(sandTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go2.transform.parent = chunk.transform;
-                            }
-                            else //Spawn sand with nothing
-                            {
-                                var go = Instantiate(sandTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                            }                                        
-                        }
-                        else if (height < 0.5f) //Grass
-                        {                          
-                            if (RandomCheck(seed, 0.97, counter)) //Spawn Tree
-                            {
-                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                                go.GetComponent<Grass>().EnableTree();
-                            }
-
-                            else if (RandomCheck(seed, 0.995, counter)) //Spawn red mushroom
-                            {
-                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                                go.GetComponent<Grass>().EnableRedMushroom();
-                            }
-
-                            else if (RandomCheck(seed, 0.995, counter)) //Spawn brown mushroom
-                            {
-                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                                go.GetComponent<Grass>().EnableBrownMushroom();
-                            }
-
-                            else if (RandomCheck(seed, 0.990, counter)) //Spawn stone node
-                            {
-                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                                go.GetComponent<Grass>().EnableStoneNode();
-                            }
-
-                            else if (RandomCheck(seed, 0.995, counter)) //Spawn flint node
-                            {
-                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                                go.GetComponent<Grass>().EnableFlintNode();
-                            }
-
-                            ////else if (RandomCheck(seed, 0.995, counter)) //Spawn blueberry bush
-                            ////{
-                            ////    var go = Instantiate(blueberryTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                            ////    go.transform.parent = chunk.transform;
-                            ////}
-                            else //Spawn normal Grass
-                            {
-                                var go = Instantiate(grassTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                                go.transform.parent = chunk.transform;
-                                go.GetComponent<Grass>().DisableAllStates(); 
-                            }                           
-                        }
-                        else if (height < 0.6f) //Dirt Ground
-                        {
-                            var go = Instantiate(dirtTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                            go.transform.parent = chunk.transform;
-                            //AddTileToGridmap(newX, newY, 5);
-                            TrySpawnCaveEntrance(newX, newY, chunkScript);
-                        }
-                        else if (height < 1.0f) //Wall
-                        {
-                            if (RandomCheck(seed, 0.95, counter)) //Spawn tin ore
-                            {
-                                SpawnOreVein(newX, newY, chunk) ;
-                            }
-                            else //If tin pass fails, spawn a normal wall
-                            {
-                                var go = Instantiate(grassWall, new Vector3(newX, newY, 0), Quaternion.identity); //Grass Wall
-                                go.transform.parent = chunk.transform;
-
-                                var go2 = Instantiate(dirtTile, new Vector3(newX, newY, 0), Quaternion.identity); //Dirt Ground
-                                go.transform.parent = chunk.transform;
-                                //AddTileToGridmap(newX, newY, 6);
-                            }
-                        }
-                    }
-                }                 
-            }
-            chunk.GetComponent<Chunk>().DisableChunk();
-
-            chunkCounter++;
-            float amount = ((float)chunkCounter / (float)max) * 100;
-            worldLoad.UpdateLoadBar(amount);
-            yield return null; //Wait 1 frame
-
-        } //OPTIMIZE THIS LATER ^^^^
-        if (chunkController != null) //If theres a chunk controller.
-        {
-            var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
-            chunkcontrollerScript.worldChunksHolder = worldChunks; //Set the chunk holder in the controller.
-        }
-        worldLoad.SurfaceLoaded();
-
-        yield return StartCoroutine(GenerateForestUnderground(seedNumber)); //When surface is made, do cave! 
+        var chunkcontrollerScript = chunkController.GetComponent<ChunkController>();
+        chunkcontrollerScript.worldChunksHolder = worldChunks; //Set the chunk holder in the controller.
+        chunkcontrollerScript.caveChunksHolder = caveChunks;
+        chunkcontrollerScript.chunksLoaded = true;       
+        //StartCoroutine(worldLoad.AllLoadingComplete());
     }
+
+    
+
+    public void GenerateForestChunk(GameObject chunkObject) //Function that takes in a chunk
+    {
+        var seed = worldSeed;
+        var chunk = chunkObject.GetComponent<Chunk>();
+
+        for (int x = chunk.xMin; x <= chunk.xMax; x++)
+        {
+            for (int y = chunk.yMin; y <= chunk.yMax; y++)
+            {
+                if (useFalloff)
+                {
+                    heightMap[x, y] = Mathf.Clamp01(heightMap[x, y] - falloffMap[x, y]);
+                }
+
+                var height = heightMap[x, y];
+
+                if (height < 0.01f) //Deep Water
+                {
+                    var go = Instantiate(deepWaterTile, new Vector3(x, y, 0), Quaternion.identity);
+                    go.transform.parent = chunk.transform;
+                    //AddTileToGridmap(newX, newY, 1);
+                }
+                else if (height < 0.2f) //Water
+                {
+                    var go = Instantiate(waterTile, new Vector3(x, y, 0), Quaternion.identity);
+                    go.transform.parent = chunk.transform;
+                }
+                else if (height < 0.3f) //Sand
+                {
+                    if (RandomCheck(seed, 0.99, counter)) //Spawn Palm Tree
+                    {
+                        var go = Instantiate(palmTree, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(sandTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+                    else if (RandomCheck(seed, 0.99, counter)) //Spawn sea shell
+                    {
+                        var go = Instantiate(seaShell, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(sandTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+                    else //Spawn sand with nothing
+                    {
+                        var go = Instantiate(sandTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+                    }
+                }
+                else if (height < 0.5f) //Grass
+                {
+                    if (RandomCheck(seed, 0.97, counter)) //Spawn Tree
+                    {
+                        var go = Instantiate(grassTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(treeObject, new Vector3(x, y, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+
+                    else if (RandomCheck(seed, 0.995, counter)) //Spawn red mushroom
+                    {
+                        var go = Instantiate(grassTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(redShroom, new Vector3(x, y, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+
+                    else if (RandomCheck(seed, 0.995, counter)) //Spawn brown mushroom
+                    {
+                        var go = Instantiate(grassTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(brownShroom, new Vector3(x, y, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+
+                    else if (RandomCheck(seed, 0.990, counter)) //Spawn stone node
+                    {
+                        var go = Instantiate(grassTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(stoneNode, new Vector3(x, y, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+
+                    else if (RandomCheck(seed, 0.995, counter)) //Spawn flint node
+                    {
+                        var go = Instantiate(grassTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(flintNode, new Vector3(x, y, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+
+                    else //Spawn normal Grass
+                    {
+                        var go = Instantiate(grassTile, new Vector3(x, y, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                    }
+                }
+                else if (height < 0.6f) //Dirt Ground
+                {
+                    var go = Instantiate(dirtTile, new Vector3(x, y, 0), Quaternion.identity);
+                    go.transform.parent = chunk.transform;
+                    TrySpawnCaveEntrance(x, y, chunk);
+                }
+                else if (height < 1.0f) //Wall
+                {
+                    if (RandomCheck(seed, 0.90, counter)) //Spawn tin ore
+                    {
+                        SpawnOreVein(x, y, chunkObject);
+                    }
+                    else //If tin pass fails, spawn a normal wall
+                    {
+                        var go = Instantiate(grassWall, new Vector3(x, y, 0), Quaternion.identity); //Grass Wall
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(dirtTile, new Vector3(x, y, 0), Quaternion.identity); //Dirt Ground
+                        go.transform.parent = chunk.transform;
+                        //AddTileToGridmap(newX, newY, 6);
+                    }
+                }
+            }
+        }
+    }
+
+
 
     private void SpawnOreVein(float x, float y, GameObject chunkObject) //This function generates ore veins. Its currently very simple
     {
@@ -363,6 +344,54 @@ public class MapGeneration : NetworkBehaviour
         }
     }
 
+    public void GenerateUndergroundChunk(GameObject chunkObject)
+    {
+        var seed = worldSeed;
+        var chunk = chunkObject.GetComponent<Chunk>();
+
+        for (int x = chunk.CavexMin; x <= chunk.CavexMax; x++)
+        {
+            for (int y = chunk.CaveyMin; y <= chunk.CaveyMax; y++)
+            {
+                var height = heightMap[x, y];
+                var newX = (x + caveOffset);
+                var newY = (y);
+
+                if (height < 0.1f) //Empty Pit
+                {
+                    var go = Instantiate(pitTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                    go.transform.parent = chunk.transform;
+                }
+
+                else if (height < 0.4f) //Open Space
+                {
+                    var go = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                    go.transform.parent = chunk.transform;
+                }
+
+                else if (height < 1.0f) //Closed Space
+                {
+                    if (RandomCheck(seed, 0.95, counter)) //Spawn Iron ore
+                    {
+                        var go = Instantiate(ironOre, new Vector3(newX, newY, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+                    else
+                    {
+                        var go = Instantiate(stoneWall, new Vector3(newX, newY, 0), Quaternion.identity);
+                        go.transform.parent = chunk.transform;
+
+                        var go2 = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                        go2.transform.parent = chunk.transform;
+                    }
+                }
+            }
+        }
+    }
+
     public IEnumerator GenerateForestUnderground(float seedNumber)
     {
         Debug.Log("Cave Generation has Begun!");
@@ -408,11 +437,22 @@ public class MapGeneration : NetworkBehaviour
 
                         else if (height < 1.0f) //Closed Space
                         {
-                            var go = Instantiate(stoneWall, new Vector3(newX, newY, 0), Quaternion.identity);
-                            go.transform.parent = chunk.transform;
+                            if (RandomCheck(seed, 0.95, counter)) //Spawn Iron ore
+                            {
+                                var go = Instantiate(ironOre, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go.transform.parent = chunk.transform;
 
-                            var go2 = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
-                            go2.transform.parent = chunk.transform;
+                                var go2 = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go2.transform.parent = chunk.transform;
+                            }
+                            else
+                            {
+                                var go = Instantiate(stoneWall, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go.transform.parent = chunk.transform;
+
+                                var go2 = Instantiate(stoneTile, new Vector3(newX, newY, 0), Quaternion.identity);
+                                go2.transform.parent = chunk.transform;
+                            }                     
                         }
                     }
                 }
@@ -424,7 +464,7 @@ public class MapGeneration : NetworkBehaviour
             yield return null;
         }
 
-        SpawnCaveExits(); //Spawn cave exits
+        StartCoroutine(SpawnCaveExits()); //Spawn cave exits
 
         if (chunkController != null) //If theres a chunk controller.
         {
@@ -435,6 +475,12 @@ public class MapGeneration : NetworkBehaviour
         StartCoroutine(worldLoad.AllLoadingComplete());
         NetworkManager.LocalClient.PlayerObject.gameObject.GetComponent<PlayerNetwork>().state = PlayerNetwork.State.Normal; //Set player to Normal
 
+        yield return new WaitForSeconds(2f); //Wait 2 Seconds
+        if (musicManager != null)
+        {
+            musicManager.StartMusic(); //Start the music.
+        }
+        
         Debug.Log("Cave Gen Finished!");
     }
 
@@ -472,7 +518,7 @@ public class MapGeneration : NetworkBehaviour
         }
     }
 
-    private void SpawnCaveExits()
+    private IEnumerator SpawnCaveExits()
     {
         caveEntrances = GameObject.FindGameObjectsWithTag("CaveEntrance"); //Get all cave entrances
         List<Vector3Int> caveExitSpots = new List<Vector3Int>();
@@ -493,8 +539,8 @@ public class MapGeneration : NetworkBehaviour
                 var chunk = chunkObj.GetComponent<Chunk>();
                 if (chunk.xMin < x && chunk.xMax > x && chunk.yMin < y && chunk.yMax > y) //if cave exit is to be placed in this chunk
                 {
+                    yield return null; //Wait 1 frame
                     chunk.EnableChunk(); //Turn the chunk on.
-
                     var vec2 = new Vector2Int(x, y); //Get position in vector 2    
                     RaycastHit2D hit = Physics2D.Raycast(vec2, Vector2.up, 0.1f); //Shoot raycast at that spot to place exit
 

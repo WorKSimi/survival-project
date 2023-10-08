@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c5f383234410e4095ba021ff517f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 10
 --- !u!114 &4648358853205179042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedItem: {fileID: 0}
-  maxHealth: 10
+  maxHealth: 15
   flashEffect: {fileID: 801226904464898194}
   healthbarObject: {fileID: 1996039737414689771}
   healthBar: {fileID: 1128948958253497378}

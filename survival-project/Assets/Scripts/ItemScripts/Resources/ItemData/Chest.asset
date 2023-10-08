@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  ID: -1
+  DisplayName: Chest
+  Description: A chest for storing items.
+  Icon: {fileID: 1631860020, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  MaxStackSize: 999
+  GoldValue: 0
+  ItemType: Chest
+  ItemPrefab: {fileID: 7389436694480070536, guid: 08a55a16234790647ad4e917bc12560c,
+    type: 3}
+  itemDamage: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 5220416277053500277, guid: 4bf6e391bd32d294698202ec37637a09,
+    type: 3}
+  HealthHealed: 0
+  BlockHealth: 0

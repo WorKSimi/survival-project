@@ -25,15 +25,16 @@ public class WorldLoadingScreen : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
-    {
-        slider.value = 0f;
-        totalLoadSlider.value = 0f;
-        text.text = "Loading Surface...";
+    //void Start()
+    //{
+    //    worldLoadScreenObject.SetActive(true);
+    //    slider.value = 0f;
+    //    totalLoadSlider.value = 0f;
+    //    text.text = "Loading Surface...";
 
-        color = new Color(0, 0, 0, 1);
-        transparentColor = new Color(0, 0, 0, 0);
-    }
+    //    color = new Color(0, 0, 0, 1);
+    //    transparentColor = new Color(0, 0, 0, 0);
+    //}
 
     public void UpdateLoadBar(float amount)
     {

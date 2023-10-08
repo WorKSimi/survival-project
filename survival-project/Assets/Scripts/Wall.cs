@@ -7,12 +7,12 @@ using UnityEngine.Tilemaps;
 public class Wall : MonoBehaviour
 {
     [SerializeField] private bool isCrop;
-    [SerializeField] private bool isBlueberryBush; //Flag for if this is on a blueberry bush.
+    //[SerializeField] private bool isBlueberryBush; //Flag for if this is on a blueberry bush.
     //[SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
     //[SerializeField] private bool isResourceNode;
     //[SerializeField] private int amountToDrop;
-    [SerializeField] private Grass grassScript;
+    //[SerializeField] private Grass grassScript;
 
     //TODO - ADD IN DROP CHANCES AS WELL!
     [Header("First Item")]
@@ -70,16 +70,16 @@ public class Wall : MonoBehaviour
             Debug.Log("Do nothing, Crop death handled by crop script");
         }        
 
-        if (grassScript != null) //If this wall object is on grass
-        {
-            grassScript.DisableAllStates(); //Turn into normal grass
-        }
+        //if (grassScript != null) //If this wall object is on grass
+        //{
+        //    grassScript.DisableAllStates(); //Turn into normal grass
+        //}
 
-        if (isBlueberryBush) //If this is a blueberry bush
-        {
-            var blueberryScript = this.gameObject.GetComponent<BlueberryBushLogic>();
-            blueberryScript.DeactivateBlueberryBush();      
-        }
+        //if (isBlueberryBush) //If this is a blueberry bush
+        //{
+        //    var blueberryScript = this.gameObject.GetComponent<BlueberryBushLogic>();
+        //    blueberryScript.DeactivateBlueberryBush();      
+        //}
 
         else //Wall is not on grass
         {
@@ -96,16 +96,16 @@ public class Wall : MonoBehaviour
             Debug.Log("Do nothing, Crop death handled by crop script");
         }
 
-        if (grassScript != null) //If this wall object is on grass
-        {
-            grassScript.DisableAllStates(); //Turn into normal grass
-        }
+        //if (grassScript != null) //If this wall object is on grass
+        //{
+        //    grassScript.DisableAllStates(); //Turn into normal grass
+        //}
 
-        if (isBlueberryBush == true) //If client is hitting blueberry bush
-        {
-            var blueberryScript = this.gameObject.GetComponent<BlueberryBushLogic>();
-            blueberryScript.ClientHitBlueberryBushServerRpc();
-        }
+        //if (isBlueberryBush == true) //If client is hitting blueberry bush
+        //{
+        //    var blueberryScript = this.gameObject.GetComponent<BlueberryBushLogic>();
+        //    blueberryScript.ClientHitBlueberryBushServerRpc();
+        //}
 
         else //Wall is not on grass
         {
