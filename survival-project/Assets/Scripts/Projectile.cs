@@ -27,6 +27,16 @@ public class Projectile : NetworkBehaviour
             DestroyProjectile();
         }
 
+        else if (hitInfo.CompareTag("Snailord"))
+        {
+            BossHealth bossHealth = hitInfo.GetComponent<BossHealth>();
+            if (bossHealth != null)
+            {
+                bossHealth.TakeDamage(Projectiledamage);
+            }
+            DestroyProjectile();
+        }
+
         else if (hitInfo.CompareTag("WallTile"))
         {
             DestroyProjectile();

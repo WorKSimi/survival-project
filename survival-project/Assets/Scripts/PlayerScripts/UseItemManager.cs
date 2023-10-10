@@ -45,6 +45,7 @@ public class UseItemManager : NetworkBehaviour
     [SerializeField] private GameObject weaponSprite;
     [SerializeField] private GameObject weaponAnchor;
     [SerializeField] private Animator slashAnimator;
+    [SerializeField] private BossHealthbarController bossHealthbarController;
 
     private Vector3Int playerPos; //Player position on grid
     private Vector3 playerPos2; //Player normal position
@@ -666,4 +667,22 @@ public class UseItemManager : NetworkBehaviour
         //    go.SetActive(false); //Make sure the tile is also NOT ACTIVE!
         //}
     }  
+
+    public void UseSlimyWarhorn()
+    {
+        Debug.Log("Using Warhorn!");
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(this.transform.position, 10f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.gameObject.CompareTag("Snailord"))
+            {
+                Debug.Log("Snailord Found!");
+                var snailord = hitCollider.gameObject.GetComponent<SnailordBoss>();
+                snailord.snailordState = SnailordBoss.SnailordState.Phase1; //Set boss to phase 1
+                snailord.targetPlayer = thisPlayer; //Set snailord target to guy that spawned him.
+                snailord.EnableHealthbar(); //Enable boss healthbar.
+                //bossHealthbarController.EnableBossHealthbar();
+            }
+        }
+    }
 }

@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\EnemyScripts\EnemyProjectile.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
+    <Compile Include="Assets\BossHealth.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StaticInventoryDisplay.cs" />
     <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
     <Compile Include="Assets\Scripts\WorldGen\FalloffGenerator.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
     <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
     <Compile Include="Assets\Scripts\CropLogic.cs" />
+    <Compile Include="Assets\BossHealthbarController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\RandomSprite.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Assets\Scripts\TileTypes.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveGameManager.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
+    <Compile Include="Assets\SnailordBoss.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
     <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
     <Compile Include="Assets\Scripts\OptimizationCulling.cs" />
@@ -175,6 +178,7 @@
     <Compile Include="Assets\Scripts\MouseItemData.cs" />
     <Compile Include="Assets\Scripts\WorldManager.cs" />
     <Compile Include="Assets\Scripts\Furnace.cs" />
+    <Compile Include="Assets\PipeHerbOnSpawner.cs" />
     <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
     <Compile Include="Assets\AnnoyingSquirrel.cs" />
     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
@@ -214,7 +218,6 @@
     <Compile Include="Assets\Scripts\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\PipeHerbOnSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

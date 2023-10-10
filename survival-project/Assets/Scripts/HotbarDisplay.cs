@@ -272,6 +272,10 @@ public class HotbarDisplay : StaticInventoryDisplay
                     }
                     break;
 
+                case "Warhorn":
+                    player.GetComponent<UseItemManager>().UseSlimyWarhorn();
+                break;
+
                 //case "Seed":
                 //    var seedTile = slots[_currentIndex].AssignedInventorySlot.ItemData.ItemTile;
                 //    if (player.GetComponent<UseItemManager>().MouseOverCropland() == true) //if mouse over farmland

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: WoodBow
+  m_Name: TinBow
   m_EditorClassIdentifier: 
   ID: 17
-  DisplayName: Wood Bow
-  Description: A crude wooden bow. Can fire arrows for ranged combat
-  Icon: {fileID: 159874814, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  DisplayName: Tin Bow
+  Description: A tin bow.
+  Icon: {fileID: 1041133064, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
   GoldValue: 1
   ItemType: Bow
-  ItemPrefab: {fileID: 7389436694480070536, guid: abe4de11b81d9c24798a3d84c0ca4bbc,
+  ItemPrefab: {fileID: 7389436694480070536, guid: 28a91736639fed24ba2b0d08fd25353f,
     type: 3}
-  itemDamage: 5
+  itemDamage: 8
   projectilePrefab: {fileID: 3006912499862247658, guid: dc22ce4f72da2f74387a2dc713632259,
     type: 3}
   projectileSpeed: 10

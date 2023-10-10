@@ -34,7 +34,6 @@ public class HerbInventorySlot : MonoBehaviour
 
     public void HerbSlotButtonClicked() //This function runs when clicking on the pipe slot
     {
-
         if (mouseItemData.AssignedInventorySlot.itemData != null) //if the mouse item data isnt null, 
         {
             if (mouseItemData.AssignedInventorySlot.itemData.ItemType == "Herb") //and that item is a Herb...
@@ -58,7 +57,7 @@ public class HerbInventorySlot : MonoBehaviour
             mouseItemData.AssignedInventorySlot.itemData = herbInventorySlot.itemData; //Set mouse data to the right pipe.
             mouseItemData.AssignedInventorySlot.stackSize = herbInventorySlot.stackSize;
             herbInventorySlot.ClearSlot();
-            UpdateHerbSlot();
+            //UpdateHerbSlot();
             ClearSlot();
             mouseItemData.UpdateMouseSlot();
         }
