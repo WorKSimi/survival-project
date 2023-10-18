@@ -6,12 +6,12 @@ using Unity.Netcode;
 public class BossHealth : NetworkBehaviour
 {
     [SerializeField] private GameObject droppedItem;
-    [SerializeField] private float maxHealth;
+    [SerializeField] public float maxHealth;
     [SerializeField] private SimpleFlash flashEffect;
     public GameObject healthbarObject;
     [SerializeField] private HealthBar healthBar;
     //[SerializeField] private AudioSource hitSound;
-    private float currentHealth;
+    public float currentHealth;
     public bool canBossBeHurt;
 
     void Start()

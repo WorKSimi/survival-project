@@ -83,16 +83,16 @@ public class BeeEnemy : NetworkBehaviour
 
         float maxDespawnDistance = 50f;
 
-        if (playerWhoSpawned != null)
-        {
-            if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
-            {
-                this.mobSpawning.currentSpawns--;
-                this.gameObject.GetComponent<NetworkObject>().Despawn();
-                Destroy(this.gameObject); //Destroy the snail,          
-            }
-        }
-        else if (playerWhoSpawned == null)
+        //if (playerWhoSpawned != null)
+        //{
+        //    if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
+        //    {
+        //        this.mobSpawning.currentSpawns--;
+        //        this.gameObject.GetComponent<NetworkObject>().Despawn();
+        //        Destroy(this.gameObject); //Destroy the snail,          
+        //    }
+        //}
+        if (playerWhoSpawned == null)
         {
             //Debug.Log("ERROR! PLAYER WHO SPAWNED IS NULL!");
         }

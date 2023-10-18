@@ -76,13 +76,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrop: 0
   maxHealth: 8
-  itemToDrop1: {fileID: 7389436694480070536, guid: a2c3b1011c7bfcc4e9d291fecc2893ba,
-    type: 3}
-  amountToDrop1: 1
-  itemToDrop2: {fileID: 0}
-  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
+  itemToDrop: {fileID: 7389436694480070536, guid: a2c3b1011c7bfcc4e9d291fecc2893ba,
+    type: 3}
+  maxToDrop: 1
+  minToDrop: 1
+  dropChance: 0
+  itemToDrop2: {fileID: 0}
+  maxToDrop2: 0
+  minToDrop2: 0
+  dropChance2: 0
 --- !u!114 &4077094351501825626
 MonoBehaviour:
   m_ObjectHideFlags: 0

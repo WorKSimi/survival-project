@@ -21,6 +21,19 @@ public class SnailordBoss : MonoBehaviour
 
     private bool canAttack; //Flag for if snailord can launch an attack.
 
+    //Stuff to be done
+    //Phase transitions
+
+    //Intro, snailord roars and the music comes in
+    //Maybe have health bar cinematically fill up? Look at Kirby for inspiration on that.
+
+    //Phase 1 > Phase 2
+    //Snailord becomes invincible for a second, roars again, and attacks
+
+    //Phase 2 > 3
+    //Snailord looks like he is about to die before roaring way louder.
+    //he turns slightly red and his health bar fills back up.
+
     public enum SnailordState
     {
         Sleeping,
@@ -43,6 +56,19 @@ public class SnailordBoss : MonoBehaviour
         bossHealth.canBossBeHurt = false;
         //bossHealthbarObject.SetActive(false);
         canAttack = true;
+    }
+
+    private void PhaseCheck()
+    {
+        float halfHealth = bossHealth.maxHealth / 2; //Get half health. Its half of the max health
+        if (bossHealth.currentHealth <= halfHealth) //If boss is at half health
+        {
+            snailordState = SnailordState.Phase2; //Set state to Phase 2.
+        }
+        else if (bossHealth.currentHealth <= 1) //If boss is at 1 hp (or less)
+        {
+            snailordState = SnailordState.Phase3; //Start phase 3
+        }
     }
 
     private void Update()
@@ -96,6 +122,59 @@ public class SnailordBoss : MonoBehaviour
         }
     }
 
+    private void Phase2Logic()
+    {
+        if (canAttack == true)
+        {
+            canAttack = false;
+            var num = Random.Range(0, 3);
+            if (num == 0)
+            {
+                //Triple Snail Charge
+
+                //Snailord revs up before charging 3 times, with a short delay between each.
+            }
+            else if (num == 1)
+            {
+                //Triple Snail Stomp
+
+                //Snailord stomps 3 times in a row. The final stomp has increased radius, height, and projectile.
+            }
+            else
+            {
+                //Snailord Super Spinout
+
+                //This time, snailord spins out with faster speed, releasing more projectiles.
+            }
+        }    
+    }
+
+    private void Phase3Logic()
+    {
+        if (canAttack == true)
+        {
+            canAttack = false;
+            var num = Random.Range(0, 3);
+            if (num == 0)
+            {
+                //Snailord revs up and charges, then jumps, then charges, then jumps, then charges,
+                //followed by a final super jump where he unleashes a storm of projectiles around him.
+                //Each charge also releases some projectiles around him.
+
+            }
+            else if (num == 1)
+            {
+                //Snailord spins out rapidly in a large circle around the player at fast speed, trapping them inside his zone.
+                //While doing this, projectiles are launched from around the circle towards the player, and you have to dodge inside the area. 
+            }
+            else
+            {
+                //Snailord spins in place and rapidly launches projectiles everywhere.
+                //After a few seconds, he charges to another spot nearby, and does it again. He does this 3 times.
+            }
+        }
+    }
+
     private IEnumerator AttackCooldown()
     {
         Debug.Log("Cooldown Start");
@@ -104,10 +183,6 @@ public class SnailordBoss : MonoBehaviour
         canAttack = true; //Set can attack to true
     }    
 
-    //Snailord picks a random attack
-    //After executing, snailord waits a set time (cooldown), before picking another attack.
-
-    //Phase 1
     //Attack 1 - Snailord revs and charges like killer snail
     private IEnumerator ChargeAttack()
     {

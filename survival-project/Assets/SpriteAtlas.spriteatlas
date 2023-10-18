@@ -139,6 +139,7 @@ SpriteAtlas:
   - {fileID: -130131874, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
   - {fileID: 76778199, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
   - {fileID: 21300000, guid: 5aad2fd81f43471489e1cdc90e932354, type: 3}
+  - {fileID: 21300000, guid: 923665e8e78d97a47ba8aad14a78aa5f, type: 3}
   - {fileID: 21300000, guid: cee5a2894ffa647458734011aa71a73d, type: 3}
   - {fileID: 21300000, guid: 9fd43b99065c86340825f3eb3c1d3540, type: 3}
   - {fileID: 540291374, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
@@ -570,6 +571,7 @@ SpriteAtlas:
   - Bee_Attack2_Up
   - Bee_Attack1_Side
   - Placeholder CaveEntrance
+  - Apple_Placeholder
   - TestDirt
   - FaceUp
   - Tree_Sapling

@@ -13,21 +13,25 @@ public class Wall : MonoBehaviour
     //[SerializeField] private bool isResourceNode;
     //[SerializeField] private int amountToDrop;
     //[SerializeField] private Grass grassScript;
+    //private BlueberryBushLogic blueBerryBush;
+    public InventoryItemData inventoryItemData;
+    private Vector3Int thisPosition;
+    public double currentHealth;
 
-    //TODO - ADD IN DROP CHANCES AS WELL!
     [Header("First Item")]
-    [SerializeField] private GameObject itemToDrop1;
-    [SerializeField] private int amountToDrop1;
+    [SerializeField] private GameObject itemToDrop;
+    [SerializeField] public int maxToDrop;
+    [SerializeField] public int minToDrop;
+    [SerializeField] public int dropChance;
 
     [Header("Second Item")]
     [SerializeField] private GameObject itemToDrop2;
-    [SerializeField] private int amountToDrop2;
+    [SerializeField] public int maxToDrop2;
+    [SerializeField] public int minToDrop2;
+    [SerializeField] public int dropChance2;
 
-    private BlueberryBushLogic blueBerryBush;
-    public InventoryItemData inventoryItemData;
-    private Vector3Int thisPosition;
 
-    public double currentHealth;
+    
 
     void Start()
     {
@@ -47,21 +51,31 @@ public class Wall : MonoBehaviour
     {
         thisPosition = Vector3Int.FloorToInt(this.transform.position);
 
-        if (itemToDrop1 != null) //If the item to drop is something
+        if (itemToDrop != null) //If the item to drop is something
         {
-            for (int i = 0; i < amountToDrop1; i++)
-            {
-                GameObject gameObject = Instantiate(itemToDrop1, transform.position, Quaternion.identity); //Instantiate Item
-                gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
+            var amountToDrop = Random.Range(minToDrop, maxToDrop); //Get random value between min and max.
+            for (int i = 0; i < amountToDrop; i++)
+            {               
+                float randValue = Random.value; //Random value
+                if (randValue >= dropChance) //If random value is greater than equal to drop chance
+                {
+                    var go = Instantiate(itemToDrop, this.transform.position, Quaternion.identity);
+                    go.GetComponent<NetworkObject>().Spawn();
+                }
             }
         }
 
         if (itemToDrop2 != null) //If the item to drop is something
         {
+            var amountToDrop2 = Random.Range(minToDrop2, maxToDrop2); //Get random value between min and max.
             for (int i = 0; i < amountToDrop2; i++)
             {
-                GameObject gameObject = Instantiate(itemToDrop2, transform.position, Quaternion.identity); //Instantiate Item
-                gameObject.GetComponent<NetworkObject>().Spawn(); //Spawn on network
+                float randValue = Random.value; //Random value
+                if (randValue >= dropChance2) //If random value is greater than equal to drop chance
+                {
+                    var go = Instantiate(itemToDrop, this.transform.position, Quaternion.identity);
+                    go.GetComponent<NetworkObject>().Spawn();
+                }
             }
         }
 
@@ -94,18 +108,7 @@ public class Wall : MonoBehaviour
         if (isCrop == true) //If its a crop.
         {
             Debug.Log("Do nothing, Crop death handled by crop script");
-        }
-
-        //if (grassScript != null) //If this wall object is on grass
-        //{
-        //    grassScript.DisableAllStates(); //Turn into normal grass
-        //}
-
-        //if (isBlueberryBush == true) //If client is hitting blueberry bush
-        //{
-        //    var blueberryScript = this.gameObject.GetComponent<BlueberryBushLogic>();
-        //    blueberryScript.ClientHitBlueberryBushServerRpc();
-        //}
+        }      
 
         else //Wall is not on grass
         {

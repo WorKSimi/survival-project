@@ -53,14 +53,16 @@ public class ItemPickup : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         var inventory = other.transform.GetComponent<PlayerInventoryHolder>();
-        //Debug.Log("Collision Happened");
+        Debug.Log("Collision Happened");
         if (!inventory) return;
 
         if (inventory.AddToInventory(ItemData, 1))
         {
+            Debug.Log("Picking Up Item");
             //If host or server, destroy normally
             if (IsHost)
             {
+                Debug.Log("Picking up Item HOST");
                 SaveGameManager.data.collectedItems.Add(id);
                 NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
                 networkObject.Despawn();
@@ -68,8 +70,14 @@ public class ItemPickup : NetworkBehaviour
             }
             else if (IsClient) //If your a client, send message to server to destroy it instead
             {
+                Debug.Log("Picking up Item CLIENT");
                 SaveGameManager.data.collectedItems.Add(id);
                 DestroyObjectServerRpc();
+            }
+            else //FailSafe
+            {
+                NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();
+                networkObject.Despawn();
             }
         }
     }

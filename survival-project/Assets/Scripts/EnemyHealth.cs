@@ -51,13 +51,13 @@ public class EnemyHealth : NetworkBehaviour
                 {
                     var go = Instantiate(droppedItem, transform.position, Quaternion.identity); //Instantiate that item where snail is
                     go.GetComponent<NetworkObject>().Spawn(); //Spawn item on server
-                    this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
+                    //this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
                     Destroy(this.gameObject); //Remove this enemy from the game world
                 }
             }
             else if (droppedItem == null) //If enemy has no item
             {
-                this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
+                //this.mobSpawning.currentSpawns--; //Remove 1 count from current spawns
                 Destroy(this.gameObject); //Remove enemy
             }
         }

@@ -211,10 +211,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrop: 0
   maxHealth: 8
-  itemToDrop1: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08,
-    type: 3}
-  amountToDrop1: 5
-  itemToDrop2: {fileID: 0}
-  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
+  itemToDrop: {fileID: 7389436694480070536, guid: 1be6088b75a91ca4ea727ca136379c08,
+    type: 3}
+  maxToDrop: 8
+  minToDrop: 5
+  dropChance: 0
+  itemToDrop2: {fileID: 0}
+  maxToDrop2: 0
+  minToDrop2: 0
+  dropChance2: 0

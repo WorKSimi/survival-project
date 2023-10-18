@@ -127,13 +127,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrop: 0
   maxHealth: 8
-  itemToDrop1: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f,
-    type: 3}
-  amountToDrop1: 5
-  itemToDrop2: {fileID: 0}
-  amountToDrop2: 0
   inventoryItemData: {fileID: 0}
   currentHealth: 0
+  itemToDrop: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f,
+    type: 3}
+  maxToDrop: 10
+  minToDrop: 5
+  dropChance: 0
+  itemToDrop2: {fileID: 7052819178168246034, guid: b4840cd78d56f3847bb706a6126406d9,
+    type: 3}
+  maxToDrop2: 1
+  minToDrop2: 1
+  dropChance2: 0
 --- !u!1 &8627842717453016308
 GameObject:
   m_ObjectHideFlags: 0
