@@ -109,6 +109,7 @@
     <Compile Include="Assets\Scripts\RotateToMouse.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\InventoryHolder.cs" />
+    <Compile Include="Assets\SnailordObjectPool.cs" />
     <Compile Include="Assets\Scripts\WorldSaveLoad\WorldSaveLoadManager.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingMaxTweens.cs" />
     <Compile Include="Assets\Scripts\WorldTime.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Assets\Scripts\CropLogic.cs" />
     <Compile Include="Assets\BossHealthbarController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
+    <Compile Include="Assets\RotateSpriteScript.cs" />
     <Compile Include="Assets\Scripts\Shop System\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\RandomSprite.cs" />
     <Compile Include="Assets\PipeInventorySlot.cs" />

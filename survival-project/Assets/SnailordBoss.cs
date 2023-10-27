@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using Unity.Netcode;
 public class SnailordBoss : MonoBehaviour
 {
     private Rigidbody2D rb;
     public GameObject targetPlayer;
     [SerializeField] private float chargeAttackPower;
+    [SerializeField] private int chargeAttackDamage;
     [SerializeField] private GameObject snailProjectile;
+    [SerializeField] private float projectileSpeed;
     private bool canDamage; //Flag for if enemy can hurt player. False by default.
     private int damage = 5;
     public SnailordState snailordState;
@@ -16,6 +18,11 @@ public class SnailordBoss : MonoBehaviour
     [SerializeField] private Animator animator;
     public BossHealth bossHealth;
     public GameObject bossHealthbarObject;
+
+    [SerializeField] private GameObject projectileRotateAnchor;
+    [SerializeField] private GameObject objectPool;
+    [SerializeField] private float degreesPerSecondRotate;
+
 
     private float jumpSpeed = 20f;
 
@@ -65,14 +72,32 @@ public class SnailordBoss : MonoBehaviour
         {
             snailordState = SnailordState.Phase2; //Set state to Phase 2.
         }
-        else if (bossHealth.currentHealth <= 1) //If boss is at 1 hp (or less)
+        //else if (bossHealth.currentHealth <= 1) //If boss is at 1 hp (or less)
+        //{
+        //    snailordState = SnailordState.Phase3; //Start phase 3
+        //}
+    }
+
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        if (hitInfo == null) return; //If collider hit info doesn't exist return
+        
+        if (hitInfo.CompareTag("Player"))
         {
-            snailordState = SnailordState.Phase3; //Start phase 3
+            if (canDamage == false) return; //If can't damage return
+            PlayerHealth playerHealth = hitInfo.GetComponent<PlayerHealth>();
+            if (playerHealth != null && playerHealth.invincibile == false)
+            {
+                playerHealth.TakeDamage(chargeAttackDamage);
+            }
         }
     }
 
     private void Update()
     {
+        
+        PhaseCheck();
+
         switch (snailordState)
         {
             case SnailordState.Sleeping:
@@ -88,6 +113,13 @@ public class SnailordBoss : MonoBehaviour
                 break;
 
             case SnailordState.Phase2:
+
+                projectileRotateAnchor.transform.Rotate(new Vector3(0, 0, degreesPerSecondRotate) * Time.deltaTime);
+                bossHealth.canBossBeHurt = true;
+                stateDebugText.text = "Phase2";
+
+                Phase2Logic();
+
                 break;
 
             case SnailordState.Phase3:
@@ -131,20 +163,22 @@ public class SnailordBoss : MonoBehaviour
             if (num == 0)
             {
                 //Triple Snail Charge
-
                 //Snailord revs up before charging 3 times, with a short delay between each.
+                StartCoroutine(TripleChargeAttack());
             }
             else if (num == 1)
             {
                 //Triple Snail Stomp
 
                 //Snailord stomps 3 times in a row. The final stomp has increased radius, height, and projectile.
+                StartCoroutine(TripleJumpAttack());
             }
             else
             {
                 //Snailord Super Spinout
 
-                //This time, snailord spins out with faster speed, releasing more projectiles.
+                //This time, snailord spins out with faster speed, releasing more projectiles. Also throw bombs at player.
+                StartCoroutine(SnailSuperSpinout());
             }
         }    
     }
@@ -160,17 +194,20 @@ public class SnailordBoss : MonoBehaviour
                 //Snailord revs up and charges, then jumps, then charges, then jumps, then charges,
                 //followed by a final super jump where he unleashes a storm of projectiles around him.
                 //Each charge also releases some projectiles around him.
+                
 
             }
             else if (num == 1)
             {
                 //Snailord spins out rapidly in a large circle around the player at fast speed, trapping them inside his zone.
                 //While doing this, projectiles are launched from around the circle towards the player, and you have to dodge inside the area. 
+                
             }
             else
             {
                 //Snailord spins in place and rapidly launches projectiles everywhere.
                 //After a few seconds, he charges to another spot nearby, and does it again. He does this 3 times.
+                
             }
         }
     }
@@ -188,19 +225,19 @@ public class SnailordBoss : MonoBehaviour
     {
         Debug.Log("CHARGE!");
         rb.velocity = Vector3.zero; //Stop his movement
-        yield return new WaitForSeconds(1f); //Wait 1 seconds       
-
+        yield return new WaitForSeconds(1f); //Wait 1 seconds
+                                             
+        canDamage = true;
         var targetChargePosition = targetPlayer.transform.position;
         Vector2 direction = (targetChargePosition - transform.position).normalized; //Get direction of player
         rb.AddForce(direction * chargeAttackPower, ForceMode2D.Impulse); //Charge at the player
-        canDamage = true;
-
         yield return new WaitForSeconds(1f); //Charge for 1 second
 
         rb.velocity = Vector3.zero; //Disable movement 
-        canDamage = false;
+        
 
         yield return new WaitForSeconds(.5f); //Pause for half a second
+        canDamage = false;
         StartCoroutine(AttackCooldown());
     }
 
@@ -218,15 +255,12 @@ public class SnailordBoss : MonoBehaviour
         
         yield return new WaitForSeconds(2f); //Wait for jump to end
 
-        canDamage = true; //Can damage on land.       
-        for (int i = 0; i < 10; i++)
-        {
-            var direction2 = Random.insideUnitCircle.normalized;
-            LaunchSnailProjectile(direction2, 15f);
-        }
+        canDamage = true; //Can damage on land.
+
+        Pattern1();
+        Pattern2();
+
         animator.Play("Snailord");
-
-
         yield return new WaitForSeconds(0.5f); //Wait HALF a second
         canDamage = false;
         StartCoroutine(AttackCooldown());
@@ -247,27 +281,73 @@ public class SnailordBoss : MonoBehaviour
         StartCoroutine(AttackCooldown());
     }
 
+    private IEnumerator TripleChargeAttack()
+    {
+        Debug.Log("TRIPLE CHARGE!");
+        rb.velocity = Vector3.zero; //Stop his movement
+        yield return new WaitForSeconds(1f); //Wait 1 seconds
+        canDamage = true;
+
+        for (int i = 0; i < 3; i++) //Charge 3 Times
+        {
+            var targetChargePosition = targetPlayer.transform.position;
+            Vector2 direction = (targetChargePosition - transform.position).normalized; //Get direction of player
+            rb.AddForce(direction * chargeAttackPower, ForceMode2D.Impulse); //Charge at the player
+            yield return new WaitForSeconds(1f); //Charge for 1 second
+            rb.velocity = Vector3.zero; //Disable movement 
+            yield return new WaitForSeconds(.5f); //Pause for half a second
+        }
+         
+        canDamage = false;
+        StartCoroutine(AttackCooldown());
+    }
+
+    private IEnumerator TripleJumpAttack()
+    {
+        Debug.Log("TRIPLE JUMP!");
+
+        for (int i = 0; i < 3; i++) //Charge 3 Times
+        {
+            animator.Play("SnailordLand");
+            canDamage = false; //Cant damage during jump
+            var targetPosition = targetPlayer.transform.position;
+            Vector2 direction = (targetPosition - transform.position).normalized; //Get direction of player
+            rb.AddForce(direction * jumpSpeed, ForceMode2D.Impulse); //Jump at player
+            yield return new WaitForSeconds(2f); //Wait for jump to end
+            canDamage = true; //Can damage on land.
+
+            Pattern1();
+            Pattern2();
+
+            animator.Play("Snailord");
+            yield return new WaitForSeconds(0.5f); //Wait HALF a second
+            canDamage = false;
+        }
+        StartCoroutine(AttackCooldown());
+    }
+
+
     private void Pattern1()
     {
-        LaunchSnailProjectile(Vector2.up, 8f); //Up
-        LaunchSnailProjectile(Vector2.down, 8f); //Down
-        LaunchSnailProjectile(Vector2.left, 8f); //Left
-        LaunchSnailProjectile(Vector2.right, 8f); //Right
-        LaunchSnailProjectile(new Vector2(1f, 1f).normalized, 8f); //Up Right
-        LaunchSnailProjectile(new Vector2(-1f, 1f).normalized, 8f); //Up Left
-        LaunchSnailProjectile(new Vector2(1f, -1f).normalized, 8f); //Down Right
-        LaunchSnailProjectile(new Vector2(-1f, -1f).normalized, 8f); //Down Left
+        LaunchSnailProjectile(Vector2.up, projectileSpeed); //Up
+        LaunchSnailProjectile(Vector2.down, projectileSpeed); //Down
+        LaunchSnailProjectile(Vector2.left, projectileSpeed); //Left
+        LaunchSnailProjectile(Vector2.right, projectileSpeed); //Right
+        LaunchSnailProjectile(new Vector2(1f, 1f).normalized, projectileSpeed); //Up Right
+        LaunchSnailProjectile(new Vector2(-1f, 1f).normalized, projectileSpeed); //Up Left
+        LaunchSnailProjectile(new Vector2(1f, -1f).normalized, projectileSpeed); //Down Right
+        LaunchSnailProjectile(new Vector2(-1f, -1f).normalized, projectileSpeed); //Down Left
     }
     private void Pattern2()
     {
-        LaunchSnailProjectile(new Vector2(0.5f, 1f).normalized, 8f);
-        LaunchSnailProjectile(new Vector2(-0.5f, 1f).normalized, 8f);
-        LaunchSnailProjectile(new Vector2(1f, 0.5f).normalized, 8f);
-        LaunchSnailProjectile(new Vector2(-1f, 0.5f).normalized, 8f);
-        LaunchSnailProjectile(new Vector2(1f, -0.5f).normalized, 8f);
-        LaunchSnailProjectile(new Vector2(-1f, -0.5f).normalized, 8f);
-        LaunchSnailProjectile(new Vector2(-0.5f, -1f).normalized, 8f);
-        LaunchSnailProjectile(new Vector2(0.5f, -1f).normalized, 8f);
+        LaunchSnailProjectile(new Vector2(0.5f, 1f).normalized, projectileSpeed);
+        LaunchSnailProjectile(new Vector2(-0.5f, 1f).normalized, projectileSpeed);
+        LaunchSnailProjectile(new Vector2(1f, 0.5f).normalized, projectileSpeed);
+        LaunchSnailProjectile(new Vector2(-1f, 0.5f).normalized, projectileSpeed);
+        LaunchSnailProjectile(new Vector2(1f, -0.5f).normalized, projectileSpeed);
+        LaunchSnailProjectile(new Vector2(-1f, -0.5f).normalized, projectileSpeed);
+        LaunchSnailProjectile(new Vector2(-0.5f, -1f).normalized, projectileSpeed);
+        LaunchSnailProjectile(new Vector2(0.5f, -1f).normalized, projectileSpeed);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -285,10 +365,40 @@ public class SnailordBoss : MonoBehaviour
     private void LaunchSnailProjectile(Vector2 projectileDirection, float projectileSpeed)
     {
         var go = Instantiate(snailProjectile, transform.position, Quaternion.identity); //Spawn projectile on snailord
+        go.GetComponent<NetworkObject>().Spawn();
         var rb = go.GetComponent<Rigidbody2D>();
         rb.AddForce(projectileDirection * projectileSpeed, ForceMode2D.Impulse);
         var projScript = go.GetComponent<EnemyProjectile>();
         projScript.enemyProjectileLifetime = 3f;
         projScript.enemyProjectileDamage = damage;
+        projScript.StartDestructionCoroutine(3f);
     }
+
+    private IEnumerator SnailSuperSpinout()
+    {
+        Debug.Log("SUPER SPINOUT!");
+
+        for (int i = 0; i < 50; i++) //Launch 50 projectiles
+        {
+            var direction = projectileRotateAnchor.transform.up;
+            var direction2 = -direction; //Opposite of direction 1
+            LaunchSnailProjectile(direction, projectileSpeed);
+            LaunchSnailProjectile(direction2, projectileSpeed);
+            yield return new WaitForSeconds(0.1f); //Wait 0.2 seconds between each projectile
+        }
+        StartCoroutine(AttackCooldown());
+    }
+
+    //private void LaunchRotatingProjectile(Vector2 projectileDirection, float projectileSpeed)
+    //{
+    //    var go = Instantiate(snailProjectile, transform.position, Quaternion.identity); //Spawn projectile on snailord
+    //    go.GetComponent<NetworkObject>().Spawn();
+    //    //go.transform.parent = projectileRotateAnchor.transform;
+    //    var rb = go.GetComponent<Rigidbody2D>();
+    //    rb.AddForce(projectileDirection * projectileSpeed, ForceMode2D.Impulse);
+    //    var projScript = go.GetComponent<EnemyProjectile>();
+    //    projScript.enemyProjectileLifetime = 3f;
+    //    projScript.enemyProjectileDamage = damage;
+    //    projScript.StartDestructionCoroutine(3f);
+    //}
 }

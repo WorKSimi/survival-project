@@ -24,7 +24,7 @@ public class EnemyProjectile : NetworkBehaviour
 
         else if (hitInfo.tag != "Enemy")
         {
-            Debug.Log("Something other than enemy was hit!");
+            //Debug.Log("Something other than enemy was hit!");
         }
     }
 
@@ -33,10 +33,22 @@ public class EnemyProjectile : NetworkBehaviour
         //Debug.Log("Projectile on function call: " + Projectilelifetime);
         StartCoroutine(DestroyProjectileAfterTime(lifetime));
     }
+
+    public void StartDisableCoroutine(float lifetime)
+    {
+        StartCoroutine(DisableProjectileAfterTime(lifetime));
+    }
+
     public IEnumerator DestroyProjectileAfterTime(float lifetime)
     {
         yield return new WaitForSeconds(lifetime); //Wait for lifetime
         DestroyProjectile(); //Destroy the object
+    }
+
+    public IEnumerator DisableProjectileAfterTime(float lifetime)
+    {
+        yield return new WaitForSeconds(lifetime);
+        this.gameObject.SetActive(false);
     }
     void DestroyProjectile()
     {

@@ -112,6 +112,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 8275934638365868964}
+--- !u!1 &949219620455715437
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7153549156013378455}
+  - component: {fileID: 1170502130386973310}
+  m_Layer: 0
+  m_Name: SnailordObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7153549156013378455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949219620455715437}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5962618268234721014}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1170502130386973310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949219620455715437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6019c42a0e2a8f24aac9da55c8c5c1ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3006912499862247658, guid: 91072d02f4adb8446859febacdffc05c,
+    type: 3}
 --- !u!1 &1088427836248855052
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,6 +260,55 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &1169560106049456613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5962618268234721014}
+  - component: {fileID: 5304425888892999329}
+  m_Layer: 0
+  m_Name: SnailordProjectileSpinAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5962618268234721014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169560106049456613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7153549156013378455}
+  m_Father: {fileID: 150251339859450378}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5304425888892999329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169560106049456613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1558390165481587803
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,8 +566,8 @@ GameObject:
   - component: {fileID: 609601953310233629}
   - component: {fileID: 8762898943667015854}
   - component: {fileID: 6836464130157715672}
-  - component: {fileID: 5459490343725163645}
   - component: {fileID: 3918084635946034016}
+  - component: {fileID: -1747950165430033929}
   m_Layer: 0
   m_Name: SnailordBoss
   m_TagString: Snailord
@@ -495,6 +590,7 @@ Transform:
   - {fileID: 6352658483891294415}
   - {fileID: 7981672093395785999}
   - {fileID: 81997147314505247}
+  - {fileID: 5962618268234721014}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -512,13 +608,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPlayer: {fileID: 0}
   chargeAttackPower: 30
+  chargeAttackDamage: 20
   snailProjectile: {fileID: 3006912499862247658, guid: 91072d02f4adb8446859febacdffc05c,
     type: 3}
+  projectileSpeed: 8
   snailordState: 0
   stateDebugText: {fileID: 2420162005713033225}
   animator: {fileID: 8317744941920834794}
   bossHealth: {fileID: 3918084635946034016}
   bossHealthbarObject: {fileID: 1558390165481587803}
+  projectileRotateAnchor: {fileID: 1169560106049456613}
+  objectPool: {fileID: 949219620455715437}
+  degreesPerSecondRotate: 180
 --- !u!50 &8762898943667015854
 Rigidbody2D:
   serializedVersion: 4
@@ -566,22 +667,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7587125, y: 1.6380692}
   m_EdgeRadius: 0
---- !u!114 &5459490343725163645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4693349628532988831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!114 &3918084635946034016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,7 +684,24 @@ MonoBehaviour:
   flashEffect: {fileID: 8532533004099773711}
   healthbarObject: {fileID: 1558390165481587803}
   healthBar: {fileID: 1305136120080047048}
+  currentHealth: 0
   canBossBeHurt: 0
+--- !u!114 &-1747950165430033929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4693349628532988831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &5055939595415408132
 GameObject:
   m_ObjectHideFlags: 0

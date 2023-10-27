@@ -50,10 +50,12 @@ public class PipeHealing : MonoBehaviour
     {
         SetHealCooldown();
         if (isPipeEquipped == false || isHerbEquipped == false) return; //if theres no pipe or herb equipped, return and dont do anything.
+        healValue = herbSlot.herbInventorySlot.itemData.herbHealValue;
         timer = healCooldown; //Set timer to be equal to heal cooldown
         herbSlot.herbInventorySlot.RemoveFromStack(1); //Remove herb when healing
         herbSlot.UpdateHerbSlot();
-        playerHealth.currentHealth += healValue; //Heal player HP by health value
+        playerHealth.HealHealth(healValue); //Heal player HP by health value
+        
         timeHeld = 0; //Reset the timeHeld value
         StartCoroutine(healingCooldown()); //Start healing cooldown
     }
