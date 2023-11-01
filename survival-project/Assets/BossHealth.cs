@@ -8,11 +8,14 @@ public class BossHealth : NetworkBehaviour
     [SerializeField] private GameObject droppedItem;
     [SerializeField] public float maxHealth;
     [SerializeField] private SimpleFlash flashEffect;
+
+    [SerializeField] private SnailordBoss snailordBoss;
     public GameObject healthbarObject;
     [SerializeField] private HealthBar healthBar;
     //[SerializeField] private AudioSource hitSound;
     public float currentHealth;
     public bool canBossBeHurt;
+    public bool isBerserk = false; //Flag to check if phase 3 began.
 
     void Start()
     {
@@ -31,7 +34,19 @@ public class BossHealth : NetworkBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            if (isBerserk == false)
+            {
+                snailordBoss.snailordState = SnailordBoss.SnailordState.Phase3; //Set phase to phase 3
+
+                currentHealth = maxHealth; //Refill health
+                healthBar.SetHealth(currentHealth);
+
+                isBerserk = true;
+            }
+            else
+            {
+                Die();
+            }         
         }
     }
 

@@ -22,7 +22,11 @@ public class SnailordBoss : MonoBehaviour
     [SerializeField] private GameObject projectileRotateAnchor;
     [SerializeField] private GameObject objectPool;
     [SerializeField] private float degreesPerSecondRotate;
+    private bool isReving;
+    private bool isCharging;
 
+    int attackNum = 0;
+    int prevNum;
 
     private float jumpSpeed = 20f;
 
@@ -47,6 +51,7 @@ public class SnailordBoss : MonoBehaviour
         Phase1,
         Phase2,
         Phase3,
+        Phase4,
         Final
     }
 
@@ -68,14 +73,15 @@ public class SnailordBoss : MonoBehaviour
     private void PhaseCheck()
     {
         float halfHealth = bossHealth.maxHealth / 2; //Get half health. Its half of the max health
-        if (bossHealth.currentHealth <= halfHealth) //If boss is at half health
+        if (bossHealth.currentHealth <= halfHealth && bossHealth.isBerserk == false) //If boss is at half health
         {
             snailordState = SnailordState.Phase2; //Set state to Phase 2.
         }
-        //else if (bossHealth.currentHealth <= 1) //If boss is at 1 hp (or less)
-        //{
-        //    snailordState = SnailordState.Phase3; //Start phase 3
-        //}
+        if (bossHealth.currentHealth <= halfHealth && bossHealth.isBerserk == true) //If boss is at half health
+        {
+            snailordState = SnailordState.Phase4; //Set state to Phase 2.
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D hitInfo)
@@ -119,10 +125,17 @@ public class SnailordBoss : MonoBehaviour
                 stateDebugText.text = "Phase2";
 
                 Phase2Logic();
-
                 break;
 
             case SnailordState.Phase3:
+                projectileRotateAnchor.transform.Rotate(new Vector3(0, 0, degreesPerSecondRotate) * Time.deltaTime);
+                stateDebugText.text = "Phase3";
+
+                Phase3Logic();
+                break;
+
+            case SnailordState.Phase4:
+                stateDebugText.text = "Phase4";
                 break;
 
             case SnailordState.Final:
@@ -135,15 +148,25 @@ public class SnailordBoss : MonoBehaviour
 
     private void Phase1Logic()
     {
+        //TREVOR SUGGESTION - CANNOT REPEAT ATTACK
+        //Store the previous attack int rolled. If next one is same as last one, roll again.
+
         if (canAttack == true) //If snailord can attack...
         {
             canAttack = false;
-            var num = Random.Range(0, 3); //Get either 0, 1, or 2
-            if (num == 0)
+            prevNum = attackNum; //Prev num is previous attack num
+            attackNum = Random.Range(0, 3); //Get the num
+
+            while (attackNum == prevNum) //if attack num is equal to prev num
+            {
+                attackNum = Random.Range(0, 3); //Roll till its not
+            }
+            
+            if (attackNum == 0)
             {
                 StartCoroutine(ChargeAttack());
             }
-            else if (num == 1)
+            else if (attackNum == 1)
             {
                 StartCoroutine(JumpAttack());
             }
@@ -159,14 +182,14 @@ public class SnailordBoss : MonoBehaviour
         if (canAttack == true)
         {
             canAttack = false;
-            var num = Random.Range(0, 3);
-            if (num == 0)
+            attackNum = Random.Range(0, 3);
+            if (attackNum == 0)
             {
                 //Triple Snail Charge
                 //Snailord revs up before charging 3 times, with a short delay between each.
                 StartCoroutine(TripleChargeAttack());
             }
-            else if (num == 1)
+            else if (attackNum == 1)
             {
                 //Triple Snail Stomp
 
@@ -194,20 +217,19 @@ public class SnailordBoss : MonoBehaviour
                 //Snailord revs up and charges, then jumps, then charges, then jumps, then charges,
                 //followed by a final super jump where he unleashes a storm of projectiles around him.
                 //Each charge also releases some projectiles around him.
-                
-
+                StartCoroutine(Phase3ChargeAttack1());
             }
             else if (num == 1)
             {
                 //Snailord spins out rapidly in a large circle around the player at fast speed, trapping them inside his zone.
                 //While doing this, projectiles are launched from around the circle towards the player, and you have to dodge inside the area. 
-                
+                StartCoroutine(Phase3ChargeAttack1());
             }
             else
             {
                 //Snailord spins in place and rapidly launches projectiles everywhere.
                 //After a few seconds, he charges to another spot nearby, and does it again. He does this 3 times.
-                
+                StartCoroutine(Phase3ChargeAttack1());
             }
         }
     }
@@ -324,6 +346,69 @@ public class SnailordBoss : MonoBehaviour
             canDamage = false;
         }
         StartCoroutine(AttackCooldown());
+    }
+
+    private IEnumerator Phase3ChargeAttack1()
+    {
+        Debug.Log("Super Charges");
+        isReving = false;
+        isCharging = false;
+
+        for (int i = 0; i < 3; i++) //Charge 3 Times
+        {
+            Debug.Log("Start Revving");
+            //Rev Up
+            //Launch Projectiles
+            rb.velocity = Vector3.zero; //Stop his movement       
+            isReving = true;
+            StartCoroutine(revCooldown());
+
+            while (isReving == true)
+            {
+                Debug.Log("REVING!");
+                var direction = projectileRotateAnchor.transform.up;
+                var direction2 = -direction; //Opposite of direction 1
+                LaunchSnailProjectile(direction, projectileSpeed);
+                LaunchSnailProjectile(direction2, projectileSpeed);
+                yield return new WaitForSeconds(0.1f); //Wait 0.1 seconds between each projectile
+            }
+            
+            canDamage = true;
+            //Once rev is done
+            //Charge
+            //Launch Projectiles on his sides while dashing.
+            Debug.Log("Start Charge");
+            var targetChargePosition = targetPlayer.transform.position;
+            Vector2 direction3 = (targetChargePosition - transform.position).normalized; //Get direction of player
+            rb.AddForce(direction3 * chargeAttackPower, ForceMode2D.Impulse); //Charge at the player
+            isCharging = true;
+
+            StartCoroutine(chargeCooldown());
+
+            while (isCharging == true)
+            {
+                Debug.Log("CHARGING!");
+                LaunchSnailProjectile(Vector2.up, projectileSpeed);
+                LaunchSnailProjectile(Vector2.down, projectileSpeed);
+                yield return new WaitForSeconds(0.2f); //Wait 0.2 seconds between each projectile
+            }
+            Debug.Log("Charge Done!");
+            rb.velocity = Vector3.zero; //Disable movement 
+            yield return new WaitForSeconds(.5f); //Pause for half a second
+        }
+        StartCoroutine(AttackCooldown());
+    }
+
+    private IEnumerator revCooldown()
+    {
+        yield return new WaitForSeconds(2f);
+        isReving = false;
+    }
+
+    private IEnumerator chargeCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        isCharging = false;
     }
 
 

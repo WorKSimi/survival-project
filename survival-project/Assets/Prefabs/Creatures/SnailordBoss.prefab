@@ -682,10 +682,12 @@ MonoBehaviour:
   droppedItem: {fileID: 0}
   maxHealth: 1000
   flashEffect: {fileID: 8532533004099773711}
+  snailordBoss: {fileID: 609601953310233629}
   healthbarObject: {fileID: 1558390165481587803}
   healthBar: {fileID: 1305136120080047048}
   currentHealth: 0
   canBossBeHurt: 0
+  isBerserk: 0
 --- !u!114 &-1747950165430033929
 MonoBehaviour:
   m_ObjectHideFlags: 0

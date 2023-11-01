@@ -22061,17 +22061,22 @@ PrefabInstance:
     - target: {fileID: 405143310459747667, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 505.4816
+      value: 1112.2201
       objectReference: {fileID: 0}
     - target: {fileID: 405143310459747667, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 73.239
+      value: 38.5246
+      objectReference: {fileID: 0}
+    - target: {fileID: 405143310459747667, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 415.92236
       objectReference: {fileID: 0}
     - target: {fileID: 405143310459747667, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -21
+      value: -857
       objectReference: {fileID: 0}
     - target: {fileID: 1130504036420532398, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
@@ -22139,6 +22144,16 @@ PrefabInstance:
       propertyPath: chestplateSpriteObject
       value: 
       objectReference: {fileID: 8076970470673927829}
+    - target: {fileID: 4345677173701891485, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -333.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4345677173701891485, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -307
+      objectReference: {fileID: 0}
     - target: {fileID: 5223098899941861574, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: m_IsActive
