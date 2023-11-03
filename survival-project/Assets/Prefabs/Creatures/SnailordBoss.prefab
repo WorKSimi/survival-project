@@ -611,15 +611,21 @@ MonoBehaviour:
   chargeAttackDamage: 20
   snailProjectile: {fileID: 3006912499862247658, guid: 91072d02f4adb8446859febacdffc05c,
     type: 3}
+  snusterBomb: {fileID: 3006912499862247658, guid: 9bd7893eb0ec30d47ac39b8bcbcc6547,
+    type: 3}
   projectileSpeed: 8
+  projectileDamage: 10
   snailordState: 0
   stateDebugText: {fileID: 2420162005713033225}
   animator: {fileID: 8317744941920834794}
   bossHealth: {fileID: 3918084635946034016}
   bossHealthbarObject: {fileID: 1558390165481587803}
+  rotateTrapAnchor: {fileID: 0}
   projectileRotateAnchor: {fileID: 1169560106049456613}
   objectPool: {fileID: 949219620455715437}
+  snailordSpriteObject: {fileID: 6900888833875221590}
   degreesPerSecondRotate: 180
+  degreesPerSecondTRAPRotate: 360
 --- !u!50 &8762898943667015854
 Rigidbody2D:
   serializedVersion: 4
