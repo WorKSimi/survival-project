@@ -8,7 +8,7 @@ public class SnusterBomb : MonoBehaviour
     private Vector3 startLocation; //Location bomb spawns at
     public Vector3 endLocation; //Location the bomb will go to
 
-    private float desiredDuration = 3f; //How long we want it to take the bomb to get to location
+    private float desiredDuration = 2f; //How long we want it to take the bomb to get to location
     private float elapsedTime;
 
     //Will move from start to target over time. Use Lerp.
@@ -43,10 +43,10 @@ public class SnusterBomb : MonoBehaviour
         visualObject.SetActive(false);
 
         //Instantiate projectiles in direction
-        LaunchProjectile(Vector2.up, 8);
-        LaunchProjectile(Vector2.down, 8);
-        LaunchProjectile(Vector2.left, 8);
-        LaunchProjectile(Vector2.right, 8);
+        LaunchProjectile(new Vector2(0,1), 8); //Up
+        LaunchProjectile(new Vector2(0,-1), 8); //Down
+        LaunchProjectile(new Vector2(-1,0), 8); //Left
+        LaunchProjectile(new Vector2(1,0), 8); //Right
 
         Destroy(this.gameObject); //Destroy the object
     }

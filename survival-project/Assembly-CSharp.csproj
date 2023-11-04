@@ -117,6 +117,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
     <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
+    <Compile Include="Assets\SnusterBomb.cs" />
     <Compile Include="Assets\Scripts\CropLogic.cs" />
     <Compile Include="Assets\BossHealthbarController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
@@ -220,7 +221,6 @@
     <Compile Include="Assets\Scripts\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\SnusterBomb.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
