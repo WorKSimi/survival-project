@@ -475,7 +475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74b63ad99b64e404eaea9315ff3e810a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLocation: {x: 0, y: 0, z: 0}
+  endLocation: {x: 0, y: 0, z: 0}
+  explosionType: 1
   visualObject: {fileID: 7796290040428987884}
   projectileToSpawn: {fileID: 3006912499862247658, guid: 91072d02f4adb8446859febacdffc05c,
     type: 3}

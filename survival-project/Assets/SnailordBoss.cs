@@ -291,11 +291,11 @@ public class SnailordBoss : MonoBehaviour
             }
             else if (attackNum == 1)
             {
-                StartCoroutine(Phase4Attack1());
+                StartCoroutine(Phase4Attack2());
             }
             else
             {
-                StartCoroutine(Phase4Attack1());
+                StartCoroutine(Phase4Attack3());
             }
         }
     }
@@ -480,8 +480,10 @@ public class SnailordBoss : MonoBehaviour
 
     private IEnumerator trapCooldown()
     {
+        snusterBombing = true;
         yield return new WaitForSeconds(8f);
         isTrapping = false;
+        snusterBombing = false;
     }
 
     private IEnumerator trapCooldown2()
@@ -653,50 +655,72 @@ public class SnailordBoss : MonoBehaviour
         Debug.Log("End Attack 3");
     }
 
-    private IEnumerator Phase4Attack1_Test()
-    {
-        var snailordTargetPos = new Vector3(targetPlayer.transform.position.x + 10, targetPlayer.transform.position.y, 0);
-        this.transform.position = targetPlayer.transform.position; //Set actual boss object to be on player
-        yield return new WaitForSeconds(1f); //Wait 1 second then start rotating
-        //var spriteRb = snailordSpriteObject.GetComponent<Rigidbody2D>();
-
-        for (int i = 0; i < 3; i++) //Do it 3 times
-        {     
-            snailordSpriteObject.transform.position = snailordTargetPos; //Set sprite object to be where it needs to be (right of player).
-            isTrapping = true;
-
-            //TO DO - MAKE SPRITE HURT PLAYER, NOT CORE
-            //TO DO - MAKE SPRITE TAKE DAMAGE, NOT CENTER
-
-            StartCoroutine(trapCooldown2());
-
-            while (isTrapping == true)
-            {
-                var dir = (targetPlayer.transform.position - snailordSpriteObject.transform.position).normalized;
-                LaunchSnailProjectile(dir, (projectileSpeed * 0.8f), true);
-                yield return new WaitForSeconds(0.2f); //Wait 0.2 seconds between each projectile
-            }
-
-            //Now, trap has happened for 5 seconds.
-            //Dash across towards player
-
-            //spriteRb.velocity = Vector2.zero; //For a split second stop all velocity.
-            rb.velocity = Vector2.zero;
-
-            //spriteRb.isKinematic = false;
-            
-            yield return new WaitForSeconds(0.5f);
-            var targetChargePosition = targetPlayer.transform.position;
-            Vector2 direction = (targetChargePosition - snailordSpriteObject.transform.position).normalized; //Get direction of player FROM sprite
-            yield return new WaitForSeconds(1f); //Charge for 1 second
-
-            //After cycle is complete, repeat!
-        }   
-    }    
-
     private IEnumerator Phase4Attack1()
     {
-        yield return null;
+        Debug.Log("Super Charges");
+        isReving = false;
+        isCharging = false;
+
+        for (int i = 0; i < 3; i++) //Charge 3 Times
+        {
+            Debug.Log("Start Revving");
+            //Rev Up
+            //Launch Projectiles
+            rb.velocity = Vector3.zero; //Stop his movement       
+            isReving = true;
+            StartCoroutine(revCooldown());
+
+            while (isReving == true)
+            {
+                Debug.Log("REVING!");
+                var direction = projectileRotateAnchor.transform.up;
+                var direction2 = -direction; //Opposite of direction 1
+                LaunchSnailProjectile(direction, projectileSpeed, false);
+                LaunchSnailProjectile(direction2, projectileSpeed, false);
+                yield return new WaitForSeconds(0.1f); //Wait 0.1 seconds between each projectile
+            }
+
+            canDamage = true;
+            //Once rev is done
+            //Charge
+            //Launch Projectiles on his sides while dashing.
+            Debug.Log("Start Charge");
+            var targetChargePosition = targetPlayer.transform.position;
+            Vector2 direction3 = (targetChargePosition - transform.position).normalized; //Get direction of player
+            rb.AddForce(direction3 * chargeAttackPower, ForceMode2D.Impulse); //Charge at the player
+
+            //Launch a Snuster Bomb right when charging.
+            var targetLocation = targetPlayer.transform.position;
+            var go = Instantiate(snusterBomb, this.transform.position, Quaternion.identity);
+            var bombScript = go.GetComponent<SnusterBomb>();
+            bombScript.endLocation = targetLocation;
+
+            isCharging = true;
+
+            StartCoroutine(chargeCooldown());
+
+            while (isCharging == true)
+            {
+                Debug.Log("CHARGING!");
+                LaunchSnailProjectile(Vector2.up, projectileSpeed, false);
+                LaunchSnailProjectile(Vector2.down, projectileSpeed, false);
+                yield return new WaitForSeconds(0.2f); //Wait 0.2 seconds between each projectile
+            }
+            Debug.Log("Charge Done!");
+            rb.velocity = Vector3.zero; //Disable movement 
+            yield return new WaitForSeconds(.5f); //Pause for half a second
+        }
+        StartCoroutine(AttackCooldown());
+    }
+
+    
+
+    private IEnumerator Phase4Attack2()
+    {
+        Debug.Log("TURBO TRAP");
+        var snailordCurrentPos = this.transform.position; //Get where snail is before moving
+
+        //TO DO - ADD ANIMATION OF SNAILORD MOVING TO TARGET POSITION INSTEAD OF HIM TELEPORTING THERE 
 
         var snailordTargetPos = new Vector3(targetPlayer.transform.position.x + 10, targetPlayer.transform.position.y, 0);
         this.transform.position = targetPlayer.transform.position; //Set actual boss object to be on player
@@ -708,21 +732,38 @@ public class SnailordBoss : MonoBehaviour
         //TO DO - MAKE SPRITE HURT PLAYER, NOT CORE
 
         StartCoroutine(trapCooldown());
+        StartCoroutine(Phase4Attack2_SnusterBombs());
+
         while (isTrapping == true)
         {
             var dir = (targetPlayer.transform.position - snailordSpriteObject.transform.position).normalized;
             LaunchSnailProjectile(dir, (projectileSpeed * 0.8f), true);
             yield return new WaitForSeconds(0.2f); //Wait 0.2 seconds between each projectile
         }
+
+        //canDamage = false;
+
         var spriteCurrentPosition = snailordSpriteObject.transform.position;
         this.transform.position = spriteCurrentPosition;
         snailordSpriteObject.transform.position = this.transform.position;
-
-        //WHILE SPINNING, "DASH" at player by launching a huge projectile at the player to represent that.
-        //ALSO ADD AFTERIMAGES TO SHOW HOW FAST DASHING
+        StartCoroutine(AttackCooldown());
     }
 
-    //New idea for phase 4 attack
-    //Have after images to show how fast boss is going
-    //Instead of physically moving the boss through a dash, spawn a projectile as big as the boss to visualize it dashing insanely fast
+    private IEnumerator Phase4Attack2_SnusterBombs()
+    {
+        while (snusterBombing == true)
+        {
+            var targetLocation = targetPlayer.transform.position;
+            var go = Instantiate(snusterBomb, snailordSpriteObject.transform.position, Quaternion.identity);
+            var bombScript = go.GetComponent<SnusterBomb>();
+            bombScript.endLocation = targetLocation;
+            yield return new WaitForSeconds(2f); //Wait 2 seconds between each projectile
+        }
+    }
+
+    private IEnumerator Phase4Attack3()
+    {
+        yield return null;
+        StartCoroutine(AttackCooldown());
+    }
 }
