@@ -85,8 +85,7 @@ public class PlayerNetwork : NetworkBehaviour
                 break;
 
             case State.Dead:
-                //rb.velocity = moveDir * deadSpeed; //Lock player movement when dead
-                rb.velocity = moveDir * currentMoveSpeed;
+                rb.velocity = moveDir * deadSpeed; //Lock player movement when dead
                 break;
 
             case State.Loading:

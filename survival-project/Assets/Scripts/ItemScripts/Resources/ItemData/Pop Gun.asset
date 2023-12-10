@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: TinBow
+  m_Name: Pop Gun
   m_EditorClassIdentifier: 
-  ID: 17
-  DisplayName: Tin Bow
-  Description: A tin bow.
-  Icon: {fileID: 1041133064, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  ID: -1
+  DisplayName: Pop-Gun
+  Description: A small toy gun that fires corks.
+  Icon: {fileID: 21300000, guid: 20190f6838deb114ca54b50254c0b0e1, type: 3}
   MaxStackSize: 1
-  GoldValue: 1
-  ItemType: Bow
-  ItemPrefab: {fileID: 7389436694480070536, guid: 28a91736639fed24ba2b0d08fd25353f,
+  GoldValue: 0
+  ItemType: Handgun
+  ItemPrefab: {fileID: 7389436694480070536, guid: b4c77a0edfbb77044a5e4a145581b388,
     type: 3}
-  itemDamage: 58
-  projectilePrefab: {fileID: 3006912499862247658, guid: dc22ce4f72da2f74387a2dc713632259,
+  itemDamage: 5
+  projectilePrefab: {fileID: 3006912499862247658, guid: 87fa2dbfc279bb14d92eb2cda3aeccac,
     type: 3}
-  projectileSpeed: 10
-  projectileLifetime: 1
+  projectileSpeed: 25
+  projectileLifetime: 2
   attackRate: 2
   DefenseValue: 0
   pipeHealCooldown: 0

@@ -116,6 +116,8 @@ SpriteAtlas:
   - {fileID: -107488313, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
   - {fileID: -32822050, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
   - {fileID: 21300000, guid: a2b041b757f4f674c8164d75ef2c4664, type: 3}
+  - {fileID: 21300000, guid: 20190f6838deb114ca54b50254c0b0e1, type: 3}
+  - {fileID: 21300000, guid: 3df8a17833e310a4783c0da1ef8835f5, type: 3}
   - {fileID: 21300000, guid: 83cf1a78d88484f48bf7bce59c1861e9, type: 3}
   - {fileID: 1980537615, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
   - {fileID: 28517793, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
@@ -140,6 +142,7 @@ SpriteAtlas:
   - {fileID: 76778199, guid: 99a83fc87d16d6f43a2cd292dc83c6c7, type: 3}
   - {fileID: 21300000, guid: 5aad2fd81f43471489e1cdc90e932354, type: 3}
   - {fileID: 21300000, guid: 923665e8e78d97a47ba8aad14a78aa5f, type: 3}
+  - {fileID: 21300000, guid: 2954c5090f48f044cad83bda5374a5c2, type: 3}
   - {fileID: 21300000, guid: cee5a2894ffa647458734011aa71a73d, type: 3}
   - {fileID: 21300000, guid: 9fd43b99065c86340825f3eb3c1d3540, type: 3}
   - {fileID: 540291374, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
@@ -548,6 +551,8 @@ SpriteAtlas:
   - torch_Off
   - stinger_Projectile
   - BabyBob
+  - PopgunPlaceholder
+  - WeirdPotion
   - WetTilledDirt
   - Snail_InShell
   - Bee_Standing_Side
@@ -572,6 +577,7 @@ SpriteAtlas:
   - Bee_Attack1_Side
   - Placeholder CaveEntrance
   - Apple_Placeholder
+  - CorkPlaceholder
   - TestDirt
   - FaceUp
   - Tree_Sapling

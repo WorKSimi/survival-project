@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
-  m_Name: IronBow
+  m_Name: StickBow
   m_EditorClassIdentifier: 
   ID: 17
-  DisplayName: Iron Bow
-  Description: The Iron Bow
-  Icon: {fileID: 2023741285, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  DisplayName: Stick Bow
+  Description: A crude bow fashioned from sticks.
+  Icon: {fileID: 159874814, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   MaxStackSize: 1
   GoldValue: 1
   ItemType: Bow
-  ItemPrefab: {fileID: 7389436694480070536, guid: b916f0aec9f796f4e90534227b44692c,
+  ItemPrefab: {fileID: 7389436694480070536, guid: abe4de11b81d9c24798a3d84c0ca4bbc,
     type: 3}
-  itemDamage: 50
+  itemDamage: 5
   projectilePrefab: {fileID: 3006912499862247658, guid: dc22ce4f72da2f74387a2dc713632259,
     type: 3}
   projectileSpeed: 10

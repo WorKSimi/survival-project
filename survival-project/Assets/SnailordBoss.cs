@@ -761,9 +761,68 @@ public class SnailordBoss : MonoBehaviour
         }
     }
 
+    private float phase4attack3Time = 12f;
+
     private IEnumerator Phase4Attack3()
     {
-        yield return null;
+        //New Attack
+
+        //Spin and release projectiles like before
+
+        //Instead of releasing one Snuster Bomb, it releases many in a pattern all around boss.
+        Debug.Log("PHASE 4 ATTACK 3");
+        //This attack is the spin storm
+        //Snailord spins in place and launches projectiles like the other attack
+        StartCoroutine(Phase3Attack3_Cooldown());
+        StartCoroutine(Phase4Attack3_SpinProjectiles());
+        //StartCoroutine(Phase4Attack3_SnusterBombs());
+
+        yield return new WaitForSeconds(phase4attack3Time);
         StartCoroutine(AttackCooldown());
+
+    }
+
+    [SerializeField] private GameObject[] P4A3_SnusterMarketHolder;
+
+    private IEnumerator Phase4Attack3_SnusterBombs()
+    {
+        //while (snusterBombing == true)
+        //{
+        //    foreach (var spot in P4A3_SnusterMarketHolder)
+        //    {
+        //        var targetLocation = spot.transform.position;
+        //        var go = Instantiate(snusterBomb, this.transform.position, Quaternion.identity);
+        //        var bombScript = go.GetComponent<SnusterBomb>();
+        //        bombScript.endLocation = targetLocation;
+        //    }     
+        //    yield return new WaitForSeconds(2f); //Wait 2 seconds between each volley
+        //}
+
+        while (snusterBombing == true)
+        {
+            var targetLocation = targetPlayer.transform.position;
+            var target2 = targetLocation.x - 5f;
+
+            var go = Instantiate(snusterBomb, this.transform.position, Quaternion.identity);
+            var bombScript = go.GetComponent<SnusterBomb>();
+            bombScript.endLocation = targetLocation;
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private IEnumerator Phase4Attack3_SpinProjectiles()
+    {
+        while (spinningPhase3 == true)
+        {
+            var direction = projectileRotateAnchor.transform.up;
+            var direction2 = -direction; //Opposite of direction 1
+            var direction3 = projectileRotateAnchor.transform.right;
+            var direction4 = -direction3;
+            LaunchSnailProjectile(direction, projectileSpeed, false);
+            LaunchSnailProjectile(direction2, projectileSpeed, false);
+            LaunchSnailProjectile(direction3, projectileSpeed, false);
+            LaunchSnailProjectile(direction4, projectileSpeed, false);
+            yield return new WaitForSeconds(0.1f); //Wait 0.2 seconds between each projectile
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-
+using UnityEngine.UI;
 public class HotbarDisplay : StaticInventoryDisplay
 {
     public GameObject player;
@@ -13,6 +13,7 @@ public class HotbarDisplay : StaticInventoryDisplay
     [SerializeField] private GameObject weaponAnchor; //Weapon anchor on player
     [SerializeField] private GameObject weapon; //Weapon object on player
     [SerializeField] private GameObject heldItem; //Held item object on player
+    [SerializeField] private SpriteRenderer heldGunSpriteRenderer; //Held gun item sprite renderer on object.
     [SerializeField] private SpriteRenderer heldItemSpriteRenderer; //Held item sprite renderer on object
 
     [SerializeField] private GameObject swordHandR; //Sprite for the hand holding sword facing right
@@ -150,11 +151,26 @@ public class HotbarDisplay : StaticInventoryDisplay
         FireBow();
     }
 
+    [SerializeField] private GameObject attackChargeBarObject;
+
     public void ChargeBow()
     {
-        if (Input.GetMouseButton(0)) //If holding mouse down
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow")
         {
+            attackChargeBarObject.SetActive(true);
+        }
+        else
+        {
+            attackChargeBarObject.SetActive(false);
+        }
+
+        if (Input.GetMouseButton(0)) //If holding mouse down
+        {     
             chargeTime += Time.deltaTime; //ChargeTime goes up
+
+            float fillPercent = chargeTime / maxChargeTime;
+            attackChargeBarObject.GetComponent<Slider>().value = fillPercent * 100;
+
             if (chargeTime >= maxChargeTime)
             {
                 chargeModifier = 1 + maxChargeTime; //If at max (2 seconds) charge multiplier - 1 + 2.0                
@@ -164,7 +180,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                 chargeModifier = 1 + chargeTime; //If below max, charge multiplier is equal to 1 + time spent charging              
             }           
         }
-        else chargeTime = 0;       
+        else chargeTime = 0;
     }
 
     public void FireBow()
@@ -177,6 +193,7 @@ public class HotbarDisplay : StaticInventoryDisplay
                 {
                     InventoryItemData itemData = slots[_currentIndex].AssignedInventorySlot.ItemData;
                     player.GetComponent<UseItemManager>().UseBow(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime, chargeModifier, itemData.attackRate);
+                    attackChargeBarObject.GetComponent<Slider>().value = 0; //Set charge bar to 0 after firing.
                 }
             }
         }
@@ -276,6 +293,14 @@ public class HotbarDisplay : StaticInventoryDisplay
                     player.GetComponent<UseItemManager>().UseSlimyWarhorn();
                 break;
 
+                case "WeirdPotion":
+                    player.GetComponent<UseItemManager>().UseWeirdPotion();
+                   break;
+
+                case "Handgun":
+                    player.GetComponent<UseItemManager>().UseHandgun(itemData.itemDamage, itemData.projectilePrefab, itemData.projectileSpeed, itemData.projectileLifetime, itemData.attackRate);
+                    break;
+
                 //case "Seed":
                 //    var seedTile = slots[_currentIndex].AssignedInventorySlot.ItemData.ItemTile;
                 //    if (player.GetComponent<UseItemManager>().MouseOverCropland() == true) //if mouse over farmland
@@ -336,9 +361,21 @@ public class HotbarDisplay : StaticInventoryDisplay
             {
                 heldItemSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon;
             }
-            else heldItemSpriteRenderer.sprite = null;
+            else if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Handgun")
+            {
+                heldGunSpriteRenderer.sprite = slots[_currentIndex].AssignedInventorySlot.ItemData.Icon;
+            }
+            else
+            {
+                heldItemSpriteRenderer.sprite = null;
+                heldGunSpriteRenderer.sprite = null;
+            }
         }
-        else heldItemSpriteRenderer.sprite = null;
+        else
+        {
+            heldItemSpriteRenderer.sprite = null;
+            heldGunSpriteRenderer.sprite = null;
+        }
     }
 
     private void AreYouHoldingPickOrBlock()

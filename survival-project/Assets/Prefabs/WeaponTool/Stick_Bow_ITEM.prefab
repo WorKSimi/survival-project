@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7389436694480070531}
   - component: {fileID: -2083750711423560777}
   m_Layer: 0
-  m_Name: Tin_Bow_ITEM
+  m_Name: Stick_Bow_ITEM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7389436694480070533
 SpriteRenderer:
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1041133064, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  m_Sprite: {fileID: 159874814, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickUpRadius: 0.57
-  ItemData: {fileID: 11400000, guid: 76ca73b91fc10f144988b65d8553255a, type: 2}
+  ItemData: {fileID: 11400000, guid: 54f968f5508382542bfc957dc7887f14, type: 2}
   _rotationSpeed: 20
   itemSaveData:
     ItemData: {fileID: 11400000, guid: ff316b8e951617a4b87cc476daa274fa, type: 2}

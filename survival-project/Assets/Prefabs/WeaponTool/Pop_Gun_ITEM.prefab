@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7389436694480070531}
   - component: {fileID: -2083750711423560777}
   m_Layer: 0
-  m_Name: Wood_Bow_ITEM
+  m_Name: Pop_Gun_ITEM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,11 +30,11 @@ Transform:
   m_GameObject: {fileID: 7389436694480070536}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.35, y: -0.08, z: 0}
-  m_LocalScale: {x: 0.5895351, y: 0.59701604, z: 1.1978651}
+  m_LocalScale: {x: 0.3847896, y: 0.5196428, z: 1.1978651}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7389436694480070533
 SpriteRenderer:
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 159874814, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 20190f6838deb114ca54b50254c0b0e1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -117,10 +117,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickUpRadius: 0.57
-  ItemData: {fileID: 11400000, guid: 54f968f5508382542bfc957dc7887f14, type: 2}
-  _rotationSpeed: 20
+  ItemData: {fileID: 11400000, guid: 40486e99410b1ac4a9f90fdabb710dfe, type: 2}
+  _rotationSpeed: 100
   itemSaveData:
-    ItemData: {fileID: 11400000, guid: ff316b8e951617a4b87cc476daa274fa, type: 2}
+    ItemData: {fileID: 11400000, guid: 40486e99410b1ac4a9f90fdabb710dfe, type: 2}
     Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7389436694480070531
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92b24fc1c82534d4b8b445711eb45776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 597fd121-ebeb-43de-b490-f82f7c2e683d
+  _id: ea438314-3a97-47b1-8e74-106f3164873c
 --- !u!114 &-2083750711423560777
 MonoBehaviour:
   m_ObjectHideFlags: 0

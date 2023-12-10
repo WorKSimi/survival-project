@@ -575,16 +575,16 @@ public class UseItemManager : NetworkBehaviour
         rb.velocity = firePoint.up * projectileSpeed;
     }
 
-    private void ProjectileTest(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
-    {
-        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
-        Projectile projectileScript = bullet.GetComponent<Projectile>();
-        projectileScript.Projectiledamage = itemDamage;
-        projectileScript.Projectilelifetime = projectileLifetime;
-        projectileScript.StartDestructionCoroutine();
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = firePoint.up * projectileSpeed;
-    }
+    //private void ProjectileTest(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
+    //{
+    //    GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
+    //    Projectile projectileScript = bullet.GetComponent<Projectile>();
+    //    projectileScript.Projectiledamage = itemDamage;
+    //    projectileScript.Projectilelifetime = projectileLifetime;
+    //    projectileScript.StartDestructionCoroutine();
+    //    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+    //    rb.velocity = firePoint.up * projectileSpeed;
+    //}
 
     [ServerRpc(RequireOwnership = false)]
     public void LaunchArrowProjectileServerRpc(float itemDamage, float projectileSpeed, float projectileLifetime, Vector3 fireDirection, Quaternion quaternion, Vector3 spawnLocation)
@@ -684,5 +684,33 @@ public class UseItemManager : NetworkBehaviour
                 //bossHealthbarController.EnableBossHealthbar();
             }
         }
+    }
+
+    public void UseHandgun(float itemDamage, GameObject projectilePrefab, float projectileSpeed, float projectileLifetime, float attackRate)
+    {
+        if (Time.time >= nextAttackTime)
+        {
+            if (IsHost)
+            {
+                LaunchProjectile(itemDamage, projectilePrefab, defaultProjectileRotation, projectileSpeed, projectileLifetime); //Shoot the projectile
+                nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
+            }
+
+            else if (IsClient)
+            {
+                //ProjectileTest(itemDamage * chargeMultiplier, projectilePrefab, projectileRotationObject, projectileSpeed * chargeMultiplier, projectileLifetime);
+                //Vector3 fireLocation = firePoint.position;
+                //Vector3 projectileDirection = firePoint.up;
+                //Quaternion tempRotation = projectileRotationObject.rotation;
+                //LaunchArrowProjectileServerRpc(itemDamage, projectileSpeed, projectileLifetime, projectileDirection, tempRotation, fireLocation);
+                //nextAttackTime = Time.time + 1f / attackRate; //Do Cooldown
+                Debug.Log("Not Yet Implemented");
+            }
+        }
+    }
+
+    public void UseWeirdPotion()
+    {
+        playerHealth.TakeDamage(10);
     }
 }

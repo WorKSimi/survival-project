@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] private GameObject lastStandCooldownUIObject;
+    [SerializeField] private TMP_Text lastStandCountdownText;
+
     public int currentHealth;
     public int maxHealth = 100;
 
@@ -15,7 +19,12 @@ public class PlayerHealth : MonoBehaviour
     public int playerTotalDefense = 0; //Total defense value the player has
     private int playerHelmetDefense = 0; //Defense value the player helmet has
     private int playerChestplateDefense = 0; //Defense value the player chestplate has
+
     private float respawnTime = 5f; //Value for respawn time
+
+    private float lastStandCooldown = 60f; //Cooldown for last stand (30 Seconds)
+
+    private bool lastStand = true; //Bool for last stand. True on default
 
     private PlayerNetwork playerNetwork;
     public PlayerChestplate playerChestplate;
@@ -42,6 +51,18 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private float timer;
+
+    private void Update()
+    {
+        if (lastStand == false)
+        {
+            timer -= Time.deltaTime;
+            int timer2 = ((int)timer);
+            lastStandCountdownText.text = timer2.ToString();
+        }    
+    }
+
     public void TakeDamage(int amount) //Taking Damage
     {
         if (playerNetwork.state != PlayerNetwork.State.Rolling) //If player is not rolling
@@ -53,14 +74,32 @@ public class PlayerHealth : MonoBehaviour
             StartCoroutine(Invulnerability());
         }
 
-        if (currentHealth <= 0) //If your health is equal to or less than 0
+        if (currentHealth <= 0 && lastStand == true) //If your health is equal to or less than 0, and last stand is true
         {
-            StartCoroutine(Die());
+            lastStand = false;
+            currentHealth = 1;
+            healthBar.SetHealth(currentHealth);
+            StartCoroutine(LastStandCooldown());
         }
+        else if (currentHealth <= 0 && lastStand == false) //If your health is less than 0, and last stand is not avaliable.
+        {
+            StartCoroutine(Die()); //Die
+        }
+    }
+
+    private IEnumerator LastStandCooldown()
+    {
+        lastStandCooldownUIObject.SetActive(true);
+        timer = lastStandCooldown;
+        yield return new WaitForSeconds(lastStandCooldown);
+        lastStandCooldownUIObject.SetActive(false);
+        lastStand = true;
     }
 
     public IEnumerator Die() //Function for player death
     {
+        //TO DO - DEATH ANIMATION!
+
         playerNetwork.state = PlayerNetwork.State.Dead; //Set state to dead
         didRespawn = false;
         yield return new WaitForSeconds(respawnTime); //Wait for respawn time
@@ -74,7 +113,7 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = maxHealth; //Set player health back to full
         healthBar.SetHealth(currentHealth); //Update the health bar
 
-        //TO DO - DEATH ANIMATION!
+        
     }
 
     public void HealHealth(int amount) //Function for food healing HP
