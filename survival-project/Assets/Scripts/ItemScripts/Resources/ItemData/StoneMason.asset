@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
+  m_Name: StoneMason
+  m_EditorClassIdentifier: 
+  ID: 4
+  DisplayName: Stone Mason
+  Description: A station for creating stuff of Stone.
+  Icon: {fileID: -1967327387, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
+  MaxStackSize: 9999
+  GoldValue: 0
+  ItemType: Block
+  ItemPrefab: {fileID: 7389436694480070536, guid: 45855d8ad8484b64a9fcb25e1ea84845,
+    type: 3}
+  itemDamage: 0
+  projectilePrefab: {fileID: 0}
+  projectileSpeed: 0
+  projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 3
+  BlockPrefab: {fileID: 1784105365037295680, guid: 4f9b53413d94065499359c1f835ec19a,
+    type: 3}
+  HealthHealed: 0
+  BlockHealth: 0

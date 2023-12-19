@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7389436694480070533
 SpriteRenderer:
@@ -119,6 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickUpRadius: 0.47
   ItemData: {fileID: 11400000, guid: 5d12c946634ae614d99ac5e0ccc6493b, type: 2}
+  soundPrefab: {fileID: 167723057952649727, guid: 9dbba6e982d7fe94c9e9c4e8845e4e41,
+    type: 3}
   _rotationSpeed: 20
   itemSaveData:
     ItemData: {fileID: 11400000, guid: 5d12c946634ae614d99ac5e0ccc6493b, type: 2}

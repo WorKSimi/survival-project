@@ -219,9 +219,9 @@ public class AnywhereCrafting : MonoBehaviour
     {
         ClearComponents();
 
-        NameText.SetText(GameManager.Instance.TinAnvil.DisplayName); //Set the text to what your crafting
-        RecipeIcon.sprite = GameManager.Instance.TinAnvil.Icon; //Set icon to the item
-        ItemDescriptionText.SetText(GameManager.Instance.TinAnvil.Description); //Set description box text
+        NameText.SetText(GameManager.Instance.Anvil.DisplayName); //Set the text to what your crafting
+        RecipeIcon.sprite = GameManager.Instance.Anvil.Icon; //Set icon to the item
+        ItemDescriptionText.SetText(GameManager.Instance.Anvil.Description); //Set description box text
 
         ComponentText.SetText("Tin Bar"); //Set component name
         ComponentAmount.SetText("x5"); //Set component amount 
@@ -600,7 +600,7 @@ public class AnywhereCrafting : MonoBehaviour
 
             var components = new List<CraftRecipeItem>() { tinComponent };
             {
-                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.TinAnvil, 1);
+                playerInventoryHolder.inventorySystem.CraftItem(components, GameManager.Instance.Anvil, 1);
                 Debug.Log("Crafted Tin Anvil");
             }
         }

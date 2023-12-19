@@ -10,6 +10,11 @@ public class Wall : MonoBehaviour
     //[SerializeField] private bool isBlueberryBush; //Flag for if this is on a blueberry bush.
     //[SerializeField] private GameObject wood;
     [SerializeField] private double maxHealth = 5;
+
+    [SerializeField] private AudioSource source; //Audio source for wall object
+    [SerializeField] private AudioClip soundOnHit; //Sound to play when wall object is hit.
+    [SerializeField] private GameObject soundOnDestroyObject;
+
     //[SerializeField] private bool isResourceNode;
     //[SerializeField] private int amountToDrop;
     //[SerializeField] private Grass grassScript;
@@ -40,6 +45,10 @@ public class Wall : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (soundOnHit != null) //if sound on hit exists
+        {
+            source.PlayOneShot(soundOnHit); //Play hit sound
+        }
         currentHealth -= damage;
         Debug.Log("Wall Hit");
         //Die();
@@ -49,6 +58,12 @@ public class Wall : MonoBehaviour
 
     public void Die()
     {
+        if (soundOnDestroyObject != null)
+        {
+            var go = Instantiate(soundOnDestroyObject, this.transform.position, Quaternion.identity);
+        }
+
+
         thisPosition = Vector3Int.FloorToInt(this.transform.position);
 
         if (itemToDrop != null) //If the item to drop is something

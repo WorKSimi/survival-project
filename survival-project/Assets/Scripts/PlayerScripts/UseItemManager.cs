@@ -47,6 +47,9 @@ public class UseItemManager : NetworkBehaviour
     [SerializeField] private Animator slashAnimator;
     [SerializeField] private BossHealthbarController bossHealthbarController;
 
+    [SerializeField] private AudioSource playerAudioSource;
+    [SerializeField] private AudioClip playerSwingSound;
+ 
     private Vector3Int playerPos; //Player position on grid
     private Vector3 playerPos2; //Player normal position
 
@@ -264,6 +267,7 @@ public class UseItemManager : NetworkBehaviour
         {
             if (Time.time >= nextAttackTime) //If not on cooldown
             {
+                playerAudioSource.PlayOneShot(playerSwingSound);
                 SwingTweenAnimation(); //Swing animation
                 nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
 
@@ -291,6 +295,7 @@ public class UseItemManager : NetworkBehaviour
         {
             if (Time.time >= nextAttackTime) //If not on cooldown
             {
+                playerAudioSource.PlayOneShot(playerSwingSound);
                 SwingTweenAnimation(); //Swing animation
                 nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
 
@@ -357,6 +362,7 @@ public class UseItemManager : NetworkBehaviour
             {
                 if (Time.time >= nextAttackTime) //If not on cooldown
                 {
+                    playerAudioSource.PlayOneShot(playerSwingSound);
                     Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
                     foreach (Collider2D enemy in hitEnemies) // Damage enemies
                     {
@@ -389,6 +395,7 @@ public class UseItemManager : NetworkBehaviour
             {
                 if (Time.time >= nextAttackTime) //If not on cooldown
                 {
+                    playerAudioSource.PlayOneShot(playerSwingSound);
                     Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
                     foreach (Collider2D enemy in hitEnemies) // Damage enemies
                     {
@@ -417,6 +424,7 @@ public class UseItemManager : NetworkBehaviour
         {
             if (Time.time >= nextAttackTime) //If not on cooldown
             {
+                playerAudioSource.PlayOneShot(playerSwingSound);
                 SwingTweenAnimation(); //Swing animation
                 Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
                 foreach (Collider2D enemy in hitEnemies) // Damage enemies
@@ -430,6 +438,7 @@ public class UseItemManager : NetworkBehaviour
         {
             if (Time.time >= nextAttackTime) //If not on cooldown
             {
+                playerAudioSource.PlayOneShot(playerSwingSound);
                 SwingTweenAnimation(); //Swing animation
                 Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
                 foreach (Collider2D enemy in hitEnemies) // Damage enemies

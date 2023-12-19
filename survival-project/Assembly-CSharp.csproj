@@ -107,6 +107,7 @@
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\RendererFeatures\KeepFrame\KeepFrameFeature.cs" />
     <Compile Include="Assets\Scripts\ProximityOptimization\ProximityActivationManager.cs" />
     <Compile Include="Assets\Scripts\RotateToMouse.cs" />
+    <Compile Include="Assets\PlaySoundObject.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\InventoryHolder.cs" />
     <Compile Include="Assets\SnailordObjectPool.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\SnailEnemy.cs" />
     <Compile Include="Assets\Scripts\Chunk.cs" />
+    <Compile Include="Assets\StationTable.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
     <Compile Include="Assets\Scripts\AuthenticateRelay.cs" />
     <Compile Include="Assets\Scripts\Lobbymanager.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
     <Compile Include="Assets\Scripts\PlayerHelmet.cs" />
     <Compile Include="Assets\Scripts\NetworkManagerUI.cs" />
+    <Compile Include="Assets\CraftingTable_Recipes.cs" />
     <Compile Include="Assets\Scripts\MouseItemData.cs" />
     <Compile Include="Assets\Scripts\WorldManager.cs" />
     <Compile Include="Assets\Scripts\Furnace.cs" />
@@ -221,6 +224,7 @@
     <Compile Include="Assets\Scripts\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
+    <Compile Include="Assets\StationTableRecipes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

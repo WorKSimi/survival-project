@@ -11,19 +11,39 @@ namespace Assets.Scripts
     {
         public static GameManager Instance;
 
-        public InventoryItemData FlintAxe;
+        //Anywhere Crafting
+        [Header("Anywhere")]
         public InventoryItemData CraftingTable;
+        public InventoryItemData Torch;
+
+        //Crafting Table
+        [Header("Crafting Table")]
+        public InventoryItemData WoodBow;
         public InventoryItemData Campfire;
         public InventoryItemData WoodClub;
         public InventoryItemData FlintPick;
-        public InventoryItemData Torch;
-        public InventoryItemData WoodBow;
-        public InventoryItemData WoodWall;
         public InventoryItemData WoodHelmet;
         public InventoryItemData WoodChestplate;
-        public InventoryItemData TinBar;
+        public InventoryItemData DirtWall;
+        public InventoryItemData DirtGround;
+        public InventoryItemData StationTable;
+        public InventoryItemData WoodArrow;
+        public InventoryItemData FlintArrow;
+        public InventoryItemData PopGun;
+
+        //Station Table
+        [Header("Station Table")]
         public InventoryItemData Furnace;
-        public InventoryItemData TinAnvil;
+        public InventoryItemData Anvil;
+        public InventoryItemData CarpenterTable;
+        public InventoryItemData StoneMasonTable;
+        public InventoryItemData CookingPot;
+
+        //Other
+        [Header("Other")]
+        public InventoryItemData WoodWall;
+        public InventoryItemData FlintAxe;
+        public InventoryItemData TinBar;
         public InventoryItemData TinSword;
         public InventoryItemData TinHelmet;
         public InventoryItemData TinChestplate;
@@ -31,7 +51,7 @@ namespace Assets.Scripts
         public InventoryItemData WoodFloor;
         public InventoryItemData Chest;
         public InventoryItemData IronAnvil;
-        public InventoryItemData IronBar;
+        public InventoryItemData IronBar;      
 
         protected void Start()
         {

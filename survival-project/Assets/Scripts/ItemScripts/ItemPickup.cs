@@ -11,6 +11,9 @@ public class ItemPickup : NetworkBehaviour
     public float PickUpRadius = 1f;
     public InventoryItemData ItemData;
 
+    [SerializeField] private GameObject soundPrefab;
+    private Vector3 thisLocation;
+
     [SerializeField] private float _rotationSpeed = 20f; //MAKES ITEMS ROTATE CHANGE LATER
 
     private CircleCollider2D myCollider;
@@ -52,16 +55,19 @@ public class ItemPickup : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        thisLocation = this.transform.position;
         var inventory = other.transform.GetComponent<PlayerInventoryHolder>();
-        Debug.Log("Collision Happened");
+        //Debug.Log("Collision Happened");
         if (!inventory) return;
 
         if (inventory.AddToInventory(ItemData, 1))
         {
+            if (soundPrefab != null) Instantiate(soundPrefab, thisLocation, Quaternion.identity);
+
             Debug.Log("Picking Up Item");
             //If host or server, destroy normally
             if (IsHost)
-            {
+            {            
                 Debug.Log("Picking up Item HOST");
                 SaveGameManager.data.collectedItems.Add(id);
                 NetworkObject networkObject = this.gameObject.GetComponent<NetworkObject>();

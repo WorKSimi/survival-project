@@ -21,12 +21,15 @@ MonoBehaviour:
   ItemType: Pick
   ItemPrefab: {fileID: 7389436694480070536, guid: 72201346e3a830e4e9b3cd20e3652d09,
     type: 3}
-  itemDamage: 5
+  itemDamage: 2
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
   attackRate: 2
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 0
   BlockPrefab: {fileID: 0}
   HealthHealed: 0

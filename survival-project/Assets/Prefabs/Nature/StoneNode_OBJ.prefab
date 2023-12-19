@@ -211,11 +211,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrop: 0
   maxHealth: 8
+  source: {fileID: 0}
+  soundOnHit: {fileID: 0}
+  soundOnDestroyObject: {fileID: 0}
   inventoryItemData: {fileID: 0}
   currentHealth: 0
   itemToDrop: {fileID: 7389436694480070536, guid: d889face19770cd41820a59981d781bd,
     type: 3}
-  maxToDrop: 8
+  maxToDrop: 10
   minToDrop: 5
   dropChance: 0
   itemToDrop2: {fileID: 0}

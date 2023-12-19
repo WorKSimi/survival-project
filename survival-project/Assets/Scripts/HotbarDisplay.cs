@@ -155,6 +155,11 @@ public class HotbarDisplay : StaticInventoryDisplay
 
     public void ChargeBow()
     {
+        if (slots[_currentIndex].AssignedInventorySlot.ItemData == null)
+        {
+            return;
+        }
+
         if (slots[_currentIndex].AssignedInventorySlot.ItemData.ItemType == "Bow")
         {
             attackChargeBarObject.SetActive(true);

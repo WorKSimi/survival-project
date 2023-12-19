@@ -18,6 +18,10 @@ public class MusicManager : MonoBehaviour
         {
             StartMusic();
         }
+        else
+        {
+            StartMusic();
+        }    
     }
 
     public void StartMusic()

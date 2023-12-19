@@ -21,12 +21,15 @@ MonoBehaviour:
   ItemType: Rock
   ItemPrefab: {fileID: 7389436694480070536, guid: 175f85b708952ef4cba11263095a5aa9,
     type: 3}
-  itemDamage: 2
+  itemDamage: 1
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
   attackRate: 2
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 0
   BlockPrefab: {fileID: 0}
   HealthHealed: 0

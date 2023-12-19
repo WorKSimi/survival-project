@@ -60,6 +60,7 @@ SpriteAtlas:
   - {fileID: 1044941745, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
   - {fileID: -143193231, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}
   - {fileID: 21300000, guid: 27854cd117b738e44a6c3662bab997cf, type: 3}
+  - {fileID: 21300000, guid: 3b8e52725ecb78b4eabbe1333c59c1f6, type: 3}
   - {fileID: 21300000, guid: 7caf9872d762f4b45af8dbe9aeaee21c, type: 3}
   - {fileID: 1562340320, guid: 3cadfc8229ea75b44967b84d226dd03f, type: 3}
   - {fileID: 21300000, guid: 702ad1a2da3ff464b8ece772b10a0dbf, type: 3}
@@ -148,6 +149,7 @@ SpriteAtlas:
   - {fileID: 540291374, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
   - {fileID: 288578347, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
   - {fileID: 264322884, guid: 850217b9e13ecbf4cb8491680d3656dd, type: 3}
+  - {fileID: 21300000, guid: b236cfb964cd84544b55432ae95924ae, type: 3}
   - {fileID: 21300000, guid: 31bc8dc9828322648afe8bf975d3dea3, type: 3}
   - {fileID: 21300000, guid: 127dfdc9603dc724f85f8a828f482d99, type: 3}
   - {fileID: 21300000, guid: bae75ad9067ef1246a107c15ca9d9822, type: 3}
@@ -484,6 +486,7 @@ SpriteAtlas:
   - {fileID: -1464044400, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   - {fileID: -1558747486, guid: b05a30af097b01c4798023d14fbf63c4, type: 3}
   - {fileID: 21300000, guid: c523c3af6497fdb4db138984716a6df6, type: 3}
+  - {fileID: 21300000, guid: 95831faf62d18d84b8c9b061dbf82e7b, type: 3}
   m_PackedSpriteNamesToIndex:
   - BobFaceLeft
   - PalmWoodPlaceholder
@@ -495,6 +498,7 @@ SpriteAtlas:
   - Bronze_Arrow
   - RustRock
   - TestAxe
+  - StationTablePlaceholder
   - BobFaceUp
   - playerHand
   - TestGrass
@@ -583,6 +587,7 @@ SpriteAtlas:
   - Tree_Sapling
   - Snailord_Side
   - Tree_Grown
+  - Dirt_Placeholder
   - WheatSeed
   - palmtreePlaceholder
   - HighlightShitty
@@ -919,6 +924,7 @@ SpriteAtlas:
   - Tin_Wall_Dirt_2
   - Tin_Wall_Dirt_3
   - CoconutPlaceholder 1
+  - WoodArrow_Placeholder
   m_RenderDataMap: {}
   m_Tag: SpriteAtlas
   m_IsVariant: 0
