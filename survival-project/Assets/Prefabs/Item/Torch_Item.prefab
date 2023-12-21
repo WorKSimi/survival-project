@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1414955053, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
-  m_Color: {r: 0.9528302, g: 0.84270835, b: 0.13932894, a: 1}
+  m_Color: {r: 1, g: 0.78039217, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PickUpRadius: 0.53
   ItemData: {fileID: 11400000, guid: 2bb5431d2886b3041951745fe1c3a0e8, type: 2}
+  soundPrefab: {fileID: 0}
   _rotationSpeed: 20
   itemSaveData:
     ItemData: {fileID: 0}

@@ -1931,9 +1931,9 @@ MonoBehaviour:
   PopGun: {fileID: 11400000, guid: 40486e99410b1ac4a9f90fdabb710dfe, type: 2}
   Furnace: {fileID: 11400000, guid: f57793a2d7a0f314fa9a3a071117a517, type: 2}
   Anvil: {fileID: 11400000, guid: 39a714b82b668be4bb204194ec80e5bf, type: 2}
-  CarpenterTable: {fileID: 0}
-  StoneMasonTable: {fileID: 0}
-  CookingPot: {fileID: 0}
+  CarpenterTable: {fileID: 11400000, guid: 426c2864c03cfce47880b6c910b5ee55, type: 2}
+  StoneMasonTable: {fileID: 11400000, guid: e76cc17c388eb4047916a0c9dde62d04, type: 2}
+  CookingPot: {fileID: 11400000, guid: 3f130aa549139164da9d21d4a7856462, type: 2}
   WoodWall: {fileID: 11400000, guid: acc65a0426b07af4399460e288c38371, type: 2}
   FlintAxe: {fileID: 11400000, guid: 53cde3b22759f0b488a0d227bdf14358, type: 2}
   TinBar: {fileID: 11400000, guid: d96bae396740802428762923517871b9, type: 2}

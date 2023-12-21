@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1414955053, guid: 03759177aec95b1479ed32ee28c61652, type: 3}
-  m_Color: {r: 1, g: 0.93166226, b: 0.2028302, a: 1}
+  m_Color: {r: 1, g: 0.78039217, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -128,6 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCrop: 0
   maxHealth: 1
+  source: {fileID: 0}
+  soundOnHit: {fileID: 0}
+  soundOnDestroyObject: {fileID: 0}
   inventoryItemData: {fileID: 0}
   currentHealth: 0
   itemToDrop: {fileID: 7389436694480070536, guid: 5302907679e65ac439910b2d1490a91c,

@@ -126,14 +126,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCrop: 0
-  wood: {fileID: 7389436694480070536, guid: 73db8bf4599a60241afd49ca9cddcd6a, type: 3}
-  maxHealth: 5
-  isResourceNode: 0
-  amountToDrop: 1
-  grassScript: {fileID: 0}
-  groundObject: {fileID: 0}
+  maxHealth: 1
+  source: {fileID: 0}
+  soundOnHit: {fileID: 0}
+  soundOnDestroyObject: {fileID: 0}
   inventoryItemData: {fileID: 0}
   currentHealth: 0
+  itemToDrop: {fileID: 7389436694480070536, guid: 73db8bf4599a60241afd49ca9cddcd6a,
+    type: 3}
+  maxToDrop: 1
+  minToDrop: 1
+  dropChance: 0
+  itemToDrop2: {fileID: 0}
+  maxToDrop2: 0
+  minToDrop2: 0
+  dropChance2: 0
 --- !u!114 &8173507676941580878
 MonoBehaviour:
   m_ObjectHideFlags: 0

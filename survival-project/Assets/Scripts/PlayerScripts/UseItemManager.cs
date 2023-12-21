@@ -575,6 +575,7 @@ public class UseItemManager : NetworkBehaviour
     {
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
         Projectile projectileScript = bullet.GetComponent<Projectile>();
+        Debug.Log("Projectile Damage: " + itemDamage);
         projectileScript.Projectiledamage = itemDamage;
         projectileScript.Projectilelifetime = projectileLifetime;
         projectileScript.StartDestructionCoroutine();

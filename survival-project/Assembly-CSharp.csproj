@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\InteractToBreak.cs" />
     <Compile Include="Assets\LeanTween\Testing\Testing248.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerNetwork.cs" />
+    <Compile Include="Assets\StationTableRecipes.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingColorTweening.cs" />
     <Compile Include="Assets\Scripts\WorldGen\MapGeneration.cs" />
     <Compile Include="Assets\Scripts\ObjectLayerSorting.cs" />
@@ -224,7 +225,6 @@
     <Compile Include="Assets\Scripts\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\StationTableRecipes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

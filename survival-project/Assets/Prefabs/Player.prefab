@@ -20241,8 +20241,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnywhereCrafting, Assembly-CSharp
+      - m_Target: {fileID: 1210071792184162242}
+        m_TargetAssemblyTypeName: StationTableRecipes, Assembly-CSharp
         m_MethodName: CraftItem
         m_Mode: 1
         m_Arguments:

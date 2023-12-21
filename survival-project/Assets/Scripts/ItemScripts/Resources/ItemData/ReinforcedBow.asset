@@ -21,7 +21,7 @@ MonoBehaviour:
   ItemType: Bow
   ItemPrefab: {fileID: 7389436694480070536, guid: 28a91736639fed24ba2b0d08fd25353f,
     type: 3}
-  itemDamage: 8
+  itemDamage: 4
   projectilePrefab: {fileID: 3006912499862247658, guid: dc22ce4f72da2f74387a2dc713632259,
     type: 3}
   projectileSpeed: 10
