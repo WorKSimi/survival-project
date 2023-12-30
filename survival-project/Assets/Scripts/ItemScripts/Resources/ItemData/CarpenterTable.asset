@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: CarpenterTable
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 7
   DisplayName: Carpenter Table
   Description: A table for woodworking.
   Icon: {fileID: -85841198, guid: a07eed7efbabc9847911472e4f78a966, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: IronBow
   m_EditorClassIdentifier: 
-  ID: 17
+  ID: 26
   DisplayName: Iron Bow
   Description: The Iron Bow
   Icon: {fileID: 2023741285, guid: a07eed7efbabc9847911472e4f78a966, type: 3}

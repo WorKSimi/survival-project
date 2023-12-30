@@ -22,6 +22,9 @@ public class MapGeneration : NetworkBehaviour
     public GameObject palmTree;
     public GameObject seaShell;
 
+    [Header("Surface Structures")]
+    public GameObject snailShrine;
+
     [Header("Underground Tiles")]
     public GameObject pitTile;
     public GameObject stoneTile;
@@ -255,7 +258,7 @@ public class MapGeneration : NetworkBehaviour
                         go.transform.parent = chunk.transform;
 
                         var go2 = Instantiate(dirtTile, new Vector3(x, y, 0), Quaternion.identity); //Dirt Ground
-                        go.transform.parent = chunk.transform;
+                        go2.transform.parent = chunk.transform;
                         //AddTileToGridmap(newX, newY, 6);
                     }
                 }

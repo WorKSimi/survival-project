@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Wood
   m_EditorClassIdentifier: 
-  ID: 16
+  ID: 55
   DisplayName: Wood
   Description: 'Wood Please!
 
@@ -24,8 +24,15 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: 3eeb2c30e9595154ca1bb5f629e9867f,
     type: 3}
   itemDamage: 0
-  ItemTile: {fileID: 0}
-  HealthHealed: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 0}
+  HealthHealed: 0
+  BlockHealth: 0

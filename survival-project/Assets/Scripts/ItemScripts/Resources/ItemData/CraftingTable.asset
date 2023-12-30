@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: CraftingTable
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 11
   DisplayName: Crafting Table
   Description: 'A table for crafting
 
@@ -29,6 +29,9 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 3
   BlockPrefab: {fileID: 1784105365037295680, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
     type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: DirtWall
   m_EditorClassIdentifier: 
-  ID: 19
+  ID: 14
   DisplayName: Dirt Wall
   Description: A dirt wall.
   Icon: {fileID: 1596645809, guid: ada6a3ccf8a0bc74e9d93c3411b0bf18, type: 3}

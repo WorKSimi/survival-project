@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Campfire
   m_EditorClassIdentifier: 
-  ID: 3
+  ID: 6
   DisplayName: Campfire
   Description: Campfire for cooking simple foods
   Icon: {fileID: -907254436, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
@@ -22,8 +22,15 @@ MonoBehaviour:
   ItemPrefab: {fileID: 1784105365037295680, guid: 1ec4fe492b4012744a47f4838b1b5e0f,
     type: 3}
   itemDamage: 0
-  ItemTile: {fileID: 0}
-  HealthHealed: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 0}
+  HealthHealed: 0
+  BlockHealth: 0

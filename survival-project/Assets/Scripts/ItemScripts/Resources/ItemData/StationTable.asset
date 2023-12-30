@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: StationTable
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 37
   DisplayName: Station Table
   Description: A special table used for creating new crafting stations.
   Icon: {fileID: 21300000, guid: 3b8e52725ecb78b4eabbe1333c59c1f6, type: 3}

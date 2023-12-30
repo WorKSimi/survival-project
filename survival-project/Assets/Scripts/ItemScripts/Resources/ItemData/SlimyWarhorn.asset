@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: SlimyWarhorn
   m_EditorClassIdentifier: 
-  ID: -1
+  ID: 36
   DisplayName: Slimy Warhorn
   Description: A strange slimy warhorn. Its so loud, it could probably wake something
     up...

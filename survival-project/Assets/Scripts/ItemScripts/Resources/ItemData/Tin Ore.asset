@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Tin Ore
   m_EditorClassIdentifier: 
-  ID: -1
+  ID: 44
   DisplayName: Tin Ore
   Description: 'A soft metal and abundant metal. Useful for crafting basic metal
     gear.
@@ -30,9 +30,10 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 0
-  TilemapID: 0
-  ItemTile: {fileID: 0}
-  ItemTilemap: 
+  BlockPrefab: {fileID: 0}
   HealthHealed: 0
   BlockHealth: 0

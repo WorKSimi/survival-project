@@ -51,6 +51,7 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: c49a68300dd23e5479f3dca49368c84f, type: 3}
+  - {fileID: 21300000, guid: 4c442870b980e424f874e04f68fddfd3, type: 3}
   - {fileID: 21300000, guid: 3f8787806226c2341841ac9a370ce36a, type: 3}
   - {fileID: 21300000, guid: 861e7d31f92d58242bfbaee68e8d5fc9, type: 3}
   - {fileID: 21300000, guid: 86460541c5d2ba843a9d54711c63ce4c, type: 3}
@@ -260,6 +261,7 @@ SpriteAtlas:
   - {fileID: -854765610, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   - {fileID: 1671616272, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
   - {fileID: 21300000, guid: aac12c4b590888b4fb5fdb508f0ea589, type: 3}
+  - {fileID: 21300000, guid: e2ac0a5b2594ccd47b0353f6ac9ed365, type: 3}
   - {fileID: 2059608954, guid: 4fda747b98d759546afa197b2a9226d1, type: 3}
   - {fileID: -112748939, guid: 4fda747b98d759546afa197b2a9226d1, type: 3}
   - {fileID: -1208051134, guid: 4fda747b98d759546afa197b2a9226d1, type: 3}
@@ -489,6 +491,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 95831faf62d18d84b8c9b061dbf82e7b, type: 3}
   m_PackedSpriteNamesToIndex:
   - BobFaceLeft
+  - snailShrinePlaceholder
   - PalmWoodPlaceholder
   - PinkFace
   - clockPlaceholder
@@ -698,6 +701,7 @@ SpriteAtlas:
   - WoodFloor3
   - WoodFloor1
   - New Piskel (51)
+  - healthBorderPlaceholder
   - woodArmorUp_2
   - woodArmorUp_1
   - woodArmorDown_8

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: IronChestplate
   m_EditorClassIdentifier: 
-  ID: 23
+  ID: 27
   DisplayName: Iron Chestplate
   Description: Iron Chestplate Description
   Icon: {fileID: -1572543380, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
@@ -25,6 +25,12 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
   DefenseValue: 4
-  ItemTile: {fileID: 0}
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 0}
   HealthHealed: 0
+  BlockHealth: 0

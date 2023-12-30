@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: FlintPickaxe
   m_EditorClassIdentifier: 
-  ID: 7
+  ID: 18
   DisplayName: Flint Pickaxe
   Description: A shoddy pickaxe for basic destruction
   Icon: {fileID: 1782844944, guid: a07eed7efbabc9847911472e4f78a966, type: 3}

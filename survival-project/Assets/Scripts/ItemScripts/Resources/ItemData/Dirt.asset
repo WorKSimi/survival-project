@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Dirt
   m_EditorClassIdentifier: 
-  ID: 16
+  ID: 12
   DisplayName: Dirt
   Description: Dirt
   Icon: {fileID: 21300000, guid: b236cfb964cd84544b55432ae95924ae, type: 3}

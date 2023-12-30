@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  ID: 15
+  ID: 51
   DisplayName: Tomato
   Description: This is a tomato!!
   Icon: {fileID: 1526037774, guid: e6145644c236f5e42b53bcbc243d37ba, type: 3}
@@ -22,8 +22,15 @@ MonoBehaviour:
   ItemPrefab: {fileID: 1101789717055732227, guid: 64fe4d3c74eb1514988acc62442bfb4b,
     type: 3}
   itemDamage: 0
-  ItemTile: {fileID: 0}
-  HealthHealed: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 0}
+  HealthHealed: 0
+  BlockHealth: 0

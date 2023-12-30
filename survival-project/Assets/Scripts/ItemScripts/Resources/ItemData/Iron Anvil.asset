@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Iron Anvil
   m_EditorClassIdentifier: 
-  ID: 34
+  ID: 22
   DisplayName: Iron Anvil
   Description: An anvil made out of reliable iron. Can make much more stuff.
   Icon: {fileID: -70214082, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
@@ -27,6 +27,9 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 0
   BlockPrefab: {fileID: 1784105365037295680, guid: 7a6d823e51ea75845bc0d7163bad11b8,
     type: 3}

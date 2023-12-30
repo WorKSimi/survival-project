@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: ReinforcedBow
   m_EditorClassIdentifier: 
-  ID: 17
+  ID: 33
   DisplayName: Reinforced Bow
   Description: A bow reinforced with tin.
   Icon: {fileID: 1041133064, guid: a07eed7efbabc9847911472e4f78a966, type: 3}

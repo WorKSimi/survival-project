@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: WoodWall
   m_EditorClassIdentifier: 
-  ID: 19
+  ID: 62
   DisplayName: Wood Wall
   Description: A wood wall. The most basic of building blocks.
   Icon: {fileID: -1623903809, guid: cf0001ea32c07604281ffd162c994f47, type: 3}
@@ -27,6 +27,9 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 1
   BlockPrefab: {fileID: 2976247172256185871, guid: d5da127504acf9847ba3fc215c40f953,
     type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: TinAxe
   m_EditorClassIdentifier: 
-  ID: 13
+  ID: 46
   DisplayName: TinAxe
   Description: A better axe made out of tin
   Icon: {fileID: -1078150396, guid: 9d92c5ee93abcfc4598a85b2eb1da699, type: 3}
@@ -22,8 +22,15 @@ MonoBehaviour:
   ItemPrefab: {fileID: 7389436694480070536, guid: d1fd14203969a2c45bf6cf54ae042bca,
     type: 3}
   itemDamage: 2
-  ItemTile: {fileID: 0}
-  HealthHealed: 0
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
+  DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 0}
+  HealthHealed: 0
+  BlockHealth: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Palm Wood
   m_EditorClassIdentifier: 
-  ID: 16
+  ID: 29
   DisplayName: Palm Wood
   Description: Tropical Wood Type
   Icon: {fileID: 21300000, guid: 3f8787806226c2341841ac9a370ce36a, type: 3}
@@ -27,6 +27,9 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 0
   BlockPrefab: {fileID: 0}
   HealthHealed: 0

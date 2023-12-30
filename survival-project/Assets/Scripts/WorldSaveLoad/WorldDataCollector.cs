@@ -175,6 +175,7 @@ public class WorldDataCollector : NetworkBehaviour
         Debug.Log("Seed on Client Load: " + seed);
         Debug.Log("Thanks for the seed! Generating Map...");
         //StartCoroutine(mapGenerator.GenerateForestSurface(seed));
+        mapGenerator.GenerateWorldSeed(seed);
     }
 }
 

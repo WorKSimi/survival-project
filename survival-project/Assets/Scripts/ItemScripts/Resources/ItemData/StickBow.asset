@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: StickBow
   m_EditorClassIdentifier: 
-  ID: 17
+  ID: 38
   DisplayName: Stick Bow
   Description: A crude bow fashioned from sticks.
   Icon: {fileID: 159874814, guid: a07eed7efbabc9847911472e4f78a966, type: 3}

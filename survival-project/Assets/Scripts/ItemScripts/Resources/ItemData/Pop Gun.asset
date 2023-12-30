@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Pop Gun
   m_EditorClassIdentifier: 
-  ID: -1
+  ID: 30
   DisplayName: Pop-Gun
   Description: A small toy gun that fires corks.
   Icon: {fileID: 21300000, guid: 20190f6838deb114ca54b50254c0b0e1, type: 3}

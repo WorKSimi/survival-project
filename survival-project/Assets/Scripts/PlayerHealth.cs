@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameObject lastStandCooldownUIObject;
     [SerializeField] private TMP_Text lastStandCountdownText;
+    [SerializeField] private TMP_Text healthBarText;
 
     public int currentHealth;
     public int maxHealth = 100;
@@ -44,6 +45,7 @@ public class PlayerHealth : MonoBehaviour
     {        
         currentHealth = maxHealth; //Set current health to max health
         healthBar.SetMaxHealth(maxHealth); //Set the health bar to max health
+        healthBarText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
         if (healthRegenOn == true) //If regenerating health bool is true
         {
@@ -70,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
             var damageToTake = amount - playerTotalDefense; //Subtract player defense from amount to take
             if (damageToTake < 1) damageToTake = 1; //If the damage to take is less then 1, set it to 1
             currentHealth -= damageToTake; //Take damage           
+            healthBarText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
             healthBar.SetHealth(currentHealth); //Update Healthbar
             StartCoroutine(Invulnerability());
         }
@@ -79,11 +82,13 @@ public class PlayerHealth : MonoBehaviour
             lastStand = false;
             currentHealth = 1;
             healthBar.SetHealth(currentHealth);
+            healthBarText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
             StartCoroutine(LastStandCooldown());
         }
         else if (currentHealth <= 0 && lastStand == false) //If your health is less than 0, and last stand is not avaliable.
         {
             StartCoroutine(Die()); //Die
+            healthBarText.text = "Dead";
         }
     }
 
@@ -112,14 +117,21 @@ public class PlayerHealth : MonoBehaviour
         playerNetwork.state = PlayerNetwork.State.Normal; //Set state back to normal
         currentHealth = maxHealth; //Set player health back to full
         healthBar.SetHealth(currentHealth); //Update the health bar
+        healthBarText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
-        
+        if (lastStand == false) //If last stand is on cooldown, reset it
+        {
+            StopCoroutine(LastStandCooldown()); //Turn off the cooldown
+            lastStand = true;
+            lastStandCooldownUIObject.SetActive(false);
+        }
     }
 
     public void HealHealth(int amount) //Function for food healing HP
     {
         currentHealth += amount; //Add the amount of health to be healed to your players health
         healthBar.SetHealth(currentHealth); //Update the health bar
+        healthBarText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
 
         if (currentHealth > maxHealth) //If your current health goes ABOVE max health
         {

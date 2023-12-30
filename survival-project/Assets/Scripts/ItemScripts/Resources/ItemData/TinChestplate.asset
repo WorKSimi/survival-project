@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: TinChestplate
   m_EditorClassIdentifier: 
-  ID: 27
+  ID: 47
   DisplayName: Tin Chestplate
   Description: Tin Chestplate Description
   Icon: {fileID: -2104806153, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
@@ -25,6 +25,12 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   projectileSpeed: 0
   projectileLifetime: 0
+  attackRate: 0
   DefenseValue: 2
-  ItemTile: {fileID: 0}
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 0}
   HealthHealed: 0
+  BlockHealth: 0

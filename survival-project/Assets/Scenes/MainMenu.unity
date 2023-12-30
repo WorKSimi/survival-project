@@ -2447,6 +2447,7 @@ MonoBehaviour:
     type: 3}
   seaShell: {fileID: 3179713049715907885, guid: 39626478cd1b4e547b9bd5aaaae42101,
     type: 3}
+  snailShrine: {fileID: 0}
   pitTile: {fileID: 3179713049715907885, guid: e14f4570219e96f459ef0d9eb2260c79, type: 3}
   stoneTile: {fileID: 3179713049715907885, guid: 7dfacac24ec743b45b8140997a52a9f5,
     type: 3}

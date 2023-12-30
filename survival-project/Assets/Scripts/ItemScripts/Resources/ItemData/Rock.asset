@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Rock
   m_EditorClassIdentifier: 
-  ID: 11
+  ID: 34
   DisplayName: Rock
   Description: Where it all started...
   Icon: {fileID: -143193231, guid: 34913c8139c99a343a3e5d2a28354dc8, type: 3}

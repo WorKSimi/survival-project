@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: CookingPot
   m_EditorClassIdentifier: 
-  ID: 4
+  ID: 10
   DisplayName: Cooking Pot
   Description: A pot for cooking stews and soups for buffs.
   Icon: {fileID: -8900383, guid: cf0001ea32c07604281ffd162c994f47, type: 3}

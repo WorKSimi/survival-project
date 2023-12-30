@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: TinSword
   m_EditorClassIdentifier: 
-  ID: 14
+  ID: 50
   DisplayName: Tin Sword
   Description: A sword crafted out of tin.
   Icon: {fileID: 1526551678, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
@@ -27,6 +27,9 @@ MonoBehaviour:
   projectileLifetime: 0.1
   attackRate: 2
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 0
   BlockPrefab: {fileID: 0}
   HealthHealed: 0

@@ -27,7 +27,10 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
-  ItemTile: {fileID: 0}
-  ItemTilemap: 
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
+  BlockID: 0
+  BlockPrefab: {fileID: 0}
   HealthHealed: 10
   BlockHealth: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740843084ec155f488a55d9e7a2e1804, type: 3}
   m_Name: Wheat
   m_EditorClassIdentifier: 
-  ID: -1
+  ID: 54
   DisplayName: Wheat
   Description: Wheat, can be cooked into food and also planted to make more!
   Icon: {fileID: 402775561, guid: a07eed7efbabc9847911472e4f78a966, type: 3}
@@ -27,9 +27,10 @@ MonoBehaviour:
   projectileLifetime: 0
   attackRate: 0
   DefenseValue: 0
+  pipeHealCooldown: 0
+  pipeHealTime: 0
+  herbHealValue: 0
   BlockID: 0
-  TilemapID: 0
-  ItemTile: {fileID: 11400000, guid: 542825b8b0df0364582291f84fce022a, type: 2}
-  ItemTilemap: 
+  BlockPrefab: {fileID: 0}
   HealthHealed: 0
   BlockHealth: 0
