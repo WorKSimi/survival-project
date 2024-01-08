@@ -9,8 +9,17 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private TMP_Text lastStandCountdownText;
     [SerializeField] private TMP_Text healthBarText;
 
+    [SerializeField] private SpriteRenderer weaponSprite;
+    [SerializeField] private SpriteRenderer heldGun;
+
+    [SerializeField] private SpriteRenderer playerSprite;
+
+    [SerializeField] private GameObject deathUIHolder;
+    [SerializeField] private TMP_Text deathCooldownText;
+
     public int currentHealth;
     public int maxHealth = 100;
+    public bool isPlayerDead = false;
 
     public bool healthRegenOn;
     public bool isHealthFull;
@@ -31,9 +40,11 @@ public class PlayerHealth : MonoBehaviour
     public PlayerChestplate playerChestplate;
     public PlayerHelmet playerHelmet;
     public HealthBar healthBar;
-    public Vector3Int respawnPoint = new Vector3Int(0, 0, 0);
+    public Vector3Int respawnPoint = new Vector3Int(113, 113, 0); //Default respawn point.
     private SpriteRenderer spriteRend;
     private bool didRespawn;
+
+    private float deathTimer;
 
     private void Awake()
     {
@@ -63,6 +74,13 @@ public class PlayerHealth : MonoBehaviour
             int timer2 = ((int)timer);
             lastStandCountdownText.text = timer2.ToString();
         }    
+
+        if (isPlayerDead == true)
+        {
+            deathTimer -= Time.deltaTime;
+            int timer2 = ((int)deathTimer);
+            deathCooldownText.text = timer2.ToString();
+        }
     }
 
     public void TakeDamage(int amount) //Taking Damage
@@ -103,11 +121,24 @@ public class PlayerHealth : MonoBehaviour
 
     public IEnumerator Die() //Function for player death
     {
-        //TO DO - DEATH ANIMATION!
+        playerSprite.enabled = false;
+        weaponSprite.enabled = false;
+        heldGun.enabled = false;
 
         playerNetwork.state = PlayerNetwork.State.Dead; //Set state to dead
+        deathUIHolder.SetActive(true);
+        isPlayerDead = true;
         didRespawn = false;
+
+        deathTimer = respawnTime + 1;
         yield return new WaitForSeconds(respawnTime); //Wait for respawn time
+        playerSprite.enabled = true;
+        weaponSprite.enabled = true;
+        heldGun.enabled = true;
+
+        deathUIHolder.SetActive(false);
+        isPlayerDead = false;
+
         if (didRespawn == false)
         {
             this.gameObject.transform.position = respawnPoint; //Set player position back to respawn point
@@ -126,7 +157,7 @@ public class PlayerHealth : MonoBehaviour
             lastStandCooldownUIObject.SetActive(false);
         }
     }
-
+  
     public void HealHealth(int amount) //Function for food healing HP
     {
         currentHealth += amount; //Add the amount of health to be healed to your players health
@@ -171,4 +202,6 @@ public class PlayerHealth : MonoBehaviour
         Physics2D.IgnoreLayerCollision(9, 10, false);
         invincibile = false;
     }
+
+
 }

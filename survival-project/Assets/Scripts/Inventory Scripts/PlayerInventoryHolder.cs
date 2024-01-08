@@ -37,14 +37,8 @@ public class PlayerInventoryHolder : InventoryHolder
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
             OnPlayerInventoryDisplayRequested?.Invoke(inventorySystem, offset); //Open it
-            personalCraftingMenu.SetActive(false);
-        }
-        if (Keyboard.current.cKey.wasPressedThisFrame) //Open crafting menu
-        {
             personalCraftingMenu.SetActive(true);
-            anywhereCrafting.amountToCraft = 1; //Reset amount to craft
-            anywhereCrafting.amountToCraftText.SetText(anywhereCrafting.amountToCraft.ToString());
-        }    
+        } 
     }
 
     public bool AddToInventory(InventoryItemData data, int amount)

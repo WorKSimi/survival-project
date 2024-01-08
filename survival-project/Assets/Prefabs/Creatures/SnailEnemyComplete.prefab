@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedItem: {fileID: 0}
-  maxHealth: 15
+  maxHealth: 20
   flashEffect: {fileID: 801226904464898194}
   healthbarObject: {fileID: 1996039737414689771}
   healthBar: {fileID: 1128948958253497378}

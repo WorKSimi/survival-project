@@ -9,7 +9,8 @@ public class HotbarDisplay : StaticInventoryDisplay
 {
     public GameObject player;
     public UseItemManager useItemManager;
-    [SerializeField] private TMP_Text heldItemText; 
+    [SerializeField] private TMP_Text heldItemText;
+    [SerializeField] private PlayerHealth playerHealth;
     [SerializeField] private GameObject weaponAnchor; //Weapon anchor on player
     [SerializeField] private GameObject weapon; //Weapon object on player
     [SerializeField] private GameObject heldItem; //Held item object on player
@@ -215,6 +216,8 @@ public class HotbarDisplay : StaticInventoryDisplay
 
     private void UseItem(InputAction.CallbackContext obj)
     {
+        if (playerHealth.isPlayerDead == true) return; //if the player is dead, can't use items.
+
         if (slots[_currentIndex].AssignedInventorySlot.ItemData != null) //Checks if current slot data is not null
         {
             InventoryItemData itemData = slots[_currentIndex].AssignedInventorySlot.ItemData;
