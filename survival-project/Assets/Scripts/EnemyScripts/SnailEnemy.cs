@@ -14,6 +14,7 @@ public class SnailEnemy : NetworkBehaviour
     [SerializeField] private Transform enemyGFX;
     [SerializeField] private float snailChargePower;
 
+
     public SnailState state;
 
     private Vector3 targetChargePosition;
@@ -38,6 +39,9 @@ public class SnailEnemy : NetworkBehaviour
     
     Seeker seeker;
     Rigidbody2D rb;
+
+    private bool isRotating = false; //Bool for if should be rotating sprite
+    [SerializeField] private float rotateSpeed; //How fast does he rotate?
 
     private void Awake()
     {
@@ -64,24 +68,17 @@ public class SnailEnemy : NetworkBehaviour
     
     private void Update()
     {       
+        if (isRotating == true)
+        {
+            this.transform.Rotate(new Vector3(0, 0, rotateSpeed) * Time.deltaTime);
+        }
+
+
         animator.SetFloat("Horizontal", rb.velocity.x);
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
 
-        //float maxDespawnDistance = 50f;
-        //if (playerWhoSpawned != null)
-        //{
-        //    if (Vector3.Distance(this.transform.position, playerWhoSpawned.transform.position) > maxDespawnDistance)
-        //    {
-        //        this.mobSpawning.currentSpawns--;
-        //        this.gameObject.GetComponent<NetworkObject>().Despawn();
-        //        Destroy(this.gameObject); //Destroy the snail,          
-        //    }
-        //}
-        //else if (playerWhoSpawned == null)
-        //{
-        //    Debug.Log("ERROR! PLAYER WHO SPAWNED IS NULL!");
-        //}
+       
 
         switch (state)
         {
@@ -200,7 +197,7 @@ public class SnailEnemy : NetworkBehaviour
 
         rb.velocity = Vector3.zero; //Disable movement 
 
-        yield return new WaitForSeconds(.5f); //Pause for half a second       
+        yield return new WaitForSeconds(1f); //Pause for  a second       
         state = SnailState.ChaseTarget;
     }
     

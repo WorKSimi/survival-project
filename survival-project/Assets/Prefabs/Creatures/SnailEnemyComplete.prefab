@@ -419,6 +419,7 @@ MonoBehaviour:
   playerToChase: {fileID: 0}
   players: []
   startingPosition: {x: 0, y: 0, z: 0}
+  rotateSpeed: 0
 --- !u!212 &8304012690007885387
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -534,10 +535,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   droppedItem: {fileID: 0}
+  dropAmount: 1
   maxHealth: 20
   flashEffect: {fileID: 801226904464898194}
   healthbarObject: {fileID: 1996039737414689771}
   healthBar: {fileID: 1128948958253497378}
+  damagePopup: {fileID: 7565807530750021238, guid: f9a18f2ecc98eb24da080dc951d57a78,
+    type: 3}
   mobSpawning: {fileID: 0}
 --- !u!95 &5510390592281846485
 Animator:
@@ -658,7 +662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4648358853535510027
 Transform:
   m_ObjectHideFlags: 0

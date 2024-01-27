@@ -6,11 +6,17 @@ using Unity.Netcode;
 public class EnemyHealth : NetworkBehaviour
 {
     [SerializeField] private GameObject droppedItem;
+    [SerializeField] private int dropAmount = 1;
+
     [SerializeField] private float maxHealth;
     [SerializeField] private SimpleFlash flashEffect;
     [SerializeField] private GameObject healthbarObject;
     public HealthBar healthBar;
+
+    [SerializeField] private GameObject damagePopup;
     //[SerializeField] private AudioSource hitSound;
+
+    
 
     public MobSpawning mobSpawning;
     private float currentHealth;
@@ -30,6 +36,10 @@ public class EnemyHealth : NetworkBehaviour
         healthBar.SetHealth(currentHealth); //Set health bar here
         SyncHealthbarClientRpc(currentHealth);
 
+        Vector3 pos = new Vector3(this.transform.position.x + 1, this.transform.position.y + 1, 0);
+        var go = Instantiate(damagePopup, pos, Quaternion.identity);
+        go.GetComponent<DamagePopup>().CreatePopup(damage);
+
         if (currentHealth <= 0)
         {
             Die();
@@ -47,7 +57,7 @@ public class EnemyHealth : NetworkBehaviour
         {
             if (droppedItem != null) //If the enemy has an item to drop
             {
-                for (int i = 0; i < 5; i++) //Drop 5 of this enemies item drop
+                for (int i = 0; i < dropAmount; i++) //Drop 5 of this enemies item drop
                 {
                     var go = Instantiate(droppedItem, transform.position, Quaternion.identity); //Instantiate that item where snail is
                     go.GetComponent<NetworkObject>().Spawn(); //Spawn item on server

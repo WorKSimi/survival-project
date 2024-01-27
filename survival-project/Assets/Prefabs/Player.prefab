@@ -6387,10 +6387,11 @@ MonoBehaviour:
   validTile: {fileID: 11400000, guid: 3d25158947a3c8e45b5d81af3280960b, type: 2}
   doMobSpawn: 0
   mobPool:
+  - {fileID: 4648358853205179229, guid: b0ab428dc7237b8498cd4d45643cfd5f, type: 3}
   - {fileID: 4648358853205179229, guid: 93fb0481b018c114282878c80237a1a0, type: 3}
-  waveCooldownTime: 120
+  waveCooldownTime: 30
   waveMobCount: 0
-  waveMobMax: 0
+  waveMobMax: 5
   waveCanSpawn: 0
 --- !u!1 &2079502706955108354
 GameObject:

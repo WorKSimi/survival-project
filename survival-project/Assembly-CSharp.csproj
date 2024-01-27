@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\OwnerNetworkAnimator.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\RPCManager.cs" />
+    <Compile Include="Assets\Chicken.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingSequencer.cs" />
     <Compile Include="Assets\Scripts\RotateToTarget.cs" />
     <Compile Include="Assets\Scripts\CaveExit.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Scripts\Shop System\Shopkeeper.cs" />
     <Compile Include="Assets\SnusterBomb.cs" />
     <Compile Include="Assets\Scripts\CropLogic.cs" />
+    <Compile Include="Assets\Scripts\DamagePopup.cs" />
     <Compile Include="Assets\BossHealthbarController.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
     <Compile Include="Assets\RotateSpriteScript.cs" />

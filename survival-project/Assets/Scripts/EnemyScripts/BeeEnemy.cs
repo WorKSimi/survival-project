@@ -56,16 +56,17 @@ public class BeeEnemy : NetworkBehaviour
 
     private void Awake()
     {
+        startingPosition = this.transform.position;
         roamWaypoint = transform.GetChild(1).gameObject; //Sets roam waypoint variable to the second child of the bee object
         state = BeeState.Passive; //Set bee state to passive on awake
     }
 
     private void Start()
     {
-        //animator = GetComponent<Animator>();
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
         InvokeRepeating("UpdatePath", 0f, .5f);
 
         roamPosition = GetRoamingPosition();
@@ -81,7 +82,7 @@ public class BeeEnemy : NetworkBehaviour
         animator.SetFloat("Vertical", rb.velocity.y);
         animator.SetFloat("Speed", rb.velocity.sqrMagnitude);
 
-        float maxDespawnDistance = 50f;
+        //float maxDespawnDistance = 50f;
 
         //if (playerWhoSpawned != null)
         //{
