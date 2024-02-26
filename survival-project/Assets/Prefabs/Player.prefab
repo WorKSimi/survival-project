@@ -1708,7 +1708,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2390541593827473284
 Transform:
   m_ObjectHideFlags: 0
@@ -10656,8 +10656,8 @@ MonoBehaviour:
   isHealthFull: 0
   invincibile: 0
   playerTotalDefense: 0
-  playerChestplate: {fileID: 202420803913224710}
-  playerHelmet: {fileID: 1116740304482951253}
+  playerChestplate: {fileID: 0}
+  playerHelmet: {fileID: 0}
   healthBar: {fileID: 5639924605906436553}
   respawnPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &6396074603074503390
@@ -25636,6 +25636,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1182050742987791200, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7827853756402106311}
+    - target: {fileID: 1182050742987791200, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HelmetSlotButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 1182050742987791200, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerHelmetInventorySlot, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 1822996231512862745, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: m_Value
@@ -25702,6 +25717,21 @@ PrefabInstance:
       propertyPath: chestplateSpriteObject
       value: 
       objectReference: {fileID: 8076970470673927829}
+    - target: {fileID: 4313201251939168132, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3339645398414041143}
+    - target: {fileID: 4313201251939168132, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChestSlotButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 4313201251939168132, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerChestplateInventorySlot, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 4345677173701891485, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -26179,7 +26209,9 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3888090876268265113, guid: bb5ec6c3ad252d34ab6ae13b80e947ad, type: 3}
+    - {fileID: 4054673190450678986, guid: bb5ec6c3ad252d34ab6ae13b80e947ad, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8320818365983362882, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
         type: 3}
@@ -26218,28 +26250,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &202420803913224710 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4054673190450678986, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+--- !u!1 &275117125056935585 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4132997138128595053, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
     type: 3}
   m_PrefabInstance: {fileID: 4218240551435722444}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &7827853756402106311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275117125056935585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d097ce7ed496743924e6eaf8355aab, type: 3}
+  m_Script: {fileID: 11500000, guid: a5a8cfeed372cad4f980d1be4df94da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1116740304482951253 stripped
+  HelmetDefenseValue: 0
+  ItemSprite: {fileID: 996910546454469961}
+  helmInventorySlot:
+    _itemID: -1
+    stackSize: -1
+  database: {fileID: 11400000, guid: b80f2f0436c45174c919233820eaa9a0, type: 2}
+  mouseItemData: {fileID: 5328690029759843884}
+--- !u!114 &996910546454469961 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3888090876268265113, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+  m_CorrespondingSourceObject: {fileID: 3990065792211944325, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
     type: 3}
   m_PrefabInstance: {fileID: 4218240551435722444}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 275117125056935585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c041ccda7b7bb44ebbc9ce59de855bf, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1163937435850354802 stripped
@@ -26302,6 +26347,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72375366767b86641be7158718bb951d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3942120097992621177 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 882435293724959413, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 4218240551435722444}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193383386940594232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4455269702389363218 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 531001851404037342, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
@@ -26356,6 +26413,31 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4218240551435722444}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6193383386940594232 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8032559226102417140, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 4218240551435722444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3339645398414041143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6193383386940594232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8490cbc708c4004c8a4619ed5f3230d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChestDefenseValue: 0
+  ItemSprite: {fileID: 3942120097992621177}
+  chestInventorySlot:
+    _itemID: -1
+    stackSize: -1
+  database: {fileID: 11400000, guid: b80f2f0436c45174c919233820eaa9a0, type: 2}
+  mouseItemData: {fileID: 5328690029759843884}
 --- !u!114 &6316139873134983140 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7867046029644622120, guid: bb5ec6c3ad252d34ab6ae13b80e947ad,

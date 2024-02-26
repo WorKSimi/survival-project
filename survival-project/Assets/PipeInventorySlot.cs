@@ -12,9 +12,7 @@ public class PipeInventorySlot : MonoBehaviour
     public InventorySlot pipeInventorySlot;
     public Database database;
     public MouseItemData mouseItemData;
-    
-
-
+   
     public void UpdatePipeSlot(InventorySlot invSlot)
     {
         pipeInventorySlot.AssignItem(invSlot);
