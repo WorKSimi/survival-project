@@ -39,15 +39,19 @@ namespace Assets.Scripts
         public InventoryItemData StoneMasonTable;
         public InventoryItemData CookingPot;
 
+        //Tin Anvil
+        [Header("Tin Anvil")]
+        public InventoryItemData TinHelmet;
+        public InventoryItemData TinChestplate;
+        public InventoryItemData TinSword;
+        public InventoryItemData TinPickaxe;
+        public InventoryItemData ReinforcedBow;
+
         //Other
         [Header("Other")]
         public InventoryItemData WoodWall;
         public InventoryItemData FlintAxe;
         public InventoryItemData TinBar;
-        public InventoryItemData TinSword;
-        public InventoryItemData TinHelmet;
-        public InventoryItemData TinChestplate;
-        public InventoryItemData TinPickaxe;
         public InventoryItemData WoodFloor;
         public InventoryItemData Chest;
         public InventoryItemData IronAnvil;

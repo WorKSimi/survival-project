@@ -62,6 +62,7 @@
     <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
     <Compile Include="Assets\LeanTween\Testing\Scripts\LeanPool.cs" />
     <Compile Include="Assets\Scripts\OwnerNetworkAnimator.cs" />
+    <Compile Include="Assets\PlayerHelmetInventorySlot.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\SharedAssets\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\Scripts\RPCManager.cs" />
     <Compile Include="Assets\Chicken.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Assets\LeanTween\Testing\Testing246.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\InventorySystem.cs" />
     <Compile Include="Assets\Scripts\Grass.cs" />
+    <Compile Include="Assets\PlayerChestplateInventorySlot.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerCanvasController.cs" />
     <Compile Include="Assets\Scripts\HostClientManager.cs" />
@@ -227,8 +229,7 @@
     <Compile Include="Assets\Scripts\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\PlayerHelmetInventorySlot.cs" />
-    <Compile Include="Assets\PlayerChestplateInventorySlot.cs" />
+    <Compile Include="Assets\TinAnvilRecipes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

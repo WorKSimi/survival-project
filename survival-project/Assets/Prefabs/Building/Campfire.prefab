@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1784105365037295682}
   - component: {fileID: 1784105365037295681}
   - component: {fileID: 1784105365037295683}
+  - component: {fileID: 2636493203717783473}
   m_Layer: 6
   m_Name: Campfire
   m_TagString: Untagged
@@ -111,3 +112,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.52, y: 0.26}
   m_EdgeRadius: 0
+--- !u!114 &2636493203717783473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784105365037295680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6401c9d6be1a2ef41a486660255ba6f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCrop: 0
+  maxHealth: 5
+  source: {fileID: 0}
+  soundOnHit: {fileID: 0}
+  soundOnDestroyObject: {fileID: 0}
+  inventoryItemData: {fileID: 11400000, guid: d53e3f3edf6e3bb4e90184cfdd83da5a, type: 2}
+  currentHealth: 0
+  itemToDrop: {fileID: 7389436694480070536, guid: f4285a701e76abd4e83e8307c3bc5a9a,
+    type: 3}
+  maxToDrop: 1
+  minToDrop: 1
+  dropChance: 0
+  itemToDrop2: {fileID: 0}
+  maxToDrop2: 0
+  minToDrop2: 0
+  dropChance2: 0
