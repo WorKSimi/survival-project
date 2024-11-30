@@ -420,41 +420,66 @@ public class UseItemManager : NetworkBehaviour
 
     public void UseSword(float itemDamage, float attackRate)
     {
-        if (IsHost)
+        if (Time.time >= nextAttackTime)
         {
-            if (Time.time >= nextAttackTime) //If not on cooldown
-            {
-                playerAudioSource.PlayOneShot(playerSwingSound);
-                SwingTweenAnimation(); //Swing animation
-                Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
-                foreach (Collider2D enemy in hitEnemies) // Damage enemies
-                {
-                    enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
-                }
-                nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
-            }
+            SwingTweenAnimation();
+            LaunchProjectile(itemDamage, slashPrefab, defaultProjectileRotation, 18, 0.15f); //last value is lifetime
+            nextAttackTime = Time.time + 1f / attackRate;
         }
-        if (IsClient)
-        {
-            if (Time.time >= nextAttackTime) //If not on cooldown
-            {
-                playerAudioSource.PlayOneShot(playerSwingSound);
-                SwingTweenAnimation(); //Swing animation
-                Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
-                foreach (Collider2D enemy in hitEnemies) // Damage enemies
-                {
-                    enemy.GetComponent<EnemyHealth>().TakeDamageServerRpc(itemDamage);
-                }
-                nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
-            }
-        }
+        
+        
+        
+        //Old code for using the sword as a melee attack, with multiplayer functionality.
+        //Swords are being reworked but im keeping this here incase I ever need it.
+        //Maybe I should make a script to store all this shit? 
+
+        //if (IsHost)
+        //{
+        //    if (Time.time >= nextAttackTime) //If not on cooldown
+        //    {
+        //        playerAudioSource.PlayOneShot(playerSwingSound);
+        //        SwingTweenAnimation(); //Swing animation
+        //        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
+        //        foreach (Collider2D enemy in hitEnemies) // Damage enemies
+        //        {
+        //            enemy.GetComponent<EnemyHealth>().TakeDamage(itemDamage);
+        //        }
+        //        nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
+        //    }
+        //}
+        //if (IsClient)
+        //{
+        //    if (Time.time >= nextAttackTime) //If not on cooldown
+        //    {
+        //        playerAudioSource.PlayOneShot(playerSwingSound);
+        //        SwingTweenAnimation(); //Swing animation
+        //        Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(attackPoint.position, boxSize, 1f, enemyLayers); // Detect enemies in range of attack
+        //        foreach (Collider2D enemy in hitEnemies) // Damage enemies
+        //        {
+        //            enemy.GetComponent<EnemyHealth>().TakeDamageServerRpc(itemDamage);
+        //        }
+        //        nextAttackTime = Time.time + 1f / attackRate; //Do cooldown stuff
+        //    }
+        //}
     }
+
+    // This function is used
+
+
+
 
     public void UseFood(int healthHealed)
     {
         playerHealth.HealHealth(healthHealed);
         StartCoroutine(healingCooldown());
     }
+
+
+    //public void UseFood(int healthHealed)
+    //{
+    //    playerHealth.HealHealth(healthHealed);
+    //    StartCoroutine(healingCooldown());
+    //}
 
     public void UseWaterCan()
     {
@@ -571,6 +596,22 @@ public class UseItemManager : NetworkBehaviour
         go.GetComponent<NetworkObject>().Spawn(); //Spawn Chest on Network
     }
 
+    //OLD FUNCTION FOR THIS, MULTIPLAYER SHITTY ONE
+
+    //private void LaunchProjectile(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
+    //{
+    //    GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
+    //    Projectile projectileScript = bullet.GetComponent<Projectile>();
+    //    Debug.Log("Projectile Damage: " + itemDamage);
+    //    projectileScript.Projectiledamage = itemDamage;
+    //    projectileScript.Projectilelifetime = projectileLifetime;
+    //    projectileScript.StartDestructionCoroutine();
+
+    //    bullet.GetComponent<NetworkObject>().Spawn();
+    //    Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+    //    rb.velocity = firePoint.up * projectileSpeed;
+    //}
+
     private void LaunchProjectile(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     {
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);
@@ -580,11 +621,9 @@ public class UseItemManager : NetworkBehaviour
         projectileScript.Projectilelifetime = projectileLifetime;
         projectileScript.StartDestructionCoroutine();
 
-        bullet.GetComponent<NetworkObject>().Spawn();
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = firePoint.up * projectileSpeed;
     }
-
     //private void ProjectileTest(float itemDamage, GameObject projectilePrefab, Transform rotationObject, float projectileSpeed, float projectileLifetime)
     //{
     //    GameObject bullet = Instantiate(projectilePrefab, firePoint.position, rotationObject.rotation);

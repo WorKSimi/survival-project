@@ -53,7 +53,7 @@
     <UnityVersion>2022.1.20f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\CameraStacking\3D Skybox\Scripts\SkyboxCamera.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="Assets\BossHealth.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\StaticInventoryDisplay.cs" />
     <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
+    <Compile Include="Assets\TinAnvilRecipes.cs" />
     <Compile Include="Assets\Scripts\WorldGen\FalloffGenerator.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSequencer.cs" />
     <Compile Include="Assets\Scripts\ItemScripts\InventoryItemData.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Assets\Scripts\TooltipImage.cs" />
     <Compile Include="Assets\Samples\Universal RP\13.1.8\URP Package Samples\RendererFeatures\KeepFrame\KeepFrameFeature.cs" />
     <Compile Include="Assets\Scripts\ProximityOptimization\ProximityActivationManager.cs" />
+    <Compile Include="Assets\DungeonGenTesting\SimpleRandomWalkDungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\RotateToMouse.cs" />
     <Compile Include="Assets\PlaySoundObject.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Assets\SnailordObjectPool.cs" />
     <Compile Include="Assets\Scripts\WorldSaveLoad\WorldSaveLoadManager.cs" />
     <Compile Include="Assets\LeanTween\Testing\TestingMaxTweens.cs" />
+    <Compile Include="Assets\DungeonGenTesting\AbstractDungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\WorldTime.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\InventoryDisplay.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
     <Compile Include="Assets\Scripts\EnemyScripts\SnailEnemy.cs" />
+    <Compile Include="Assets\DungeonGenerator.cs" />
     <Compile Include="Assets\Scripts\Chunk.cs" />
     <Compile Include="Assets\StationTable.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
@@ -187,6 +191,7 @@
     <Compile Include="Assets\Scripts\NetworkManagerUI.cs" />
     <Compile Include="Assets\CraftingTable_Recipes.cs" />
     <Compile Include="Assets\Scripts\MouseItemData.cs" />
+    <Compile Include="Assets\DungeonGenTesting\DungeonTest_ProceduralGenerationAlgorithms.cs" />
     <Compile Include="Assets\Scripts\WorldManager.cs" />
     <Compile Include="Assets\Scripts\Furnace.cs" />
     <Compile Include="Assets\PipeHerbOnSpawner.cs" />
@@ -201,6 +206,7 @@
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\InventorySlot.cs" />
+    <Compile Include="Assets\DungeonGenTesting\DungeonTestTilemapVisualizer.cs" />
     <Compile Include="Assets\Scripts\BlueberryBushLogic.cs" />
     <Compile Include="Assets\Scripts\SaveLoad\SaveData.cs" />
     <Compile Include="Assets\Scripts\SimpleFlash.cs" />
@@ -229,7 +235,9 @@
     <Compile Include="Assets\Scripts\RockSpawner.cs" />
     <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
     <Compile Include="Assets\Scripts\Inventory Scripts\ChestInventory.cs" />
-    <Compile Include="Assets\TinAnvilRecipes.cs" />
+    <Compile Include="Assets\DungeonGenTesting\DungeonData\SimpleRandomWalkSO.cs" />
+    <Compile Include="Assets\DungeonGenTesting\DungeonWallGenerator.cs" />
+    <Compile Include="Assets\DungeonGenTesting\CorridorFirstDungeonGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

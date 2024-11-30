@@ -54,11 +54,16 @@ public class Projectile : NetworkBehaviour
         if (IsHost)
         {
             gameObject.GetComponent<NetworkObject>().Despawn();
+            Destroy(this.gameObject);
         }
         else if (IsClient)
         {
             DestroyObjectServerRpc(); //Destroy on server
             Destroy(this.gameObject); //Destroy on client
+        }
+        else
+        {
+            Destroy(this.gameObject);
         }
     }
 
