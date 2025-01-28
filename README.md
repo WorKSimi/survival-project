@@ -1,4 +1,2 @@
 # survival-project
-fog veil
-
-party rocker
+Fogveil. Still incomplete, but there is a lot done.
